@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import { Provider } from "react-redux";
-import { makeStore } from "../../lib/store"; // Относительный путь к store
-import type { AppStore } from "../../lib/store";
+import { useRef } from 'react';
+import { Provider } from 'react-redux';
+import { makeStore } from '../lib/store';
+import type { AppStore } from '../lib/store';
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
   // useRef гарантирует, что Store создается только один раз
