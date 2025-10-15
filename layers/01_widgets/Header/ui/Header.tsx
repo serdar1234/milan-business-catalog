@@ -83,7 +83,7 @@ export const Header: React.FC = () => {
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },
           }}
         >
-          <MobileDrawerContent onClose={handleDrawerToggle} />
+          <MobileDrawerContent />
         </Drawer>
       </nav>
     </AppBar>

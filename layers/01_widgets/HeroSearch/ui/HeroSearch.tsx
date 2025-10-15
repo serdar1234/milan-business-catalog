@@ -14,6 +14,7 @@ export const HeroSearch: React.FC = () => {
         position: 'relative',
         overflow: 'hidden',
         height: { xs: 320, md: 600 },
+        maxHeight: { xs: 320, md: 600 },
       }}
     >
       <Image
