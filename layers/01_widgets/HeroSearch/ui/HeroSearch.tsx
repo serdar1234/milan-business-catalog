@@ -4,6 +4,7 @@ import React from 'react';
 import { Box, Typography, Container } from '@mui/material';
 import Image from 'next/image';
 import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
+import { HeroDesktopInfo } from './HeroDesktopInfo';
 
 const HERO_IMAGE_URL = '/mockHero.jpg';
 
@@ -14,7 +15,6 @@ export const HeroSearch: React.FC = () => {
         position: 'relative',
         overflow: 'hidden',
         height: { xs: 320, md: 600 },
-        maxHeight: { xs: 320, md: 600 },
       }}
     >
       <Image
@@ -27,13 +27,13 @@ export const HeroSearch: React.FC = () => {
       <Container
         sx={{
           position: 'relative',
-          top: '40%',
+          top: { xs: '40%', md: 0 },
           zIndex: 1,
-          height: '60%',
+          height: { xs: '60%', md: '100%' },
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'flext-end',
+          alignItems: { xs: 'flext-end', md: 'center' },
         }}
       >
         <Box sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -49,6 +49,17 @@ export const HeroSearch: React.FC = () => {
             Perfect spots for your winter adventure
           </Typography>
           <SearchForm />
+        </Box>
+
+        {/* Desktop info block */}
+        <Box
+          sx={{
+            display: { xs: 'none', md: 'flex' },
+            width: '100%',
+            justifyContent: 'center',
+          }}
+        >
+          <HeroDesktopInfo />
         </Box>
       </Container>
     </Box>

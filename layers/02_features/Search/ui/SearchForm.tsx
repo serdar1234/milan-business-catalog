@@ -15,7 +15,7 @@ export const SearchForm: React.FC = () => {
         height: '3rem',
         borderRadius: '0.5rem',
         overflow: 'hidden',
-        bgcolor: 'surface.main',
+        bgcolor: '#fff',
       }}
     >
       <TextField

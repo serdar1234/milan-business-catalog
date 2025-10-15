@@ -24,7 +24,6 @@ declare module '@mui/material/styles' {
     brandPrimary?: PaletteOptions['primary'];
     brandAccent?: PaletteOptions['primary'];
     brandPin?: PaletteOptions['primary'];
-    surface?: PaletteOptions['primary'];
   }
 }
 
@@ -50,9 +49,6 @@ export const customTheme = createTheme({
     },
     brandPin: {
       main: '#E94F37', // Vibrant Orange (Для Map pin / rating star)
-    },
-    surface: {
-      main: '#FFFFFF', // Card and Surface
     },
 
     // Цвет фона страницы (используется MUI)
