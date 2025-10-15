@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { Button, IconButton, Box } from '@mui/material';
-import { Icon } from '@/layers/04_shared/ui/Icon';
+import { Button, Box } from '@mui/material';
+import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
 
 const NAV_LINKS = [
   { href: '/shopping', label: 'Shopping' },
@@ -29,9 +29,9 @@ export const DesktopNavigation: React.FC = () => {
           {link.label}
         </Button>
       ))}
-      <IconButton sx={{ color: 'white' }}>
-        <Icon iconName="Search" />
-      </IconButton>
+      <Box sx={{ width: 280, ml: 1, mr: -1 }}>
+        <SearchForm />
+      </Box>
     </Box>
   );
 };

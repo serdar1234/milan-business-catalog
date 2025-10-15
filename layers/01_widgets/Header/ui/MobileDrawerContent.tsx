@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import {
   Box,
+  Divider,
   List,
   ListItem,
   ListItemText,
   Toolbar,
   Typography,
 } from '@mui/material';
+import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
 
 const NAV_LINKS = [
   { href: '/', label: 'Discover' },
@@ -16,23 +18,20 @@ const NAV_LINKS = [
   { href: '/map', label: 'Map View' },
 ];
 
-interface MobileDrawerContentProps {
-  onClose: () => void;
-}
-
-export const MobileDrawerContent: React.FC<MobileDrawerContentProps> = ({
-  onClose,
-}) => {
+export const MobileDrawerContent: React.FC = () => {
   return (
-    <Box
-      sx={{ width: 250, bgcolor: 'background.default', height: '100%' }}
-      onClick={onClose}
-    >
+    <Box sx={{ width: 250, bgcolor: 'background.default', height: '100%' }}>
       <Toolbar sx={{ backgroundColor: 'primary.main' }}>
         <Typography variant="h6" sx={{ color: 'white', fontWeight: 'bold' }}>
           Navigation
         </Typography>
       </Toolbar>
+
+      <Box sx={{ p: 2, pb: 1 }}>
+        <SearchForm />
+      </Box>
+      <Divider sx={{ mb: 1 }} />
+
       <List>
         {NAV_LINKS.map((item) => (
           <ListItem

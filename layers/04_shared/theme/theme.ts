@@ -2,13 +2,13 @@ import { createTheme } from '@mui/material/styles';
 import { Playfair_Display, Inter } from 'next/font/google';
 
 const playfair = Playfair_Display({
-  weight: ['700'], // Используем жирное начертание для заголовков
+  weight: ['700'],
   subsets: ['latin'],
-  display: 'swap', // Позволяет браузеру сначала отобразить запасной шрифт
+  display: 'swap',
 });
 
 const inter = Inter({
-  weight: ['300', '400', '500', '700'], // Включаем нужные толщины
+  weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
   display: 'swap',
 });
@@ -68,11 +68,27 @@ export const customTheme = createTheme({
 
   typography: {
     fontFamily: inter.style.fontFamily,
-    h6: {
+    h1: {
       fontFamily: playfair.style.fontFamily,
       fontWeight: 700,
     },
-    h1: {
+    h2: {
+      fontFamily: playfair.style.fontFamily,
+      fontWeight: 700,
+    },
+    h3: {
+      fontFamily: playfair.style.fontFamily,
+      fontWeight: 700,
+    },
+    h4: {
+      fontFamily: playfair.style.fontFamily,
+      fontWeight: 700,
+    },
+    h5: {
+      fontFamily: playfair.style.fontFamily,
+      fontWeight: 700,
+    },
+    h6: {
       fontFamily: playfair.style.fontFamily,
       fontWeight: 700,
     },
