@@ -1,25 +1,26 @@
-// layers/01_widgets/Header/ui/Header.tsx
+'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Icon } from '@/layers/04_shared/ui/Icon';
 import {
   AppBar,
   Toolbar,
   Typography,
   Box,
   IconButton,
-  Button,
+  Drawer,
 } from '@mui/material';
-
-const NAV_LINKS = [
-  { href: '/shopping', label: 'Shopping' },
-  { href: '/culture', label: 'Culture' },
-  { href: '/food', label: 'Food & Drink' },
-  { href: '/map', label: 'Map View' },
-];
+import { DesktopNavigation } from './DesktopNavigation';
+import { MobileDrawerContent } from './MobileDrawerContent';
+import { Icon } from '@/layers/04_shared/ui/Icon';
 
 export const Header: React.FC = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   return (
     <AppBar position="sticky">
       <Toolbar
@@ -30,6 +31,16 @@ export const Header: React.FC = () => {
           justifyContent: 'space-between',
         }}
       >
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={handleDrawerToggle}
+          sx={{ mr: 2, display: { md: 'none' } }}
+        >
+          <Icon iconName="Menu" />
+        </IconButton>
+
         <Typography
           variant="h6"
           component={Link}
@@ -38,33 +49,15 @@ export const Header: React.FC = () => {
             textDecoration: 'none',
             color: 'white',
             fontWeight: 'bold',
-            letterSpacing: '0.05em',
+            letterSpacing: '0.05rem',
+            flexGrow: { xs: 1, md: 0 },
+            textAlign: { xs: 'left', md: 'left' },
           }}
         >
           Milan Catalog
         </Typography>
 
-        <Box
-          sx={{
-            display: { xs: 'none', md: 'flex' },
-            alignItems: 'center',
-            gap: 3,
-          }}
-        >
-          {NAV_LINKS.map((link) => (
-            <Button
-              key={link.href}
-              component={Link}
-              href={link.href}
-              sx={{ color: '#ccc', '&:hover': { color: 'white' } }}
-            >
-              {link.label}
-            </Button>
-          ))}
-          <IconButton sx={{ color: 'white' }}>
-            <Icon iconName="Search" />
-          </IconButton>
-        </Box>
+        <DesktopNavigation />
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <IconButton
@@ -72,15 +65,27 @@ export const Header: React.FC = () => {
           >
             <Icon iconName="Search" />
           </IconButton>
+
           <IconButton component={Link} href="/profile" sx={{ color: 'white' }}>
             <Icon iconName="User" />
           </IconButton>
         </Box>
-
-        {/* В MUI часто используют Drawer или Menu для мобильного меню,
-           но пока мы его пропускаем, чтобы сосредоточиться на логике. 
-           Mobile-first меню будет добавлено позже. */}
       </Toolbar>
+
+      <nav>
+        <Drawer
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          anchor="right"
+          ModalProps={{ keepMounted: true }}
+          sx={{
+            display: { xs: 'block', md: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },
+          }}
+        >
+          <MobileDrawerContent onClose={handleDrawerToggle} />
+        </Drawer>
+      </nav>
     </AppBar>
   );
 };

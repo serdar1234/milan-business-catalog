@@ -1,4 +1,17 @@
 import { createTheme } from '@mui/material/styles';
+import { Playfair_Display, Inter } from 'next/font/google';
+
+const playfair = Playfair_Display({
+  weight: ['700'], // Используем жирное начертание для заголовков
+  subsets: ['latin'],
+  display: 'swap', // Позволяет браузеру сначала отобразить запасной шрифт
+});
+
+const inter = Inter({
+  weight: ['300', '400', '500', '700'], // Включаем нужные толщины
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 declare module '@mui/material/styles' {
   interface Palette {
@@ -54,8 +67,15 @@ export const customTheme = createTheme({
   },
 
   typography: {
-    // Используем 'Roboto' или любой другой шрифт, который вы выберете,
-    // но по умолчанию MUI использует его. Мы оставим настройки шрифтов по умолчанию.
+    fontFamily: inter.style.fontFamily,
+    h6: {
+      fontFamily: playfair.style.fontFamily,
+      fontWeight: 700,
+    },
+    h1: {
+      fontFamily: playfair.style.fontFamily,
+      fontWeight: 700,
+    },
   },
 
   components: {
