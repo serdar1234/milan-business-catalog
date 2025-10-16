@@ -4,6 +4,22 @@
   margin: 0;
 }
 
+:root {
+  --color-brand-primary: #0b3a5b; /* Deep Canal Blue */
+  --color-brand-accent: #d3542a; /* Warm Terracotta (CTA) */
+  --color-brand-pin: #e94f37; /* Vibrant Orange (Map Pin / Error) */
+
+  /* Стандартные цвета MUI, если бы мы их использовали вне MUI */
+  --color-primary-main: #0b3a5b;
+  --color-secondary-main: #ffb46b;
+  --color-error-main: #e94f37;
+
+  /* Цвета поверхности и текста */
+  --color-surface: #ffffff; /* White */
+  --color-background: #fff9f3; /* Pale Cream */
+  --color-text-primary: #102428; /* Dark Teal */
+}
+
 html,
 body {
   max-width: 100vw;

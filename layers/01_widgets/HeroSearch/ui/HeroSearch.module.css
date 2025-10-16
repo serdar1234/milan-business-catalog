@@ -1,4 +1,24 @@
-.button {
-  padding: 0.75rem 1.5rem;
-  text-transform: capitalize;
+.left-col__button {
+  text-transform: capitalize !important;
+}
+
+.right-col {
+  color: #fff;
+  border: 1px solid currentColor;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  height: fit-content;
+  box-shadow: 0px 0px 4px rgb(255 255 255 / 1);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(2px);
+}
+
+.quick-discover__link {
+  color: inherit;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+}
+
+.quick-discover__link:hover {
+  color: var(--color-brand-accent);
 }

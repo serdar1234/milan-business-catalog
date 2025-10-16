@@ -51,7 +51,8 @@ export const Header: React.FC = () => {
             fontWeight: 'bold',
             letterSpacing: '0.05rem',
             flexGrow: { xs: 1, md: 0 },
-            textAlign: { xs: 'left', md: 'left' },
+            textAlign: 'left',
+            whiteSpace: 'nowrap',
           }}
         >
           Milan Catalog

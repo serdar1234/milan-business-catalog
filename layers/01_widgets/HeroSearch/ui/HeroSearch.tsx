@@ -52,15 +52,7 @@ export const HeroSearch: React.FC = () => {
         </Box>
 
         {/* Desktop info block */}
-        <Box
-          sx={{
-            display: { xs: 'none', md: 'flex' },
-            width: '100%',
-            justifyContent: 'center',
-          }}
-        >
-          <HeroDesktopInfo />
-        </Box>
+        <HeroDesktopInfo />
       </Container>
     </Box>
   );

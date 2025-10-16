@@ -15,8 +15,9 @@ export const DesktopNavigation: React.FC = () => {
     <Box
       sx={{
         display: { xs: 'none', md: 'flex' },
-        alignItems: 'center',
-        gap: 3,
+        alignItems: 'space-around',
+        gap: 2,
+        marginInline: '1rem',
       }}
     >
       {NAV_LINKS.map((link) => (
@@ -24,7 +25,13 @@ export const DesktopNavigation: React.FC = () => {
           key={link.href}
           component={Link}
           href={link.href}
-          sx={{ color: '#ccc', '&:hover': { color: 'white' } }}
+          sx={{
+            color: '#ccc',
+            '&:hover': { color: 'white' },
+            textTransform: 'capitalize',
+            whiteSpace: 'nowrap',
+            padding: '0.5rem',
+          }}
         >
           {link.label}
         </Button>
