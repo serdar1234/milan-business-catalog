@@ -1,5 +1,4 @@
-import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { CategoryCard } from '@/layers/02_features/CategoryCard/ui/CategoryCard';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
@@ -9,6 +8,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import MuseumIcon from '@mui/icons-material/Museum';
 import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
 import SpaIcon from '@mui/icons-material/Spa';
+import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 
 const CATEGORIES = [
   { name: 'Cafes', icon: CoffeeIcon, count: 189, href: '/category/cafes' },
@@ -54,26 +54,11 @@ export const BrowseByCategory: React.FC = () => {
         padding: '2rem 1rem',
       }}
     >
-      <Typography
-        variant="h5"
-        component="h2"
-        fontWeight="bold"
-        sx={{
-          mb: { xs: 2, md: 0.5 },
-          textAlign: { xs: 'start', md: 'center' },
-        }}
-      >
-        Browse by Category
-      </Typography>
+      <WidgetHeader
+        title="Browse by Category"
+        subtitle="Discover the best Milano has to offer"
+      />
 
-      <Typography
-        display={{ xs: 'none', md: 'block' }}
-        variant="subtitle1"
-        component="p"
-        sx={{ mb: 3, textAlign: 'center' }}
-      >
-        Discover the best Milano has to offer
-      </Typography>
       <Grid container spacing={{ xs: 1, md: 2 }} justifyContent="center">
         {CATEGORIES.map((cat) => (
           <Grid

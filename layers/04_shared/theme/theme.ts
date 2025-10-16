@@ -1,6 +1,25 @@
 import { createTheme } from '@mui/material/styles';
 import { Playfair_Display, Inter } from 'next/font/google';
 
+declare module '@mui/material/styles' {
+  interface Palette {
+    brandPrimary: Palette['primary'];
+    brandAccent: Palette['primary'];
+    brandPin: Palette['primary'];
+    surface: Palette['primary'];
+    statusError: Palette['primary'];
+    statusFeatured: Palette['primary'];
+  }
+  interface PaletteOptions {
+    brandPrimary?: PaletteOptions['primary'];
+    brandAccent?: PaletteOptions['primary'];
+    brandPin?: PaletteOptions['primary'];
+    surface?: PaletteOptions['primary'];
+    statusError?: PaletteOptions['primary'];
+    statusFeatured?: PaletteOptions['primary'];
+  }
+}
+
 const playfair = Playfair_Display({
   weight: ['700'],
   subsets: ['latin'],
@@ -13,49 +32,41 @@ const inter = Inter({
   display: 'swap',
 });
 
-declare module '@mui/material/styles' {
-  interface Palette {
-    brandPrimary: Palette['primary'];
-    brandAccent: Palette['primary'];
-    brandPin: Palette['primary'];
-    surface: Palette['primary'];
-  }
-  interface PaletteOptions {
-    brandPrimary?: PaletteOptions['primary'];
-    brandAccent?: PaletteOptions['primary'];
-    brandPin?: PaletteOptions['primary'];
-    surface?: PaletteOptions['primary'];
-  }
-}
-
 export const customTheme = createTheme({
   palette: {
     mode: 'light',
 
     primary: {
-      main: '#0B3A5B', // Deep Canal Blue (часто используется для AppBar/Buttons)
+      main: '#0B3A5B', // Deep Canal Blue (for AppBar/Buttons)
     },
     secondary: {
       main: '#FFB46B', // Soft Sunset Orange
     },
     error: {
-      main: '#E94F37', // Vibrant Orange для ошибок или критических акцентов
+      main: '#E94F37', // Vibrant Orange for error messages
     },
-
     brandPrimary: {
       main: '#0B3A5B',
     },
     brandAccent: {
-      main: '#D3542A', // Warm Terracotta (Для CTA)
+      main: '#D3542A', // Warm Terracotta (for CTA)
+      dark: '#C14E26',
+      contrastText: '#FFFFFF',
     },
     brandPin: {
-      main: '#E94F37', // Vibrant Orange (Для Map pin / rating star)
+      main: '#E94F37', // Vibrant Orange (for Map pin / rating star)
     },
-
+    statusError: {
+      main: '#A31F2E', // dark red (Closing Soon)
+      contrastText: '#FFFFFF',
+    },
+    statusFeatured: {
+      main: '#114B3C', // dark green (Featured)
+      contrastText: '#FFFFFF',
+    },
     surface: {
       main: '#E5E7EB', // Surface (Card)
     },
-    // Цвет фона страницы (используется MUI)
     background: {
       default: '#FFF9F3', // Pale Cream (Background)
       paper: '#FFFFFF', // Surface (Card)
@@ -98,9 +109,9 @@ export const customTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         containedPrimary: {
-          backgroundColor: '#D3542A', // Использование Terracotta для Primary Button
+          backgroundColor: '#D3542A',
           '&:hover': {
-            backgroundColor: '#c14e26', // Чуть темнее при наведении
+            backgroundColor: '#c14e26',
           },
         },
       },
