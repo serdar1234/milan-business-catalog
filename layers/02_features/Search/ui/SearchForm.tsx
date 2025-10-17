@@ -3,7 +3,9 @@
 import { Box, TextField, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
-export const SearchForm: React.FC = () => {
+export const SearchForm: React.FC<{ hasBorder?: boolean }> = ({
+  hasBorder = false,
+}) => {
   return (
     <Box
       component="form"
@@ -14,6 +16,7 @@ export const SearchForm: React.FC = () => {
         maxWidth: 360,
         height: '3rem',
         borderRadius: '0.5rem',
+        border: hasBorder ? '1px solid var(--color-brand-accent)' : 'none',
         overflow: 'hidden',
         bgcolor: '#fff',
       }}

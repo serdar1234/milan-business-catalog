@@ -1,6 +1,9 @@
 import { createTheme } from '@mui/material/styles';
 import { Playfair_Display, Inter } from 'next/font/google';
 
+// =========================================================
+// 1. Pallete options
+// =========================================================
 declare module '@mui/material/styles' {
   interface Palette {
     brandPrimary: Palette['primary'];
@@ -20,6 +23,41 @@ declare module '@mui/material/styles' {
   }
 }
 
+// =========================================================
+// 2. Button color props
+// =========================================================
+declare module '@mui/material/Button' {
+  interface ButtonPropsColorOverrides {
+    brandPrimary: true;
+    brandAccent: true;
+    brandPin: true;
+    surface: true;
+    statusError: true;
+    statusFeatured: true;
+  }
+}
+
+declare module '@mui/material/IconButton' {
+  interface IconButtonPropsColorOverrides {
+    brandPrimary: true;
+    brandAccent: true;
+    brandPin: true;
+    surface: true;
+  }
+}
+
+declare module '@mui/material/Chip' {
+  interface ChipPropsColorOverrides {
+    brandPrimary: true;
+    brandAccent: true;
+    statusError: true;
+    statusFeatured: true;
+  }
+}
+
+// =========================================================
+// 3. Typography
+// =========================================================
 const playfair = Playfair_Display({
   weight: ['700'],
   subsets: ['latin'],
