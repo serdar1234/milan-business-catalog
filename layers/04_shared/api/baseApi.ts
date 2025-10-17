@@ -1,9 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const baseApi = createApi({
-  reducerPath: "api",
+  reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.milan-catalog.com/v1",
+    baseUrl: 'https://api.milan-catalog.com/v1',
     prepareHeaders: (headers) => {
       // Здесь можно добавить логику для авторизации, например, токен
       // const token = localStorage.getItem('authToken');
