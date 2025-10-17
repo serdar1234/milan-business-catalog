@@ -1,0 +1,41 @@
+.explore-districts {
+  background-color: var(--color-surface);
+}
+
+.swiperWrapper {
+  position: relative;
+}
+
+.swiperWrapper :global(.swiper-button-prev),
+.swiperWrapper :global(.swiper-button-next) {
+  color: var(--color-surface);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  box-shadow: var(--color-surface);
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.swiperWrapper :global(.swiper-button-prev):hover,
+.swiperWrapper :global(.swiper-button-next):hover {
+  background-color: var(--color-brand-accent);
+  color: var(--color-surface);
+}
+
+.swiperWrapper :global(.swiper-button-disabled) {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.swiperWrapper :global(.swiper-button-prev) {
+  left: 10px;
+}
+.swiperWrapper :global(.swiper-button-next) {
+  right: 10px;
+}

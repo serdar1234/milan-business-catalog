@@ -5,7 +5,7 @@ export const DISTRICTS = [
     businessCount: 145,
     averageRating: 4.6,
     imageUrl: '/d1.jpg',
-    href: '/discover?district=brera',
+    href: '#',
   },
   {
     name: 'Navigli',
@@ -13,7 +13,7 @@ export const DISTRICTS = [
     businessCount: 210,
     averageRating: 4.4,
     imageUrl: '/d2.jpg',
-    href: '/discover?district=navigli',
+    href: '#',
   },
   {
     name: 'Isola',
@@ -21,7 +21,7 @@ export const DISTRICTS = [
     businessCount: 98,
     averageRating: 4.7,
     imageUrl: '/d3.jpg',
-    href: '/discover?district=isola',
+    href: '#',
   },
   {
     name: 'Porta Romana',
@@ -29,6 +29,6 @@ export const DISTRICTS = [
     businessCount: 122,
     averageRating: 4.5,
     imageUrl: '/d4.jpg',
-    href: '/discover?district=porta-romana',
+    href: '#',
   },
 ];

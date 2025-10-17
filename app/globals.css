@@ -18,6 +18,8 @@
   --color-surface: #ffffff; /* White */
   --color-background: #fff9f3; /* Pale Cream */
   --color-text-primary: #102428; /* Dark Teal */
+  /* --color-surface: #ac5a5a; /* White */
+  /* --color-background: #c08c59; /* Pale Cream */
 }
 
 html,
@@ -25,7 +27,7 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   scrollbar-color: #0b3a5b rgb(from #0b3a5b r g b / 0.5);
-  background-color: #fff9f3; /* Pale Cream */
+  background-color: var(--color-background); /* Pale Cream */
   color: #102428; /* Dark Teal */
 }
 

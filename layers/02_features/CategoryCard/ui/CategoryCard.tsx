@@ -34,7 +34,7 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
 
         maxWidth: 140,
         flexGrow: 1,
-        p: 1.5,
+        p: { xs: 0.5, sm: 1, md: 1.5 },
         boxShadow: { xs: 0, md: 1 },
       }}
     >

@@ -38,7 +38,6 @@ export const DistrictCard: React.FC<DistrictCardProps> = ({ district }) => {
         },
       }}
     >
-      {/* 1. Фоновое изображение с затемнением */}
       <Box
         component="img"
         src={imageUrl}
@@ -50,13 +49,11 @@ export const DistrictCard: React.FC<DistrictCardProps> = ({ district }) => {
           filter: 'brightness(0.5)',
           transition: 'transform 0.5s',
           '&:hover': {
-            // Эффект увеличения при наведении
             transform: 'scale(1.05)',
           },
         }}
       />
 
-      {/* 2. Контентное наложение (текст, рейтинг) */}
       <Box
         sx={{
           position: 'absolute',
@@ -64,27 +61,22 @@ export const DistrictCard: React.FC<DistrictCardProps> = ({ district }) => {
           left: 0,
           right: 0,
           p: { xs: 2, md: 3 },
-          color: 'white', // Весь текст белый
+          color: 'var(--color-surface)',
         }}
       >
-        {/* Заголовок */}
         <Typography variant="h5" component="div" fontWeight="bold" mb={0.5}>
           {name}
         </Typography>
 
-        {/* Субтайтл */}
         <Typography variant="body2" mb={1}>
           {subtitle}
         </Typography>
 
-        {/* Количество бизнесов и рейтинг */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          {/* Количество бизнесов */}
           <Typography variant="body2" fontWeight="medium">
             {businessCount} places
           </Typography>
 
-          {/* Звезды рейтинга */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Rating
               name={`rating-${name}`}
