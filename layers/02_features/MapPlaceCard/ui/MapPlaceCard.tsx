@@ -13,7 +13,7 @@ interface MapPlaceCardProps {
 
 export const MapPlaceCard: React.FC<MapPlaceCardProps> = ({ place }) => {
   const { id, imageUrl, name, rating, description, distance, isOpen } = place;
-  console.log(id);
+  if (!id) console.log('No id for place', place);
   return (
     <Box
       component={Link}

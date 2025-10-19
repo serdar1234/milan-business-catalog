@@ -19,6 +19,8 @@
   --color-background: #fff9f3; /* Pale Cream */
   --color-text-primary: #102428; /* Dark Teal */
   --color-border-grey: #aaa; /* Light Gray */
+  --color-dark-red: #a31f2e; /* dark red (Closing Soon) */
+  --color-status-featured: #114b3c; /* dark green (Featured) */
   /* --color-surface: #ac5a5a; /* White */
   /* --color-background: #c08c59; /* Pale Cream */
 }

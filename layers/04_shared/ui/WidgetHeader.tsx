@@ -12,7 +12,7 @@ export const WidgetHeader: React.FC<WidgetHeaderProps> = ({
   return (
     <>
       <Typography
-        variant="h5"
+        variant="h4"
         component="h2"
         fontWeight="bold"
         sx={{

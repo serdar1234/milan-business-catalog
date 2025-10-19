@@ -134,11 +134,11 @@ export const customTheme = createTheme({
       fontWeight: 700,
     },
     h5: {
-      fontFamily: inter.style.fontFamily,
+      fontFamily: playfair.style.fontFamily,
       fontWeight: 700,
     },
     h6: {
-      fontFamily: playfair.style.fontFamily,
+      fontFamily: inter.style.fontFamily,
       fontWeight: 700,
     },
   },

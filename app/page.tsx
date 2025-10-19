@@ -3,6 +3,7 @@ import { ExploreDistricts } from '@/layers/01_widgets/ExploreDistricts/ui/Explor
 import { ExploreOnMap } from '@/layers/01_widgets/ExploreOnMap/ui/ExploreOnMap';
 import { HeroSearch } from '@/layers/01_widgets/HeroSearch/ui/HeroSearch';
 import { SeasonFavorites } from '@/layers/01_widgets/SeasonFavorites/ui/SeasonFavorites';
+import { WinterSpecials } from '@/layers/01_widgets/WinterSpecials/ui/WinterSpecials';
 import Box from '@mui/material/Box';
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <SeasonFavorites />
       <ExploreDistricts />
       <ExploreOnMap />
+      <WinterSpecials />
     </Box>
   );
 }

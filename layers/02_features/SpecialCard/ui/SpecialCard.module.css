@@ -1,0 +1,32 @@
+.card {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  transition: box-shadow 0.3s ease-in-out;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    width: 128px;
+    height: 128px;
+    background-color: rgb(255 255 255 / 0.1);
+    border-radius: 50%;
+  }
+
+  &::before {
+    left: 0;
+    bottom: 0;
+    transform: translate(-50%, 50%);
+  }
+
+  &::after {
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+}
