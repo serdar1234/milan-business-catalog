@@ -2,6 +2,7 @@ import { BrowseByCategory } from '@/layers/01_widgets/BrowseByCategory/BrowseByC
 import { ExploreDistricts } from '@/layers/01_widgets/ExploreDistricts/ui/ExploreDistricts';
 import { ExploreOnMap } from '@/layers/01_widgets/ExploreOnMap/ui/ExploreOnMap';
 import { HeroSearch } from '@/layers/01_widgets/HeroSearch/ui/HeroSearch';
+import { LocalInsights } from '@/layers/01_widgets/LocalInsights/ui/LocalInsights';
 import { SeasonFavorites } from '@/layers/01_widgets/SeasonFavorites/ui/SeasonFavorites';
 import { WinterSpecials } from '@/layers/01_widgets/WinterSpecials/ui/WinterSpecials';
 import Box from '@mui/material/Box';
@@ -15,6 +16,7 @@ export default function Home() {
       <ExploreDistricts />
       <ExploreOnMap />
       <WinterSpecials />
+      <LocalInsights />
     </Box>
   );
 }

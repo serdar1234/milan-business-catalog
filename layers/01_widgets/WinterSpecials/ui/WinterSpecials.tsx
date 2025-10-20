@@ -115,7 +115,6 @@ export const WinterSpecials: React.FC = () => {
 
   const DesktopView = (
     <Box sx={{ position: 'relative' }}>
-      {/* 2.1. Два больших события (50% + 50%) */}
       <Grid container spacing={3} sx={{ mb: 3, position: 'relative' }}>
         {TOP_EVENTS.map((event) => (
           <Grid size={6} key={event.title} component={'article'}>
@@ -124,7 +123,6 @@ export const WinterSpecials: React.FC = () => {
         ))}
       </Grid>
 
-      {/* 2.2. Три мелких события (1/3 + 1/3 + 1/3) */}
       <Grid container spacing={3}>
         {MINOR_EVENTS.map((event) => (
           <Grid size={4} key={event.title}>
@@ -141,12 +139,13 @@ export const WinterSpecials: React.FC = () => {
       sx={{ py: 6, backgroundColor: 'background.paper' }}
     >
       <Container maxWidth="lg">
-        <WidgetHeader
-          title="Winter Events & Specials"
-          subtitle="Don't miss these seasonal experiences in Milano" // Обновленный сабтайтл
-        />
+        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+          <WidgetHeader
+            title="Winter Events & Specials"
+            subtitle="Don't miss these seasonal experiences in Milano"
+          />
+        </Box>
 
-        {/* Рендеринг мобильной/десктопной версии */}
         <Box sx={{ display: { xs: 'block', md: 'none' } }}>{MobileView}</Box>
 
         <Box sx={{ display: { xs: 'none', md: 'block' } }}>{DesktopView}</Box>
