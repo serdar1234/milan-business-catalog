@@ -27,13 +27,11 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
     business;
 
   return (
-    // Оборачиваем Card в Link, чтобы сделать всю карточку кликабельной
     <Card
       component={'article'}
       sx={{
         width: '100%',
         textDecoration: 'none',
-        // Используем цвет поверхности (белый)
         bgcolor: 'surface.main',
         borderRadius: 2,
         boxShadow: 2,
@@ -47,11 +45,8 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
       }}
     >
       <Box sx={{ position: 'relative' }}>
-        {/* Изображение */}
         <CardMedia
           component="img"
-          // Временно используем мок-изображение, так как моки не содержат реальных путей
-          // В реальном приложении: src={imageUrl}
           image={imageUrl}
           alt={name}
           sx={{ height: 200, objectFit: 'cover' }}
@@ -65,7 +60,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
               position: 'absolute',
               top: 8,
               left: 8,
-              bgcolor: tag.color, // Используем цвет из моков
+              bgcolor: tag.color,
               color: 'white',
               fontWeight: 'bold',
             }}
@@ -78,7 +73,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
             position: 'absolute',
             top: 8,
             right: 8,
-            color: isFavorite ? 'brandPin.main' : 'white', // Красная иконка, если добавлено
+            color: isFavorite ? 'brandPin.main' : 'background.paper',
             bgcolor: 'rgba(255, 255, 255, 0.5)',
             '&:hover': {
               bgcolor: 'rgba(255, 255, 255, 0.7)',
@@ -98,9 +93,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
         </IconButton>
       </Box>
 
-      {/* Контент карточки */}
       <CardContent>
-        {/* Категория и Рейтинг */}
         <Box
           sx={{
             display: 'flex',
@@ -131,7 +124,6 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
           </Box>
         </Box>
 
-        {/* Title */}
         <Link href={`/business/${id}`}>
           <Typography
             variant="h6"
@@ -144,7 +136,6 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
           </Typography>
         </Link>
 
-        {/* Address */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <PlaceIcon
             sx={{ fontSize: 16, color: 'brandAccent.main', mr: 0.5 }}
@@ -185,7 +176,6 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
         </Button>
       </Box>
 
-      {/* 2б. ДЕСКТОПНАЯ ВЕРСИЯ CTA (3 кнопки) */}
       <Box
         sx={{
           display: { xs: 'none', md: 'flex' },
@@ -198,7 +188,6 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
           e.stopPropagation();
         }}
       >
-        {/* Reserve */}
         <Button
           variant="contained"
           sx={{
@@ -210,7 +199,6 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
           Reserve
         </Button>
 
-        {/* Directions */}
         <IconButton
           size="large"
           sx={{
@@ -224,7 +212,6 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
           <DirectionsIcon />
         </IconButton>
 
-        {/* Phone */}
         <IconButton
           size="large"
           sx={{

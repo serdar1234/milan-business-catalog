@@ -40,18 +40,21 @@ export const HeroSearch: React.FC = () => {
           <Typography
             variant="h5"
             component="h1"
-            color="white"
+            color="brandAccent.contrastText"
             fontWeight="bold"
           >
             Discover Milano&apos;s Hidden Gems
           </Typography>
-          <Typography variant="body1" color="white" mb={'1rem'}>
+          <Typography
+            variant="body1"
+            color="brandAccent.contrastText"
+            mb={'1rem'}
+          >
             Perfect spots for your winter adventure
           </Typography>
           <SearchForm />
         </Box>
 
-        {/* Desktop info block */}
         <HeroDesktopInfo />
       </Container>
     </Box>

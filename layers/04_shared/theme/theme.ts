@@ -76,6 +76,7 @@ export const customTheme = createTheme({
 
     primary: {
       main: '#0B3A5B', // Deep Canal Blue (for AppBar/Buttons)
+      contrastText: '#FFFFFF',
     },
     secondary: {
       main: '#FFB46B', // Soft Sunset Orange
@@ -85,6 +86,7 @@ export const customTheme = createTheme({
     },
     brandPrimary: {
       main: '#0B3A5B',
+      contrastText: '#FFFFFF',
     },
     brandAccent: {
       main: '#D3542A', // Warm Terracotta (for CTA)

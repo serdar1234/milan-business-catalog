@@ -17,8 +17,7 @@ export const MapPlaceCard: React.FC<MapPlaceCardProps> = ({ place }) => {
   return (
     <Box
       component={Link}
-      // href={`/business/${id}`}
-      href={'#'}
+      href={`/business/${id}`}
       sx={{
         display: 'flex',
         gap: 2,

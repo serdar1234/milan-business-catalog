@@ -41,7 +41,7 @@ export const HeroDesktopInfo: React.FC = () => {
             variant="h3"
             component="h1"
             fontWeight="bold"
-            sx={{ mb: '1.5rem', color: '#fff' }}
+            sx={{ mb: '1.5rem', color: 'brandAccent.contrastText' }}
           >
             Discover Milano&apos;s
             <Box sx={{ color: 'brandAccent.main' }}>Winter Magic</Box>
@@ -51,7 +51,7 @@ export const HeroDesktopInfo: React.FC = () => {
             variant="body1"
             sx={{
               mb: 4,
-              color: '#fff',
+              color: 'brandAccent.contrastText',
               opacity: 0.8,
               maxWidth: '60ch',
             }}
@@ -83,7 +83,7 @@ export const HeroDesktopInfo: React.FC = () => {
               href="/map"
               sx={{
                 padding: '0.75rem 1.5rem',
-                color: '#fff',
+                color: 'brandAccent.contrastText',
                 border: '2px solid',
                 borderColor: 'currentColor',
               }}
@@ -105,7 +105,7 @@ export const HeroDesktopInfo: React.FC = () => {
               variant="h6"
               fontWeight="bold"
               sx={{
-                color: '#fff',
+                color: 'brandAccent.contrastText',
               }}
             >
               Quick Discover
@@ -158,7 +158,11 @@ export const HeroDesktopInfo: React.FC = () => {
                   {stat.value}
                 </Typography>
               </Box>
-              <Typography variant="caption" color="#fff" display="block">
+              <Typography
+                variant="caption"
+                color="brandAccent.contrastText"
+                display="block"
+              >
                 {stat.label}
               </Typography>
             </Grid>

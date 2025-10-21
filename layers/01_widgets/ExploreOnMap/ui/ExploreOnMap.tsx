@@ -113,7 +113,7 @@ export const ExploreOnMap: React.FC = () => {
         }}
       >
         <Typography variant="h6" color="text.secondary">
-          [Карта города: Заглушка]
+          [the map goes here]
         </Typography>
       </Box>
     </Box>
