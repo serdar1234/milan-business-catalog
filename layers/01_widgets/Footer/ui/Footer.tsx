@@ -94,18 +94,16 @@ export const Footer: React.FC = () => {
     <Box
       component="footer"
       sx={{
-        bgcolor: 'brandPrimary.main', // Deep Canal Blue
+        bgcolor: 'brandPrimary.main',
         color: 'white',
         py: 8,
-        display: { xs: 'none', md: 'block' }, // Видно только на десктопе
+        display: { xs: 'none', md: 'block' },
       }}
     >
       <Container maxWidth="lg">
         <Grid container spacing={5}>
-          {/* 1. Колонка: Логотип, Описание, Соцсети */}
           <Grid size={3}>
             <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
-              {/* Заглушка логотипа MilanoDiscover */}
               <Typography
                 variant="h5"
                 fontWeight="bold"
@@ -122,7 +120,7 @@ export const Footer: React.FC = () => {
               variant="body2"
               sx={{ mb: 3, color: 'rgba(255, 255, 255, 0.7)' }}
             >
-              Your ultimate guide to discovering the best of Milano, from
+              Your ultimate guide to discovering the best of Milan, from
               canal-side aperitivo bars to world-class restaurants and hidden
               gems.
             </Typography>
@@ -147,7 +145,6 @@ export const Footer: React.FC = () => {
             </Box>
           </Grid>
 
-          {/* 2, 3, 4. Колонки навигации */}
           {FOOTER_LINKS.map((col) => (
             <Grid size={3} key={col.title}>
               <NavColumn {...col} />
@@ -155,7 +152,6 @@ export const Footer: React.FC = () => {
           ))}
         </Grid>
 
-        {/* Разделитель и Нижняя строка */}
         <Box
           sx={{
             borderTop: '1px solid rgba(255, 255, 255, 0.1)',
@@ -166,7 +162,6 @@ export const Footer: React.FC = () => {
             alignItems: 'center',
           }}
         >
-          {/* Копирайт */}
           <Typography
             variant="caption"
             sx={{ color: 'rgba(255, 255, 255, 0.7)' }}
@@ -174,7 +169,6 @@ export const Footer: React.FC = () => {
             © 2025 MilanoDiscover. All rights reserved.
           </Typography>
 
-          {/* Язык и Валюта (простые заглушки) */}
           <Box sx={{ display: 'flex', gap: 3 }}>
             <Box
               sx={{
