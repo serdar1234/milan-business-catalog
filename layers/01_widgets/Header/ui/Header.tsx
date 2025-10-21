@@ -13,9 +13,11 @@ import {
 import { DesktopNavigation } from './DesktopNavigation';
 import { MobileDrawerContent } from './MobileDrawerContent';
 import { Icon } from '@/layers/04_shared/ui/Icon';
+import { useScrollLock } from '@/layers/04_shared/hooks/useScrollLock';
 
 export const Header: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  useScrollLock(mobileOpen);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -78,7 +80,7 @@ export const Header: React.FC = () => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           anchor="right"
-          ModalProps={{ keepMounted: true }}
+          ModalProps={{ keepMounted: true, disableScrollLock: true }}
           sx={{
             display: { xs: 'block', md: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },

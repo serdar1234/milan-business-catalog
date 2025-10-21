@@ -18,6 +18,7 @@ const NAV_ITEMS = [
 export const MobileNavBar: React.FC = () => {
   return (
     <AppBar
+      id="mobile-nav-bar"
       position="fixed"
       sx={{
         top: 'auto',
