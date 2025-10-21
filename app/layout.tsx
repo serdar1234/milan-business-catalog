@@ -5,6 +5,10 @@ import { StoreProvider } from '@/layers/04_shared/providers/StoreProvider';
 import { MuiThemeProvider } from '@/layers/04_shared/providers/MuiThemeProvider';
 import { Header } from '@/layers/01_widgets/Header/ui/Header';
 import { Playfair_Display, Inter } from 'next/font/google';
+import { Footer } from '@/layers/01_widgets/Footer/ui/Footer';
+import { MobileNavBar } from '@/layers/01_widgets/MobileNavBar/ui/MobileNavBar';
+import { Box } from '@mui/material';
+import ScrollToTopButton from '@/layers/02_features/ScrollToTopButton';
 
 const playfair = Playfair_Display({
   weight: ['700'],
@@ -35,7 +39,12 @@ export default function RootLayout({
           <StoreProvider>
             <AppRouterCacheProvider options={{ key: 'css' }}>
               <Header />
-              {children}
+              <Box component="main" sx={{ pb: { xs: 8, md: 0 } }}>
+                {children}
+                <ScrollToTopButton />
+              </Box>
+              <MobileNavBar />
+              <Footer />
             </AppRouterCacheProvider>
           </StoreProvider>
         </body>
