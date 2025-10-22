@@ -115,6 +115,7 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
         <Grid size={6} sx={{ minWidth: 0 }}>
           <Typography
             variant="h5"
+            component={'h1'}
             fontWeight="bold"
             lineHeight={1.2}
             sx={{ mb: 1 }}

@@ -3,7 +3,7 @@ import { MobileBusinessHeader } from '@/layers/02_features/MobileBusinessHeader/
 import { AppBreadcrumbs } from '@/layers/04_shared/ui/AppBreadcrumbs';
 import { BusinessHeroDesktop } from '@/layers/02_features/BusinessHeroDesktop/ui/BusinessHeroDesktop';
 
-const MOCK_BUSINESS_DATA = {
+export const MOCK_BUSINESS_DATA = {
   id: 1,
   name: 'Osteria del Borgo',
   category: 'Restaurants',
@@ -15,6 +15,7 @@ const MOCK_BUSINESS_DATA = {
   priceRange: '€€€',
   distance: '0.8 km',
   isOpen: true,
+  isFavorite: true,
   statusText: '11:00 PM',
   imageUrl: 'business.jpg',
   district: 'Navigli',
