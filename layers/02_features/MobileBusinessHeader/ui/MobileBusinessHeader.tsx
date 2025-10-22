@@ -1,10 +1,22 @@
-import { Box, Grid, Typography } from '@mui/material';
+import {
+  Box,
+  Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from '@mui/material';
 
 import StarIcon from '@mui/icons-material/Star';
 import PlaceIcon from '@mui/icons-material/Place';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import GridViewIcon from '@mui/icons-material/GridView';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
+import LanguageIcon from '@mui/icons-material/Language';
 
 interface MobileBusinessHeaderData {
   name: string;
@@ -26,12 +38,44 @@ interface MobileBusinessHeaderProps {
 export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
   data,
 }) => {
-  const { name, category, rating, district, isOpen } = data;
+  const {
+    name,
+    category,
+    rating,
+    district,
+    isOpen,
+    address,
+    phone,
+    email,
+    website,
+  } = data;
+  const contactItems = [
+    {
+      icon: PlaceIcon,
+      text: address,
+      href: `https://maps.google.com/?q=${encodeURIComponent(address)}`,
+      type: 'address',
+    },
+    {
+      icon: PhoneIcon,
+      text: phone,
+      href: `tel:${phone.replace(/\s/g, '')}`,
+      type: 'phone',
+    },
+    { icon: EmailIcon, text: email, href: `mailto:${email}`, type: 'email' },
+    {
+      icon: LanguageIcon,
+      text: website.replace('https://', '').replace('http://', ''),
+      href: website,
+      type: 'website',
+    },
+  ];
 
   return (
     <Box
       sx={{
         display: { xs: 'flex', md: 'none' },
+        flexDirection: 'column',
         p: 3,
         bgcolor: 'background.paper',
         borderRadius: 2,
@@ -142,6 +186,48 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
           </Grid>
         </Grid>
       </Grid>
+      {/* Contact items */}
+      <List>
+        {contactItems.map((item, index) => {
+          const IconComponent = item.icon;
+          return (
+            <ListItem disablePadding key={index}>
+              <ListItemButton>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 40,
+                    mt: 0.5,
+                  }}
+                >
+                  <IconComponent
+                    sx={{ color: 'brandAccent.main', fontSize: 24 }}
+                  />
+                </ListItemIcon>
+                <ListItemText
+                  primary={
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        textDecoration: 'none',
+                        wordBreak: 'break-word',
+                      }}
+                      component={'a'}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      {item.text}
+                    </Typography>
+                  }
+                  sx={{
+                    m: 0,
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
+      </List>
     </Box>
   );
 };

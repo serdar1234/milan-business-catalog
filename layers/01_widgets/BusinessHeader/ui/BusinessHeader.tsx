@@ -21,7 +21,7 @@ const MOCK_BUSINESS_DATA = {
   address: 'Via Naviglio Grande, 12 - 20144 Milano, Italy',
   phone: '+39 02 1234 5678',
   email: 'info@osteriadelborgo.it',
-  website: 'www.osteriadelborgo.it',
+  website: 'https://example.com',
   views: 2847,
   saves: 156,
 };
