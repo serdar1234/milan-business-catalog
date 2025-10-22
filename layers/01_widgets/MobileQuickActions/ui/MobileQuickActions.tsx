@@ -89,10 +89,9 @@ export const MobileQuickActions: React.FC<MobileQuickActionsProps> = ({
 
   return (
     <Box
+      component="section"
       sx={{
-        px: 3,
-        pt: 2,
-        pb: 3,
+        p: 3,
         display: { xs: 'block', md: 'none' },
       }}
     >

@@ -106,12 +106,13 @@ export const Footer: React.FC = () => {
             <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
               <Typography
                 variant="h5"
+                component="h6"
                 fontWeight="bold"
                 sx={{ color: 'brandAccent.main', mr: 1 }}
               >
                 M
               </Typography>
-              <Typography variant="h5" fontWeight="bold">
+              <Typography variant="h5" component="h6" fontWeight="bold">
                 MilanoDiscover
               </Typography>
             </Box>

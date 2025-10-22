@@ -11,6 +11,7 @@ const HERO_IMAGE_URL = '/mockHero.jpg';
 export const HeroSearch: React.FC = () => {
   return (
     <Box
+      component={'figure'}
       sx={{
         position: 'relative',
         overflow: 'hidden',
@@ -37,14 +38,16 @@ export const HeroSearch: React.FC = () => {
         }}
       >
         <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-          <Typography
-            variant="h5"
-            component="h1"
-            color="brandAccent.contrastText"
-            fontWeight="bold"
-          >
-            Discover Milano&apos;s Hidden Gems
-          </Typography>
+          <Box component={'figcaption'}>
+            <Typography
+              variant="h5"
+              component="h1"
+              color="brandAccent.contrastText"
+              fontWeight="bold"
+            >
+              Discover Milano&apos;s Hidden Gems
+            </Typography>
+          </Box>
           <Typography
             variant="body1"
             color="brandAccent.contrastText"

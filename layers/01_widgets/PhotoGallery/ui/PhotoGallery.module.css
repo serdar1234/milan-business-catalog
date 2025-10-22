@@ -1,0 +1,9 @@
+.image-wrapper {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  border-radius: 1rem;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  position: relative;
+}

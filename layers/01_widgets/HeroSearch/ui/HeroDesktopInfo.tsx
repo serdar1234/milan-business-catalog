@@ -26,7 +26,6 @@ const STATS = [
 export const HeroDesktopInfo: React.FC = () => {
   return (
     <Box
-      className="123131"
       sx={{
         display: { xs: 'none', md: 'flex' },
         width: '100%',
@@ -37,15 +36,17 @@ export const HeroDesktopInfo: React.FC = () => {
       <Grid container spacing={4}>
         {/* === LEFT COLUMN === */}
         <Grid size={7}>
-          <Typography
-            variant="h3"
-            component="h1"
-            fontWeight="bold"
-            sx={{ mb: '1.5rem', color: 'brandAccent.contrastText' }}
-          >
-            Discover Milano&apos;s
-            <Box sx={{ color: 'brandAccent.main' }}>Winter Magic</Box>
-          </Typography>
+          <Box component={'figcaption'}>
+            <Typography
+              variant="h3"
+              component="h1"
+              fontWeight="bold"
+              sx={{ mb: '1.5rem', color: 'brandAccent.contrastText' }}
+            >
+              Discover Milano&apos;s
+              <Box sx={{ color: 'brandAccent.main' }}>Winter Magic</Box>
+            </Typography>
+          </Box>
 
           <Typography
             variant="body1"

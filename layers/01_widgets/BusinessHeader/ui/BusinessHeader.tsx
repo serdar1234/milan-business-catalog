@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { MobileBusinessHeader } from '@/layers/02_features/MobileBusinessHeader/ui/MobileBusinessHeader';
 import { AppBreadcrumbs } from '@/layers/04_shared/ui/AppBreadcrumbs';
 import { BusinessHeroDesktop } from '@/layers/02_features/BusinessHeroDesktop/ui/BusinessHeroDesktop';
@@ -39,12 +39,14 @@ export default function BusinessHeader() {
       component="section"
       sx={{
         bgcolor: 'var(--color-surface)',
-        padding: '2rem 1rem',
+        // bgcolor: 'brandAccent.main',
       }}
     >
-      <AppBreadcrumbs items={BREADCRUMBS} />
-      <BusinessHeroDesktop data={MOCK_BUSINESS_DATA} />
-      <MobileBusinessHeader data={MOCK_BUSINESS_DATA} />
+      <Container maxWidth="lg">
+        <AppBreadcrumbs items={BREADCRUMBS} />
+        <BusinessHeroDesktop data={MOCK_BUSINESS_DATA} />
+        <MobileBusinessHeader data={MOCK_BUSINESS_DATA} />
+      </Container>
     </Box>
   );
 }
