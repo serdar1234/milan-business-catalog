@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { DesktopNavigation } from './DesktopNavigation';
 import { MobileDrawerContent } from './MobileDrawerContent';
-import { Icon } from '@/layers/04_shared/ui/Icon';
+import { SharedIcon } from '@/layers/04_shared/ui/Icon';
 import { useScrollLock } from '@/layers/04_shared/hooks/useScrollLock';
 
 export const Header: React.FC = () => {
@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
           onClick={handleDrawerToggle}
           sx={{ mr: 2, display: { md: 'none' } }}
         >
-          <Icon iconName="Menu" />
+          <SharedIcon iconName="Menu" />
         </IconButton>
 
         <Typography
@@ -66,11 +66,11 @@ export const Header: React.FC = () => {
           <IconButton
             sx={{ display: { xs: 'block', md: 'none' }, color: 'white' }}
           >
-            <Icon iconName="Search" />
+            <SharedIcon iconName="Search" />
           </IconButton>
 
           <IconButton component={Link} href="/profile" sx={{ color: 'white' }}>
-            <Icon iconName="User" />
+            <SharedIcon iconName="User" />
           </IconButton>
         </Box>
       </Toolbar>

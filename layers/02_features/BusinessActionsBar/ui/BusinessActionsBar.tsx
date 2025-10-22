@@ -32,6 +32,7 @@ export const BusinessActionsBar: React.FC<BusinessActionsBarProps> = ({
         alignItems: 'center',
         justifyContent: 'space-between',
         p: 3,
+        pr: 2,
         bgcolor: 'background.paper',
         position: 'relative',
         zIndex: 10,
@@ -43,7 +44,7 @@ export const BusinessActionsBar: React.FC<BusinessActionsBarProps> = ({
           color="brandAccent"
           startIcon={<EventNoteIcon />}
         >
-          Reserve Table
+          Reserve
         </Button>
 
         <Button
@@ -53,30 +54,27 @@ export const BusinessActionsBar: React.FC<BusinessActionsBarProps> = ({
           href={directionsHref}
           target="_blank"
         >
-          Get Directions
+          Directions
         </Button>
 
-        {/* 3. Call Now (Светлый контур) */}
         <Button
           variant="outlined"
           color="inherit"
-          startIcon={<PhoneIcon />}
           href={phoneHref}
           sx={{ borderColor: 'grey.300', color: 'text.primary' }}
         >
-          Call Now
+          <PhoneIcon />
         </Button>
 
         {/* 4. Website (Светлый контур) */}
         <Button
           variant="outlined"
           color="inherit"
-          startIcon={<LanguageIcon />}
           href={`https://${website.replace('www.', '')}`}
           target="_blank"
           sx={{ borderColor: 'grey.300', color: 'text.primary' }}
         >
-          Website
+          <LanguageIcon />
         </Button>
       </Box>
 

@@ -5,10 +5,10 @@ import CloseIcon from '@mui/icons-material/Close';
 
 type IconName = 'User' | 'Menu' | 'Close' | 'Search';
 
-export const Icon: React.FC<{ iconName: IconName; className?: string }> = ({
-  iconName,
-  className,
-}) => {
+export const SharedIcon: React.FC<{
+  iconName: IconName;
+  className?: string;
+}> = ({ iconName, className }) => {
   let IconComponent;
   switch (iconName) {
     case 'User':

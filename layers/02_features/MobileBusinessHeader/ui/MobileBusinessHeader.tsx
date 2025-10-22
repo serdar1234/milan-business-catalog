@@ -35,7 +35,6 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
         p: 3,
         bgcolor: 'background.paper',
         borderRadius: 2,
-        mt: 3,
       }}
     >
       <Grid
@@ -94,7 +93,7 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
               justifyContent: 'center',
               position: 'absolute',
               bottom: '1.5rem',
-              height: 92,
+              height: { xs: 92, sm: 'calc(100% - 3rem)' },
               right: '1.5rem',
               aspectRatio: '1/1',
               background: 'linear-gradient(135deg, #F06240 0%, #D83B1B 100%)',
