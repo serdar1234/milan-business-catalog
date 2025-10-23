@@ -37,8 +37,8 @@ export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
         py: 3,
         bgcolor: { xs: 'transparent', md: 'background.paper' },
         position: 'relative',
-        outline: '2px solid salmon',
         borderRadius: '1rem',
+        boxShadow: 4,
       }}
     >
       <WidgetHeader title="Photo Gallery" />
@@ -55,7 +55,7 @@ export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
         <Link href="#">View all ({photos.length})</Link>
       </Typography>
       <Grid container spacing={2} sx={{ display: { xs: 'flex', md: 'none' } }}>
-        {/* Мобильная версия (простой layout) */}
+        {/* Mobile version */}
         {mobilePreviewPhotos.map((photo) => (
           <Grid
             size={4}
@@ -81,7 +81,7 @@ export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
         ))}
       </Grid>
       <Grid container spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
-        {/* Десктопная версия (сложный layout) */}
+        {/* Desktop version */}
         <Grid size={8} className={styles['image-wrapper']}>
           <Image
             src={firstPhoto.url}

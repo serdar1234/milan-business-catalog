@@ -1,25 +1,15 @@
 import { Box, Grid, Typography } from '@mui/material';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LanguageIcon from '@mui/icons-material/Language';
 import EuroIcon from '@mui/icons-material/Euro';
 
-// Amenities
-// import WifiIcon from '@mui/icons-material/Wifi';
-// import AccessibleIcon from '@mui/icons-material/Accessible';
-// import DriveEtaIcon from '@mui/icons-material/DriveEta';
-// import CreditCardIcon from '@mui/icons-material/CreditCard';
+import {
+  HourEntry,
+  HoursSection,
+} from '@/layers/03_entities/business/ui/BusinessHours';
+import { MOCK_BUSINESS_DETAILS } from '@/layers/03_entities/business/api/mockData';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-
-import { MOCK_BUSINESS_DETAILS } from './mockData';
-
-interface HourEntry {
-  day: string;
-  hours: string;
-  isToday: boolean;
-}
 
 interface BusinessDetails {
   address: string;
@@ -35,104 +25,42 @@ const InfoRow: React.FC<{
   title: string;
   content: React.ReactNode;
   isLink?: boolean;
-}> = ({ icon: Icon, title, content, isLink }) => (
-  <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
-    <Icon sx={{ color: 'brandAccent.main', mr: 2, mt: 0.25, fontSize: 24 }} />
-    <Box>
-      <Typography variant="body1" fontWeight="bold" color="text.primary">
-        {title}
-      </Typography>
-      <Typography
-        variant="body1"
-        color={isLink ? 'brandAccent.main' : 'text.secondary'}
-        sx={{
-          whiteSpace: 'pre-line', // Для переноса строки в адресе
-          textDecoration: isLink ? 'underline' : 'none',
-        }}
-      >
-        {content}
-      </Typography>
-    </Box>
-  </Box>
-);
-
-const ScheduleRow: React.FC<HourEntry> = ({ day, hours, isToday }) => (
-  <Box
-    sx={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      py: 1.5,
-      borderBottom: '1px solid',
-      borderColor: 'divider',
-    }}
-  >
-    {/* День недели */}
-    <Typography
-      variant="body1"
-      sx={{
-        color: isToday ? 'brandAccent.main' : 'text.primary',
-        fontWeight: isToday ? 'bold' : 'normal',
-      }}
-    >
-      {day}
-    </Typography>
-
-    {/* Время */}
-    <Typography variant="body1" color="text.secondary">
-      {hours}
-    </Typography>
-  </Box>
-);
-
-interface BusinessInformationProps {
-  data?: BusinessDetails;
-}
-
-const HoursSection: React.FC<{ hours: HourEntry[] }> = ({ hours }) => {
-  const todayHours = hours.find((h) => h.isToday) || hours[0];
-  const isOpen = todayHours.hours !== 'Closed';
-  const statusText = isOpen
-    ? `Open Now • Closes at ${todayHours.hours.split(',').pop()?.trim().split(' - ').pop()}`
-    : `Closed Today`;
-  const statusColor = isOpen ? 'success' : 'error';
-  const IconComponent = isOpen ? CheckCircleOutlineIcon : AccessTimeIcon;
-
+}> = ({ icon: Icon, title, content, isLink }) => {
+  let linkText: string = '';
+  if (isLink) {
+    if (title === 'Website') linkText = 'https://' + content;
+    else if (title === 'Phone') linkText = 'tel:' + content;
+    else if (title === 'Address')
+      linkText = `https://maps.google.com/?q=${encodeURIComponent(content as string)}`;
+  }
   return (
-    <Box>
-      <Box sx={{ mb: 3 }}>
-        {hours.map((entry) => (
-          <ScheduleRow key={entry.day} {...entry} />
-        ))}
-      </Box>
-
-      {/* Блок текущего статуса */}
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          p: 2,
-          borderRadius: 2,
-          bgcolor: `${statusColor}.light`,
-        }}
-      >
-        <IconComponent
-          sx={{ color: `${statusColor}.main`, mr: 1, fontSize: 24 }}
-        />
+    <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
+      <Icon sx={{ color: 'brandAccent.main', mr: 2, mt: 0.25, fontSize: 24 }} />
+      <Box>
+        <Typography variant="body1" fontWeight="bold" color="text.primary">
+          {title}
+        </Typography>
         <Typography
           variant="body1"
-          fontWeight="bold"
-          sx={{ color: `${statusColor}.dark` }}
+          component={isLink ? 'a' : 'span'}
+          href={isLink ? (linkText as string) : undefined}
+          target={isLink ? '_blank' : undefined}
+          sx={{
+            cursor: isLink ? 'pointer' : 'default',
+            whiteSpace: 'pre-line',
+          }}
         >
-          {statusText}
+          {content}
         </Typography>
       </Box>
     </Box>
   );
 };
 
-/**
- * BusinessInformation - Основной виджет с информацией о заведении.
- */
+interface BusinessInformationProps {
+  data?: BusinessDetails;
+}
+
 export const BusinessInformation: React.FC<BusinessInformationProps> = ({
   data = MOCK_BUSINESS_DETAILS,
 }) => {
@@ -146,16 +74,34 @@ export const BusinessInformation: React.FC<BusinessInformationProps> = ({
 
   // --- Десктопная версия: Полная информация ---
   const DesktopView = (
-    <Box sx={{ display: { xs: 'none', md: 'block' }, p: 3 }}>
-      <WidgetHeader title="Business Information" />
+    <Box
+      sx={{
+        display: {
+          xs: 'none',
+          md: 'block',
+        },
+        bgcolor: 'background.paper',
+        borderRadius: '1rem',
+        boxShadow: 4,
+        p: 3,
+      }}
+    >
+      <Typography
+        variant="h5"
+        fontFamily='"Inter", "Inter Fallback"'
+        sx={{ mb: 2 }}
+      >
+        Business Information
+      </Typography>
 
       <Grid container spacing={4}>
-        {/* 1. КОЛОНКА: Адрес, Телефон, Сайт, Цена */}
-        <Grid size={6}>
+        {/* 1. Address, Phone, Website, Price Range */}
+        <Grid size={12}>
           <InfoRow
             icon={LocationOnIcon}
             title="Address"
             content={data.address}
+            isLink
           />
           <InfoRow icon={PhoneIcon} title="Phone" content={data.phone} isLink />
           <InfoRow
@@ -171,24 +117,19 @@ export const BusinessInformation: React.FC<BusinessInformationProps> = ({
           />
         </Grid>
 
-        {/* 2. КОЛОНКА: Часы работы и Удобства */}
-        <Grid size={6}>
-          {/* Часы работы */}
+        {/* 2. Business Hours */}
+        <Grid size={12}>
           <Typography variant="h6" fontWeight="bold" sx={{ mb: 1 }}>
             Hours
           </Typography>
           <HoursSection hours={data.hours} />
 
-          {/* Удобства (Amenities) */}
-          <Typography variant="h6" fontWeight="bold" sx={{ mt: 4, mb: 1 }}>
-            Amenities
-          </Typography>
           {data.amenities.map((a) => (
             <Box
               key={a.label}
               sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
             >
-              <a.icon sx={{ color: 'text.secondary', mr: 2, fontSize: 24 }} />
+              <a.icon sx={{ color: 'brandAccent.main', mr: 2, fontSize: 24 }} />
               <Typography variant="body1" color="text.primary">
                 {a.label}
               </Typography>

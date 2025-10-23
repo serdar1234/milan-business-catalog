@@ -98,11 +98,19 @@ export const customTheme = createTheme({
     },
     statusError: {
       main: '#A31F2E', // dark red (Closing Soon)
-      contrastText: '#FFFFFF',
+      dark: '#7A1824', // darker shade for depth or hover
+      light: '#F4D3D6', // lighter shade for backgrounds or subtle elements
+      contrastText: '#FFE0E2',
     },
     statusFeatured: {
       main: '#114B3C', // dark green (Featured)
       contrastText: '#FFFFFF',
+    },
+    success: {
+      main: '#16A34A',
+      dark: '#15803D',
+      contrastText: '#BBF7D0',
+      light: '#F0FDF4',
     },
     surface: {
       main: '#E5E7EB', // Surface (Card)

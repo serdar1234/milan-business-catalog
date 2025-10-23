@@ -13,21 +13,54 @@ interface HourEntry {
 }
 
 interface BusinessDetails {
+  id: number;
+  name: string;
+  category: string;
+  description: string;
+  rating: number;
+  reviews: number;
+  tags: string[];
+  priceRange: string;
+  distance: string;
+  isOpen: boolean;
+  isFavorite: boolean;
+  statusText: string;
+  imageUrl: string;
+  district: string;
   address: string;
   phone: string;
+  email: string;
   website: string;
-  priceRange: string;
+  views: number;
+  saves: number;
   hours: HourEntry[];
   amenities: { icon: React.ElementType; label: string; isAvailable: boolean }[];
 }
 
 export const MOCK_BUSINESS_DETAILS: BusinessDetails = {
-  address: 'Via del Borgo, 23\n20121 Milano, Italy',
+  id: 1,
+  name: 'Osteria del Borgo',
+  category: 'Restaurants',
+  description:
+    'Experience traditional flavors with modern presentation in our cozy winter atmosphere.',
+  rating: 4.9,
+  reviews: 847,
+  tags: ['Traditional Italian', 'Restaurant'],
+  priceRange: '€€€',
+  distance: '0.8 km',
+  isOpen: true,
+  isFavorite: true,
+  statusText: '11:00 PM',
+  imageUrl: 'business.jpg',
+  district: 'Navigli',
+  address: 'Via Naviglio Grande, 12 - 20144 Milano, Italy', // from source 1
   phone: '+39 02 1234 5678',
-  website: 'osteriadelborgo.it',
-  priceRange: '€€€ (€30-50 per person)',
+  email: 'info@osteriadelborgo.it', // from source 1
+  website: 'https://example.com', // from source 1
+  views: 2847,
+  saves: 156,
   hours: [
-    { day: 'Monday', hours: 'Closed', isToday: true }, // Monday is today, it's closed
+    { day: 'Monday', hours: 'Closed', isToday: true },
     { day: 'Tuesday', hours: '7:00 PM - 11:00 PM', isToday: false },
     { day: 'Wednesday', hours: '7:00 PM - 11:00 PM', isToday: false },
     { day: 'Thursday', hours: '7:00 PM - 11:00 PM', isToday: false },
