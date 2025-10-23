@@ -9,6 +9,7 @@ import { Footer } from '@/layers/01_widgets/Footer/ui/Footer';
 import { MobileNavBar } from '@/layers/01_widgets/MobileNavBar/ui/MobileNavBar';
 import { Box } from '@mui/material';
 import ScrollToTopButton from '@/layers/02_features/ScrollToTopButton';
+import { ViewportListener } from '@/layers/04_shared/providers/ViewportListener';
 
 const playfair = Playfair_Display({
   weight: ['700'],
@@ -37,15 +38,17 @@ export default function RootLayout({
       <MuiThemeProvider>
         <body className={inter.className}>
           <StoreProvider>
-            <AppRouterCacheProvider options={{ key: 'css' }}>
-              <Header />
-              <Box component="main" sx={{ pb: { xs: 8, md: 0 } }}>
-                {children}
-                <ScrollToTopButton />
-              </Box>
-              <MobileNavBar />
-              <Footer />
-            </AppRouterCacheProvider>
+            <ViewportListener>
+              <AppRouterCacheProvider options={{ key: 'css' }}>
+                <Header />
+                <Box component="main" sx={{ pb: { xs: 8, md: 0 } }}>
+                  {children}
+                  <ScrollToTopButton />
+                </Box>
+                <MobileNavBar />
+                <Footer />
+              </AppRouterCacheProvider>
+            </ViewportListener>
           </StoreProvider>
         </body>
       </MuiThemeProvider>

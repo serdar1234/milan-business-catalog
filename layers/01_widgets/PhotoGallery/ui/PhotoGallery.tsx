@@ -1,11 +1,13 @@
+'use client';
+
 import { Typography, Grid } from '@mui/material';
-import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import Image from 'next/image';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
+import { selectIsMobile } from '@/layers/04_shared/lib/store/slices/uiSlice';
+import { MobilePhotoGallery } from './MobilePhotoGallery';
+import { DesktopPhotoGallery } from './DesktopPhotoGallery';
 
-import styles from './PhotoGallery.module.css';
-
-// Мок-данные для галереи
 const MOCK_PHOTOS = [
   { id: 1, url: '/d1.jpg', alt: 'Interior view' },
   { id: 2, url: '/d2.jpg', alt: 'Plate of food' },
@@ -25,15 +27,15 @@ interface PhotoGalleryProps {
 }
 
 export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
+  const isMobile = useSelector(selectIsMobile);
   const mobilePreviewPhotos = photos.slice(0, 3);
-  const firstPhoto = photos[0];
-  const desktopPreviewPhotos = photos.slice(1, 4);
+  const desktopPreviewPhotos = photos.slice(0, 4);
 
   return (
     <Grid
       size={{ xs: 12, md: 8 }}
       sx={{
-        px: 3,
+        px: { xs: 1, sm: 2, md: 3 },
         py: 3,
         bgcolor: { xs: 'transparent', md: 'background.paper' },
         position: 'relative',
@@ -49,60 +51,17 @@ export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
           display: { xs: 'block', md: 'none' },
           position: 'absolute',
           top: '2.5rem',
-          right: '1.5rem',
+          right: { xs: '0.5rem', sm: '1rem' },
         }}
       >
         <Link href="#">View all ({photos.length})</Link>
       </Typography>
-      <Grid container spacing={2} sx={{ display: { xs: 'flex', md: 'none' } }}>
-        {/* Mobile version */}
-        {mobilePreviewPhotos.map((photo) => (
-          <Grid
-            size={4}
-            key={photo.id}
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: '1rem',
-              height: 'auto',
-              aspectRatio: '1/1',
-              overflow: 'hidden',
-              position: 'relative',
-            }}
-          >
-            <Image
-              src={photo.url}
-              alt={photo.alt}
-              fill={true}
-              objectFit="cover"
-            />
-          </Grid>
-        ))}
-      </Grid>
-      <Grid container spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
-        {/* Desktop version */}
-        <Grid size={8} className={styles['image-wrapper']}>
-          <Image
-            src={firstPhoto.url}
-            alt={firstPhoto.alt}
-            fill={true}
-            objectFit="cover"
-          />
-        </Grid>
-        <Grid size={4} rowGap={2} display={'flex'} flexDirection={'column'}>
-          {desktopPreviewPhotos.map((photo) => (
-            <Grid key={photo.id} className={styles['image-wrapper']}>
-              <Image
-                src={photo.url}
-                alt={photo.alt}
-                fill={true}
-                objectFit="cover"
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </Grid>
+      {isMobile && (
+        <MobilePhotoGallery mobilePreviewPhotos={mobilePreviewPhotos} />
+      )}
+      {isMobile === false && (
+        <DesktopPhotoGallery desktopPreviewPhotos={desktopPreviewPhotos} />
+      )}
     </Grid>
   );
 };
