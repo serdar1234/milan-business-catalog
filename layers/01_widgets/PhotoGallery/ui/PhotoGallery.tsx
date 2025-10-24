@@ -28,7 +28,7 @@ interface PhotoGalleryProps {
 export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
   const isMobile = useViewportWidth();
   const mobilePreviewPhotos = photos.slice(0, 3);
-  const desktopPreviewPhotos = photos.slice(0, 4);
+  const desktopPreviewPhotos = photos;
 
   return (
     <Grid

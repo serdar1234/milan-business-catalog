@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import styles from './PhotoGallery.module.css';
+import Link from 'next/link';
 
 interface DesktopPreviewPhotos {
   desktopPreviewPhotos: {
@@ -15,6 +16,7 @@ export function DesktopPhotoGallery({
 }: DesktopPreviewPhotos) {
   const firstPhoto = desktopPreviewPhotos[0];
   const photos = desktopPreviewPhotos.slice(1);
+  const numberOfPhotos = desktopPreviewPhotos.length;
 
   return (
     <Grid container spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -38,6 +40,14 @@ export function DesktopPhotoGallery({
           </Grid>
         ))}
       </Grid>
+
+      {numberOfPhotos > 4 && (
+        <Grid size={12}>
+          <Typography variant="body1" color="brandAccent.main">
+            <Link href="#">View all {numberOfPhotos} photos</Link>
+          </Typography>
+        </Grid>
+      )}
     </Grid>
   );
 }
