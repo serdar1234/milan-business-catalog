@@ -18,8 +18,12 @@ export default function BusinessPage() {
       <Box component="section" sx={{ py: 3, bgcolor: 'background.default' }}>
         <Container maxWidth="lg">
           <Grid container spacing={3}>
-            <PhotoGallery />
-            <BusinessInformation />
+            <Grid size={{ xs: 12, md: 8 }}>
+              <PhotoGallery />
+            </Grid>
+            <Grid size={{ xs: 12, md: 4 }}>
+              <BusinessInformation />
+            </Grid>
           </Grid>
         </Container>
       </Box>

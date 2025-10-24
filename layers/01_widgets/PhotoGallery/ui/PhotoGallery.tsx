@@ -32,11 +32,11 @@ export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
 
   return (
     <Grid
-      size={{ xs: 12, md: 8 }}
+      size={12}
       sx={{
         px: { xs: 1, sm: 2, md: 3 },
         py: 3,
-        bgcolor: { xs: 'transparent', md: 'background.paper' },
+        bgcolor: 'background.paper',
         position: 'relative',
         borderRadius: '1rem',
         boxShadow: 4,
