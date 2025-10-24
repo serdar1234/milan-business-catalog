@@ -12,6 +12,10 @@ interface HourEntry {
   isToday: boolean;
 }
 
+interface Feature {
+  label: string;
+}
+
 interface BusinessDetails {
   id: number;
   name: string;
@@ -31,6 +35,10 @@ interface BusinessDetails {
   phone: string;
   email: string;
   website: string;
+  shortDescription: string;
+  fullDescription: string;
+  specialties: Feature[];
+  features: Feature[];
   views: number;
   saves: number;
   hours: HourEntry[];
@@ -53,12 +61,31 @@ export const MOCK_BUSINESS_DETAILS: BusinessDetails = {
   statusText: '11:00 PM',
   imageUrl: 'business.jpg',
   district: 'Navigli',
-  address: 'Via Naviglio Grande, 12 - 20144 Milano, Italy', // from source 1
+  address: 'Via Naviglio Grande, 12 - 20144 Milano, Italy',
   phone: '+39 02 1234 5678',
-  email: 'info@osteriadelborgo.it', // from source 1
-  website: 'https://example.com', // from source 1
+  email: 'info@osteriadelborgo.it',
+  website: 'https://example.com',
   views: 2847,
   saves: 156,
+  shortDescription:
+    "Experience authentic Italian cuisine in the heart of Milan's historic Navigli district. Our family-run restaurant has been serving traditional recipes with a modern twist since 1987, offering an intimate dining experience with canal views.",
+  fullDescription:
+    "Nestled in the heart of Milano's historic district, Osteria del Borgo has been serving authentic Lombard cuisine for over three decades. Our chef, Marco Antonelli, brings together traditional recipes passed down through generations with contemporary techniques to create an unforgettable dining experience.\n\n" +
+    'During the winter months, our restaurant transforms into a cozy haven where the warmth of our wood-fired oven and carefully curated wine selection create the perfect atmosphere for intimate dinners and celebrations.', //
+
+  specialties: [
+    { label: 'Risotto alla Milanese with winter truffles' },
+    { label: 'Osso Buco with saffron polenta' },
+    { label: 'Handmade pasta with seasonal ingredients' },
+    { label: 'Curated selection of Lombard wines' },
+  ],
+  features: [
+    //
+    { label: 'Heated terrace for winter dining' },
+    { label: 'Private dining rooms available' },
+    { label: 'Wheelchair accessible' },
+    { label: 'Sommelier wine pairings' },
+  ],
   hours: [
     { day: 'Monday', hours: 'Closed', isToday: true },
     { day: 'Tuesday', hours: '7:00 PM - 11:00 PM', isToday: false },

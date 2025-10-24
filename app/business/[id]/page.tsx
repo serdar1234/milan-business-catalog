@@ -5,6 +5,7 @@ import { MOCK_BUSINESS_DETAILS } from '@/layers/03_entities/business/api/mockDat
 import { PhotoGallery } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
 import { Box, Container, Grid } from '@mui/material';
 import { BusinessInformation } from '@/layers/01_widgets/BusinessInformation/ui/BusinessInformation';
+import { About } from '@/layers/01_widgets/About/ui/About';
 
 export default function BusinessPage() {
   return (
@@ -20,6 +21,7 @@ export default function BusinessPage() {
           <Grid container spacing={3}>
             <Grid size={{ xs: 12, md: 8 }}>
               <PhotoGallery />
+              <About />
             </Grid>
             <Grid size={{ xs: 12, md: 4 }}>
               <BusinessInformation />
