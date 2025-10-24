@@ -1,38 +1,42 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  setIsMobile,
-  selectIsMobile,
-} from '@/layers/04_shared/lib/store/slices/uiSlice';
-import type { AppDispatch } from '@/layers/04_shared/lib/store';
+import { useSyncExternalStore } from 'react';
 
 const BREAKPOINT = 900;
 
 /**
- * Hook for determining viewport width
+ * Functions for subscribing to viewport width changes
+ * @param callback - function that will be called on resize
  */
-export const useViewportWidth = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const isMobile = useSelector(selectIsMobile);
+function subscribe(callback: () => void) {
+  window.addEventListener('resize', callback);
+  return () => window.removeEventListener('resize', callback);
+}
 
-  useEffect(() => {
-    const handleResize = () => {
-      const currentIsMobile = window.innerWidth < BREAKPOINT;
-      if (currentIsMobile !== isMobile) {
-        dispatch(setIsMobile(currentIsMobile));
-      }
-    };
+/**
+ * Function that returns current value
+ */
+function getSnapshot() {
+  return window.innerWidth < BREAKPOINT;
+}
 
-    handleResize();
+/**
+ * Function that returns initial value during SSR.
+ */
+function getServerSnapshot() {
+  // Safe fallback during SSR
+  return false;
+}
 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [dispatch, isMobile]);
+/**
+ * Concurrent-safe hook for detecting mobile viewport
+ */
+export function useViewportWidth() {
+  const isMobile = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
 
   return isMobile;
-};
+}

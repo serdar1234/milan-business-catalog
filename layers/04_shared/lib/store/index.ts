@@ -1,12 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import uiReducer from './slices/uiSlice';
 import { baseApi } from '../../api/baseApi';
 import { businessApi } from '@/layers/03_entities/business/api/businessApi';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      ui: uiReducer,
       [baseApi.reducerPath]: baseApi.reducer,
       [businessApi.reducerPath]: businessApi.reducer,
     },

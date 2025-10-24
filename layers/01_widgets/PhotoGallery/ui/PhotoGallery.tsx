@@ -2,11 +2,10 @@
 
 import { Typography, Grid } from '@mui/material';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import { selectIsMobile } from '@/layers/04_shared/lib/store/slices/uiSlice';
 import { MobilePhotoGallery } from './MobilePhotoGallery';
 import { DesktopPhotoGallery } from './DesktopPhotoGallery';
+import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 
 const MOCK_PHOTOS = [
   { id: 1, url: '/d1.jpg', alt: 'Interior view' },
@@ -27,7 +26,7 @@ interface PhotoGalleryProps {
 }
 
 export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
-  const isMobile = useSelector(selectIsMobile);
+  const isMobile = useViewportWidth();
   const mobilePreviewPhotos = photos.slice(0, 3);
   const desktopPreviewPhotos = photos.slice(0, 4);
 
