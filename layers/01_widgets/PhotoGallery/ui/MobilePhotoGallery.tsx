@@ -31,7 +31,7 @@ export function MobilePhotoGallery({ mobilePreviewPhotos }: MobilePhotoProps) {
           }}
         >
           <Image
-            src={photo.url}
+            src={`/${photo.url}`}
             alt={photo.alt}
             fill={true}
             objectFit="cover"

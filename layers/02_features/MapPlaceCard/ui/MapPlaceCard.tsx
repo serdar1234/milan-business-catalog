@@ -14,10 +14,11 @@ interface MapPlaceCardProps {
 export const MapPlaceCard: React.FC<MapPlaceCardProps> = ({ place }) => {
   const { id, imageUrl, name, rating, description, distance, isOpen } = place;
   if (!id) console.log('No id for place', place);
+  const url = encodeURIComponent(name);
   return (
     <Box
       component={Link}
-      href={`/business/${id}`}
+      href={`/business/${url}`}
       sx={{
         display: 'flex',
         gap: 2,
@@ -46,7 +47,7 @@ export const MapPlaceCard: React.FC<MapPlaceCardProps> = ({ place }) => {
       >
         <Typography variant="caption" color="var(--color-border-grey)">
           <Image
-            src={imageUrl}
+            src={`/${imageUrl}`}
             alt={name}
             width={60}
             height={60}

@@ -14,6 +14,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import LanguageIcon from '@mui/icons-material/Language';
 import EuroIcon from '@mui/icons-material/Euro';
+import { FooterLogo } from './FooterLogo';
 
 const FOOTER_LINKS = [
   {
@@ -103,19 +104,7 @@ export const Footer: React.FC = () => {
       <Container maxWidth="lg">
         <Grid container spacing={5}>
           <Grid size={3}>
-            <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
-              <Typography
-                variant="h5"
-                component="h6"
-                fontWeight="bold"
-                sx={{ color: 'brandAccent.main', mr: 1 }}
-              >
-                M
-              </Typography>
-              <Typography variant="h5" component="h6" fontWeight="bold">
-                MilanoDiscover
-              </Typography>
-            </Box>
+            <FooterLogo />
 
             <Typography
               variant="body2"
