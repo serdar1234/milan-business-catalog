@@ -79,41 +79,62 @@ export const customTheme = createTheme({
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#FFB46B', // Soft Sunset Orange
+      main: '#FFB46B', // Warm Sand (for AppBar/Buttons)
+      light: '#FFC790',
+      dark: '#E09F5A',
+      contrastText: '#000000',
     },
     error: {
       main: '#E94F37', // Vibrant Orange for error messages
+      light: '#EB6E5C',
+      dark: '#C83B25',
+      contrastText: '#FFFFFF',
     },
+
     brandPrimary: {
       main: '#0B3A5B',
       contrastText: '#FFFFFF',
+      light: '#3C6986', // Lighten 20%
+      dark: '#082E47', // Darken 20%
     },
     brandAccent: {
       main: '#D3542A', // Warm Terracotta (for CTA)
       dark: '#C14E26',
       contrastText: '#FFFFFF',
+      light: '#DD7855',
     },
     brandPin: {
       main: '#E94F37', // Vibrant Orange (for Map pin / rating star)
+      light: '#EB6E5C', // Lighten 10%
+      dark: '#C83B25', // Darken 10%
+      contrastText: '#FFFFFF',
     },
+
     statusError: {
       main: '#A31F2E', // dark red (Closing Soon)
-      dark: '#7A1824', // darker shade for depth or hover
-      light: '#F4D3D6', // lighter shade for backgrounds or subtle elements
+      dark: '#7A1824',
+      light: '#F4D3D6',
       contrastText: '#FFE0E2',
     },
     statusFeatured: {
       main: '#114B3C', // dark green (Featured)
       contrastText: '#FFFFFF',
+      light: '#3D7A6A', // Lighten 20%
+      dark: '#0C372B', // Darken 20%
     },
+
     success: {
       main: '#16A34A',
       dark: '#15803D',
       contrastText: '#BBF7D0',
       light: '#F0FDF4',
     },
+
     surface: {
       main: '#E5E7EB', // Surface (Card)
+      light: '#F0F2F5',
+      dark: '#C3C5C9',
+      contrastText: '#102428',
     },
     background: {
       default: '#FFF9F3', // Pale Cream (Background)
@@ -122,6 +143,8 @@ export const customTheme = createTheme({
 
     text: {
       primary: '#102428', // Dark Teal
+      secondary: '#4A5C61', // medium Teal
+      disabled: '#A9B5B8', // light Teal
     },
   },
 

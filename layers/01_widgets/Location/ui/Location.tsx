@@ -7,6 +7,7 @@ import LocalParkingIcon from '@mui/icons-material/LocalParking';
 import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 import { TransportRow } from './TransportRow';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
+import { ActionButton } from '@/layers/04_shared/ui/ActionButton';
 
 import {
   BusinessDetails,
@@ -17,6 +18,28 @@ import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 interface BusinessDetailsProps {
   data?: BusinessDetails;
 }
+
+const ACTION_BUTTONS: {
+  label: string;
+  Icon: React.ElementType;
+  colorKey: string;
+}[] = [
+  {
+    label: 'Directions',
+    Icon: DirectionsIcon,
+    colorKey: 'brandPrimary',
+  },
+  {
+    label: 'Parking',
+    Icon: LocalParkingIcon,
+    colorKey: 'brandSecondary',
+  },
+  {
+    label: 'Transit',
+    Icon: DirectionsBusIcon,
+    colorKey: 'statusFeatured',
+  },
+];
 
 export const Location: React.FC<BusinessDetailsProps> = ({
   data = MOCK_BUSINESS_DETAILS,
@@ -108,60 +131,14 @@ export const Location: React.FC<BusinessDetailsProps> = ({
 
       {/* 2. Три кнопки действий */}
       <Grid container spacing={2} sx={{ mb: 3 }}>
-        <Grid size={4}>
-          <Button
-            variant="contained"
-            fullWidth
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 1,
-              alignItems: 'center',
-              bgcolor: 'brandPrimary.main',
-              '&:hover': {
-                bgcolor: 'hsl(from var(--color-brand-primary) h s 30%)',
-              },
-            }}
-          >
-            <DirectionsIcon />
-            Directions
-          </Button>
-        </Grid>
-        <Grid size={4}>
-          <Button
-            variant="contained"
-            fullWidth
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 1,
-              alignItems: 'center',
-              bgcolor: 'brandSecondary.main',
-            }}
-          >
-            <LocalParkingIcon />
-            Parking
-          </Button>
-        </Grid>
-        <Grid size={4}>
-          <Button
-            variant="contained"
-            fullWidth
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 1,
-              alignItems: 'center',
-              bgcolor: 'var(--color-status-featured)',
-              '&:hover': {
-                bgcolor: 'hsl(from var(--color-status-featured) h s 10%)',
-              },
-            }}
-          >
-            <DirectionsBusIcon />
-            Transit
-          </Button>
-        </Grid>
+        {ACTION_BUTTONS.map((button) => (
+          <ActionButton
+            key={button.label}
+            label={button.label}
+            Icon={button.Icon}
+            colorKey={button.colorKey}
+          />
+        ))}
       </Grid>
 
       {/* 3. Информация о транспорте */}
