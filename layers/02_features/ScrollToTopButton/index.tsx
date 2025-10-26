@@ -31,7 +31,7 @@ const ScrollToTopButton = () => {
         }}
         onClick={handleClick}
       >
-        <KeyboardArrowUpIcon />
+        <KeyboardArrowUpIcon color="primary" />
       </Fab>
     </Zoom>
   );

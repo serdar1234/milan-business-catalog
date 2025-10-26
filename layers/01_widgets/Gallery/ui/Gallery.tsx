@@ -1,9 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { ImageList, ImageListItem, Box, Typography } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import {
+  ImageList,
+  ImageListItem,
+  Box,
+  Typography,
+  Button,
+} from '@mui/material';
 import Image from 'next/image';
-import { PhotoLightbox } from './PhotoLightbox';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { PhotoLightbox } from '../../../04_shared/ui/PhotoLightbox';
 
 const MOCK_PHOTOS = [
   { id: 1, url: '/d1.jpg', alt: 'Interior view' },
@@ -13,7 +21,7 @@ const MOCK_PHOTOS = [
   { id: 5, url: '/d5.jpg', alt: 'Dinner table' },
   { id: 6, url: '/d6.jpg', alt: 'Kitchen' },
   { id: 7, url: '/d7.jpg', alt: 'Dessert' },
-  { id: 8, url: '/d8.jpg', alt: 'Facade' },
+  { id: 8, url: '/business.jpg', alt: 'Business' },
 ];
 
 interface Photo {
@@ -32,8 +40,7 @@ export const Gallery: React.FC<BusinessImagesGalleryProps> = ({
   businessName,
 }) => {
   const [lightboxPhotoId, setLightboxPhotoId] = useState<number | null>(null);
-
-  // 🚨 Обработчик клика
+  const router = useRouter();
   const handlePhotoClick = (photoId: number) => {
     setLightboxPhotoId(photoId);
   };
@@ -41,7 +48,18 @@ export const Gallery: React.FC<BusinessImagesGalleryProps> = ({
     setLightboxPhotoId(null);
   };
   return (
-    <Box sx={{ p: { xs: 1, md: 3 }, maxWidth: 'lg', mx: 'auto' }}>
+    <Box sx={{ p: 3, mx: 'auto' }} maxWidth="lg">
+      <Box>
+        <Button
+          startIcon={<ArrowBackIcon color="error" />}
+          onClick={() => router.back()}
+          color="error"
+          variant="outlined"
+          sx={{ textTransform: 'none', px: '1rem' }}
+        >
+          Go back to {businessName}
+        </Button>
+      </Box>
       <Typography variant="h4" fontWeight="bold" sx={{ mb: 3 }}>
         All Photos of {businessName} ({photos.length})
       </Typography>

@@ -1,10 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, Box } from '@mui/material';
 import styles from './PhotoGallery.module.css';
 import Link from 'next/link';
+import { PhotoLightbox } from '@/layers/04_shared/ui/PhotoLightbox';
 
 interface DesktopPreviewPhotos {
   desktopPreviewPhotos: {
@@ -17,17 +19,29 @@ interface DesktopPreviewPhotos {
 export function DesktopPhotoGallery({
   desktopPreviewPhotos,
 }: DesktopPreviewPhotos) {
+  const [lightboxPhotoId, setLightboxPhotoId] = useState<number | null>(null);
   const params = useParams();
   const firstPhoto = desktopPreviewPhotos[0];
   const photos = desktopPreviewPhotos.slice(1, 4);
   const numberOfPhotos = desktopPreviewPhotos.length;
-  console.log(params);
+
+  const handlePhotoClick = (photoId: number) => {
+    setLightboxPhotoId(photoId); // Открываем модалку с нужным фото
+  };
+
+  const handleLightboxClose = () => {
+    setLightboxPhotoId(null);
+  };
 
   return (
     <Grid container spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
-      <Grid size={8} className={styles['image-wrapper']}>
+      <Grid
+        size={8}
+        className={styles['image-wrapper']}
+        onClick={() => handlePhotoClick(firstPhoto.id)}
+      >
         <Image
-          src={`/${firstPhoto.url}`}
+          src={firstPhoto.url}
           alt={firstPhoto.alt}
           fill={true}
           objectFit="cover"
@@ -36,14 +50,17 @@ export function DesktopPhotoGallery({
       <Grid size={4} rowGap={2} display={'flex'} flexDirection={'column'}>
         {photos.map((photo) => (
           <Grid key={photo.id} className={styles['image-wrapper']}>
-            <Link href={`./${params.id}/gallery/${photo.url}`}>
+            <Box
+              onClick={() => handlePhotoClick(photo.id)} // 🚨 КЛИК
+              sx={{ cursor: 'pointer', height: '100%', position: 'relative' }}
+            >
               <Image
-                src={`/${photo.url}`}
+                src={photo.url}
                 alt={photo.alt}
                 fill={true}
                 objectFit="cover"
               />
-            </Link>
+            </Box>
           </Grid>
         ))}
       </Grid>
@@ -57,6 +74,13 @@ export function DesktopPhotoGallery({
           </Typography>
         </Grid>
       )}
+
+      <PhotoLightbox
+        open={!!lightboxPhotoId}
+        onClose={handleLightboxClose}
+        initialPhotoId={lightboxPhotoId}
+        photos={desktopPreviewPhotos}
+      />
     </Grid>
   );
 }

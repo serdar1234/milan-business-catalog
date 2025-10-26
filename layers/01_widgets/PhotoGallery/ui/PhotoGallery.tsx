@@ -8,11 +8,14 @@ import { DesktopPhotoGallery } from './DesktopPhotoGallery';
 import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 
 const MOCK_PHOTOS = [
-  { id: 1, url: 'd1.jpg', alt: 'Interior view' },
-  { id: 2, url: 'd2.jpg', alt: 'Plate of food' },
-  { id: 3, url: 'd3.jpg', alt: 'Canal view' },
-  { id: 4, url: 'd4.jpg', alt: 'Bar area' },
-  { id: 5, url: 'd5.jpg', alt: 'Dinner table' },
+  { id: 1, url: '/d1.jpg', alt: 'Interior view' },
+  { id: 2, url: '/d2.jpg', alt: 'Plate of food' },
+  { id: 3, url: '/d3.jpg', alt: 'Canal view' },
+  { id: 4, url: '/d4.jpg', alt: 'Bar area' },
+  { id: 5, url: '/d5.jpg', alt: 'Dinner table' },
+  { id: 6, url: '/d6.jpg', alt: 'Kitchen' },
+  { id: 7, url: '/d7.jpg', alt: 'Dessert' },
+  { id: 8, url: '/business.jpg', alt: 'Business' },
 ];
 
 interface Photo {
@@ -27,8 +30,6 @@ interface PhotoGalleryProps {
 
 export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
   const isMobile = useViewportWidth();
-  const mobilePreviewPhotos = photos.slice(0, 3);
-  const desktopPreviewPhotos = photos;
 
   return (
     <Grid
@@ -56,9 +57,9 @@ export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
         <Link href="#">View all ({photos.length})</Link>
       </Typography>
       {isMobile ? (
-        <MobilePhotoGallery mobilePreviewPhotos={mobilePreviewPhotos} />
+        <MobilePhotoGallery mobilePreviewPhotos={photos} />
       ) : (
-        <DesktopPhotoGallery desktopPreviewPhotos={desktopPreviewPhotos} />
+        <DesktopPhotoGallery desktopPreviewPhotos={photos} />
       )}
     </Grid>
   );

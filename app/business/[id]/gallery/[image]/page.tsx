@@ -18,7 +18,14 @@ export default function ImagePage() {
       <Typography variant="h4" component={'h2'} sx={{ mb: 2 }}>
         Photo Gallery
       </Typography>
-      <Image src={`/${image}`} alt={image} width={500} height={500} />
+      <Box sx={{ position: 'relative', width: '100%', paddingTop: '50%' }}>
+        <Image
+          src={`/${image}`}
+          alt={image}
+          fill
+          style={{ objectFit: 'contain' }}
+        />
+      </Box>
     </Box>
   );
 }

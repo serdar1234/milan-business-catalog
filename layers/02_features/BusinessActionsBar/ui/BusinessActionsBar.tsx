@@ -57,24 +57,18 @@ export const BusinessActionsBar: React.FC<BusinessActionsBarProps> = ({
           Directions
         </Button>
 
-        <Button
-          variant="outlined"
-          color="inherit"
-          href={phoneHref}
-          sx={{ borderColor: 'grey.300', color: 'text.primary' }}
-        >
-          <PhoneIcon />
+        <Button variant="outlined" color="primary" href={phoneHref}>
+          <PhoneIcon color="primary" />
         </Button>
 
         {/* 4. Website (Светлый контур) */}
         <Button
           variant="outlined"
-          color="inherit"
+          color="primary"
           href={`https://${website.replace('www.', '')}`}
           target="_blank"
-          sx={{ borderColor: 'grey.300', color: 'text.primary' }}
         >
-          <LanguageIcon />
+          <LanguageIcon color="primary" />
         </Button>
       </Box>
 
