@@ -6,6 +6,7 @@ import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { MobilePhotoGallery } from './MobilePhotoGallery';
 import { DesktopPhotoGallery } from './DesktopPhotoGallery';
 import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
+import { useParams } from 'next/navigation';
 
 const MOCK_PHOTOS = [
   { id: 8, url: '/business.jpg', alt: 'Business' },
@@ -30,6 +31,7 @@ interface PhotoGalleryProps {
 
 export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
   const isMobile = useViewportWidth();
+  const params = useParams();
 
   return (
     <Grid
@@ -54,7 +56,7 @@ export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
           right: { xs: '0.5rem', sm: '1rem' },
         }}
       >
-        <Link href="#">View all ({photos.length})</Link>
+        <Link href={`./${params.id}/gallery/`}>View all ({photos.length})</Link>
       </Typography>
       {isMobile ? (
         <MobilePhotoGallery mobilePreviewPhotos={photos} />
