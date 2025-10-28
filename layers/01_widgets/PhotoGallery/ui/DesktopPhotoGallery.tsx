@@ -26,7 +26,7 @@ export function DesktopPhotoGallery({
   const numberOfPhotos = desktopPreviewPhotos.length;
 
   const handlePhotoClick = (photoId: number) => {
-    setLightboxPhotoId(photoId); // Открываем модалку с нужным фото
+    setLightboxPhotoId(photoId);
   };
 
   const handleLightboxClose = () => {
@@ -44,21 +44,23 @@ export function DesktopPhotoGallery({
           src={firstPhoto.url}
           alt={firstPhoto.alt}
           fill={true}
-          objectFit="cover"
+          sizes="66vw"
+          style={{ objectFit: 'cover' }}
         />
       </Grid>
       <Grid size={4} rowGap={2} display={'flex'} flexDirection={'column'}>
         {photos.map((photo) => (
           <Grid key={photo.id} className={styles['image-wrapper']}>
             <Box
-              onClick={() => handlePhotoClick(photo.id)} // 🚨 КЛИК
+              onClick={() => handlePhotoClick(photo.id)}
               sx={{ cursor: 'pointer', height: '100%', position: 'relative' }}
             >
               <Image
                 src={photo.url}
                 alt={photo.alt}
                 fill={true}
-                objectFit="cover"
+                sizes="33vw"
+                style={{ objectFit: 'cover' }}
               />
             </Box>
           </Grid>

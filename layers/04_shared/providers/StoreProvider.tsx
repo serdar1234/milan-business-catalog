@@ -1,16 +1,12 @@
 'use client';
 
-import { useRef } from 'react';
+import { useState } from 'react';
 import { Provider } from 'react-redux';
 import { makeStore } from '../lib/store';
 import type { AppStore } from '../lib/store';
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
-  // useRef гарантирует, что Store создается только один раз
-  const storeRef = useRef<AppStore | null>(null);
-  if (!storeRef.current) {
-    storeRef.current = makeStore();
-  }
+  const [store] = useState<AppStore>(() => makeStore());
 
-  return <Provider store={storeRef.current}>{children}</Provider>;
+  return <Provider store={store}>{children}</Provider>;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const getScrollbarWidth = () => {
   const scrollDiv = document.createElement('div');
@@ -21,14 +21,10 @@ const getScrollbarWidth = () => {
  * @param isLocked - if true, blocks scrolling.
  */
 export const useScrollLock = (isLocked: boolean) => {
-  // State for scrollbar width and compensation to avoid recalculations
-  const [scrollbarWidth, setScrollbarWidth] = useState(0);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setScrollbarWidth(getScrollbarWidth());
-    }
-  }, []);
+  let scrollbarWidth = 0;
+  if (typeof window !== 'undefined') {
+    scrollbarWidth = getScrollbarWidth();
+  }
 
   useEffect(() => {
     const html = document.documentElement;

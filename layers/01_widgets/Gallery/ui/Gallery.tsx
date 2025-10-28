@@ -81,7 +81,8 @@ export const Gallery: React.FC<BusinessImagesGalleryProps> = ({
                 src={item.url}
                 alt={item.alt}
                 fill={true}
-                objectFit="cover"
+                sizes="33vw"
+                style={{ objectFit: 'cover' }}
               />
             </Box>
           </ImageListItem>

@@ -22,6 +22,7 @@ export const HeroSearch: React.FC = () => {
         src={HERO_IMAGE_URL}
         alt="Milan Cityscape"
         fill
+        sizes="100vw"
         priority
         style={{ objectFit: 'cover', filter: 'brightness(0.5)' }}
       />

@@ -1,9 +1,7 @@
-// MobilePhotoGallery.tsx
-
-'use client'; // 🚨 Убедитесь, что 'use client' стоит для использования onClick
+'use client';
 
 import Image from 'next/image';
-import { Grid, Box } from '@mui/material'; // Добавим Box, если Grid не поддерживает onClick
+import { Grid } from '@mui/material';
 import { PhotoLightbox } from '@/layers/04_shared/ui/PhotoLightbox';
 import { useState } from 'react';
 
@@ -45,14 +43,15 @@ export function MobilePhotoGallery({ mobilePreviewPhotos }: MobilePhotoProps) {
             aspectRatio: '1/1',
             overflow: 'hidden',
             position: 'relative',
-            cursor: 'pointer', // Указываем, что элемент кликабельный
+            cursor: 'pointer',
           }}
         >
           <Image
             src={photo.url}
             alt={photo.alt}
             fill={true}
-            style={{ objectFit: 'cover' }} // Используем style вместо objectFit
+            sizes="30vw"
+            style={{ objectFit: 'cover' }}
           />
         </Grid>
       ))}
@@ -60,7 +59,7 @@ export function MobilePhotoGallery({ mobilePreviewPhotos }: MobilePhotoProps) {
         open={!!lightboxPhotoId}
         onClose={handleLightboxClose}
         initialPhotoId={lightboxPhotoId}
-        photos={mobilePreviewPhotos} // Предполагаем, что это полный список
+        photos={mobilePreviewPhotos}
       />
     </Grid>
   );

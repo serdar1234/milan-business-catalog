@@ -37,16 +37,14 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
   initialPhotoId,
   photos,
 }) => {
-  const [index, setIndex] = useState(0);
   const touchStartX = useRef(0);
-  useEffect(() => {
-    if (open && initialPhotoId != null) {
+  const [index, setIndex] = useState(() => {
+    if (initialPhotoId != null) {
       const i = photos.findIndex((p) => p.id === initialPhotoId);
-      setIndex(i >= 0 ? i : 0);
+      return i >= 0 ? i : 0;
     }
-  }, [open, initialPhotoId, photos]);
-
-  // --- (Touch Handlers) ---
+    return 0;
+  });
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -114,7 +112,6 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
         <IconButton onClick={onClose} className={styles['close-btn']}>
           <CloseIcon fontSize="large" />
         </IconButton>
-        {/* Image + controls */}
         <Box
           sx={{
             px: { xs: 0, md: 8 },
@@ -148,7 +145,6 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
             <ArrowForwardIosIcon />
           </ArrowButton>
         </Box>
-        {/* Counter */}
         <Box className={styles['counter']}>
           <Typography variant="body1">
             {index + 1} / {total}

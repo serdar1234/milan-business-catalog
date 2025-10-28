@@ -8,6 +8,7 @@ import { DesktopPhotoGallery } from './DesktopPhotoGallery';
 import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 
 const MOCK_PHOTOS = [
+  { id: 8, url: '/business.jpg', alt: 'Business' },
   { id: 1, url: '/d1.jpg', alt: 'Interior view' },
   { id: 2, url: '/d2.jpg', alt: 'Plate of food' },
   { id: 3, url: '/d3.jpg', alt: 'Canal view' },
@@ -15,7 +16,6 @@ const MOCK_PHOTOS = [
   { id: 5, url: '/d5.jpg', alt: 'Dinner table' },
   { id: 6, url: '/d6.jpg', alt: 'Kitchen' },
   { id: 7, url: '/d7.jpg', alt: 'Dessert' },
-  { id: 8, url: '/business.jpg', alt: 'Business' },
 ];
 
 interface Photo {
