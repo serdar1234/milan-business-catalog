@@ -13,9 +13,13 @@ interface ViewedPlace {
 
 interface ViewedPlaceCardProps {
   place: ViewedPlace;
+  withArrow?: boolean;
 }
 
-export const ViewedPlaceCard: React.FC<ViewedPlaceCardProps> = ({ place }) => {
+export const ViewedPlaceCard: React.FC<ViewedPlaceCardProps> = ({
+  place,
+  withArrow = true,
+}) => {
   const { id, name, subtitle, rating, distance, imageUrl } = place;
 
   return (
@@ -62,12 +66,10 @@ export const ViewedPlaceCard: React.FC<ViewedPlaceCardProps> = ({ place }) => {
           {name}
         </Typography>
 
-        {/* Подзаголовок (Категория • Район) */}
         <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
           {subtitle}
         </Typography>
 
-        {/* Рейтинг и Дистанция */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Rating
             value={rating}
@@ -76,14 +78,18 @@ export const ViewedPlaceCard: React.FC<ViewedPlaceCardProps> = ({ place }) => {
             size="small"
             sx={{ mr: 1, color: 'brandPin.main' }}
           />
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="body2" color="text.secondary">
-            • {distance}
+            {distance}
           </Typography>
         </Box>
       </Box>
-      <ArrowForwardIcon
-        sx={{ color: 'brandAccent.main', fontSize: 24, flexShrink: 0 }}
-      />
+      {withArrow && (
+        <ArrowForwardIcon
+          sx={{ color: 'brandAccent.main', fontSize: 24, flexShrink: 0 }}
+        />
+      )}
     </Box>
   );
 };

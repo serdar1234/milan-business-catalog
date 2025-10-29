@@ -3,6 +3,7 @@ import { Box, Container, Grid } from '@mui/material';
 import { BusinessInformation } from '@/layers/01_widgets/BusinessInformation/ui/BusinessInformation';
 import { About } from '@/layers/01_widgets/About/ui/About';
 import { Location } from '@/layers/01_widgets/Location/ui/Location';
+import { SimilarPlaces } from '@/layers/01_widgets/SimilarPlaces/ui/SimilarPlaces';
 
 export default function BusinessPage() {
   return (
@@ -16,6 +17,7 @@ export default function BusinessPage() {
           <Grid size={{ xs: 12, md: 4 }}>
             <BusinessInformation />
             <Location />
+            <SimilarPlaces />
           </Grid>
         </Grid>
       </Container>
