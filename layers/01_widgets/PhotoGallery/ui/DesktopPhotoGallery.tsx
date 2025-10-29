@@ -76,13 +76,14 @@ export function DesktopPhotoGallery({
           </Typography>
         </Grid>
       )}
-
-      <PhotoLightbox
-        open={!!lightboxPhotoId}
-        onClose={handleLightboxClose}
-        initialPhotoId={lightboxPhotoId}
-        photos={desktopPreviewPhotos}
-      />
+      {!!lightboxPhotoId && (
+        <PhotoLightbox
+          open={!!lightboxPhotoId}
+          onClose={handleLightboxClose}
+          initialPhotoId={lightboxPhotoId}
+          photos={desktopPreviewPhotos}
+        />
+      )}
     </Grid>
   );
 }

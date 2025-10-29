@@ -55,12 +55,14 @@ export function MobilePhotoGallery({ mobilePreviewPhotos }: MobilePhotoProps) {
           />
         </Grid>
       ))}
-      <PhotoLightbox
-        open={!!lightboxPhotoId}
-        onClose={handleLightboxClose}
-        initialPhotoId={lightboxPhotoId}
-        photos={mobilePreviewPhotos}
-      />
+      {!!lightboxPhotoId && (
+        <PhotoLightbox
+          open={!!lightboxPhotoId}
+          onClose={handleLightboxClose}
+          initialPhotoId={lightboxPhotoId}
+          photos={mobilePreviewPhotos}
+        />
+      )}
     </Grid>
   );
 }

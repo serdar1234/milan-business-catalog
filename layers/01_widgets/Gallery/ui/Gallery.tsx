@@ -88,12 +88,14 @@ export const Gallery: React.FC<BusinessImagesGalleryProps> = ({
           </ImageListItem>
         ))}
       </ImageList>
-      <PhotoLightbox
-        open={!!lightboxPhotoId}
-        onClose={handleLightboxClose}
-        initialPhotoId={lightboxPhotoId}
-        photos={photos}
-      />
+      {!!lightboxPhotoId && (
+        <PhotoLightbox
+          open={!!lightboxPhotoId}
+          onClose={handleLightboxClose}
+          initialPhotoId={lightboxPhotoId}
+          photos={photos}
+        />
+      )}
     </Box>
   );
 };
