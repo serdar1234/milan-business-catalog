@@ -12,6 +12,7 @@ import {
 import Image from 'next/image';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { PhotoLightbox } from '../../../04_shared/ui/PhotoLightbox';
+import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 
 const MOCK_PHOTOS = [
   { id: 1, url: '/d1.jpg', alt: 'Interior view' },
@@ -39,6 +40,7 @@ export const Gallery: React.FC<BusinessImagesGalleryProps> = ({
   photos = MOCK_PHOTOS,
   businessName,
 }) => {
+  const isMobile = useViewportWidth();
   const [lightboxPhotoId, setLightboxPhotoId] = useState<number | null>(null);
   const router = useRouter();
   const handlePhotoClick = (photoId: number) => {
@@ -64,7 +66,7 @@ export const Gallery: React.FC<BusinessImagesGalleryProps> = ({
         All Photos of {businessName} ({photos.length})
       </Typography>
 
-      <ImageList cols={3} gap={8}>
+      <ImageList cols={isMobile ? 3 : 4} gap={8}>
         {photos.map((item) => (
           <ImageListItem key={item.id}>
             <Box

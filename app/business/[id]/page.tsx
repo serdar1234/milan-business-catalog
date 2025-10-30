@@ -4,6 +4,7 @@ import { BusinessInformation } from '@/layers/01_widgets/BusinessInformation/ui/
 import { About } from '@/layers/01_widgets/About/ui/About';
 import { Location } from '@/layers/01_widgets/Location/ui/Location';
 import { SimilarPlaces } from '@/layers/01_widgets/SimilarPlaces/ui/SimilarPlaces';
+import { ReviewsRatings } from '@/layers/01_widgets/ReviewsRatings/ui/ReviewsRatings';
 
 export default function BusinessPage() {
   return (
@@ -13,6 +14,7 @@ export default function BusinessPage() {
           <Grid size={{ xs: 12, md: 8 }}>
             <PhotoGallery />
             <About />
+            <ReviewsRatings />
           </Grid>
           <Grid size={{ xs: 12, md: 4 }}>
             <BusinessInformation />

@@ -23,14 +23,16 @@ export const WidgetHeader: React.FC<WidgetHeaderProps> = ({
         {title}
       </Typography>
 
-      <Typography
-        display={{ xs: 'none', md: 'block' }}
-        variant="subtitle1"
-        component="p"
-        sx={{ mb: 3, textAlign: 'center' }}
-      >
-        {subtitle}
-      </Typography>
+      {subtitle && (
+        <Typography
+          display={{ xs: 'none', md: 'block' }}
+          variant="subtitle1"
+          component="p"
+          sx={{ mb: 3, textAlign: 'center' }}
+        >
+          {subtitle}
+        </Typography>
+      )}
     </>
   );
 };

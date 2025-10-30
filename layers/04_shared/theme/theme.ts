@@ -17,6 +17,7 @@ declare module '@mui/material/styles' {
     brandPrimary?: PaletteOptions['primary'];
     brandAccent?: PaletteOptions['primary'];
     brandPin?: PaletteOptions['primary'];
+    ratingGold?: PaletteOptions['primary'];
     surface?: PaletteOptions['primary'];
     statusError?: PaletteOptions['primary'];
     statusFeatured?: PaletteOptions['primary'];
@@ -109,7 +110,12 @@ export const customTheme = createTheme({
       dark: '#C83B25', // Darken 10%
       contrastText: '#FFFFFF',
     },
-
+    ratingGold: {
+      main: '#FACC15', // Bright Gold
+      light: '#FDE047', // Lighter Gold (около +20% яркости)
+      dark: '#CA8A04', // Darker Gold (около -20% яркости)
+      contrastText: '#000000',
+    },
     statusError: {
       main: '#A31F2E', // dark red (Closing Soon)
       dark: '#7A1824',
