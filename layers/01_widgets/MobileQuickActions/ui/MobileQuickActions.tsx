@@ -92,7 +92,7 @@ export const MobileQuickActions: React.FC<MobileQuickActionsProps> = ({
       component="section"
       sx={{
         p: 3,
-        display: { xs: 'block', md: 'none' },
+        display: 'block',
       }}
     >
       <WidgetHeader title="Quick Actions" subtitle="Get to know your place" />

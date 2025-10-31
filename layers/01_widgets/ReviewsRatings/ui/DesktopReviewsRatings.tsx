@@ -53,13 +53,21 @@ export const DesktopReviewsRatings: React.FC<DesktopReviewsRatingsProps> = ({
   stats = MOCK_STATS,
 }) => {
   return (
-    <Box sx={{ p: '2rem', bgcolor: 'background.paper', borderRadius: 2 }}>
+    <Box
+      component="section"
+      boxShadow={4}
+      sx={{
+        bgcolor: 'background.paper',
+        borderRadius: '1rem',
+        p: '2rem',
+      }}
+    >
       {/* Header and button */}
       <Box
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        sx={{ mb: 4 }}
+        mb={4}
       >
         <Box>
           <WidgetHeader title="Reviews & Ratings" />
@@ -69,7 +77,7 @@ export const DesktopReviewsRatings: React.FC<DesktopReviewsRatingsProps> = ({
               fontWeight="bold"
               sx={{
                 color: 'text.primary',
-                fontFamily: "Inter, 'Inter Fallback",
+                fontFamily: (theme) => theme.typography.fontFamily,
               }}
             >
               {stats.averageRating.toFixed(1)}
@@ -90,7 +98,7 @@ export const DesktopReviewsRatings: React.FC<DesktopReviewsRatingsProps> = ({
         <Button
           variant="outlined"
           sx={{
-            textTransform: 'none',
+            textTransform: 'capitalize',
             color: 'brandAccent.main',
             border: '2px solid',
             borderColor: 'currentColor',

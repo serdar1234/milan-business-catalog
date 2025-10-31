@@ -11,7 +11,15 @@ interface MobileViewProps {
 export const MobileView: React.FC<MobileViewProps> = ({
   withButton = true,
 }) => (
-  <Box sx={{ p: '1.5rem', bgcolor: 'background.paper', borderRadius: 2 }}>
+  <Box
+    component="section"
+    boxShadow={4}
+    sx={{
+      bgcolor: 'background.paper',
+      borderRadius: '1rem',
+      p: '1.5rem',
+    }}
+  >
     <WidgetHeader title="Reviews & Ratings" />
     <Box>
       {INSIGHT_MOCKS.slice(0, 2).map((insight) => (

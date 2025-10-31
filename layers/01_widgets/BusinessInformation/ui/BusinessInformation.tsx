@@ -28,7 +28,7 @@ export const BusinessInformation: React.FC<BusinessInformationProps> = ({
 }) => {
   const isMobile = useViewportWidth();
   const MobileView = (
-    <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+    <Box sx={{ display: 'block' }}>
       <WidgetHeader title="Opening Hours" />
       <HoursSection hours={data.hours} />
     </Box>

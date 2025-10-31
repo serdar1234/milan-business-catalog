@@ -64,7 +64,7 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
           position: 'relative',
           height: 500,
           color: 'brandAccent.contrastText',
-          display: { xs: 'none', md: 'flex' },
+          display: 'flex',
           flexDirection: 'column',
         }}
       >

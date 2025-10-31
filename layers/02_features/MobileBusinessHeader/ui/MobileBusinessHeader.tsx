@@ -74,7 +74,7 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
   return (
     <Box
       sx={{
-        display: { xs: 'flex', md: 'none' },
+        display: 'flex',
         flexDirection: 'column',
         p: 3,
         bgcolor: 'background.paper',

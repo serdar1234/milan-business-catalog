@@ -13,7 +13,7 @@ export const RatingBox = ({ name, data }: { name: string; data: number }) => (
       <Typography
         variant="h5"
         sx={{
-          fontFamily: "Inter, 'Inter Fallback",
+          fontFamily: (theme) => theme.typography.fontFamily,
           color: 'brandAccent.main',
         }}
       >
