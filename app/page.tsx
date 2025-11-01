@@ -6,7 +6,7 @@ import { LocalInsights } from '@/layers/01_widgets/LocalInsights/ui/LocalInsight
 import { RecentlyViewed } from '@/layers/01_widgets/RecentlyViewed/ui/RecentlyViewed';
 import { SavedPlaces } from '@/layers/01_widgets/SavedPlaces/ui/SavedPlaces';
 import { SeasonFavorites } from '@/layers/01_widgets/SeasonFavorites/ui/SeasonFavorites';
-import { WinterSpecials } from '@/layers/01_widgets/WinterSpecials/ui/WinterSpecials';
+import WinterSpecials from '@/layers/01_widgets/WinterSpecials/';
 
 export default function Home() {
   return (
