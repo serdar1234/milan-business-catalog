@@ -1,7 +1,7 @@
 'use client';
 
 import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
-import { MobileView } from '@/layers/02_features/Reviews/ui/MobileReviews';
+import { MobileView } from '@/layers/04_shared/ui/ReviewsRatings';
 import { DesktopReviewsRatings } from './DesktopReviewsRatings';
 
 export const ReviewsRatings: React.FC = () => {

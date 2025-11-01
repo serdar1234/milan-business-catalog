@@ -1,7 +1,7 @@
-import { INSIGHT_MOCKS } from '@/layers/01_widgets/LocalInsights/ui/mockData';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import Link from 'next/link';
-import { InsightCard } from '../../InsightCard/ui/InsightCard';
+import { INSIGHT_MOCKS } from '@/layers/04_shared/api/mocks/localInsightsMocks';
+import { InsightCard } from '@/layers/02_features/InsightCard/ui/InsightCard';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 
 interface MobileViewProps {
@@ -40,4 +40,32 @@ export const MobileView: React.FC<MobileViewProps> = ({
       </Box>
     )}
   </Box>
+);
+
+export const DesktopView = () => (
+  <>
+    <Grid container spacing={4} justifyContent="center">
+      {INSIGHT_MOCKS.map((insight) => (
+        <Grid size={4} key={insight.id}>
+          <InsightCard insight={insight} isDesktop={true} />
+        </Grid>
+      ))}
+    </Grid>
+
+    <Box sx={{ textAlign: 'center', mt: 6 }}>
+      <Button
+        component={Link}
+        href="/stories"
+        variant="contained"
+        color="brandPrimary"
+        sx={{
+          fontWeight: 'bold',
+          color: 'white',
+          px: 4,
+        }}
+      >
+        Read More Stories
+      </Button>
+    </Box>
+  </>
 );

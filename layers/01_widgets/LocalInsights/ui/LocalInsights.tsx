@@ -2,8 +2,7 @@
 
 import { Box, Container } from '@mui/material';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import { DesktopView } from '@/layers/02_features/Reviews/ui/DesktopReviews';
-import { MobileView } from '@/layers/02_features/Reviews/ui/MobileReviews';
+import { MobileView, DesktopView } from '@/layers/04_shared/ui/ReviewsRatings';
 
 import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 
