@@ -1,10 +1,8 @@
-'use client';
-
 import { CategoryHeader } from '@/layers/01_widgets/CategoryHeader/CategoryHeader';
-import { useParams } from 'next/navigation';
 
 interface CategoryLayoutProps {
   children: React.ReactNode;
+  params: Promise<{ slug: string }>;
 }
 
 const MOCK_MAIN_CATEGORY = {
@@ -12,13 +10,15 @@ const MOCK_MAIN_CATEGORY = {
   name: 'Food & Drink',
 };
 
-export default function CategoryLayout({ children }: CategoryLayoutProps) {
-  const { slug } = useParams<{ slug: string }>();
+export default async function CategoryLayout({
+  children,
+  params,
+}: CategoryLayoutProps) {
+  const { slug } = await params;
 
-  const subcategoryName =
-    (slug &&
-      slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())) ||
-    '';
+  const subcategoryName = slug
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
