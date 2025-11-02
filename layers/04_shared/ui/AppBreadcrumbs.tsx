@@ -2,7 +2,7 @@ import { Breadcrumbs, Link, Typography, Box } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NextLink from 'next/link';
 
-interface BreadcrumbItem {
+export interface BreadcrumbItem {
   label: string;
   href?: string;
 }

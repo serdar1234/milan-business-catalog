@@ -1,0 +1,12 @@
+.active {
+  border-radius: 30px;
+  text-transform: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-brand-accent);
+  color: white;
+  border: 1px solid transparent;
+  &:hover {
+    background-color: 'brandAccent.dark';
+  }
+}

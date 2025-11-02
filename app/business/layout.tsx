@@ -1,6 +1,6 @@
 'use client';
 
-import BusinessHeader from '@/layers/01_widgets/BusinessHeader/ui/BusinessHeader';
+import BusinessHeader from '@/layers/01_widgets/BusinessHeader/BusinessHeader';
 import { MobileQuickActions } from '@/layers/01_widgets/MobileQuickActions/ui/MobileQuickActions';
 
 import { MOCK_BUSINESS_DETAILS } from '@/layers/03_entities/business/api/mockData';

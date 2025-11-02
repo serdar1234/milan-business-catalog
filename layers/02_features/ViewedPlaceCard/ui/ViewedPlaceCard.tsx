@@ -49,8 +49,8 @@ export const ViewedPlaceCard: React.FC<ViewedPlaceCardProps> = ({
           width: 80,
           height: 80,
           borderRadius: 1,
-          bgcolor: 'grey.300',
-          backgroundImage: `url(${imageUrl})`,
+          bgcolor: 'surface.main',
+          backgroundImage: `url(/${imageUrl})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

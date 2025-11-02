@@ -6,7 +6,7 @@ import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
 const NAV_LINKS = [
   { href: '/shopping', label: 'Shopping' },
   { href: '/culture', label: 'Culture' },
-  { href: '/food', label: 'Food & Drink' },
+  { href: '/food-and-drink', label: 'Food & Drink' },
   { href: '/map', label: 'Map View' },
 ];
 
@@ -24,7 +24,7 @@ export const DesktopNavigation: React.FC = () => {
         <Button
           key={link.href}
           component={Link}
-          href={link.href}
+          href={`/category${link.href}`}
           sx={{
             color: '#ccc',
             '&:hover': { color: 'white' },

@@ -41,7 +41,7 @@ export const SimilarPlaces: React.FC = () => {
         bgcolor: 'background.paper',
       }}
     >
-      <Container maxWidth="sm">
+      <Container>
         <WidgetHeader title="Similar Places Nearby" />
 
         <Box>

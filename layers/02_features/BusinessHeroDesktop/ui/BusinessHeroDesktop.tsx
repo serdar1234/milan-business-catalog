@@ -8,6 +8,8 @@ import EuroIcon from '@mui/icons-material/Euro';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import { BusinessActionsBar } from '../../BusinessActionsBar/ui/BusinessActionsBar';
+import Link from 'next/link';
+import { AppBreadcrumbs } from '@/layers/04_shared/ui/AppBreadcrumbs';
 
 interface HeroData {
   id: number;
@@ -57,8 +59,15 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
     saves,
   } = data;
 
+  const BREADCRUMBS = [
+    { label: 'Home', href: '/' },
+    { label: category, href: '/category/' + category.toLowerCase() },
+    { label: name },
+  ];
+
   return (
     <>
+      <AppBreadcrumbs items={BREADCRUMBS} />
       <Box
         sx={{
           position: 'relative',
@@ -90,7 +99,6 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
             },
           }}
         />
-        {/* Top right corner icons */}
         <Box
           sx={{
             position: 'absolute',
@@ -147,7 +155,7 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
               '&:hover': { bgcolor: 'statusError.dark' },
             }}
           >
-            {category}
+            <Link href={`/category/${category}`}>{category}</Link>
           </Button>
 
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>

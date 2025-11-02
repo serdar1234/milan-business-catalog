@@ -51,7 +51,6 @@ export const HoursSection: React.FC<{ hours: HourEntry[] }> = ({ hours }) => {
         ))}
       </Box>
 
-      {/* Current Status */}
       <Box
         sx={{
           display: { xs: 'flex', md: 'none' },

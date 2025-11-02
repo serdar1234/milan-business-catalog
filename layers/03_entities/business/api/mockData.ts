@@ -1,6 +1,3 @@
-// --- Мок-данные ---
-
-// Amenities
 import WifiIcon from '@mui/icons-material/Wifi';
 import AccessibleIcon from '@mui/icons-material/Accessible';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
@@ -47,8 +44,8 @@ export interface BusinessDetails {
   views: number;
   saves: number;
   hours: HourEntry[];
-  fullAddress: string; // Полный адрес для карты
-  cityPostal: string; // Город и индекс
+  fullAddress: string;
+  cityPostal: string;
   transportInfo: TransportInfo[];
   amenities: { icon: React.ElementType; label: string; isAvailable: boolean }[];
 }
@@ -75,12 +72,12 @@ export const MOCK_BUSINESS_DETAILS: BusinessDetails = {
   website: 'https://example.com',
   views: 2847,
   saves: 156,
-  fullAddress: 'Via Naviglio Grande, 12', //
-  cityPostal: '20144 Milano, Italy', //
+  fullAddress: 'Via Naviglio Grande, 12',
+  cityPostal: '20144 Milano, Italy',
   transportInfo: [
-    { icon: 'walk', label: '5 min walk from Porta Genova Metro' }, //
-    { icon: 'bus', label: 'Bus stop 50m away (Lines 2, 14)' }, //
-    { icon: 'car', label: 'Paid parking available nearby' }, //
+    { icon: 'walk', label: '5 min walk from Porta Genova Metro' },
+    { icon: 'bus', label: 'Bus stop 50m away (Lines 2, 14)' },
+    { icon: 'car', label: 'Paid parking available nearby' },
   ],
   shortDescription:
     "Experience authentic Italian cuisine in the heart of Milan's historic Navigli district. Our family-run restaurant has been serving traditional recipes with a modern twist since 1987, offering an intimate dining experience with canal views.",

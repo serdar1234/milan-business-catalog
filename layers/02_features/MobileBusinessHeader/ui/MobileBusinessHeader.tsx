@@ -17,6 +17,7 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LanguageIcon from '@mui/icons-material/Language';
+import Link from 'next/link';
 
 interface MobileBusinessHeaderData {
   name: string;
@@ -111,7 +112,6 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
         >
           <RestaurantIcon sx={{ fontSize: 36, color: 'white' }} />
         </Grid>
-        {/* Name and category */}
         <Grid size={6} sx={{ minWidth: 0 }}>
           <Typography
             variant="h5"
@@ -123,7 +123,7 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
             {name}
           </Typography>
           <Typography variant="body2" color="surface" sx={{ mb: 1 }}>
-            {category}
+            <Link href={`/category/${category.toLowerCase()}`}>{category}</Link>
           </Typography>
         </Grid>
         {/* QR code */}

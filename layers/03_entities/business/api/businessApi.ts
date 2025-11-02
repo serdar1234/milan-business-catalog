@@ -9,7 +9,6 @@ export const businessApi = createApi({
       queryFn: () => {
         return new Promise((resolve) => {
           setTimeout(() => {
-            // Возвращаем мок-данные, имитируя успешный ответ сервера
             resolve({ data: BUSINESS_MOCKS });
           }, 500);
         });
@@ -18,5 +17,4 @@ export const businessApi = createApi({
   }),
 });
 
-// Экспорт хука, который мы используем в компонентах
 export const { useGetBusinessListQuery } = businessApi;
