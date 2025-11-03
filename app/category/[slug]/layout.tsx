@@ -1,4 +1,5 @@
 import { CategoryHeader } from '@/layers/01_widgets/CategoryHeader/CategoryHeader';
+import { titleCase } from '@/layers/04_shared/utils/helpers';
 
 interface CategoryLayoutProps {
   children: React.ReactNode;
@@ -16,9 +17,7 @@ export default async function CategoryLayout({
 }: CategoryLayoutProps) {
   const { slug } = await params;
 
-  const subcategoryName = slug
-    .replace(/-/g, ' ')
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+  const subcategoryName = titleCase(slug);
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
