@@ -26,6 +26,7 @@
 
 .grid-item__filters {
   grid-area: filters;
+  height: 100%;
 }
 
 .grid-item__main {
@@ -35,8 +36,5 @@
 .grid-item__categories,
 .grid-item__filters,
 .grid-item__main {
-  /* padding: 1.5rem; */
   border-radius: 1rem;
-  background-color: var(--color-surface);
-  /* outline: 1px dashed red; */
 }

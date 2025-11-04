@@ -5,7 +5,7 @@ import { HeroSearch } from '@/layers/01_widgets/HeroSearch/ui/HeroSearch';
 import { LocalInsights } from '@/layers/01_widgets/LocalInsights/ui/LocalInsights';
 import { RecentlyViewed } from '@/layers/01_widgets/RecentlyViewed/ui/RecentlyViewed';
 import { SavedPlaces } from '@/layers/01_widgets/SavedPlaces/ui/SavedPlaces';
-import { SeasonFavorites } from '@/layers/01_widgets/SeasonFavorites/ui/SeasonFavorites';
+import { SeasonFavorites } from '@/layers/01_widgets/SeasonFavorites/SeasonFavorites';
 import WinterSpecials from '@/layers/01_widgets/WinterSpecials/';
 
 export default function Home() {

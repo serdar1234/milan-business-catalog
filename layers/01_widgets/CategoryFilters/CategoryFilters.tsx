@@ -16,6 +16,7 @@ import {
   Slider,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 
 const MAX_RADIUS = 50;
 const PRICE_OPTIONS = [
@@ -64,6 +65,7 @@ export const CategoryFilters: React.FC = () => {
   const [atmosphere, setAtmosphere] = useState<string[]>([]);
   const [features, setFeatures] = useState<string[]>([]);
   const [radius, setRadius] = useState<number>(25);
+  const isMobile = useViewportWidth();
 
   const handleRadiusChange = (event: Event, newValue: number | number[]) => {
     setRadius(newValue as number);
@@ -86,19 +88,8 @@ export const CategoryFilters: React.FC = () => {
     }
   };
 
-  return (
-    <Box
-      sx={{
-        bgcolor: 'background.paper',
-        p: 2,
-        borderRadius: '1rem',
-        boxShadow: 2,
-      }}
-    >
-      <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
-        Filters
-      </Typography>
-
+  const filters = (
+    <>
       {/* Radius */}
       <FilterSection title="Distance">
         <Box sx={{ p: 1 }}>
@@ -208,7 +199,7 @@ export const CategoryFilters: React.FC = () => {
       </FilterSection>
 
       {/* (Features) */}
-      <FilterSection title="Features" defaultExpanded={false}>
+      <FilterSection title="Features">
         <Stack direction="column" spacing={0}>
           {FEATURE_OPTIONS.map((label) => (
             <FormControlLabel
@@ -227,6 +218,43 @@ export const CategoryFilters: React.FC = () => {
           ))}
         </Stack>
       </FilterSection>
+    </>
+  );
+
+  if (isMobile) {
+    return (
+      <Box
+        sx={{
+          bgcolor: 'background.paper',
+          borderRadius: '1rem',
+          boxShadow: 2,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
+        }}
+      >
+        <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
+          Filters are not available on mobile yet
+        </Typography>
+      </Box>
+    );
+  }
+
+  return (
+    <Box
+      sx={{
+        bgcolor: 'background.paper',
+        p: 2,
+        borderRadius: '1rem',
+        boxShadow: 2,
+      }}
+    >
+      <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
+        Filters
+      </Typography>
+
+      {filters}
     </Box>
   );
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { use, useState } from 'react';
+import { FC, useState } from 'react';
 import Link from 'next/link';
 import {
   AppBar,
@@ -16,7 +16,7 @@ import { SharedIcon } from '@/layers/04_shared/ui/Icon';
 import { useScrollLock } from '@/layers/04_shared/hooks/useScrollLock';
 import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 
-export const Header: React.FC = () => {
+export const Header: FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   useScrollLock(mobileOpen);
   const isMobile = useViewportWidth();

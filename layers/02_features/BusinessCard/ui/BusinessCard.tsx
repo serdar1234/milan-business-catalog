@@ -7,23 +7,24 @@ import {
   IconButton,
   Rating,
   Chip,
-  Button,
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import PlaceIcon from '@mui/icons-material/Place';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import PhoneIcon from '@mui/icons-material/Phone';
+
 import Link from 'next/link';
 
 import { Business } from '@/layers/03_entities/business/api/businessMocks';
+import { slugify } from '@/layers/04_shared/utils/helpers';
+import { MobileCTA } from './MobileCTA';
+import { DesktopCTA } from './DesktopCTA';
 
 interface BusinessCardProps {
   business: Business;
 }
 
 export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
-  const { name, category, rating, address, isFavorite, imageUrl, id, tag } =
+  const { name, category, rating, address, isFavorite, imageUrl, tag } =
     business;
 
   return (
@@ -124,7 +125,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
           </Box>
         </Box>
 
-        <Link href={`/business/${id}`}>
+        <Link href={`/business/${slugify(name)}`}>
           <Typography
             variant="h6"
             component="div"
@@ -146,85 +147,8 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
         </Box>
       </CardContent>
 
-      <Box
-        sx={{
-          display: { xs: 'block', md: 'none' },
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          p: 1.5,
-          bgcolor: 'surface.main',
-          borderBottomLeftRadius: 8,
-          borderBottomRightRadius: 8,
-        }}
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-        }}
-      >
-        <Button
-          variant="contained"
-          fullWidth
-          size="large"
-          sx={{
-            bgcolor: 'brandAccent.main',
-            '&:hover': { bgcolor: '#c14e26' },
-          }}
-        >
-          Reserve a Spot
-        </Button>
-      </Box>
-
-      <Box
-        sx={{
-          display: { xs: 'none', md: 'flex' },
-          gap: 1,
-          p: 2,
-          pt: 0,
-        }}
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-        }}
-      >
-        <Button
-          variant="contained"
-          sx={{
-            flexGrow: 1,
-            bgcolor: 'brandAccent.main',
-            '&:hover': { bgcolor: 'brandAccent.dark' },
-          }}
-        >
-          Reserve
-        </Button>
-
-        <IconButton
-          size="large"
-          sx={{
-            bgcolor: 'background.default',
-            color: 'brandAccent.main',
-            border: '1px solid #ccc',
-            '&:hover': { bgcolor: '#f0f0f0' },
-          }}
-          aria-label="Get directions"
-        >
-          <DirectionsIcon />
-        </IconButton>
-
-        <IconButton
-          size="large"
-          sx={{
-            bgcolor: 'background.default',
-            color: 'brandAccent.main',
-            border: '1px solid #ccc',
-            '&:hover': { bgcolor: '#f0f0f0' },
-          }}
-          aria-label="Call business"
-        >
-          <PhoneIcon />
-        </IconButton>
-      </Box>
+      <MobileCTA />
+      <DesktopCTA />
     </Card>
   );
 };
