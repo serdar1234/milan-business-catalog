@@ -1,6 +1,7 @@
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 70px 1fr;
   grid-template-areas:
     'categories filters'
     'main main';
@@ -20,6 +21,7 @@
 
 .grid-item__categories {
   grid-area: categories;
+  height: fit-content;
 }
 
 .grid-item__filters {
@@ -33,7 +35,8 @@
 .grid-item__categories,
 .grid-item__filters,
 .grid-item__main {
-  padding: 1.5rem;
+  /* padding: 1.5rem; */
   border-radius: 1rem;
-  background-color: salmon;
+  background-color: var(--color-surface);
+  /* outline: 1px dashed red; */
 }

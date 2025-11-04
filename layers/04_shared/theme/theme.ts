@@ -85,13 +85,6 @@ export const customTheme = createTheme({
       dark: '#E09F5A',
       contrastText: '#000000',
     },
-    error: {
-      main: '#E94F37', // Vibrant Orange for error messages
-      light: '#EB6E5C',
-      dark: '#C83B25',
-      contrastText: '#FFFFFF',
-    },
-
     brandPrimary: {
       main: '#0B3A5B',
       contrastText: '#FFFFFF',
@@ -135,7 +128,6 @@ export const customTheme = createTheme({
       contrastText: '#BBF7D0',
       light: '#F0FDF4',
     },
-
     surface: {
       main: '#E5E7EB', // Surface (Card)
       light: '#F0F2F5',

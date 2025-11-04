@@ -53,9 +53,9 @@ export const Gallery: React.FC<BusinessImagesGalleryProps> = ({
     <Box sx={{ p: 3, mx: 'auto' }} maxWidth="lg">
       <Box>
         <Button
-          startIcon={<ArrowBackIcon color="error" />}
+          startIcon={<ArrowBackIcon color="inherit" />}
           onClick={() => router.back()}
-          color="error"
+          color="brandPin"
           variant="outlined"
           sx={{ textTransform: 'none', px: '1rem' }}
         >

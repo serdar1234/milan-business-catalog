@@ -1,6 +1,8 @@
 import { Box, Container } from '@mui/material';
 import style from './CategoryPage.module.css';
 import { MOCK_BUSINESS_DETAILS } from '@/layers/03_entities/business/api/mockData';
+import { CategoryFilters } from '@/layers/01_widgets/CategoryFilters/CategoryFilters';
+import LongMenu from '@/layers/04_shared/ui/LongMenu';
 
 export function generateMetadata() {
   return {
@@ -15,19 +17,10 @@ export default function CategoryPage() {
       <Container maxWidth="lg">
         <div className={style['grid-container']}>
           <div className={style['grid-item__categories']}>
-            <Box>
-              <h2>Category Select</h2>
-            </Box>
+            <LongMenu title="Other categories" />
           </div>
           <div className={style['grid-item__filters']}>
-            <Box
-              sx={{
-                width: '100%',
-                height: { md: '100%' },
-              }}
-            >
-              <h2>Filters</h2>
-            </Box>
+            <CategoryFilters />
           </div>
           <div className={style['grid-item__main']}>
             <Box>

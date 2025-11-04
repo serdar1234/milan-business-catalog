@@ -106,10 +106,10 @@ export const Location: React.FC<BusinessDetailsProps> = ({
         </Button>
       )}
 
-      {/* Временный маркер для карты */}
+      {/* temporary pin on the map */}
       <LocationOnIcon
         sx={{
-          color: 'error.main',
+          color: 'brandPin.main',
           fontSize: 40,
           position: 'absolute',
           top: 50,

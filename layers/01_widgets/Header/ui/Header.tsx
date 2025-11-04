@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import Link from 'next/link';
 import {
   AppBar,
@@ -14,10 +14,12 @@ import { DesktopNavigation } from './DesktopNavigation';
 import { MobileDrawerContent } from './MobileDrawerContent';
 import { SharedIcon } from '@/layers/04_shared/ui/Icon';
 import { useScrollLock } from '@/layers/04_shared/hooks/useScrollLock';
+import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 
 export const Header: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   useScrollLock(mobileOpen);
+  const isMobile = useViewportWidth();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -33,15 +35,17 @@ export const Header: React.FC = () => {
           justifyContent: 'space-between',
         }}
       >
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { md: 'none' } }}
-        >
-          <SharedIcon iconName="Menu" />
-        </IconButton>
+        {isMobile && (
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2 }}
+          >
+            <SharedIcon iconName="Menu" />
+          </IconButton>
+        )}
 
         <Typography
           variant="h6"
@@ -63,11 +67,11 @@ export const Header: React.FC = () => {
         <DesktopNavigation />
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <IconButton
-            sx={{ display: { xs: 'block', md: 'none' }, color: 'white' }}
-          >
-            <SharedIcon iconName="Search" />
-          </IconButton>
+          {isMobile && (
+            <IconButton sx={{ display: 'block', color: 'white' }}>
+              <SharedIcon iconName="Search" />
+            </IconButton>
+          )}
 
           <IconButton component={Link} href="/profile" sx={{ color: 'white' }}>
             <SharedIcon iconName="User" />
@@ -75,20 +79,22 @@ export const Header: React.FC = () => {
         </Box>
       </Toolbar>
 
-      <nav>
-        <Drawer
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          anchor="right"
-          ModalProps={{ keepMounted: true, disableScrollLock: true }}
-          sx={{
-            display: { xs: 'block', md: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },
-          }}
-        >
-          <MobileDrawerContent />
-        </Drawer>
-      </nav>
+      {isMobile && (
+        <nav>
+          <Drawer
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            anchor="right"
+            ModalProps={{ keepMounted: true, disableScrollLock: true }}
+            sx={{
+              display: 'block',
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },
+            }}
+          >
+            <MobileDrawerContent />
+          </Drawer>
+        </nav>
+      )}
     </AppBar>
   );
 };
