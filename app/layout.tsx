@@ -9,6 +9,7 @@ import { Footer } from '@/layers/01_widgets/Footer/ui/Footer';
 import { MobileNavBar } from '@/layers/01_widgets/MobileNavBar/ui/MobileNavBar';
 import { Box } from '@mui/material';
 import ScrollToTopButton from '@/layers/02_features/ScrollToTopButton';
+import { DeviceLayoutWrapper } from '@/layers/04_shared/hocs/DeviceLayoutWrapper';
 
 const playfair = Playfair_Display({
   weight: ['700'],
@@ -43,8 +44,10 @@ export default function RootLayout({
                 {children}
                 <ScrollToTopButton />
               </Box>
-              <MobileNavBar />
-              <Footer />
+              <DeviceLayoutWrapper
+                mobile={<MobileNavBar />}
+                desktop={<Footer />}
+              />
             </AppRouterCacheProvider>
           </StoreProvider>
         </body>

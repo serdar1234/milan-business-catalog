@@ -27,7 +27,7 @@ const ACTION_BUTTONS: {
   {
     label: 'Directions',
     Icon: DirectionsIcon,
-    colorKey: 'brandPrimary',
+    colorKey: 'primary',
   },
   {
     label: 'Parking',

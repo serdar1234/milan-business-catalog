@@ -31,7 +31,6 @@ export const MobileView = () => (
       sx={{
         maxWidth: 120,
         height: 36,
-        color: 'brandPrimary.main',
         fontWeight: 'bold',
         textTransform: 'capitalize',
       }}

@@ -78,18 +78,14 @@ export const customTheme = createTheme({
     primary: {
       main: '#0B3A5B', // Deep Canal Blue (for AppBar/Buttons)
       contrastText: '#FFFFFF',
+      light: '#3C6986', // Lighten 20%
+      dark: '#082E47', // Darken 20%
     },
     secondary: {
       main: '#FFB46B', // Warm Sand (for AppBar/Buttons)
       light: '#FFC790',
       dark: '#E09F5A',
       contrastText: '#000000',
-    },
-    brandPrimary: {
-      main: '#0B3A5B',
-      contrastText: '#FFFFFF',
-      light: '#3C6986', // Lighten 20%
-      dark: '#082E47', // Darken 20%
     },
     brandAccent: {
       main: '#D3542A', // Warm Terracotta (for CTA)
@@ -175,16 +171,16 @@ export const customTheme = createTheme({
   },
 
   components: {
-    MuiButton: {
-      styleOverrides: {
-        containedPrimary: {
-          backgroundColor: '#D3542A',
-          '&:hover': {
-            backgroundColor: '#c14e26',
-          },
-        },
-      },
-    },
+    // MuiButton: {
+    //   styleOverrides: {
+    //     containedPrimary: {
+    //       backgroundColor: '#D3542A',
+    //       '&:hover': {
+    //         backgroundColor: '#c14e26',
+    //       },
+    //     },
+    //   },
+    // },
     MuiAppBar: {
       styleOverrides: {
         root: {

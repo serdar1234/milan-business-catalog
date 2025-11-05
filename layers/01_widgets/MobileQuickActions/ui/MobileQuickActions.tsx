@@ -8,7 +8,7 @@ import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 
 const ACTION_COLORS = {
   CALL: 'brandAccent.main',
-  DIRECTIONS: 'brandPrimary.main',
+  DIRECTIONS: 'primary.main',
   RESERVE: 'statusFeatured.main',
   SAVE: 'statusError.main',
 };

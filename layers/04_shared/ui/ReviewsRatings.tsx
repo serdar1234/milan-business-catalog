@@ -57,7 +57,7 @@ export const DesktopView = () => (
         component={Link}
         href="/stories"
         variant="contained"
-        color="brandPrimary"
+        color="primary"
         sx={{
           fontWeight: 'bold',
           color: 'white',

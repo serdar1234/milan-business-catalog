@@ -94,9 +94,9 @@ export const Footer: React.FC = () => {
   return (
     <Box
       component="footer"
+      bgcolor="primary.main"
+      color="primary.contrastText"
       sx={{
-        bgcolor: 'brandPrimary.main',
-        color: 'white',
         py: 8,
         display: { xs: 'none', md: 'block' },
       }}
@@ -117,20 +117,16 @@ export const Footer: React.FC = () => {
 
             <Box sx={{ display: 'flex' }}>
               <IconButton {...socialIconProps}>
-                {' '}
-                <InstagramIcon />{' '}
+                <InstagramIcon />
               </IconButton>
               <IconButton {...socialIconProps}>
-                {' '}
-                <FacebookIcon />{' '}
+                <FacebookIcon />
               </IconButton>
               <IconButton {...socialIconProps}>
-                {' '}
-                <TwitterIcon />{' '}
+                <TwitterIcon />
               </IconButton>
               <IconButton {...socialIconProps}>
-                {' '}
-                <YouTubeIcon />{' '}
+                <YouTubeIcon />
               </IconButton>
             </Box>
           </Grid>

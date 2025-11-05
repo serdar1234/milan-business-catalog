@@ -85,10 +85,10 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
       <Grid
         container
         spacing={2}
+        bgcolor="primary.main"
         sx={{
           position: 'relative',
           display: 'flex',
-          bgcolor: 'brandPrimary.main',
           color: 'white',
           p: 3,
           mb: 2,

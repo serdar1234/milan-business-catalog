@@ -42,10 +42,7 @@ export const MobileView = () => (
           color="surface"
           sx={{
             bgcolor: 'background.paper',
-            color: 'brandPrimary.main',
-            '&:hover': {
-              bgcolor: 'background.default',
-            },
+            color: 'primary',
             px: 2,
             ml: 4,
           }}

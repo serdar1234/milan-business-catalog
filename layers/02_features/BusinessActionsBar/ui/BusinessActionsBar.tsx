@@ -49,7 +49,7 @@ export const BusinessActionsBar: React.FC<BusinessActionsBarProps> = ({
 
         <Button
           variant="contained"
-          color="brandPrimary"
+          color="primary"
           startIcon={<NearMeIcon />}
           href={directionsHref}
           target="_blank"

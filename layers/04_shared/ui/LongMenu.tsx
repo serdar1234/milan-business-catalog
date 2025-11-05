@@ -43,7 +43,7 @@ export default function LongMenu({ title }: { title: string }) {
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
         variant="outlined"
-        color="brandPrimary"
+        color="primary"
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}

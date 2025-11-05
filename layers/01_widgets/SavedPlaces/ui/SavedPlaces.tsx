@@ -63,13 +63,12 @@ export const SavedPlaces: React.FC = () => {
             component={Link}
             href="/search"
             variant="outlined"
-            color="brandPrimary"
+            color="primary"
             startIcon={<AddIcon />}
             sx={{
               py: 1.5,
               fontWeight: 'bold',
               borderRadius: 2,
-              borderColor: 'brandPrimary.main',
               bgcolor: 'background.paper',
             }}
           >
