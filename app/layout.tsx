@@ -1,12 +1,17 @@
+import { lazy } from 'react';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import './globals.css';
 import { StoreProvider } from '@/layers/04_shared/providers/StoreProvider';
 import { MuiThemeProvider } from '@/layers/04_shared/providers/MuiThemeProvider';
 import { Header } from '@/layers/01_widgets/Header/ui/Header';
 import { Playfair_Display, Inter } from 'next/font/google';
-import { Footer } from '@/layers/01_widgets/Footer/ui/Footer';
-import { MobileNavBar } from '@/layers/01_widgets/MobileNavBar/ui/MobileNavBar';
+const Footer = lazy(() => import('@/layers/01_widgets/Footer/ui/Footer'));
+const MobileNavBar = lazy(
+  () => import('@/layers/01_widgets/MobileNavBar/ui/MobileNavBar'),
+);
+
 import { Box } from '@mui/material';
 import ScrollToTopButton from '@/layers/02_features/ScrollToTopButton';
 import { DeviceLayoutWrapper } from '@/layers/04_shared/hocs/DeviceLayoutWrapper';
@@ -28,11 +33,15 @@ export const metadata: Metadata = {
   description: 'Best places to visit in Milan',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const hd = await headers();
+  const ua = hd.get('user-agent') || '';
+  const isMobile = /Mobi|Android/i.test(ua);
+
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <MuiThemeProvider>
@@ -47,6 +56,7 @@ export default function RootLayout({
               <DeviceLayoutWrapper
                 mobile={<MobileNavBar />}
                 desktop={<Footer />}
+                initialIsMobile={isMobile}
               />
             </AppRouterCacheProvider>
           </StoreProvider>

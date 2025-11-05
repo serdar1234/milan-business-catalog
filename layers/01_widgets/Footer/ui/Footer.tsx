@@ -52,7 +52,7 @@ const FOOTER_LINKS = [
   },
 ];
 
-export const Footer: React.FC = () => {
+const Footer: React.FC = () => {
   const socialIconProps = {
     size: 'small' as const,
     sx: {
@@ -182,3 +182,5 @@ export const Footer: React.FC = () => {
     </Box>
   );
 };
+
+export default Footer;

@@ -36,7 +36,7 @@ export const DesktopNavigation: React.FC = () => {
           {link.label}
         </Button>
       ))}
-      <Box sx={{ width: 280, ml: 1, mr: -1 }}>
+      <Box>
         <SearchForm />
       </Box>
     </Box>

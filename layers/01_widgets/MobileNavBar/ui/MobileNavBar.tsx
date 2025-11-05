@@ -15,7 +15,7 @@ const NAV_ITEMS = [
   { label: 'Profile', icon: PersonIcon, href: '/profile', active: false },
 ];
 
-export const MobileNavBar: React.FC = () => {
+const MobileNavBar: React.FC = () => {
   return (
     <AppBar
       component={'nav'}
@@ -77,3 +77,5 @@ export const MobileNavBar: React.FC = () => {
     </AppBar>
   );
 };
+
+export default MobileNavBar;
