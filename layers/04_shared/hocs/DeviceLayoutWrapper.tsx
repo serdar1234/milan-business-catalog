@@ -1,6 +1,6 @@
 'use client';
 
-import { useSyncExternalStore } from 'react';
+// import { useSyncExternalStore } from 'react';
 import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 
 interface DeviceLayoutWrapperProps {
