@@ -14,12 +14,10 @@ import { DesktopNavigation } from './DesktopNavigation';
 import { MobileDrawerContent } from './MobileDrawerContent';
 import { SharedIcon } from '@/layers/04_shared/ui/Icon';
 import { useScrollLock } from '@/layers/04_shared/hooks/useScrollLock';
-import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 
 export const Header: FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   useScrollLock(mobileOpen);
-  const isMobile = useViewportWidth();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -35,17 +33,15 @@ export const Header: FC = () => {
           justifyContent: 'space-between',
         }}
       >
-        {isMobile && (
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2 }}
-          >
-            <SharedIcon iconName="Menu" />
-          </IconButton>
-        )}
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={handleDrawerToggle}
+          sx={{ display: { md: 'none' }, mr: 2 }}
+        >
+          <SharedIcon iconName="Menu" />
+        </IconButton>
 
         <Typography
           variant="h6"
@@ -53,7 +49,7 @@ export const Header: FC = () => {
           href="/"
           sx={{
             textDecoration: 'none',
-            color: 'white',
+            color: 'primary.contrastText',
             fontWeight: 'bold',
             letterSpacing: '0.05rem',
             flexGrow: { xs: 1, md: 0 },
@@ -67,34 +63,39 @@ export const Header: FC = () => {
         <DesktopNavigation />
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          {isMobile && (
-            <IconButton sx={{ display: 'block', color: 'white' }}>
-              <SharedIcon iconName="Search" />
-            </IconButton>
-          )}
+          <IconButton
+            sx={{
+              display: { xs: 'block', md: 'none' },
+              color: 'primary.contrastText',
+            }}
+          >
+            <SharedIcon iconName="Search" />
+          </IconButton>
 
-          <IconButton component={Link} href="/profile" sx={{ color: 'white' }}>
+          <IconButton
+            component={Link}
+            href="/profile"
+            sx={{ color: 'primary.contrastText' }}
+          >
             <SharedIcon iconName="User" />
           </IconButton>
         </Box>
       </Toolbar>
 
-      {isMobile && (
-        <nav>
-          <Drawer
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            anchor="right"
-            ModalProps={{ keepMounted: true, disableScrollLock: true }}
-            sx={{
-              display: 'block',
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },
-            }}
-          >
-            <MobileDrawerContent />
-          </Drawer>
-        </nav>
-      )}
+      <nav>
+        <Drawer
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          anchor="right"
+          ModalProps={{ keepMounted: true, disableScrollLock: true }}
+          sx={{
+            display: 'block',
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },
+          }}
+        >
+          <MobileDrawerContent />
+        </Drawer>
+      </nav>
     </AppBar>
   );
 };

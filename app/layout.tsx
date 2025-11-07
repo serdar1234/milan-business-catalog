@@ -1,20 +1,18 @@
-import { lazy } from 'react';
+import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
-import { headers } from 'next/headers';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
-import './globals.css';
 import { StoreProvider } from '@/layers/04_shared/providers/StoreProvider';
 import { MuiThemeProvider } from '@/layers/04_shared/providers/MuiThemeProvider';
 import { Header } from '@/layers/01_widgets/Header/ui/Header';
 import { Playfair_Display, Inter } from 'next/font/google';
-const Footer = lazy(() => import('@/layers/01_widgets/Footer/ui/Footer'));
-const MobileNavBar = lazy(
+import './globals.css';
+const MobileNavBar = dynamic(
   () => import('@/layers/01_widgets/MobileNavBar/ui/MobileNavBar'),
 );
+const Footer = dynamic(() => import('@/layers/01_widgets/Footer/ui/Footer'));
 
 import { Box } from '@mui/material';
 import ScrollToTopButton from '@/layers/02_features/ScrollToTopButton';
-import { DeviceLayoutWrapper } from '@/layers/04_shared/hocs/DeviceLayoutWrapper';
 
 const playfair = Playfair_Display({
   weight: ['700'],
@@ -38,10 +36,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const hd = await headers();
-  const ua = hd.get('user-agent') || '';
-  const isMobile = /Mobi|Android/i.test(ua);
-
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <MuiThemeProvider>
@@ -53,11 +47,8 @@ export default async function RootLayout({
                 {children}
                 <ScrollToTopButton />
               </Box>
-              <DeviceLayoutWrapper
-                mobile={<MobileNavBar />}
-                desktop={<Footer />}
-                initialIsMobile={isMobile}
-              />
+              <MobileNavBar />
+              <Footer />
             </AppRouterCacheProvider>
           </StoreProvider>
         </body>

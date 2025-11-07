@@ -22,8 +22,9 @@
   --color-dark-red: #a31f2e; /* dark red (Closing Soon) */
   --color-status-featured: #114b3c; /* dark green (Featured) */
 
-  --color-1surface: #ac5a5a; /* White */
-  --color-1background: #c08c59; /* Pale Cream */
+  /* Fonts */
+  --font-playfair: 'Playfair Display', 'Playfair Display Fallback', serif;
+  --font-inter: 'Inter', 'Inter Fallback', sans-serif;
 }
 
 html,

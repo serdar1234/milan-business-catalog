@@ -24,10 +24,7 @@ export const DesktopView: React.FC<BusinessInformationProps> = ({
         p: 3,
       }}
     >
-      <Typography
-        variant="h5"
-        sx={{ mb: 2, fontFamily: (theme) => theme.typography.fontFamily }}
-      >
+      <Typography variant="h5" sx={{ mb: 2, fontFamily: 'var(--font-inter)' }}>
         Business Information
       </Typography>
 

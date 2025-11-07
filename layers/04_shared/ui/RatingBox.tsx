@@ -1,3 +1,5 @@
+'use client';
+
 import { Grid, Box, Typography } from '@mui/material';
 
 export const RatingBox = ({ name, data }: { name: string; data: number }) => (

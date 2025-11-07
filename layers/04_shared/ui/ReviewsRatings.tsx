@@ -12,6 +12,7 @@ export const MobileView: React.FC<MobileViewProps> = ({
   withButton = true,
 }) => (
   <Box
+    display={{ xs: 'block', md: 'none' }}
     component="section"
     boxShadow={4}
     sx={{
@@ -43,7 +44,7 @@ export const MobileView: React.FC<MobileViewProps> = ({
 );
 
 export const DesktopView = () => (
-  <>
+  <Box display={{ xs: 'none', md: 'block' }}>
     <Grid container spacing={4} justifyContent="center">
       {INSIGHT_MOCKS.map((insight) => (
         <Grid size={4} key={insight.id}>
@@ -67,5 +68,5 @@ export const DesktopView = () => (
         Read More Stories
       </Button>
     </Box>
-  </>
+  </Box>
 );

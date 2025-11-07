@@ -171,16 +171,6 @@ export const customTheme = createTheme({
   },
 
   components: {
-    // MuiButton: {
-    //   styleOverrides: {
-    //     containedPrimary: {
-    //       backgroundColor: '#D3542A',
-    //       '&:hover': {
-    //         backgroundColor: '#c14e26',
-    //       },
-    //     },
-    //   },
-    // },
     MuiAppBar: {
       styleOverrides: {
         root: {

@@ -66,7 +66,7 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
   ];
 
   return (
-    <>
+    <Box display={{ xs: 'none', md: 'block' }}>
       <AppBreadcrumbs items={BREADCRUMBS} />
       <Box
         sx={{
@@ -239,6 +239,6 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
         views={views}
         saves={saves}
       />
-    </>
+    </Box>
   );
 };

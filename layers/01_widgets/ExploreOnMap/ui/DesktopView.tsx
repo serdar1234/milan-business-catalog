@@ -5,7 +5,7 @@ import { Container, Box, Button, Typography } from '@mui/material';
 import { FILTER_BUTTONS, PLACE_LIST_MOCKS } from './mockData';
 
 export const DesktopView = () => (
-  <>
+  <Box display={{ xs: 'none', md: 'block' }}>
     <WidgetHeader
       title="Find Your Way Around"
       subtitle="A powerful map to explore curated places in every Milan district."
@@ -29,7 +29,6 @@ export const DesktopView = () => (
             borderRight: '1px solid #eee',
           }}
         >
-          {/* Фильтры-кнопки */}
           <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
             {FILTER_BUTTONS.map((label) => (
               <Button
@@ -68,17 +67,17 @@ export const DesktopView = () => (
         {/* the map */}
         <Box
           sx={{
-            bgcolor: 'rebeccapurple',
+            bgcolor: 'secondary.light',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
           }}
         >
-          <Typography variant="h6" color="text.secondary">
+          <Typography variant="h6" color="secondary.contrastText">
             [the map goes here]
           </Typography>
         </Box>
       </Box>
     </Container>
-  </>
+  </Box>
 );

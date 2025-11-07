@@ -1,3 +1,4 @@
+'use client';
 import { Grid, Button } from '@mui/material';
 
 interface ActionButtonProps {
@@ -6,7 +7,7 @@ interface ActionButtonProps {
   colorKey: string;
 }
 
-export const ActionButton: React.FC<ActionButtonProps> = ({
+export const LocationButton: React.FC<ActionButtonProps> = ({
   label,
   Icon,
   colorKey,

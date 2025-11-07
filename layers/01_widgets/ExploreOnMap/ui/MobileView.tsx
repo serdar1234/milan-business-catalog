@@ -3,7 +3,7 @@ import MapIcon from '@mui/icons-material/Map';
 import { NEARBY_CHIPS } from './mockData';
 
 export const MobileView = () => (
-  <Container>
+  <Container sx={{ display: { xs: 'block', md: 'none' } }}>
     <Box
       sx={{
         backgroundImage:

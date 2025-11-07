@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Box,
   Typography,
@@ -16,7 +16,6 @@ import {
   Slider,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 
 const MAX_RADIUS = 50;
 const PRICE_OPTIONS = [
@@ -65,7 +64,6 @@ export const CategoryFilters: React.FC = () => {
   const [atmosphere, setAtmosphere] = useState<string[]>([]);
   const [features, setFeatures] = useState<string[]>([]);
   const [radius, setRadius] = useState<number>(25);
-  const isMobile = useViewportWidth();
 
   const handleRadiusChange = (event: Event, newValue: number | number[]) => {
     setRadius(newValue as number);
@@ -221,14 +219,14 @@ export const CategoryFilters: React.FC = () => {
     </>
   );
 
-  if (isMobile) {
-    return (
+  return (
+    <>
       <Box
+        display={{ xs: 'flex', md: 'none' }}
         sx={{
           bgcolor: 'background.paper',
           borderRadius: '1rem',
           boxShadow: 2,
-          display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           height: '100%',
@@ -238,23 +236,22 @@ export const CategoryFilters: React.FC = () => {
           Filters are not available on mobile yet
         </Typography>
       </Box>
-    );
-  }
 
-  return (
-    <Box
-      sx={{
-        bgcolor: 'background.paper',
-        p: 2,
-        borderRadius: '1rem',
-        boxShadow: 2,
-      }}
-    >
-      <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
-        Filters
-      </Typography>
+      <Box
+        display={{ xs: 'none', md: 'flex' }}
+        sx={{
+          bgcolor: 'background.paper',
+          p: 2,
+          borderRadius: '1rem',
+          boxShadow: 2,
+        }}
+      >
+        <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
+          Filters
+        </Typography>
 
-      {filters}
-    </Box>
+        {filters}
+      </Box>
+    </>
   );
 };
