@@ -6,11 +6,11 @@ import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 
 export const MobileView = () => (
   <Box
+    display={{ xs: 'flex', md: 'none' }}
     sx={{
       backgroundImage: 'linear-gradient(to right, #114B3C, #0B3A5B)',
       p: 3,
       borderRadius: 2,
-      display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
     }}
@@ -41,13 +41,12 @@ export const MobileView = () => (
 );
 
 export const DesktopView = () => (
-  <>
-    <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-      <WidgetHeader
-        title="Winter Events & Specials"
-        subtitle="Don't miss these seasonal experiences in Milano"
-      />
-    </Box>
+  <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+    <WidgetHeader
+      title="Winter Events & Specials"
+      subtitle="Don't miss these seasonal experiences in Milano"
+    />
+
     <Box sx={{ position: 'relative' }}>
       <Grid container spacing={3} sx={{ mb: 3, position: 'relative' }}>
         {TOP_EVENTS.map((event) => (
@@ -65,5 +64,5 @@ export const DesktopView = () => (
         ))}
       </Grid>
     </Box>
-  </>
+  </Box>
 );

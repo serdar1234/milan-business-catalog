@@ -1,17 +1,8 @@
-'use client';
-
-import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
 import { Box, Button, IconButton } from '@mui/material';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import PhoneIcon from '@mui/icons-material/Phone';
 
 export const DesktopCTA = () => {
-  const isMobile = useViewportWidth();
-
-  if (isMobile) {
-    return null;
-  }
-
   return (
     <Box
       sx={{

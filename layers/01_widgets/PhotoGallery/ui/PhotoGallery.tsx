@@ -1,12 +1,8 @@
-'use client';
-
-import { Typography, Grid } from '@mui/material';
-import Link from 'next/link';
+import { Grid } from '@mui/material';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { MobilePhotoGallery } from './MobilePhotoGallery';
 import { DesktopPhotoGallery } from './DesktopPhotoGallery';
-import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
-import { useParams } from 'next/navigation';
+import ViewAllButton from './ViewAllButton';
 
 const MOCK_PHOTOS = [
   { id: 8, url: '/business.jpg', alt: 'Business' },
@@ -30,9 +26,6 @@ interface PhotoGalleryProps {
 }
 
 export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
-  const isMobile = useViewportWidth();
-  const params = useParams();
-
   return (
     <Grid
       size={12}
@@ -46,23 +39,11 @@ export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
       }}
     >
       <WidgetHeader title="Photo Gallery" />
-      <Typography
-        variant="body1"
-        color="brandAccent.main"
-        sx={{
-          display: { xs: 'block', md: 'none' },
-          position: 'absolute',
-          top: '2.5rem',
-          right: { xs: '0.5rem', sm: '1rem' },
-        }}
-      >
-        <Link href={`./${params.id}/gallery/`}>View all ({photos.length})</Link>
-      </Typography>
-      {isMobile ? (
-        <MobilePhotoGallery mobilePreviewPhotos={photos} />
-      ) : (
-        <DesktopPhotoGallery desktopPreviewPhotos={photos} />
-      )}
+      <ViewAllButton photolength={photos.length} />
+
+      <MobilePhotoGallery mobilePreviewPhotos={photos} />
+
+      <DesktopPhotoGallery desktopPreviewPhotos={photos} />
     </Grid>
   );
 };

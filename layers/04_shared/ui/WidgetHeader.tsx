@@ -3,11 +3,13 @@ import { Typography } from '@mui/material';
 interface WidgetHeaderProps {
   title: string;
   subtitle?: string;
+  marginBottom?: number | string;
 }
 
 export const WidgetHeader: React.FC<WidgetHeaderProps> = ({
   title,
   subtitle,
+  marginBottom = '1rem',
 }) => {
   return (
     <>
@@ -16,7 +18,7 @@ export const WidgetHeader: React.FC<WidgetHeaderProps> = ({
         component="h2"
         fontWeight="bold"
         sx={{
-          mb: { xs: 2, md: 0.5 },
+          mb: { marginBottom },
           textAlign: { xs: 'start', md: 'center' },
         }}
       >

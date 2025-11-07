@@ -36,6 +36,7 @@ export const DesktopReviewsRatings: React.FC<DesktopReviewsRatingsProps> = ({
   const buttonText = isExpanded ? 'Show Less Reviews' : `Load More Reviews`;
   return (
     <Box
+      display={{ xs: 'none', md: 'block' }}
       component="section"
       boxShadow={4}
       sx={{
@@ -48,6 +49,7 @@ export const DesktopReviewsRatings: React.FC<DesktopReviewsRatingsProps> = ({
         title="Reviews & Ratings"
         buttonText="Write a Review"
         stats={stats}
+        {...{ marginBottom: 0 }}
       />
 
       <Grid container spacing={4}>
