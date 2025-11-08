@@ -51,7 +51,7 @@ export const BUSINESS_MOCKS: Business[] = [
     address: 'Corso Como, 15',
     isFavorite: false,
     imageUrl: '/r4.jpg',
-    tag: { label: 'Popular', color: 'statusSuccess.main' },
+    tag: { label: 'Popular', color: 'success.main' },
   },
   {
     id: 5,
@@ -91,6 +91,6 @@ export const BUSINESS_MOCKS: Business[] = [
     address: 'Corso Venezia, 30',
     isFavorite: false,
     imageUrl: '/r5.jpg',
-    tag: { label: 'Popular', color: 'statusSuccess.main' },
+    tag: { label: 'Popular', color: 'success.main' },
   },
 ];

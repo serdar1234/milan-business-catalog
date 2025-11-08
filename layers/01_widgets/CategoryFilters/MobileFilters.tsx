@@ -24,13 +24,10 @@ export default function MobileFilters({ filters }: { filters: ReactNode }) {
       <IconButton aria-label="delete" onClick={toggleDrawer(true)}>
         <FilterAltIcon color="primary" />
       </IconButton>
-      <Drawer
-        open={open}
-        onClose={toggleDrawer(false)}
-        anchor="right"
-        sx={{ maxWidth: '80vw' }}
-      >
-        <Box padding={2}>{filters}</Box>
+      <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
+        <Box padding={2} sx={{ maxWidth: '80vw' }}>
+          {filters}
+        </Box>
       </Drawer>
     </>
   );

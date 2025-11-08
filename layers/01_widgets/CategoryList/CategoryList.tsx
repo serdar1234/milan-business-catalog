@@ -59,7 +59,14 @@ export const CategoryList: React.FC = () => {
             <BusinessCard business={business} />
           </Grid>
         ))}
-        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Box
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexWrap: 'nowrap',
+            justifyContent: 'center',
+          }}
+        >
           <Pagination count={10} />
         </Box>
       </Grid>
