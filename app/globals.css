@@ -18,6 +18,7 @@
   --color-surface: #ffffff; /* White */
   --color-background: #fff9f3; /* Pale Cream */
   --color-text-primary: #102428; /* Dark Teal */
+  --color-primary-main-light: #3c6986; /* Lighten 20% */
   --color-border-grey: #aaa; /* Light Gray */
   --color-dark-red: #a31f2e; /* dark red (Closing Soon) */
   --color-status-featured: #114b3c; /* dark green (Featured) */
@@ -30,10 +31,9 @@
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
-  scrollbar-color: #0b3a5b rgb(from #0b3a5b r g b / 0.5);
+  scrollbar-color: var(--color-primary-main) var(--color-primary-main-light);
   background-color: var(--color-background); /* Pale Cream */
-  color: #102428; /* Dark Teal */
+  color: var(--color-text-primary); /* Dark Teal */
 }
 
 a {

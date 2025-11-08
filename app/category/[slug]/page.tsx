@@ -18,7 +18,7 @@ export default function CategoryPage() {
       <Container maxWidth="lg">
         <div className={style['grid-container']}>
           <div className={style['grid-item__categories']}>
-            <LongMenu title="Other categories" />
+            <LongMenu title="Categories" />
           </div>
           <div className={style['grid-item__filters']}>
             <CategoryFilters />

@@ -11,10 +11,15 @@ import Link from 'next/link';
 import styles from './HeroSearch.module.css';
 
 const QUICK_DISCOVER_CATEGORIES = [
-  { name: 'Aperitivo Bars', count: 324, icon: LocalBarIcon },
-  { name: 'Cozy Restaurants', count: 567, icon: RestaurantIcon },
-  { name: 'Winter Cafés', count: 189, icon: LocalCafeIcon },
-  { name: 'Art Galleries', count: 78, icon: ColorLensIcon },
+  { name: 'Aperitivo Bars', count: 324, icon: LocalBarIcon, href: '/bars' },
+  {
+    name: 'Cozy Restaurants',
+    count: 567,
+    icon: RestaurantIcon,
+    href: '/restaurants',
+  },
+  { name: 'Winter Cafés', count: 189, icon: LocalCafeIcon, href: '/cafes' },
+  { name: 'Art Galleries', count: 78, icon: ColorLensIcon, href: '/art' },
 ];
 
 const STATS = [
@@ -121,7 +126,7 @@ export const HeroDesktopInfo: React.FC = () => {
                 className={styles['quick-discover__link']}
               >
                 <Link
-                  href={`/discover?category=${cat.name}`}
+                  href={`/category${cat.href}`}
                   style={{
                     display: 'flex',
                     justifyContent: 'space-between',

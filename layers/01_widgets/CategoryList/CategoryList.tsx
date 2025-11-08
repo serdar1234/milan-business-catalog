@@ -1,6 +1,12 @@
 'use client';
 
-import { Box, Grid, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  CircularProgress,
+  Grid,
+  Pagination,
+  Typography,
+} from '@mui/material';
 import { useGetBusinessListQuery } from '@/layers/03_entities/business/api/businessApi';
 import { BusinessCard } from '@/layers/02_features/BusinessCard/ui/BusinessCard';
 
@@ -13,9 +19,9 @@ export const CategoryList: React.FC = () => {
 
   if (isLoading) {
     return (
-      <Typography sx={{ textAlign: 'center', py: 4 }}>
-        Loading businesses...
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'center', py: '2rem' }}>
+        <CircularProgress sx={{ color: 'var(--color-brand-accent)' }} />
+      </Box>
     );
   }
 
@@ -27,7 +33,7 @@ export const CategoryList: React.FC = () => {
     );
   }
 
-  const featuredBusinesses = businessList?.slice(0, 3) || [];
+  const featuredBusinesses = businessList?.slice(0, 6) || [];
 
   if (featuredBusinesses.length === 0) {
     return null;
@@ -43,17 +49,20 @@ export const CategoryList: React.FC = () => {
         boxShadow: 2,
       }}
     >
-      <Stack spacing={3}>
+      <Grid container spacing={2}>
         {featuredBusinesses.map((business) => (
           <Grid
             key={business.id}
-            size={{ xs: 12, md: 4 }}
+            size={{ xs: 12, sm: 6 }}
             sx={{ display: 'flex' }}
           >
             <BusinessCard business={business} />
           </Grid>
         ))}
-      </Stack>
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <Pagination count={10} />
+        </Box>
+      </Grid>
     </Box>
   );
 };

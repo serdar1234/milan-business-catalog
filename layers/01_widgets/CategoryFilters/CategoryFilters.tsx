@@ -16,6 +16,7 @@ import {
   Slider,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MobileFilters from './MobileFilters';
 
 const MAX_RADIUS = 50;
 const PRICE_OPTIONS = [
@@ -227,14 +228,13 @@ export const CategoryFilters: React.FC = () => {
           bgcolor: 'background.paper',
           borderRadius: '1rem',
           boxShadow: 2,
-          justifyContent: 'center',
+          justifyContent: { xs: 'center', sm: 'flex-end' },
           alignItems: 'center',
+          p: 2,
           height: '100%',
         }}
       >
-        <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
-          Filters are not available on mobile yet
-        </Typography>
+        <MobileFilters filters={filters} />
       </Box>
 
       <Box
@@ -244,6 +244,7 @@ export const CategoryFilters: React.FC = () => {
           p: 2,
           borderRadius: '1rem',
           boxShadow: 2,
+          flexDirection: 'column',
         }}
       >
         <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
