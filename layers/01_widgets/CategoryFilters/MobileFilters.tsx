@@ -1,11 +1,13 @@
 'use client';
-import { ReactNode, useState } from 'react';
+
+import { useState } from 'react';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { Box, Drawer, IconButton } from '@mui/material';
 
 import React from 'react';
+import Filters from '@/layers/02_features/Filters/Filters';
 
-export default function MobileFilters({ filters }: { filters: ReactNode }) {
+export default function MobileFilters() {
   const [open, setOpen] = useState(false);
 
   const toggleDrawer =
@@ -26,7 +28,7 @@ export default function MobileFilters({ filters }: { filters: ReactNode }) {
       </IconButton>
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
         <Box padding={2} sx={{ maxWidth: '80vw' }}>
-          {filters}
+          <Filters setOpen={setOpen} />
         </Box>
       </Drawer>
     </>

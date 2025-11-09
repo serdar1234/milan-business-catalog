@@ -62,7 +62,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
               top: 8,
               left: 8,
               bgcolor: tag.color,
-              color: 'white',
+              color: tag.color === 'ratingGold.main' ? 'black' : 'white',
               fontWeight: 'bold',
             }}
           />

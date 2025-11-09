@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { baseApi } from '../../api/baseApi';
 import { businessApi } from '@/layers/03_entities/business/api/businessApi';
+import categoryStateReducer from './features/categoryState/categoryStateSlice';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       [baseApi.reducerPath]: baseApi.reducer,
       [businessApi.reducerPath]: businessApi.reducer,
+      categoryState: categoryStateReducer,
     },
 
     middleware: (getDefaultMiddleware) =>
