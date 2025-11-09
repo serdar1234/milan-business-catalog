@@ -45,7 +45,7 @@ export const ExploreDistricts: React.FC = () => {
             slidesPerView={'auto'}
             spaceBetween={16}
             navigation={true}
-            style={{ padding: '0 1rem', overflow: 'initial' }}
+            style={{ padding: '0 1rem' }}
           >
             {DISTRICTS.map((district) => (
               <SwiperSlide
