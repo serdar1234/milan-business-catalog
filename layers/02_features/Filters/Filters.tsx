@@ -225,8 +225,15 @@ export default function Filters({
         </Stack>
       </FilterSection>
 
-      {/* Apply filters buttons */}
-      <Box sx={{ p: 2, display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+      {/* Filters buttons */}
+      <Box
+        sx={{
+          p: { xs: 0, md: 2 },
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: 1,
+        }}
+      >
         <Button color="primary" variant="outlined" onClick={handleReset}>
           Reset
         </Button>

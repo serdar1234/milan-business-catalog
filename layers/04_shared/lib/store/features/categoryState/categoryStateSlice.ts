@@ -36,19 +36,13 @@ const categoryStateSlice = createSlice({
         action.payload.value;
       state.currentPage = 1;
     },
-
-    // Установка сортировки
     setSort: (state, action: PayloadAction<string>) => {
       state.currentSort = action.payload;
       state.currentPage = 1;
     },
-
-    // Установка страницы
     setPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
-
-    // Сброс всех фильтров (кнопка Reset/Cancel)
     resetCategoryState: (state) => {
       state.filters = INITIAL_FILTER_STATE;
       state.currentSort = initialState.currentSort;

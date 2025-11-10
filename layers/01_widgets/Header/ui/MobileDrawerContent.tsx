@@ -12,13 +12,15 @@ import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
 
 const NAV_LINKS = [
   { href: '/', label: 'Discover' },
-  { href: '/shopping', label: 'Shopping' },
-  { href: '/culture', label: 'Culture' },
-  { href: '/food', label: 'Food & Drink' },
+  { href: '/category/shopping', label: 'Shopping' },
+  { href: '/category/culture', label: 'Culture' },
+  { href: '/category/food', label: 'Food & Drink' },
   { href: '/map', label: 'Map View' },
 ];
 
-export const MobileDrawerContent: React.FC = () => {
+export const MobileDrawerContent: React.FC<{
+  handleDrawerClose: () => void;
+}> = ({ handleDrawerClose }) => {
   return (
     <Box sx={{ width: 250, bgcolor: 'background.default', height: '100%' }}>
       <Toolbar sx={{ backgroundColor: 'primary.main' }}>
@@ -38,6 +40,7 @@ export const MobileDrawerContent: React.FC = () => {
             key={item.label}
             component={Link}
             href={item.href}
+            onClick={handleDrawerClose}
             sx={{ textDecoration: 'none', color: 'text.primary' }}
           >
             <ListItemText primary={item.label} />
