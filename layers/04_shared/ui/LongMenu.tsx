@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Button } from '@mui/material';
+import Link from 'next/link';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuItem from '@mui/material/MenuItem';
 import { useScrollLock } from '../hooks/useScrollLock';
-
-const options = ['Atria', 'Callisto', 'Dione', 'Ganymede', 'Hangouts Call'];
+import { Category, useGetCategoriesQuery } from '../api/categoriesApi';
 
 const ITEM_HEIGHT = '50vh';
 
@@ -17,6 +18,7 @@ export default function LongMenu({ title }: { title: string }) {
 
   const [mobileOpen, setMobileOpen] = useState(false);
   useScrollLock(mobileOpen);
+  const { data: options, error, isLoading } = useGetCategoriesQuery('en');
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -26,6 +28,8 @@ export default function LongMenu({ title }: { title: string }) {
     setAnchorEl(null);
     setMobileOpen(false);
   };
+  if (error) return <div>error</div>;
+  if (isLoading) return <div>loading</div>;
 
   return (
     <Box
@@ -42,7 +46,7 @@ export default function LongMenu({ title }: { title: string }) {
         aria-controls={open ? 'long-menu' : undefined}
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
-        variant="outlined"
+        variant="text"
         color="primary"
         disableElevation
         onClick={handleClick}
@@ -71,15 +75,20 @@ export default function LongMenu({ title }: { title: string }) {
           },
         }}
       >
-        {options.map((option) => (
-          <MenuItem
-            key={option}
-            selected={option === 'Pyxis'}
-            onClick={handleClose}
-          >
-            {option}
-          </MenuItem>
-        ))}
+        {isLoading && <p>Loading...</p>}
+        {error && null}
+        {(options &&
+          options.data.map((option: Category) => (
+            <Link
+              key={option.id}
+              href={`/category/${option.name.toLocaleLowerCase().replace(' ', '-')}`}
+            >
+              <MenuItem key={option.id} selected={option.id === 1}>
+                {option.name}
+              </MenuItem>
+            </Link>
+          ))) ||
+          null}
       </Menu>
     </Box>
   );

@@ -1,5 +1,5 @@
 import { Box, Typography, Grid } from '@mui/material';
-import { MOCK_BUSINESS_DETAILS as data } from '@/layers/03_entities/business/api/mockData';
+import { MOCK_BUSINESS_DETAILS as data } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { RatingBox } from '@/layers/04_shared/ui/RatingBox';
 import { FeatureList } from '@/layers/04_shared/ui/FeatureList';

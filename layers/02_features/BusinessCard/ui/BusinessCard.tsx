@@ -14,7 +14,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 
 import Link from 'next/link';
 
-import { Business } from '@/layers/03_entities/business/api/businessMocks';
+import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 import { slugify } from '@/layers/04_shared/utils/helpers';
 import { MobileCTA } from './MobileCTA';
 import { DesktopCTA } from './DesktopCTA';

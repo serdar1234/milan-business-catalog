@@ -1,4 +1,4 @@
-import { HoursSection } from '@/layers/03_entities/business/ui/BusinessHours';
+import { HoursSection } from '@/layers/01_widgets/BusinessInformation/ui/BusinessHours';
 import { Box, Typography, Grid } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -6,7 +6,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import EuroIcon from '@mui/icons-material/Euro';
 import { InfoRow } from './InfoRow';
 import { BusinessInformationProps } from './BusinessInformation';
-import { MOCK_BUSINESS_DETAILS } from '@/layers/03_entities/business/api/mockData';
+import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 
 export const DesktopView: React.FC<BusinessInformationProps> = ({
   data = MOCK_BUSINESS_DETAILS,

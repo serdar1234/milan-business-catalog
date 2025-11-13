@@ -1,6 +1,6 @@
 import { Box, Typography, Rating, Chip } from '@mui/material';
 import Link from 'next/link';
-import { Business } from '@/layers/03_entities/business/api/businessMocks';
+import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 import Image from 'next/image';
 
 interface MapPlaceCardProps {

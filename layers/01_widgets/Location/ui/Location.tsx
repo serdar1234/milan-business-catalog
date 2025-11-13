@@ -10,7 +10,7 @@ import { LocationButton } from '@/layers/04_shared/ui/LocationButton';
 import {
   BusinessDetails,
   MOCK_BUSINESS_DETAILS,
-} from '@/layers/03_entities/business/api/mockData';
+} from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 
 interface BusinessDetailsProps {
   data?: BusinessDetails;

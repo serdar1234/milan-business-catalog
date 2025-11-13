@@ -7,7 +7,7 @@ import {
   Pagination,
   Typography,
 } from '@mui/material';
-import { useGetBusinessListQuery } from '@/layers/03_entities/business/api/businessApi';
+import { useGetBusinessListQuery } from '@/layers/04_shared/api/businessApi';
 import { BusinessCard } from '@/layers/02_features/BusinessCard/ui/BusinessCard';
 
 export const CategoryList: React.FC = () => {

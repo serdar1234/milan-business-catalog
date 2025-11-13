@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { baseApi } from '../../api/baseApi';
-import { businessApi } from '@/layers/03_entities/business/api/businessApi';
+import { businessApi } from '../../api/businessApi';
+import { categoriesApi } from '../../api/categoriesApi';
 import categoryStateReducer from './features/categoryState/categoryStateSlice';
 
 export const makeStore = () => {
@@ -8,11 +9,16 @@ export const makeStore = () => {
     reducer: {
       [baseApi.reducerPath]: baseApi.reducer,
       [businessApi.reducerPath]: businessApi.reducer,
+      [categoriesApi.reducerPath]: categoriesApi.reducer,
       categoryState: categoryStateReducer,
     },
 
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(baseApi.middleware, businessApi.middleware),
+      getDefaultMiddleware().concat(
+        baseApi.middleware,
+        businessApi.middleware,
+        categoriesApi.middleware,
+      ),
 
     devTools: process.env.NODE_ENV !== 'production',
   });

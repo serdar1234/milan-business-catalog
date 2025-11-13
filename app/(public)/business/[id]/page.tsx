@@ -5,7 +5,7 @@ import { About } from '@/layers/01_widgets/About/ui/About';
 import { Location } from '@/layers/01_widgets/Location/ui/Location';
 import { SimilarPlaces } from '@/layers/01_widgets/SimilarPlaces/ui/SimilarPlaces';
 import { ReviewsRatings } from '@/layers/01_widgets/ReviewsRatings/ui/ReviewsRatings';
-import { MOCK_BUSINESS_DETAILS } from '@/layers/03_entities/business/api/mockData';
+import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 
 export function generateMetadata() {
   return {

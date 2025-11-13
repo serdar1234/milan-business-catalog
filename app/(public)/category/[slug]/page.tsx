@@ -1,6 +1,6 @@
 import { Box, Container } from '@mui/material';
 import style from './CategoryPage.module.css';
-import { MOCK_BUSINESS_DETAILS } from '@/layers/03_entities/business/api/mockData';
+import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 import { CategoryFilters } from '@/layers/01_widgets/CategoryFilters/CategoryFilters';
 import LongMenu from '@/layers/04_shared/ui/LongMenu';
 import { CategoryList } from '@/layers/01_widgets/CategoryList/CategoryList';
