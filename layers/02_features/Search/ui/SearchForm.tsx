@@ -2,13 +2,29 @@
 
 import { Box, TextField, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import { useRouter } from 'next/navigation';
+import { useState, FormEvent } from 'react';
 
 export const SearchForm: React.FC<{ hasBorder?: boolean }> = ({
   hasBorder = false,
 }) => {
+  const router = useRouter();
+  const [query, setQuery] = useState('');
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const trimmedQuery = query.trim();
+
+    if (trimmedQuery) {
+      const encodedQuery = encodeURIComponent(trimmedQuery);
+      router.push(`/search?q=${encodedQuery}`);
+      setQuery('');
+    }
+  };
   return (
     <Box
       component="form"
+      onSubmit={handleSubmit}
       sx={{
         display: 'flex',
         alignItems: 'center',
@@ -18,12 +34,14 @@ export const SearchForm: React.FC<{ hasBorder?: boolean }> = ({
         borderRadius: '0.5rem',
         border: hasBorder ? '1px solid var(--color-brand-accent)' : 'none',
         overflow: 'hidden',
-        bgcolor: '#fff',
+        bgcolor: 'surface.main',
       }}
     >
       <TextField
         fullWidth
         variant="outlined"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
         placeholder="Find shops, restaurants, and more"
         sx={{
           '& .MuiOutlinedInput-root': {
