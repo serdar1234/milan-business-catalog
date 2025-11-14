@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { SearchHeader } from '@/layers/01_widgets/SearchHeader/SearchHeader';
 
-type ViewType = 'list' | 'map';
+import type { ViewType } from '@/layers/02_features/SearchHeaderVersions';
 
 interface SearchPageClientProps {
   searchQuery: string;
@@ -22,9 +22,9 @@ export default function SearchPageClient({
 
   const DUMMY_TOTAL_RESULTS = 47;
 
-  const handleViewChange = (newView: ViewType) => {
-    setCurrentView(newView);
-    router.push(`?view=${newView}`, { scroll: false });
+  const handleViewChange = (view: ViewType) => {
+    setCurrentView(view);
+    router.push(`?view=${view}`, { scroll: false });
   };
 
   const handleFilterOpen = () => {

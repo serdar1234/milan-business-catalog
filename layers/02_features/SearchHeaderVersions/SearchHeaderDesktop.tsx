@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { List as ListIcon, Apps as GridIcon } from '@mui/icons-material';
 
-type ViewType = 'list' | 'map' | 'grid'; // Используем 'list' и 'map' для consistency, но здесь добавим 'grid'
+import type { ViewType } from '@/layers/02_features/SearchHeaderVersions';
 
 interface SearchHeaderDesktopProps {
   totalResults: number;

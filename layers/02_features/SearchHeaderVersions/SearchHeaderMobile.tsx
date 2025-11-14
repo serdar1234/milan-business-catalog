@@ -15,7 +15,7 @@ import {
 } from '@mui/icons-material';
 import styles from './SearchHeaderMobile.module.css';
 
-type ViewType = 'list' | 'map' | 'grid';
+import type { ViewType } from '@/layers/02_features/SearchHeaderVersions';
 
 interface SearchHeaderMobileProps {
   totalResults: number;
