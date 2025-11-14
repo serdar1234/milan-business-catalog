@@ -13,6 +13,7 @@ const Footer = dynamic(() => import('@/layers/01_widgets/Footer/ui/Footer'));
 
 import { Box } from '@mui/material';
 import ScrollToTopButton from '@/layers/02_features/ScrollToTopButton';
+import { MobileSearchDrawer } from '@/layers/01_widgets/MobileSearchDrawer/MobileSearchDrawer';
 
 const playfair = Playfair_Display({
   weight: ['700'],
@@ -47,6 +48,7 @@ export default async function RootLayout({
                 {children}
                 <ScrollToTopButton />
               </Box>
+              <MobileSearchDrawer />
               <MobileNavBar />
               <Footer />
             </AppRouterCacheProvider>

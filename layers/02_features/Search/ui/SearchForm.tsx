@@ -5,9 +5,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useRouter } from 'next/navigation';
 import { useState, FormEvent } from 'react';
 
-export const SearchForm: React.FC<{ hasBorder?: boolean }> = ({
-  hasBorder = false,
-}) => {
+export const SearchForm: React.FC<{
+  hasBorder?: boolean;
+  handleDrawerClose?: () => void;
+}> = ({ hasBorder = false, handleDrawerClose }) => {
   const router = useRouter();
   const [query, setQuery] = useState('');
 
@@ -19,6 +20,7 @@ export const SearchForm: React.FC<{ hasBorder?: boolean }> = ({
       const encodedQuery = encodeURIComponent(trimmedQuery);
       router.push(`/search?q=${encodedQuery}`);
       setQuery('');
+      if (handleDrawerClose) handleDrawerClose();
     }
   };
   return (

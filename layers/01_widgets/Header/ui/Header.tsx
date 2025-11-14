@@ -14,10 +14,19 @@ import { DesktopNavigation } from './DesktopNavigation';
 import { MobileDrawerContent } from './MobileDrawerContent';
 import { SharedIcon } from '@/layers/04_shared/ui/Icon';
 import { useScrollLock } from '@/layers/04_shared/hooks/useScrollLock';
+import { useDispatch } from 'react-redux';
+import { openSearchDrawer } from '@/layers/03_entities/search/model/slice';
 
 export const Header: FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   useScrollLock(mobileOpen);
+
+  const dispatch = useDispatch();
+
+  const handleSearchClick = (event: React.MouseEvent) => {
+    event.preventDefault(); // Если это форма, предотвращаем переход
+    dispatch(openSearchDrawer()); // 🚨 Открываем Drawer
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -64,6 +73,7 @@ export const Header: FC = () => {
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <IconButton
+            onClick={handleSearchClick}
             sx={{
               display: { xs: 'block', md: 'none' },
               color: 'primary.contrastText',
