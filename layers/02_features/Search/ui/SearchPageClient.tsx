@@ -25,15 +25,12 @@ export default function SearchPageClient({
   const [currentView, setCurrentView] = useState<ViewType>(initialView);
   const DUMMY_TOTAL_RESULTS = 47;
 
-  // 🚨 Обновленный обработчик, который меняет только параметр 'view'
   const handleViewChange = (newView: ViewType) => {
     setCurrentView(newView);
 
-    // Создаем новый URLSearchParams из текущих
     const params = new URLSearchParams(searchParams.toString());
     params.set('view', newView);
 
-    // Обновляем URL, сохраняя параметр 'q' и другие
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
@@ -46,7 +43,6 @@ export default function SearchPageClient({
       component="main"
       sx={{ bgcolor: 'background.default', minHeight: '100vh' }}
     >
-      {/* Адаптивный хедер */}
       <SearchHeader
         totalResults={DUMMY_TOTAL_RESULTS}
         currentView={currentView}
@@ -56,16 +52,15 @@ export default function SearchPageClient({
       />
 
       <Container maxWidth="lg" sx={{ pt: 3, pb: 6 }}>
-        {/* Рендеринг основного контента */}
         {currentView !== 'map' && (
           <Box>
             <Typography variant="h6" sx={{ mb: 2 }}>
-              Search Results for: **{searchQuery}** ({currentView} View)
+              Search Results for: {searchQuery.toLocaleUpperCase()}
             </Typography>
             <Box
               sx={{
                 height: 600,
-                border: '1px dashed #ccc',
+                border: '1px dashed var(--color-border-grey)',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -84,7 +79,7 @@ export default function SearchPageClient({
             <Box
               sx={{
                 height: 600,
-                border: '1px solid #ccc',
+                border: '1px solid var(--color-border-grey)',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',

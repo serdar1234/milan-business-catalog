@@ -124,7 +124,10 @@ export const MobileSearchDrawer: React.FC = () => {
                   Recent Searches
                 </Typography>
               </Grid>
-              <Grid size={6} sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Grid
+                size={6}
+                sx={{ display: 'flex', justifyContent: 'flex-end' }}
+              >
                 <Button
                   onClick={() => handleClearRecentSearches()}
                   size="small"

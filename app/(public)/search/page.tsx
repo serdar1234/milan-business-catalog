@@ -19,7 +19,7 @@ export default async function SearchPage({ searchParams }: Props) {
   const initial: ViewType = (params.view as ViewType) || 'list';
   const decodedQuery = decodeURIComponent(searchQuery);
   const pageTitle =
-    decodedQuery === 'all' ? 'All Businesses in Milan' : decodedQuery;
+    decodedQuery === 'milano' ? 'All Businesses in Milan' : decodedQuery;
 
   return (
     <SearchPageClient

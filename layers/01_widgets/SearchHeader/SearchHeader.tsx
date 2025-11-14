@@ -1,12 +1,9 @@
-'use client';
-import React from 'react';
-import { useMediaQuery, useTheme } from '@mui/material';
+import Box from '@mui/material/Box';
 import {
   SearchHeaderMobile,
   SearchHeaderDesktop,
 } from '@/layers/02_features/SearchHeaderVersions';
-
-type ViewType = 'list' | 'map' | 'grid';
+import type { ViewType } from '@/layers/02_features/SearchHeaderVersions';
 
 interface SearchHeaderProps {
   totalResults: number;
@@ -17,12 +14,14 @@ interface SearchHeaderProps {
 }
 
 export const SearchHeader: React.FC<SearchHeaderProps> = (props) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
-  if (isMobile) {
-    return <SearchHeaderMobile {...props} />;
-  }
-
-  return <SearchHeaderDesktop {...props} />;
+  return (
+    <>
+      <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+        <SearchHeaderMobile {...props} />
+      </Box>
+      <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+        <SearchHeaderDesktop {...props} />
+      </Box>
+    </>
+  );
 };
