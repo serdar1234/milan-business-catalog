@@ -29,7 +29,7 @@ import { RootState } from '@/layers/04_shared/lib/store';
 import {
   resetCategoryState,
   setFilters,
-} from '@/layers/04_shared/lib/store/features/categoryState/categoryStateSlice';
+} from '@/layers/03_entities/category/model/categoryStateSlice';
 
 export default function Filters({
   setOpen,

@@ -2,14 +2,12 @@ import { AppBar, Toolbar, Box, Typography } from '@mui/material';
 import Link from 'next/link';
 
 import HomeIcon from '@mui/icons-material/Home';
-import SearchIcon from '@mui/icons-material/Search';
 import MapIcon from '@mui/icons-material/Map';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
 
 const NAV_ITEMS = [
   { label: 'Home', icon: HomeIcon, href: '/', active: true },
-  { label: 'Search', icon: SearchIcon, href: '/search', active: false },
   { label: 'Map', icon: MapIcon, href: '/map', active: false },
   { label: 'Saved', icon: FavoriteIcon, href: '/saved', active: false },
   { label: 'Profile', icon: PersonIcon, href: '/profile', active: false },
@@ -47,6 +45,7 @@ const MobileNavBar: React.FC = () => {
               key={item.label}
               component={Link}
               href={item.href}
+              aria-label={item.label}
               sx={{
                 display: 'flex',
                 flexDirection: 'column',

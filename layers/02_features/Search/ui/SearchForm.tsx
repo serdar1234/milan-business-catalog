@@ -4,11 +4,15 @@ import { Box, TextField, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useRouter } from 'next/navigation';
 import { useState, FormEvent } from 'react';
+import { useDispatch } from 'react-redux';
+import { addRecentSearch } from '@/layers/03_entities/search/model/slice';
 
-export const SearchForm: React.FC<{ hasBorder?: boolean }> = ({
-  hasBorder = false,
-}) => {
+export const SearchForm: React.FC<{
+  hasBorder?: boolean;
+  handleDrawerClose?: () => void;
+}> = ({ hasBorder = false, handleDrawerClose }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [query, setQuery] = useState('');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -18,7 +22,9 @@ export const SearchForm: React.FC<{ hasBorder?: boolean }> = ({
     if (trimmedQuery) {
       const encodedQuery = encodeURIComponent(trimmedQuery);
       router.push(`/search?q=${encodedQuery}`);
+      dispatch(addRecentSearch(trimmedQuery));
       setQuery('');
+      if (handleDrawerClose) handleDrawerClose();
     }
   };
   return (

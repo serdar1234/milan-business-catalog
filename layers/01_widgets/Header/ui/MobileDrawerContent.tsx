@@ -30,7 +30,7 @@ export const MobileDrawerContent: React.FC<{
       </Toolbar>
 
       <Box sx={{ p: 2, pb: 1 }}>
-        <SearchForm hasBorder />
+        <SearchForm hasBorder handleDrawerClose={handleDrawerClose} />
       </Box>
       <Divider sx={{ mb: 1 }} />
 
