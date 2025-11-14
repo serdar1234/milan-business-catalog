@@ -18,7 +18,7 @@ export default function LongMenu({ title }: { title: string }) {
 
   const [mobileOpen, setMobileOpen] = useState(false);
   useScrollLock(mobileOpen);
-  const { data: options, error, isLoading } = useGetCategoriesQuery('en');
+  const { data: options, error, isLoading } = useGetCategoriesQuery(undefined);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -67,7 +67,7 @@ export default function LongMenu({ title }: { title: string }) {
           paper: {
             style: {
               maxHeight: ITEM_HEIGHT,
-              width: '20ch',
+              width: '30vw',
             },
           },
           list: {

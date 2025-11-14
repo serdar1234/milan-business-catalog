@@ -3,7 +3,7 @@ import style from './CategoryPage.module.css';
 import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 import { CategoryFilters } from '@/layers/01_widgets/CategoryFilters/CategoryFilters';
 import LongMenu from '@/layers/04_shared/ui/LongMenu';
-import { CategoryList } from '@/layers/01_widgets/CategoryList/CategoryList';
+import { CategoryBusinessList } from '@/layers/01_widgets/CategoryBusinessList/CategoryBusinessList';
 
 export function generateMetadata() {
   return {
@@ -24,7 +24,7 @@ export default function CategoryPage() {
             <CategoryFilters />
           </div>
           <div className={style['grid-item__main']}>
-            <CategoryList />
+            <CategoryBusinessList />
           </div>
         </div>
       </Container>

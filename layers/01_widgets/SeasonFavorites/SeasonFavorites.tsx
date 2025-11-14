@@ -3,7 +3,7 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { useGetBusinessListQuery } from '@/layers/04_shared/api/businessApi';
-import { BusinessCard } from '@/layers/02_features/BusinessCard/ui/BusinessCard';
+import BusinessCardGrid from '@/layers/02_features/BusinessCardGrid';
 
 export const SeasonFavorites: React.FC = () => {
   const {
@@ -42,16 +42,8 @@ export const SeasonFavorites: React.FC = () => {
           subtitle="Hand-picked spots perfect for Milano's winter season"
         />
 
-        <Grid container spacing={3}>
-          {featuredBusinesses.map((business) => (
-            <Grid
-              key={business.id}
-              size={{ xs: 12, md: 4 }}
-              sx={{ display: 'flex' }}
-            >
-              <BusinessCard business={business} />
-            </Grid>
-          ))}
+        <Grid container spacing={2}>
+          <BusinessCardGrid data={featuredBusinesses} cols={3} />
         </Grid>
       </Container>
     </Box>

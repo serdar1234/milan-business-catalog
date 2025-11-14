@@ -8,9 +8,9 @@ import {
   Typography,
 } from '@mui/material';
 import { useGetBusinessListQuery } from '@/layers/04_shared/api/businessApi';
-import { BusinessCard } from '@/layers/02_features/BusinessCard/ui/BusinessCard';
+import BusinessCardGrid from '@/layers/02_features/BusinessCardGrid';
 
-export const CategoryList: React.FC = () => {
+export const CategoryBusinessList: React.FC = () => {
   const {
     data: businessList,
     isLoading,
@@ -50,15 +50,7 @@ export const CategoryList: React.FC = () => {
       }}
     >
       <Grid container spacing={2}>
-        {featuredBusinesses.map((business) => (
-          <Grid
-            key={business.id}
-            size={{ xs: 12, sm: 6 }}
-            sx={{ display: 'flex' }}
-          >
-            <BusinessCard business={business} />
-          </Grid>
-        ))}
+        <BusinessCardGrid data={featuredBusinesses} cols={2} />
         <Box
           sx={{
             width: '100%',

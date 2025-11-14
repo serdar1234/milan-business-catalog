@@ -6,11 +6,6 @@ interface CategoryLayoutProps {
   params: Promise<{ slug: string }>;
 }
 
-const MOCK_MAIN_CATEGORY = {
-  slug: 'food-and-drink',
-  name: 'Food & Drink',
-};
-
 export default async function CategoryLayout({
   children,
   params,
@@ -21,10 +16,6 @@ export default async function CategoryLayout({
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
-    {
-      label: MOCK_MAIN_CATEGORY.name,
-      href: `/category/${MOCK_MAIN_CATEGORY.slug}`,
-    },
     { label: subcategoryName, href: `/category/${slug}` },
   ];
 
