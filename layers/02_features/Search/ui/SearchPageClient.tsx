@@ -8,6 +8,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { ViewType } from '@/layers/02_features/SearchHeaderVersions';
 import styles from './SearchPageClient.module.css';
 import { SearchFilters } from '@/layers/02_features/SearchFilters/SearchFilters';
+import { CategoryBusinessList } from '@/layers/01_widgets/CategoryBusinessList/CategoryBusinessList';
 
 interface SearchPageClientProps {
   searchQuery: string;
@@ -55,39 +56,41 @@ export default function SearchPageClient({
           Search Results for: {searchQuery.toLocaleUpperCase()}
         </Typography>
         <Grid container spacing={1}>
-          <Grid size={3} component={'aside'}>
+          <Grid
+            size={3}
+            component={'aside'}
+            aria-label="Filters"
+            display={{ xs: 'none', md: 'block' }}
+          >
             <SearchFilters />
           </Grid>
-          <Grid size={5} component={'section'}>
+          <Grid
+            size={{ xs: 12, md: 9, lg: 5 }}
+            component={'section'}
+            aria-label="Business list"
+            display={currentView === 'map' ? 'none' : 'block'}
+          >
             {currentView !== 'map' && (
               <Box
                 sx={{
-                  height: 600,
-                  border: '2px solid var(--color-brand-accent)',
                   display: 'flex',
                   justifyContent: 'center',
                   alignBoxs: 'center',
                 }}
               >
-                Placeholder for SearchListings / Grid
-              </Box>
-            )}
-
-            {currentView === 'map' && (
-              <Box
-                sx={{
-                  height: 600,
-                  border: '2px solid var(--color-brand-accent)',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignBoxs: 'center',
-                }}
-              >
-                Placeholder for SearchMap
+                <CategoryBusinessList cols={currentView === 'list' ? 1 : 2} />
               </Box>
             )}
           </Grid>
-          <Grid size={4} component={'section'} aria-label="Map">
+          <Grid
+            size={{ md: currentView === 'map' ? 9 : 4, xs: 12 }}
+            component={'section'}
+            aria-label="Map"
+            display={{
+              xs: currentView === 'map' ? 'block' : 'none',
+              lg: 'block',
+            }}
+          >
             <Box className={styles['map-container']}>MAP</Box>
           </Grid>
         </Grid>

@@ -12,7 +12,11 @@ import {
   ToggleButton,
   Container,
 } from '@mui/material';
-import { List as ListIcon, Apps as GridIcon } from '@mui/icons-material';
+import {
+  List as ListIcon,
+  Apps as GridIcon,
+  Map as MapIcon,
+} from '@mui/icons-material';
 
 import type { ViewType } from '@/layers/02_features/SearchHeaderVersions';
 
@@ -99,7 +103,7 @@ export const SearchHeaderDesktop: React.FC<SearchHeaderDesktopProps> = ({
         </FormControl>
 
         <ToggleButtonGroup
-          value={currentView === 'map' ? 'list' : currentView}
+          value={currentView}
           exclusive
           onChange={handleViewChange}
           size="small"
@@ -129,6 +133,12 @@ export const SearchHeaderDesktop: React.FC<SearchHeaderDesktopProps> = ({
               sx={{ color: currentView === 'grid' ? 'white' : 'text.primary' }}
             />
             Grid
+          </ToggleButton>
+          <ToggleButton value="map" aria-label="map view">
+            <MapIcon
+              sx={{ color: currentView === 'map' ? 'white' : 'text.primary' }}
+            />
+            Map
           </ToggleButton>
         </ToggleButtonGroup>
       </Box>

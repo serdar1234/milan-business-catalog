@@ -10,7 +10,13 @@ import {
 import { useGetBusinessListQuery } from '@/layers/04_shared/api/businessApi';
 import BusinessCardGrid from '@/layers/02_features/BusinessCardGrid';
 
-export const CategoryBusinessList: React.FC = () => {
+interface CategoryBusinessListProps {
+  cols?: number;
+}
+
+export const CategoryBusinessList: React.FC<CategoryBusinessListProps> = ({
+  cols = 2,
+}) => {
   const {
     data: businessList,
     isLoading,
@@ -50,7 +56,7 @@ export const CategoryBusinessList: React.FC = () => {
       }}
     >
       <Grid container spacing={2}>
-        <BusinessCardGrid data={featuredBusinesses} cols={2} />
+        <BusinessCardGrid data={featuredBusinesses} cols={cols} />
         <Box
           sx={{
             width: '100%',

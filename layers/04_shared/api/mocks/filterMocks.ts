@@ -17,9 +17,9 @@ const FEATURE_OPTIONS = [
 ];
 
 const DISTANCE_OPTIONS = [
-  { value: 'all', label: 'Within 5km', count: 89 },
   { value: '1km', label: 'Within 1km', count: 127 },
   { value: '2km', label: 'Within 2km', count: 91 },
+  { value: '5km', label: 'Within 5km', count: 89 },
 ];
 
 const PRICE_OPTIONS_VERBOSE = [

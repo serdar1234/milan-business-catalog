@@ -9,6 +9,7 @@ import {
   FilterList as FilterIcon,
   List as ListIcon,
   Map as MapIcon,
+  Apps as GridIcon,
   AccessTime as TimeIcon,
   Star as StarIcon,
   Place as PlaceIcon,
@@ -106,6 +107,13 @@ export const SearchHeaderMobile: React.FC<SearchHeaderMobileProps> = ({
               <ListIcon
                 sx={{
                   color: currentView === 'list' ? 'white' : 'text.primary',
+                }}
+              />
+            </ToggleButton>
+            <ToggleButton value="grid" aria-label="grid view">
+              <GridIcon
+                sx={{
+                  color: currentView === 'grid' ? 'white' : 'text.primary',
                 }}
               />
             </ToggleButton>

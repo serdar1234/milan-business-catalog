@@ -35,7 +35,7 @@ export const SearchFilters: React.FC = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const currentDistance = searchParams.get('distance') || 'all';
+  const currentDistance = searchParams.get('distance') || '1km';
   const currentPrice = searchParams.get('price') || '';
   const currentRating = searchParams.get('rating') || '';
 
@@ -129,15 +129,9 @@ export const SearchFilters: React.FC = () => {
           <FormControlLabel
             key={option.value}
             value={option.value}
+            sx={{ width: 'fit-content' }}
             control={<Radio size="small" />}
-            label={
-              <Box display="flex" justifyContent="space-between" width="100%">
-                <Typography variant="body2">{option.label}</Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {option.count} places
-                </Typography>
-              </Box>
-            }
+            label={<Typography variant="body2">{option.label}</Typography>}
           />
         ))}
       </RadioGroup>
@@ -151,12 +145,9 @@ export const SearchFilters: React.FC = () => {
           <FormControlLabel
             key={option.value}
             value={option.value}
+            sx={{ width: 'fit-content' }}
             control={<Radio size="small" />}
-            label={
-              <Box display="flex" justifyContent="space-between" width="100%">
-                <Typography variant="body2">{option.label}</Typography>
-              </Box>
-            }
+            label={<Typography variant="body2">{option.label}</Typography>}
           />
         ))}
       </RadioGroup>
@@ -164,7 +155,7 @@ export const SearchFilters: React.FC = () => {
       <FilterHeader title="Rating" />
       {RATING_OPTIONS.map((option) => (
         <MuiFormControlLabel
-          key={option.value}
+          key={'rating_' + option.value}
           control={
             <Checkbox
               size="small"
@@ -183,32 +174,18 @@ export const SearchFilters: React.FC = () => {
             >
               <Typography variant="body2">{option.label}</Typography>
               <Rating
-                name={`rating-${option.value}-read`}
+                name={`rating-${option.value}`}
                 defaultValue={parseFloat(option.value)}
                 precision={0.5}
                 readOnly
                 sx={{
                   color: 'ratingGold.main',
-                  fontSize: '1rem',
+                  fontSize: '1.25rem',
                   ml: 1,
                 }}
               />
-
-              <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
-                {option.count}
-              </Typography>
             </Box>
           }
-          sx={{
-            width: '100%',
-            mr: 0,
-            // Выравнивание элементов внутри label
-            '& .MuiFormControlLabel-label': {
-              display: 'flex',
-              justifyContent: 'space-between',
-              flexGrow: 1,
-            },
-          }}
         />
       ))}
 
