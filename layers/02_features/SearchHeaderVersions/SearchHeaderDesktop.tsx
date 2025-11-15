@@ -10,6 +10,7 @@ import {
   InputLabel,
   ToggleButtonGroup,
   ToggleButton,
+  Container,
 } from '@mui/material';
 import { List as ListIcon, Apps as GridIcon } from '@mui/icons-material';
 
@@ -43,7 +44,6 @@ export const SearchHeaderDesktop: React.FC<SearchHeaderDesktopProps> = ({
   currentView,
   onViewChange,
 }) => {
-  // 🚨 Заглушка для текущей сортировки (должно управляться Redux/URL)
   const [currentSort, setCurrentSort] = React.useState('distance');
 
   const handleSortChange = (event: { target: { value: unknown } }) => {
@@ -63,11 +63,10 @@ export const SearchHeaderDesktop: React.FC<SearchHeaderDesktopProps> = ({
   };
 
   return (
-    <Box
+    <Container
+      maxWidth="lg"
       sx={{
-        py: 2,
-        px: 3,
-        borderBottom: '1px solid var(--color-border-grey)',
+        p: '2rem 3rem 0',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -133,6 +132,6 @@ export const SearchHeaderDesktop: React.FC<SearchHeaderDesktopProps> = ({
           </ToggleButton>
         </ToggleButtonGroup>
       </Box>
-    </Box>
+    </Container>
   );
 };

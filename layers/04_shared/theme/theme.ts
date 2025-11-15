@@ -85,7 +85,7 @@ export const customTheme = createTheme({
       main: '#FFB46B', // Warm Sand (for AppBar/Buttons)
       light: '#FFC790',
       dark: '#E09F5A',
-      contrastText: '#000000',
+      contrastText: '#2A2420',
     },
     brandAccent: {
       main: '#D3542A', // Warm Terracotta (for CTA)
@@ -103,7 +103,7 @@ export const customTheme = createTheme({
       main: '#FACC15', // Bright Gold
       light: '#FDE047', // Lighter Gold (около +20% яркости)
       dark: '#CA8A04', // Darker Gold (около -20% яркости)
-      contrastText: '#000000',
+      contrastText: '#1F1E1B',
     },
     statusError: {
       main: '#A31F2E', // dark red (Closing Soon)
