@@ -3,13 +3,8 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import {
   FilterList as FilterIcon,
-  List as ListIcon,
-  Map as MapIcon,
-  Apps as GridIcon,
   AccessTime as TimeIcon,
   Star as StarIcon,
   Place as PlaceIcon,
@@ -17,6 +12,7 @@ import {
 import styles from './SearchHeaderMobile.module.css';
 
 import type { ViewType } from '@/layers/02_features/SearchHeaderVersions';
+import { FormControlLabel, Switch } from '@mui/material';
 
 interface SearchHeaderMobileProps {
   totalResults: number;
@@ -52,11 +48,13 @@ export const SearchHeaderMobile: React.FC<SearchHeaderMobileProps> = ({
   pageTitle,
 }) => {
   const handleViewChange = (
-    event: React.MouseEvent<HTMLElement>,
-    newView: ViewType | null,
+    event: React.ChangeEvent<HTMLElement>,
+    checked: boolean,
   ) => {
-    if (newView !== null) {
-      onViewChange(newView);
+    if (checked) {
+      onViewChange('map');
+    } else {
+      onViewChange('list');
     }
   };
 
@@ -83,46 +81,15 @@ export const SearchHeaderMobile: React.FC<SearchHeaderMobileProps> = ({
             </Typography>
           </Box>
 
-          {/* List/Map toggle */}
-          <ToggleButtonGroup
-            value={currentView}
-            exclusive
-            onChange={handleViewChange}
-            size="small"
-            sx={{
-              borderRadius: '8px',
-              '& .MuiToggleButtonGroup-grouped': {
-                margin: 0,
-                border: '1px solid',
-                borderColor: 'var(--color-border-grey)',
-                '&.Mui-selected': {
-                  bgcolor: 'brandPin.main',
-                  color: 'white',
-                  '&:hover': { bgcolor: 'brandPin.dark' },
-                },
-              },
-            }}
-          >
-            <ToggleButton value="list" aria-label="list view">
-              <ListIcon
-                sx={{
-                  color: currentView === 'list' ? 'white' : 'text.primary',
-                }}
+          <FormControlLabel
+            control={
+              <Switch
+                checked={currentView === 'map'}
+                onChange={handleViewChange}
               />
-            </ToggleButton>
-            <ToggleButton value="grid" aria-label="grid view">
-              <GridIcon
-                sx={{
-                  color: currentView === 'grid' ? 'white' : 'text.primary',
-                }}
-              />
-            </ToggleButton>
-            <ToggleButton value="map" aria-label="map view">
-              <MapIcon
-                sx={{ color: currentView === 'map' ? 'white' : 'text.primary' }}
-              />
-            </ToggleButton>
-          </ToggleButtonGroup>
+            }
+            label="Switch to Map View"
+          />
         </Box>
 
         {/* 2. Rounded buttons */}
@@ -130,13 +97,15 @@ export const SearchHeaderMobile: React.FC<SearchHeaderMobileProps> = ({
           className={styles.quickFiltersContainer}
           sx={{ '& > *': { mr: 1, flexShrink: 0 } }}
         >
-          {/* "All Filters" */}
           <Button
             variant="contained"
             color="brandPin"
             startIcon={<FilterIcon />}
             onClick={onFilterClick}
-            sx={{ borderRadius: '25px' }}
+            sx={{
+              borderRadius: '25px',
+              span: { margin: { xs: 0, sm: '0 8px 0 -4px' } },
+            }}
           >
             <Typography variant="body2" display={{ xs: 'none', sm: 'block' }}>
               All Filters
@@ -152,7 +121,7 @@ export const SearchHeaderMobile: React.FC<SearchHeaderMobileProps> = ({
               sx={{
                 borderRadius: '25px',
                 ml: 1,
-                '&:hover': { borderColor: 'var(--color-border-grey-dark)' },
+                span: { margin: { xs: 0, sm: '0 8px 0 -4px' } },
               }}
             >
               <Typography variant="body2" display={{ xs: 'none', sm: 'block' }}>
@@ -177,7 +146,6 @@ export const SearchHeaderMobile: React.FC<SearchHeaderMobileProps> = ({
           >
             Sort by:
           </Typography>
-          {/* Опции сортировки как текст-кнопки */}
           {SORT_OPTIONS.map((option) => (
             <Button
               key={option.value}

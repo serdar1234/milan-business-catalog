@@ -15,7 +15,7 @@ export default function BusinessCardGrid({
       {data.map((business) => (
         <Grid
           key={business.id}
-          size={{ xs: 12, sm: 12 / cols }}
+          size={{ xs: 12, sm: 6, md: 12 / cols }}
           sx={{ display: 'flex' }}
         >
           <BusinessCard business={business} />
