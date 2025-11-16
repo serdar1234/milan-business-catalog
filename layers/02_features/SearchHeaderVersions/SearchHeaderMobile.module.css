@@ -2,36 +2,31 @@
   display: flex;
   overflow-x: auto;
   padding-bottom: 8px;
-  /* Убираем стандартную полосу прокрутки для более чистого мобильного вида */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .quickFiltersContainer::-webkit-scrollbar {
   display: none;
 }
 
-/* Стилизация для опций сортировки */
 .sortButton {
   text-transform: none;
-  min-width: unset; /* Убираем минимальную ширину для компактности */
-  padding: 4px 8px; /* Более компактный padding */
+  min-width: unset;
+  padding: 4px 8px;
   margin-right: 8px;
 }
 
-/* Стилизация для кнопки "All Filters" */
 .allFiltersButton {
   border-radius: 25px;
   flex-shrink: 0;
 }
 
-/* Стилизация для обычных кнопок быстрых фильтров */
 .quickFilterButton {
   border: 1px solid var(--color-border-grey);
   flex-shrink: 0;
 }
 
-/* Контейнер для переключателя Список/Карта */
 .toggleGroup {
   border-radius: 8px;
 }

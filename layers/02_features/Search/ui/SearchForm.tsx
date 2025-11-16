@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, TextField, IconButton } from '@mui/material';
+import { Box, TextField, IconButton, CircularProgress } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useRouter } from 'next/navigation';
 import { useState, FormEvent } from 'react';
@@ -14,17 +14,20 @@ export const SearchForm: React.FC<{
   const router = useRouter();
   const dispatch = useDispatch();
   const [query, setQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const trimmedQuery = query.trim();
 
     if (trimmedQuery) {
+      setIsLoading(true);
       const encodedQuery = encodeURIComponent(trimmedQuery);
       router.push(`/search?q=${encodedQuery}`);
       dispatch(addRecentSearch(trimmedQuery));
       setQuery('');
       if (handleDrawerClose) handleDrawerClose();
+      setIsLoading(false);
     }
   };
   return (
@@ -75,7 +78,11 @@ export const SearchForm: React.FC<{
                   },
                 }}
               >
-                <SearchIcon />
+                {isLoading ? (
+                  <CircularProgress color="secondary" size={24} />
+                ) : (
+                  <SearchIcon />
+                )}
               </IconButton>
             ),
           },

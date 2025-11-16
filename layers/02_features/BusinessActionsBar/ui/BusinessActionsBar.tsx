@@ -61,7 +61,6 @@ export const BusinessActionsBar: React.FC<BusinessActionsBarProps> = ({
           <PhoneIcon color="primary" />
         </Button>
 
-        {/* 4. Website (Светлый контур) */}
         <Button
           variant="outlined"
           color="primary"

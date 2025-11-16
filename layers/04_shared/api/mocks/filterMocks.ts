@@ -1,3 +1,16 @@
+import {
+  AccessTime as TimeIcon,
+  Star as StarIcon,
+  Place as PlaceIcon,
+} from '@mui/icons-material';
+
+interface QuickFilter {
+  label: string;
+  icon: React.ElementType;
+  paramKey: string;
+  paramValue: string;
+}
+
 const MAX_RADIUS = 50;
 const PRICE_OPTIONS = [
   { value: '1', label: '€' },
@@ -52,6 +65,29 @@ const ATMOSPHERE_OPTIONS_COUNT = [
   { value: 'divey', label: 'Divey', count: 19 },
 ];
 
+const QUICK_FILTERS: QuickFilter[] = [
+  {
+    label: 'Open Now',
+    icon: TimeIcon,
+    paramKey: 'openNow',
+    paramValue: 'true',
+  },
+  {
+    label: '4.5+ Rating',
+    icon: StarIcon,
+    paramKey: 'rating',
+    paramValue: '4.5',
+  },
+  { label: 'Near Me', icon: PlaceIcon, paramKey: 'nearMe', paramValue: 'true' },
+];
+
+const SORT_OPTIONS: { value: string; label: string }[] = [
+  { value: 'distance', label: 'Distance' },
+  { value: 'popular', label: 'Popular' },
+  { value: 'price', label: 'Price' },
+  { value: 'rating', label: 'Rating' },
+];
+
 export {
   DISTANCE_OPTIONS,
   PRICE_OPTIONS_VERBOSE,
@@ -62,4 +98,6 @@ export {
   PRICE_OPTIONS,
   ATMOSPHERE_OPTIONS,
   FEATURE_OPTIONS,
+  QUICK_FILTERS,
+  SORT_OPTIONS,
 };
