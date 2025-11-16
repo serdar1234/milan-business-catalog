@@ -1,6 +1,26 @@
 import { redirect } from 'next/navigation';
 import SearchPageClient from '@/layers/02_features/Search/ui/SearchPageClient';
 import type { ViewType } from '@/layers/02_features/SearchHeaderVersions';
+import type { Metadata } from 'next';
+import { getTitleFromSlug } from '@/layers/04_shared/utils/helpers';
+type MetaProps = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata({
+  searchParams,
+}: MetaProps): Promise<Metadata> {
+  const search = await searchParams;
+
+  return {
+    title:
+      (Array.isArray(search.q) && search.q[0]) ||
+      (typeof search.q === 'string' && getTitleFromSlug(search.q)) ||
+      '',
+    description:
+      'search results for ' + Object.values(await searchParams).join(', '),
+  };
+}
 
 interface Props {
   searchParams: {

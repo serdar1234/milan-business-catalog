@@ -1,17 +1,23 @@
 import { Box, Container } from '@mui/material';
 import style from './CategoryPage.module.css';
-import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 import { CategoryFilters } from '@/layers/01_widgets/CategoryFilters/CategoryFilters';
 import LongMenu from '@/layers/04_shared/ui/LongMenu';
 import { CategoryBusinessList } from '@/layers/01_widgets/CategoryBusinessList/CategoryBusinessList';
+import type { Metadata } from 'next';
+import { getTitleFromSlug } from '@/layers/04_shared/utils/helpers';
+type Props = {
+  params: Promise<{ slug: string }>;
+};
 
-export function generateMetadata() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = (await params).slug;
+  const titleCase = getTitleFromSlug(slug);
+
   return {
-    title: MOCK_BUSINESS_DETAILS.name,
-    description: MOCK_BUSINESS_DETAILS.description,
+    title: titleCase + ' category',
+    description: `${titleCase} businesses in Milano`,
   };
 }
-
 export default function CategoryPage() {
   return (
     <Box component="section" sx={{ py: 3, bgcolor: 'background.default' }}>

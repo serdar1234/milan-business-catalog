@@ -12,19 +12,16 @@ export default async function CategoryLayout({
 }: CategoryLayoutProps) {
   const { slug } = await params;
 
-  const subcategoryName = titleCase(slug);
+  const categoryName = titleCase(slug);
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
-    { label: subcategoryName, href: `/category/${slug}` },
+    { label: categoryName, href: `/category/${slug}` },
   ];
 
   return (
     <>
-      <CategoryHeader
-        categoryName={subcategoryName}
-        breadcrumbs={breadcrumbs}
-      />
+      <CategoryHeader categoryName={categoryName} breadcrumbs={breadcrumbs} />
       {children}
     </>
   );
