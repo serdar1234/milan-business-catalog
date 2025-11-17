@@ -19,7 +19,7 @@ interface SearchHeaderMobileProps {
   totalResults: number;
   currentView: ViewType;
   onViewChange: (view: ViewType) => void;
-  onFilterClick: () => void;
+  onAllFilterClick: () => void;
   pageTitle: string;
 }
 
@@ -27,7 +27,7 @@ export const SearchHeaderMobile: React.FC<SearchHeaderMobileProps> = ({
   totalResults,
   currentView,
   onViewChange,
-  onFilterClick,
+  onAllFilterClick,
   pageTitle,
 }) => {
   const router = useRouter();
@@ -109,7 +109,7 @@ export const SearchHeaderMobile: React.FC<SearchHeaderMobileProps> = ({
             variant="contained"
             color="brandPin"
             startIcon={<FilterIcon />}
-            onClick={onFilterClick}
+            onClick={onAllFilterClick}
             sx={{
               borderRadius: '25px',
               span: { margin: { xs: 0, sm: '0 8px 0 -4px' } },

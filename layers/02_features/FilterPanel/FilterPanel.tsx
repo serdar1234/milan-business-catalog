@@ -5,7 +5,6 @@ import {
   Box,
   Typography,
   Button,
-  Divider,
   RadioGroup,
   FormControlLabel,
   Radio,
@@ -20,17 +19,9 @@ import {
   FEATURES_OPTIONS_VERBOSE,
   ATMOSPHERE_OPTIONS_COUNT,
 } from '@/layers/04_shared/api/mocks/filterMocks';
+import { FilterHeader } from '@/layers/04_shared/ui/FilterHeader';
 
-const FilterHeader = ({ title }: { title: string }) => (
-  <>
-    <Divider sx={{ mb: 2 }} />
-    <Typography variant="subtitle1" fontWeight="bold" sx={{ mt: 1, mb: 1 }}>
-      {title}
-    </Typography>
-  </>
-);
-
-export const SearchFilters: React.FC = () => {
+export const FilterPanel: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

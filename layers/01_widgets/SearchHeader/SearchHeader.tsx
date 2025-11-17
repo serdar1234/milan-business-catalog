@@ -9,7 +9,7 @@ interface SearchHeaderProps {
   totalResults: number;
   currentView: ViewType;
   onViewChange: (view: ViewType) => void;
-  onFilterClick: () => void;
+  onAllFilterClick: () => void;
   pageTitle: string;
 }
 

@@ -1,14 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Drawer, Grid, Typography } from '@mui/material';
 import { SearchHeader } from '@/layers/01_widgets/SearchHeader/SearchHeader';
 import { useRouter } from 'next/navigation';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { ViewType } from '@/layers/02_features/SearchHeaderVersions';
 import styles from './SearchPageClient.module.css';
-import { SearchFilters } from '@/layers/02_features/SearchFilters/SearchFilters';
+import { FilterPanel } from '@/layers/02_features/FilterPanel/FilterPanel';
 import { CategoryBusinessList } from '@/layers/01_widgets/CategoryBusinessList/CategoryBusinessList';
+import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
 
 interface SearchPageClientProps {
   searchQuery: string;
@@ -24,6 +25,7 @@ export default function SearchPageClient({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { open, toggleDrawer, setOpen } = useToggleDrawer();
 
   const [currentView, setCurrentView] = useState<ViewType>(initialView);
   const DUMMY_TOTAL_RESULTS = 47;
@@ -37,8 +39,8 @@ export default function SearchPageClient({
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  const handleFilterOpen = () => {
-    console.log(`Open Mobile Filters Modal for query: ${searchQuery}`);
+  const handleAllFiltersOpen = () => {
+    setOpen(true);
   };
 
   return (
@@ -47,7 +49,7 @@ export default function SearchPageClient({
         totalResults={DUMMY_TOTAL_RESULTS}
         currentView={currentView}
         onViewChange={handleViewChange}
-        onFilterClick={handleFilterOpen}
+        onAllFilterClick={handleAllFiltersOpen}
         pageTitle={pageTitle}
       />
 
@@ -62,7 +64,7 @@ export default function SearchPageClient({
             aria-label="Filters"
             display={{ xs: 'none', md: 'block' }}
           >
-            <SearchFilters />
+            <FilterPanel />
           </Grid>
           <Grid
             size={{ xs: 12, md: 9, lg: 5 }}
@@ -95,6 +97,14 @@ export default function SearchPageClient({
           </Grid>
         </Grid>
       </Container>
+      <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
+        <Box
+          padding={2}
+          sx={{ width: 'clamp(40vw, 300px, 80vw)', overflowX: 'auto' }}
+        >
+          <FilterPanel />
+        </Box>
+      </Drawer>
     </>
   );
 }

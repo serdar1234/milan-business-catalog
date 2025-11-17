@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import MobileFilters from './MobileFilters';
-import { SearchFilters } from '@/layers/02_features/SearchFilters/SearchFilters';
+import { FilterPanel } from '@/layers/02_features/FilterPanel/FilterPanel';
 
 export const CategoryFilters: React.FC = () => {
   return (
@@ -21,7 +21,7 @@ export const CategoryFilters: React.FC = () => {
       </Box>
 
       <Box display={{ xs: 'none', md: 'flex' }} component="aside">
-        <SearchFilters />
+        <FilterPanel />
       </Box>
     </>
   );

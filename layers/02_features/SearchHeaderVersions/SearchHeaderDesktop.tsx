@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import {
   Box,
   Typography,
@@ -17,24 +16,16 @@ import {
   Apps as GridIcon,
   Map as MapIcon,
 } from '@mui/icons-material';
-
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import type { ViewType } from '@/layers/02_features/SearchHeaderVersions';
 
 interface SearchHeaderDesktopProps {
   totalResults: number;
   pageTitle: string;
-  // Предполагаем, что десктоп может иметь 3 вида: List (карта внизу), Map (карта слева), Grid (карта внизу)
   currentView: ViewType;
   onViewChange: (view: ViewType) => void;
 }
 
-// Опции для переключения вида List/Grid
-// const DESKTOP_VIEW_OPTIONS: { value: 'list' | 'grid'; label: string }[] = [
-//   { value: 'list', label: 'List' },
-//   { value: 'grid', label: 'Grid' },
-// ];
-
-// Опции сортировки (могут быть взяты из shared/api/mocks или Redux)
 const SORT_OPTIONS: { value: string; label: string }[] = [
   { value: 'distance', label: 'Distance' },
   { value: 'rating', label: 'Rating' },
@@ -48,21 +39,39 @@ export const SearchHeaderDesktop: React.FC<SearchHeaderDesktopProps> = ({
   currentView,
   onViewChange,
 }) => {
-  const [currentSort, setCurrentSort] = React.useState('distance');
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentSort = searchParams.get('sort') || 'distance';
 
   const handleSortChange = (event: { target: { value: unknown } }) => {
-    // 🚨 В реальном проекте: dispatch(setSort(event.target.value as string));
-    setCurrentSort(event.target.value as string);
+    const newSortValue = event.target.value as string;
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (newSortValue && newSortValue !== 'distance') {
+      params.set('sort', newSortValue);
+    } else {
+      params.delete('sort');
+    }
+
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  // Функция для переключения List/Grid
   const handleViewChange = (
     event: React.MouseEvent<HTMLElement>,
-    newView: 'list' | 'grid' | null,
+    newView: 'list' | 'grid' | 'map' | null,
   ) => {
     if (newView !== null) {
-      // Если выбран Map, можно использовать 'map' из пропсов, но пока ограничимся List/Grid
       onViewChange(newView);
+      const params = new URLSearchParams(searchParams.toString());
+
+      if (newView !== 'list') {
+        params.set('view', newView);
+      } else {
+        params.delete('view');
+      }
+
+      router.push(`${pathname}?${params.toString()}`, { scroll: false });
     }
   };
 

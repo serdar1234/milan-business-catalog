@@ -1,27 +1,15 @@
 'use client';
 
-import { useState } from 'react';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { SearchFilters } from '@/layers/02_features/SearchFilters/SearchFilters';
+import { FilterPanel } from '@/layers/02_features/FilterPanel/FilterPanel';
+import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
 
 export default function MobileFilters() {
-  const [open, setOpen] = useState(false);
-
-  const toggleDrawer =
-    (open: boolean) => (event: React.MouseEvent | React.KeyboardEvent) => {
-      if (
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
-      ) {
-        return;
-      }
-      setOpen(open);
-    };
+  const { open, toggleDrawer } = useToggleDrawer();
   return (
     <>
       <IconButton
@@ -42,7 +30,7 @@ export default function MobileFilters() {
           padding={2}
           sx={{ width: 'clamp(40vw, 300px, 80vw)', overflowX: 'auto' }}
         >
-          <SearchFilters />
+          <FilterPanel />
         </Box>
       </Drawer>
     </>
