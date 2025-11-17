@@ -48,7 +48,6 @@ export const CategoryHeader: React.FC<CategoryHeaderProps> = ({
               </Typography>
             )}
           </Typography>
-          {/* Filter buttons */}
           <FilterButtons />
         </Stack>
       </Box>

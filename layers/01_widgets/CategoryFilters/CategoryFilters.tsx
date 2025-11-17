@@ -1,7 +1,6 @@
-import { Box, Typography } from '@mui/material';
-import Filters from '@/layers/02_features/Filters/Filters';
-
+import Box from '@mui/material/Box';
 import MobileFilters from './MobileFilters';
+import { SearchFilters } from '@/layers/02_features/SearchFilters/SearchFilters';
 
 export const CategoryFilters: React.FC = () => {
   return (
@@ -21,21 +20,8 @@ export const CategoryFilters: React.FC = () => {
         <MobileFilters />
       </Box>
 
-      <Box
-        display={{ xs: 'none', md: 'flex' }}
-        sx={{
-          bgcolor: 'background.paper',
-          p: 2,
-          borderRadius: '1rem',
-          boxShadow: 2,
-          flexDirection: 'column',
-        }}
-      >
-        <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
-          Filters
-        </Typography>
-
-        <Filters />
+      <Box display={{ xs: 'none', md: 'flex' }} component="aside">
+        <SearchFilters />
       </Box>
     </>
   );

@@ -104,6 +104,7 @@ export const SearchFilters: React.FC = () => {
       sx={{
         p: 2,
         pb: '2rem',
+        width: '100%',
       }}
     >
       <Box
@@ -153,41 +154,43 @@ export const SearchFilters: React.FC = () => {
       </RadioGroup>
 
       <FilterHeader title="Rating" />
-      {RATING_OPTIONS.map((option) => (
-        <MuiFormControlLabel
-          key={'rating_' + option.value}
-          control={
-            <Checkbox
-              size="small"
-              checked={currentRating.includes(option.value)}
-              onChange={(e) =>
-                handleCheckboxChange('rating', option.value, e.target.checked)
-              }
-            />
-          }
-          label={
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              width="100%"
-            >
-              <Typography variant="body2">{option.label}</Typography>
-              <Rating
-                name={`rating-${option.value}`}
-                defaultValue={parseFloat(option.value)}
-                precision={0.5}
-                readOnly
-                sx={{
-                  color: 'ratingGold.main',
-                  fontSize: '1.25rem',
-                  ml: 1,
-                }}
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+        {RATING_OPTIONS.map((option) => (
+          <MuiFormControlLabel
+            key={'rating_' + option.value}
+            control={
+              <Checkbox
+                size="small"
+                checked={currentRating.includes(option.value)}
+                onChange={(e) =>
+                  handleCheckboxChange('rating', option.value, e.target.checked)
+                }
               />
-            </Box>
-          }
-        />
-      ))}
+            }
+            label={
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                width="100%"
+              >
+                <Typography variant="body2">{option.label}</Typography>
+                <Rating
+                  name={`rating-${option.value}`}
+                  defaultValue={parseFloat(option.value)}
+                  precision={0.5}
+                  readOnly
+                  sx={{
+                    color: 'ratingGold.main',
+                    fontSize: '1.25rem',
+                    ml: 1,
+                  }}
+                />
+              </Box>
+            }
+          />
+        ))}
+      </Box>
 
       <FilterHeader title="Features" />
       {FEATURES_OPTIONS_VERBOSE.map((feature) => (

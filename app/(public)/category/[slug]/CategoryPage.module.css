@@ -11,10 +11,10 @@
 @media (min-width: 900px) {
   .grid-container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 3fr;
     grid-template-areas:
-      'categories filters'
-      'main filters';
+      'filters categories'
+      'filters main';
     gap: 6px;
   }
 }

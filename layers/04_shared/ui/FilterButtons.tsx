@@ -6,7 +6,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import StarIcon from '@mui/icons-material/Star';
 import Stack from '@mui/material/Stack';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
 interface FilterButton {
   label: string;
@@ -35,13 +35,16 @@ export const FilterButtons: FC = () => {
     <Stack direction="row" spacing={1}>
       {FILTER_BUTTONS.map(({ label, value, Icon }, index) => (
         <Button
+          size="small"
           key={value}
           color={activeStates[index] ? 'brandPin' : 'primary'}
           variant={activeStates[index] ? 'contained' : 'outlined'}
           onClick={() => handleButtonClick(index)}
           startIcon={<Icon sx={{ fontSize: 18 }} />}
         >
-          {label}
+          <Typography sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
+            {label}
+          </Typography>
         </Button>
       ))}
     </Stack>

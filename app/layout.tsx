@@ -5,15 +5,21 @@ import { StoreProvider } from '@/layers/04_shared/providers/StoreProvider';
 import { MuiThemeProvider } from '@/layers/04_shared/providers/MuiThemeProvider';
 import { Header } from '@/layers/01_widgets/Header/ui/Header';
 import { Playfair_Display, Inter } from 'next/font/google';
+import Box from '@mui/material/Box';
 import './globals.css';
 const MobileNavBar = dynamic(
   () => import('@/layers/01_widgets/MobileNavBar/ui/MobileNavBar'),
 );
 const Footer = dynamic(() => import('@/layers/01_widgets/Footer/ui/Footer'));
 
-import { Box } from '@mui/material';
-import ScrollToTopButton from '@/layers/02_features/ScrollToTopButton';
-import { MobileSearchDrawer } from '@/layers/01_widgets/MobileSearchDrawer/MobileSearchDrawer';
+const ScrollToTopButton = dynamic(
+  () => import('@/layers/02_features/ScrollToTopButton'),
+);
+const MobileSearchDrawer = dynamic(() =>
+  import('@/layers/01_widgets/MobileSearchDrawer/MobileSearchDrawer').then(
+    (mod) => mod.MobileSearchDrawer,
+  ),
+);
 
 const playfair = Playfair_Display({
   weight: ['700'],
