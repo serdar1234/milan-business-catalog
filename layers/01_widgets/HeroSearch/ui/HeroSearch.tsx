@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { Box, Typography, Container } from '@mui/material';
 import Image from 'next/image';
 import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';

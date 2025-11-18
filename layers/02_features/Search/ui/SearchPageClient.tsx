@@ -1,7 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Container, Drawer, Grid, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Drawer,
+  Grid,
+  Typography,
+} from '@mui/material';
 import { SearchHeader } from '@/layers/01_widgets/SearchHeader/SearchHeader';
 import { useRouter } from 'next/navigation';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -100,9 +107,22 @@ export default function SearchPageClient({
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
         <Box
           padding={2}
-          sx={{ width: 'clamp(40vw, 300px, 80vw)', overflowX: 'auto' }}
+          sx={{
+            width: 'clamp(40vw, 300px, 80vw)',
+            overflowX: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
         >
           <FilterPanel />
+          <Button
+            variant="contained"
+            onClick={toggleDrawer(false)}
+            color="statusFeatured"
+            sx={{ alignSelf: 'flex-end' }}
+          >
+            Apply Filters
+          </Button>
         </Box>
       </Drawer>
     </>

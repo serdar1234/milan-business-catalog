@@ -2,6 +2,7 @@
 
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -28,9 +29,22 @@ export default function MobileFilters() {
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
         <Box
           padding={2}
-          sx={{ width: 'clamp(40vw, 300px, 80vw)', overflowX: 'auto' }}
+          sx={{
+            width: 'clamp(40vw, 300px, 80vw)',
+            overflowX: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
         >
           <FilterPanel />
+          <Button
+            variant="contained"
+            onClick={toggleDrawer(false)}
+            color="statusFeatured"
+            sx={{ alignSelf: 'flex-end' }}
+          >
+            Apply Filters
+          </Button>
         </Box>
       </Drawer>
     </>
