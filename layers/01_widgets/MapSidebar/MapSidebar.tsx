@@ -11,10 +11,10 @@ export const MapSidebar: React.FC = () => {
       }}
     >
       <Typography variant="h6" fontWeight="bold" gutterBottom>
-        Детали и фильтры
+        Filters and places
       </Typography>
       <Typography variant="body2" color="text.secondary">
-        Здесь будет содержимое боковой панели: список мест, фильтры, информация.
+        There will be filters and places here
       </Typography>
 
       {Array.from({ length: 20 }).map((_, i) => (
@@ -27,7 +27,7 @@ export const MapSidebar: React.FC = () => {
             borderRadius: '4px',
           }}
         >
-          <Typography variant="body2">Элемент #{i + 1}</Typography>
+          <Typography variant="body2">Element #{i + 1}</Typography>
         </Box>
       ))}
     </Paper>

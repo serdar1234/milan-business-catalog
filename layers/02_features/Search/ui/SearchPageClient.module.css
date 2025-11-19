@@ -1,9 +1,10 @@
 .map-container {
   width: 100%;
-  aspect-ratio: 3/5;
+  aspect-ratio: 1/1;
   position: sticky;
   top: 4rem;
-  border: 2px solid var(--color-brand-accent);
   display: flex;
+  border-radius: 1rem;
+  overflow: hidden;
   background-color: skyblue;
 }

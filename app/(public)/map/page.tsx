@@ -36,11 +36,12 @@ export default function MapPage() {
         position: { xs: 'fixed', md: 'static' },
         flexDirection: { xs: 'column', md: 'row' },
         height: 'calc(100vh - 64px)',
+        width: '100%',
       }}
     >
       <Box
         sx={{
-          flex: { xs: '1 1 auto', md: '1 1 60%' },
+          flex: { xs: '1 1 100%', md: '1 1 60%' },
           height: { xs: '60vh', md: 'auto' },
         }}
       >

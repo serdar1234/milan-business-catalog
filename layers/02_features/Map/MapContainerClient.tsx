@@ -54,7 +54,7 @@ export const MapContainerClient: React.FC<MapContainerClientProps> = ({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Marker icon={customDivIcon('Milano', true)} position={MILAN_CENTER}>
-          <Popup>Bon jour à Milan !</Popup>
+          <Popup offset={[0, -10]}>Benvenuti a Milano!</Popup>
         </Marker>
       </MapContainer>
     </Box>

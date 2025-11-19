@@ -17,6 +17,7 @@ import styles from './SearchPageClient.module.css';
 import { FilterPanel } from '@/layers/02_features/FilterPanel/FilterPanel';
 import { CategoryBusinessList } from '@/layers/01_widgets/CategoryBusinessList/CategoryBusinessList';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
+import { MapContainerClient } from '@/layers/02_features/Map/MapContainerClient';
 
 interface SearchPageClientProps {
   searchQuery: string;
@@ -100,7 +101,9 @@ export default function SearchPageClient({
               lg: 'block',
             }}
           >
-            <Box className={styles['map-container']}>MAP</Box>
+            <Box className={styles['map-container']} boxShadow={4}>
+              <MapContainerClient />
+            </Box>
           </Grid>
         </Grid>
       </Container>

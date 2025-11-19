@@ -11,6 +11,7 @@ import {
   BusinessDetails,
   MOCK_BUSINESS_DETAILS,
 } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
+import { MapContainerClient } from '@/layers/02_features/Map/MapContainerClient';
 
 interface BusinessDetailsProps {
   data?: BusinessDetails;
@@ -52,6 +53,7 @@ export const Location: React.FC<BusinessDetailsProps> = ({
         overflow: 'hidden',
       }}
     >
+      <MapContainerClient />
       <Box
         sx={{
           position: 'absolute',
@@ -62,6 +64,7 @@ export const Location: React.FC<BusinessDetailsProps> = ({
           bgcolor: 'background.paper',
           borderRadius: 2,
           boxShadow: 3,
+          zIndex: 1000,
           display: { xs: 'flex', md: 'none' },
           alignItems: 'center',
         }}
@@ -90,24 +93,13 @@ export const Location: React.FC<BusinessDetailsProps> = ({
           color: 'text.primary',
           fontWeight: 'bold',
           boxShadow: 3,
+          zIndex: 1000,
           '&:hover': { bgcolor: 'grey.100' },
         }}
         startIcon={<DirectionsIcon sx={{ color: 'primary' }} />}
       >
         Get Directions
       </Button>
-
-      {/* temporary pin on the map */}
-      <LocationOnIcon
-        sx={{
-          color: 'brandPin.main',
-          fontSize: 40,
-          position: 'absolute',
-          top: 50,
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-      />
     </Box>
   );
 

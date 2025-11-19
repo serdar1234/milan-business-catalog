@@ -30,7 +30,7 @@ export const MobileView = () => (
       color="surface"
       sx={{
         maxWidth: 120,
-        height: 36,
+        height: '3rem',
         fontWeight: 'bold',
         textTransform: 'capitalize',
       }}

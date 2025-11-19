@@ -3,6 +3,7 @@ import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { Container, Box, Button, Typography } from '@mui/material';
 import { FILTER_BUTTONS, PLACE_LIST_MOCKS } from './mockData';
+import { MapContainerClient } from '@/layers/02_features/Map/MapContainerClient';
 
 export const DesktopView = () => (
   <Box display={{ xs: 'none', md: 'block' }}>
@@ -38,7 +39,7 @@ export const DesktopView = () => (
                 color={label === 'All' ? 'brandAccent' : 'inherit'}
                 sx={{
                   color: label === 'All' ? 'white' : 'text.primary',
-                  borderColor: '#ccc',
+                  borderColor: 'var(--color-border-grey)',
                   textTransform: 'capitalize',
                 }}
               >
@@ -73,9 +74,7 @@ export const DesktopView = () => (
             alignItems: 'center',
           }}
         >
-          <Typography variant="h6" color="secondary.contrastText">
-            [the map goes here]
-          </Typography>
+          <MapContainerClient />
         </Box>
       </Box>
     </Container>

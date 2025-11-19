@@ -1,6 +1,7 @@
 import { Box, Typography, Button, Chip, Container } from '@mui/material';
 import MapIcon from '@mui/icons-material/Map';
 import { NEARBY_CHIPS } from './mockData';
+import Link from 'next/link';
 
 export const MobileView = () => (
   <Container sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -38,13 +39,16 @@ export const MobileView = () => (
         </Box>
 
         <Button
+          component={Link}
           variant="contained"
           color="surface"
+          href="/map"
           sx={{
-            bgcolor: 'background.paper',
-            color: 'primary',
             px: 2,
             ml: 4,
+            textTransform: 'capitalize',
+            height: '3rem',
+            textWrap: 'nowrap',
           }}
           startIcon={<MapIcon />}
         >
