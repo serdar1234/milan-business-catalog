@@ -24,8 +24,8 @@ export const Header: FC = () => {
   const dispatch = useDispatch();
 
   const handleSearchClick = (event: React.MouseEvent) => {
-    event.preventDefault(); // Если это форма, предотвращаем переход
-    dispatch(openSearchDrawer()); // 🚨 Открываем Drawer
+    event.preventDefault();
+    dispatch(openSearchDrawer());
   };
 
   const handleDrawerToggle = () => {
