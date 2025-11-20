@@ -1,12 +1,10 @@
-import {
-  Box,
-  Typography,
-  Avatar,
-  Chip,
-  Card,
-  CardContent,
-  Rating,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import Chip from '@mui/material/Chip';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Rating from '@mui/material/Rating';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 
 type UserLabel = 'Verified' | 'Tourist';

@@ -1,17 +1,15 @@
 'use client';
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import {
-  Box,
-  Typography,
-  Button,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Rating,
-  Checkbox,
-  FormControlLabel as MuiFormControlLabel,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from '@mui/material/Radio';
+import Rating from '@mui/material/Rating';
+import Checkbox from '@mui/material/Checkbox';
+import MuiFormControlLabel from '@mui/material/FormControlLabel';
 import {
   DISTANCE_OPTIONS,
   PRICE_OPTIONS_VERBOSE,

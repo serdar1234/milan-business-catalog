@@ -1,6 +1,9 @@
 'use client';
 
-import { Box, TextField, IconButton, CircularProgress } from '@mui/material';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import CircularProgress from '@mui/material/CircularProgress';
 import SearchIcon from '@mui/icons-material/Search';
 import { useRouter } from 'next/navigation';
 import { useState, FormEvent } from 'react';

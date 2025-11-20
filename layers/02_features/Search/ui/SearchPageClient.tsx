@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Box,
-  Button,
-  Container,
-  Drawer,
-  Grid,
-  Typography,
-} from '@mui/material';
+import dynamic from 'next/dynamic';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+import Container from '@mui/material/Container';
+import Drawer from '@mui/material/Drawer';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import { SearchHeader } from '@/layers/01_widgets/SearchHeader/SearchHeader';
 import { useRouter } from 'next/navigation';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -18,11 +18,26 @@ import { FilterPanel } from '@/layers/02_features/FilterPanel/FilterPanel';
 import { CategoryBusinessList } from '@/layers/01_widgets/CategoryBusinessList/CategoryBusinessList';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
 
-import dynamic, { type LoaderComponent } from 'next/dynamic';
 const MapContainerClient = dynamic(
-  () => import('../../Map/MapContainerClient') as unknown as LoaderComponent,
+  () =>
+    import('@/layers/02_features/Map/MapContainerClient').then(
+      (mod) => mod.MapContainerClient,
+    ),
   {
     ssr: false,
+    loading: () => (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '60vh',
+          backgroundColor: 'var(--color-secondary-main)',
+        }}
+      >
+        <CircularProgress size={60} color="primary" />
+      </div>
+    ),
   },
 );
 

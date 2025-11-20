@@ -1,6 +1,8 @@
 import { ReviewStats } from '@/layers/04_shared/api/mocks/reviewStatsMocks';
 import { RatingBar } from '@/layers/04_shared/ui/RatingBar';
-import { Grid, Box, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 export const RatingPanel: React.FC<ReviewStats> = (stats) => {
   return (

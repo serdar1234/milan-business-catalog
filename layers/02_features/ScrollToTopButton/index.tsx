@@ -1,8 +1,9 @@
 'use client';
 
 import Fab from '@mui/material/Fab';
+import Zoom from '@mui/material/Zoom';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { useScrollTrigger, Zoom } from '@mui/material';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
 
 const ScrollToTopButton = () => {
   const trigger = useScrollTrigger({

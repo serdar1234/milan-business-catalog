@@ -1,4 +1,7 @@
-import { Box, Typography, Rating, Chip } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Rating from '@mui/material/Rating';
+import Chip from '@mui/material/Chip';
 import Link from 'next/link';
 import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 import Image from 'next/image';
