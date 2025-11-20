@@ -1,4 +1,6 @@
-import { Box, Typography, Grid, Button } from '@mui/material';
+'use client';
+
+import { Box, Typography, Grid, Button, CircularProgress } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import LocalParkingIcon from '@mui/icons-material/LocalParking';
@@ -11,7 +13,30 @@ import {
   BusinessDetails,
   MOCK_BUSINESS_DETAILS,
 } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
-import { MapContainerClient } from '@/layers/02_features/Map/MapContainerClient';
+
+import dynamic from 'next/dynamic';
+const MapContainerClient = dynamic(
+  () =>
+    import('@/layers/02_features/Map/MapContainerClient').then(
+      (mod) => mod.MapContainerClient,
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '60vh',
+          backgroundColor: 'var(--color-secondary-main)',
+        }}
+      >
+        <CircularProgress size={60} color="primary" />
+      </div>
+    ),
+  },
+);
 
 interface BusinessDetailsProps {
   data?: BusinessDetails;

@@ -1,9 +1,40 @@
+'use client';
+
 import { MapPlaceCard } from '@/layers/02_features/MapPlaceCard/ui/MapPlaceCard';
 import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import { Container, Box, Button, Typography } from '@mui/material';
+import {
+  Container,
+  Box,
+  Button,
+  Typography,
+  CircularProgress,
+} from '@mui/material';
 import { FILTER_BUTTONS, PLACE_LIST_MOCKS } from './mockData';
-import { MapContainerClient } from '@/layers/02_features/Map/MapContainerClient';
+import dynamic from 'next/dynamic';
+
+const MapContainerClient = dynamic(
+  () =>
+    import('@/layers/02_features/Map/MapContainerClient').then(
+      (mod) => mod.MapContainerClient,
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '60vh',
+          backgroundColor: 'var(--color-secondary-main)',
+        }}
+      >
+        <CircularProgress size={60} color="primary" />
+      </div>
+    ),
+  },
+);
 
 export const DesktopView = () => (
   <Box display={{ xs: 'none', md: 'block' }}>

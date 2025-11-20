@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react';
 import * as L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { GestureHandling } from 'leaflet-gesture-handling';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import Box from '@mui/material/Box';
 import customDivIcon from '@/layers/04_shared/utils/customDivIcon';
@@ -23,7 +22,11 @@ export const MapContainerClient: React.FC<MapContainerClientProps> = ({
 }) => {
   const mapRef = useRef(null);
   useEffect(() => {
-    L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
+    if (typeof window !== 'undefined') {
+      import('leaflet-gesture-handling').then(({ GestureHandling }) => {
+        L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling);
+      });
+    }
   }, []);
 
   return (

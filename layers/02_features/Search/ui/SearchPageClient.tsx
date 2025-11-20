@@ -17,7 +17,14 @@ import styles from './SearchPageClient.module.css';
 import { FilterPanel } from '@/layers/02_features/FilterPanel/FilterPanel';
 import { CategoryBusinessList } from '@/layers/01_widgets/CategoryBusinessList/CategoryBusinessList';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
-import { MapContainerClient } from '@/layers/02_features/Map/MapContainerClient';
+
+import dynamic, { type LoaderComponent } from 'next/dynamic';
+const MapContainerClient = dynamic(
+  () => import('../../Map/MapContainerClient') as unknown as LoaderComponent,
+  {
+    ssr: false,
+  },
+);
 
 interface SearchPageClientProps {
   searchQuery: string;
