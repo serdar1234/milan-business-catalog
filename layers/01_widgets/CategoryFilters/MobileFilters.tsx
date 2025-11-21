@@ -1,6 +1,6 @@
 'use client';
 
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import { FilterList as FilterIcon } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
@@ -24,7 +24,7 @@ export default function MobileFilters() {
         >
           Filters
         </Typography>
-        <FilterAltIcon />
+        <FilterIcon />
       </IconButton>
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
         <Box

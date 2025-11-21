@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { Box } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
-import { MapSidebar } from '@/layers/01_widgets/MapSidebar/MapSidebar';
+import { CategoryBusinessList } from '@/layers/01_widgets/CategoryBusinessList/CategoryBusinessList';
 
 const MapContainerClient = dynamic(
   () =>
@@ -42,7 +42,6 @@ export default function MapPage() {
       <Box
         sx={{
           flex: { xs: '1 1 100%', md: '1 1 60%' },
-          height: { xs: '60vh', md: 'auto' },
         }}
       >
         <MapContainerClient />
@@ -51,11 +50,12 @@ export default function MapPage() {
       <Box
         sx={{
           flex: { xs: '1 1 auto', md: '1 1 40%' },
-          height: { xs: '40vh', md: 'auto' },
+          height: { xs: '80%', md: 'auto' },
           overflowY: 'auto',
+          scrollbarWidth: 'thin',
         }}
       >
-        <MapSidebar />
+        <CategoryBusinessList cols={1} />
       </Box>
     </Box>
   );

@@ -55,7 +55,7 @@ export const CategoryBusinessList: React.FC<CategoryBusinessListProps> = ({
         boxShadow: 2,
       }}
     >
-      <Grid container spacing={2}>
+      <Grid container spacing={2} width={'100%'}>
         <BusinessCardGrid data={featuredBusinesses} cols={cols} />
         <Box
           sx={{
