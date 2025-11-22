@@ -32,6 +32,7 @@ const MapContainerClient = dynamic(
           justifyContent: 'center',
           alignItems: 'center',
           height: '60vh',
+          width: '100%',
           backgroundColor: 'var(--color-secondary-main)',
         }}
       >
@@ -124,7 +125,7 @@ export default function SearchPageClient({
             }}
           >
             <Box className={styles['map-container']} boxShadow={4}>
-              <MapContainerClient />
+              <MapContainerClient showMapControls />
             </Box>
           </Grid>
         </Grid>

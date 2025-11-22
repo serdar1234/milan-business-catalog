@@ -13,9 +13,9 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import Box from '@mui/material/Box';
 import customDivIcon from '@/layers/04_shared/utils/customDivIcon';
-// import { MapZoomControls } from './MapZoomControls';
 import { MapFilterButton } from './MapFilterButton';
 import HomeControl from './HomeControl';
+import { MapUpdater } from '@/layers/04_shared/utils/MapUpdater';
 
 interface MapContainerClientProps {
   center?: [number, number];
@@ -69,11 +69,14 @@ export const MapContainerClient: React.FC<MapContainerClientProps> = ({
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <MapUpdater newPosition={center} />
         {showMapControls && (
           <>
             <HomeControl position="topleft" centralPosition={center} />
             <ScaleControl position="bottomright" />
-            <MapFilterButton position="topright" onClick={onFilterClick} />
+            {onFilterClick && (
+              <MapFilterButton position="topright" onClick={onFilterClick} />
+            )}
           </>
         )}
         <Marker icon={customDivIcon('Milano', true)} position={center}>

@@ -58,7 +58,7 @@ export const DesktopView = () => (
           sx={{
             bgcolor: 'background.paper',
             p: 3,
-            borderRight: '1px solid #eee',
+            borderRight: '1px solid var(--color-border-grey)',
           }}
         >
           <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
@@ -96,7 +96,6 @@ export const DesktopView = () => (
           </Typography>
         </Box>
 
-        {/* the map */}
         <Box
           sx={{
             bgcolor: 'secondary.light',
@@ -105,7 +104,7 @@ export const DesktopView = () => (
             alignItems: 'center',
           }}
         >
-          <MapContainerClient />
+          <MapContainerClient showMapControls />
         </Box>
       </Box>
     </Container>
