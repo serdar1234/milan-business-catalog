@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import {
@@ -33,11 +33,15 @@ import {
 export const MobileSearchDrawer: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-
   const isOpen = useSelector(selectIsSearchDrawerOpen);
   const recentSearches = useSelector(selectRecentSearches);
   const [currentQuery, setCurrentQuery] = useState('');
   const [historyKey, updateHistoryKey] = useState(42);
+  const ref = useRef<HTMLInputElement>(null);
+
+  const setInputFocus = () => {
+    ref.current?.focus();
+  };
 
   const handleSearchSubmit = (event: FormEvent | string) => {
     const queryToSearch = typeof event === 'string' ? event : currentQuery;
@@ -75,6 +79,9 @@ export const MobileSearchDrawer: React.FC = () => {
         paper: {
           sx: { width: '100%', height: '100vh', zIndex: 10 },
         },
+        transition: {
+          onEntered: setInputFocus,
+        },
       }}
     >
       <Box sx={{ pt: 1, px: 2, height: '100%' }}>
@@ -97,7 +104,7 @@ export const MobileSearchDrawer: React.FC = () => {
           </IconButton>
 
           <InputBase
-            autoFocus
+            inputRef={ref}
             fullWidth
             placeholder="Find shops, restaurants, and more..."
             value={currentQuery}
