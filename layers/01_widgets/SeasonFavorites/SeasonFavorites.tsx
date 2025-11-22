@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography, useMediaQuery } from '@mui/material';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { useGetBusinessListQuery } from '@/layers/04_shared/api/businessApi';
 import BusinessCardGrid from '@/layers/02_features/BusinessCardGrid';
@@ -11,6 +11,8 @@ export const SeasonFavorites: React.FC = () => {
     isLoading,
     isError,
   } = useGetBusinessListQuery(undefined);
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const numberOfCols = isMobile ? 2 : 3;
 
   if (isLoading) {
     return (
@@ -28,7 +30,7 @@ export const SeasonFavorites: React.FC = () => {
     );
   }
 
-  const featuredBusinesses = businessList?.slice(0, 3) || [];
+  const featuredBusinesses = businessList?.slice(0, numberOfCols) || [];
 
   if (featuredBusinesses.length === 0) {
     return null;

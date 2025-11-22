@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import { baseApi } from '../../api/baseApi';
 import { businessApi } from '../../api/businessApi';
 import { categoriesApi } from '../../api/categoriesApi';
-import categoryStateReducer from '@/layers/03_entities/category/model/categoryStateSlice';
 import recentSearchSliceReducer from '@/layers/03_entities/search/model/slice';
 
 export const makeStore = () => {
@@ -11,7 +10,6 @@ export const makeStore = () => {
       [baseApi.reducerPath]: baseApi.reducer,
       [businessApi.reducerPath]: businessApi.reducer,
       [categoriesApi.reducerPath]: categoriesApi.reducer,
-      categoryState: categoryStateReducer,
       recentSearch: recentSearchSliceReducer,
     },
 

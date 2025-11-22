@@ -50,7 +50,7 @@ const createControl = (
         </span>,
       );
       homeButton.href = '#';
-      homeButton.title = 'Back on track';
+      homeButton.title = 'Back to search result';
 
       const zoomOutButton = L.DomUtil.create(
         'a',
