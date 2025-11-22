@@ -44,7 +44,7 @@ export default function MapPage() {
           flex: { xs: '1 1 100%', md: '1 1 60%' },
         }}
       >
-        <MapContainerClient />
+        <MapContainerClient showMapControls />
       </Box>
 
       <Box

@@ -2,15 +2,26 @@
 
 import { useEffect, useRef } from 'react';
 import * as L from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  ScaleControl,
+} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
 import Box from '@mui/material/Box';
 import customDivIcon from '@/layers/04_shared/utils/customDivIcon';
+// import { MapZoomControls } from './MapZoomControls';
+import { MapFilterButton } from './MapFilterButton';
+import HomeControl from './HomeControl';
 
 interface MapContainerClientProps {
   center?: [number, number];
   zoom?: number;
+  showMapControls?: boolean;
+  onFilterClick?: () => void;
 }
 
 const ZOOM = 13;
@@ -19,6 +30,8 @@ const MILAN_CENTER: [number, number] = [45.4642, 9.19];
 export const MapContainerClient: React.FC<MapContainerClientProps> = ({
   center = MILAN_CENTER,
   zoom = ZOOM,
+  showMapControls = false,
+  onFilterClick,
 }) => {
   const mapRef = useRef(null);
   useEffect(() => {
@@ -56,7 +69,14 @@ export const MapContainerClient: React.FC<MapContainerClientProps> = ({
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker icon={customDivIcon('Milano', true)} position={MILAN_CENTER}>
+        {showMapControls && (
+          <>
+            <HomeControl position="topleft" centralPosition={center} />
+            <ScaleControl position="bottomright" />
+            <MapFilterButton position="topright" onClick={onFilterClick} />
+          </>
+        )}
+        <Marker icon={customDivIcon('Milano', true)} position={center}>
           <Popup offset={[0, -10]}>Benvenuti a Milano!</Popup>
         </Marker>
       </MapContainer>
