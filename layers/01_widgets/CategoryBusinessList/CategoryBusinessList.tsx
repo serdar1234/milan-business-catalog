@@ -7,7 +7,7 @@ import {
   Pagination,
   Typography,
 } from '@mui/material';
-import { useGetBusinessListQuery } from '@/layers/04_shared/api/businessApi';
+import { useGetBusinessListQuery } from '@/layers/03_entities/business/businessApi';
 import BusinessCardGrid from '@/layers/02_features/BusinessCardGrid';
 
 interface CategoryBusinessListProps {

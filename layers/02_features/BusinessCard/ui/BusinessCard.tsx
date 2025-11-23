@@ -46,12 +46,14 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
       }}
     >
       <Box sx={{ position: 'relative' }}>
-        <CardMedia
-          component="img"
-          image={imageUrl}
-          alt={name}
-          sx={{ height: 200, objectFit: 'cover' }}
-        />
+        <Link href={`/business/${slugify(name)}`}>
+          <CardMedia
+            component="img"
+            image={imageUrl}
+            alt={name}
+            sx={{ height: 200, objectFit: 'cover' }}
+          />
+        </Link>
 
         {tag && (
           <Chip

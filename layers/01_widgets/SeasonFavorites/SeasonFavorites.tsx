@@ -2,7 +2,7 @@
 
 import { Box, Container, Grid, Typography, useMediaQuery } from '@mui/material';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import { useGetBusinessListQuery } from '@/layers/04_shared/api/businessApi';
+import { useGetBusinessListQuery } from '@/layers/03_entities/business/businessApi';
 import BusinessCardGrid from '@/layers/02_features/BusinessCardGrid';
 
 export const SeasonFavorites: React.FC = () => {

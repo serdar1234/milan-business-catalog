@@ -1,9 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Business, BUSINESS_MOCKS } from './mocks/businessMocks';
+import { api } from '@/layers/03_entities/api/baseApi';
+import {
+  Business,
+  BUSINESS_MOCKS,
+} from '../../04_shared/api/mocks/businessMocks';
 
-export const businessApi = createApi({
-  reducerPath: 'businessApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/' }),
+export const businessApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBusinessList: builder.query<Business[], undefined>({
       queryFn: () => {

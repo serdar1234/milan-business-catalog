@@ -8,7 +8,10 @@ import Menu from '@mui/material/Menu';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuItem from '@mui/material/MenuItem';
 import { useScrollLock } from '../hooks/useScrollLock';
-import { Category, useGetCategoriesQuery } from '../api/categoriesApi';
+import {
+  Category,
+  useGetCategoriesQuery,
+} from '@/layers/03_entities/category/categoryApi';
 
 const ITEM_HEIGHT = '50vh';
 
@@ -67,7 +70,7 @@ export default function LongMenu({ title }: { title: string }) {
           paper: {
             style: {
               maxHeight: ITEM_HEIGHT,
-              width: '30vw',
+              minWidth: 300,
             },
           },
           list: {

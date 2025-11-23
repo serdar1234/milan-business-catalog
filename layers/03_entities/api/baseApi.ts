@@ -1,0 +1,14 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+const baseQuery = fetchBaseQuery({
+  baseUrl: 'https://api.milanplaces.com/api/v1',
+});
+
+export const api = createApi({
+  reducerPath: 'api',
+  baseQuery,
+  tagTypes: ['Category', 'Business', 'User'],
+  keepUnusedDataFor: 60 * 60,
+
+  endpoints: () => ({}),
+});

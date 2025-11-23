@@ -1,23 +1,24 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { baseApi } from '../../api/baseApi';
-import { businessApi } from '../../api/businessApi';
-import { categoriesApi } from '../../api/categoriesApi';
+// import { baseApi } from '../../api/baseApi';
+// import { businessApi } from '../../api/businessApi';
+// import { categoriesApi } from '../../api/categoriesApi';
+import { api as baseApi } from '@/layers/03_entities/api/baseApi';
 import recentSearchSliceReducer from '@/layers/03_entities/search/model/slice';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       [baseApi.reducerPath]: baseApi.reducer,
-      [businessApi.reducerPath]: businessApi.reducer,
-      [categoriesApi.reducerPath]: categoriesApi.reducer,
+      // [businessApi.reducerPath]: businessApi.reducer,
+      // [categoriesApi.reducerPath]: categoriesApi.reducer,
       recentSearch: recentSearchSliceReducer,
     },
 
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(
         baseApi.middleware,
-        businessApi.middleware,
-        categoriesApi.middleware,
+        // businessApi.middleware,
+        // categoriesApi.middleware,
       ),
 
     devTools: process.env.NODE_ENV !== 'production',

@@ -1,16 +1,15 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
+import { api } from '@/layers/03_entities/api/baseApi';
 export interface Category {
   id: number;
   name: string;
 }
 
-export const categoriesApi = createApi({
-  reducerPath: 'categoriesApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://api.milanplaces.com/api/v1' }),
+const categoriesApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getCategories: builder.query<{ data: Category[] }, string | undefined>({
       query: (lang = 'en') => `/categories?lang=${lang}`,
+      providesTags: ['Category'],
+      keepUnusedDataFor: 24 * 60 * 60,
     }),
   }),
 });
