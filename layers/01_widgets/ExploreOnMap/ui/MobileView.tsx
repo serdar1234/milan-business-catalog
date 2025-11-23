@@ -48,7 +48,7 @@ export const MobileView = () => (
             ml: 4,
             textTransform: 'capitalize',
             height: '3rem',
-            textWrap: 'nowrap',
+            textWrap: { xs: 'auto', sm: 'nowrap' },
           }}
           startIcon={<MapIcon />}
         >

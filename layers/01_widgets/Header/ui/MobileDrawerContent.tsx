@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
+import { LanguageCurrencySwitcher } from '@/layers/01_widgets/LanguageCurrencySwitcher';
 
 const NAV_LINKS = [
   { href: '/', label: 'Discover' },
@@ -47,7 +48,8 @@ export const MobileDrawerContent: React.FC<{
           </ListItem>
         ))}
       </List>
-      {/* TODO: Сюда можно добавить кнопку Войти/Профиль */}
+
+      <LanguageCurrencySwitcher />
     </Box>
   );
 };

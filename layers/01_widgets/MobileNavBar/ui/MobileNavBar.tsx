@@ -25,7 +25,7 @@ const MobileNavBar: React.FC = () => {
         bgcolor: 'background.paper',
         display: { xs: 'block', md: 'none' },
         boxShadow: 8,
-        borderTop: '1px solid #eee',
+        borderTop: '1px solid var(--color-border-grey)',
       }}
     >
       <Toolbar

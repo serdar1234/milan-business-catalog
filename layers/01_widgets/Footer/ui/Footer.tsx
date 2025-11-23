@@ -1,20 +1,18 @@
-import {
-  Box,
-  Container,
-  Grid,
-  Typography,
-  IconButton,
-  Link as MuiLink,
-} from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import MuiLink from '@mui/material/Link';
+
 import Link from 'next/link';
 
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import LanguageIcon from '@mui/icons-material/Language';
-import EuroIcon from '@mui/icons-material/Euro';
 import { FooterLogo } from './FooterLogo';
+import { LanguageCurrencySwitcher } from '@/layers/01_widgets/LanguageCurrencySwitcher/';
 
 const FOOTER_LINKS = [
   {
@@ -57,7 +55,7 @@ const Footer: React.FC = () => {
     size: 'small' as const,
     sx: {
       color: 'white',
-      bgcolor: 'rgba(255, 255, 255, 0.1)',
+      bgcolor: 'var(--color-transparent-1)',
       '&:hover': { bgcolor: 'brandAccent.main' },
       mr: 1,
       p: 0.8,
@@ -81,7 +79,7 @@ const Footer: React.FC = () => {
           sx={{
             display: 'block',
             mb: 1,
-            color: 'rgba(255, 255, 255, 0.7)',
+            color: 'var(--color-transparent-7)',
             '&:hover': { color: 'brandAccent.main' },
           }}
         >
@@ -108,7 +106,7 @@ const Footer: React.FC = () => {
 
             <Typography
               variant="body2"
-              sx={{ mb: 3, color: 'rgba(255, 255, 255, 0.7)' }}
+              sx={{ mb: 3, color: 'var(--color-transparent-7)' }}
             >
               Your ultimate guide to discovering the best of Milan, from
               canal-side aperitivo bars to world-class restaurants and hidden
@@ -140,7 +138,7 @@ const Footer: React.FC = () => {
 
         <Box
           sx={{
-            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            borderTop: '1px solid var(--color-transparent-1)',
             mt: 6,
             pt: 3,
             display: 'flex',
@@ -148,34 +146,12 @@ const Footer: React.FC = () => {
             alignItems: 'center',
           }}
         >
-          <Typography
-            variant="caption"
-            sx={{ color: 'rgba(255, 255, 255, 0.7)' }}
-          >
+          <Typography variant="caption" sx={{ color: '' }}>
             © 2025 MilanoDiscover. All rights reserved.
           </Typography>
 
           <Box sx={{ display: 'flex', gap: 3 }}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                color: 'rgba(255, 255, 255, 0.7)',
-              }}
-            >
-              <LanguageIcon sx={{ fontSize: 16, mr: 0.5 }} />
-              <Typography variant="caption">English</Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                color: 'rgba(255, 255, 255, 0.7)',
-              }}
-            >
-              <EuroIcon sx={{ fontSize: 16, mr: 0.5 }} />
-              <Typography variant="caption">EUR</Typography>
-            </Box>
+            <LanguageCurrencySwitcher light />
           </Box>
         </Box>
       </Container>
