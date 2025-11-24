@@ -10,6 +10,9 @@ export interface Business {
     label: string;
     color: string;
   };
+  distance?: string;
+  description?: string;
+  isOpen?: boolean;
 }
 
 export const BUSINESS_MOCKS: Business[] = [
@@ -22,6 +25,9 @@ export const BUSINESS_MOCKS: Business[] = [
     isFavorite: true,
     imageUrl: '/r1.jpg',
     tag: { label: 'Closing Soon', color: 'statusError.main' },
+    description: 'Fine Italian cuisine',
+    distance: '0.4 km',
+    isOpen: true,
   },
   {
     id: 2,
@@ -32,6 +38,9 @@ export const BUSINESS_MOCKS: Business[] = [
     isFavorite: false,
     imageUrl: '/r2.jpg',
     tag: { label: 'Featured', color: 'statusFeatured.main' },
+    description: 'Cocktails & ambiance',
+    distance: '1.1 km',
+    isOpen: false,
   },
   {
     id: 3,
@@ -42,6 +51,9 @@ export const BUSINESS_MOCKS: Business[] = [
     isFavorite: true,
     imageUrl: '/r3.jpg',
     tag: { label: 'New', color: 'brandAccent.main' },
+    description: 'Traditional Milanese coffee',
+    distance: '0.8 km',
+    isOpen: true,
   },
   {
     id: 4,
@@ -52,6 +64,9 @@ export const BUSINESS_MOCKS: Business[] = [
     isFavorite: false,
     imageUrl: '/r4.jpg',
     tag: { label: 'Popular', color: 'ratingGold.main' },
+    description: 'Fine Italian cuisine',
+    distance: '0.4 km',
+    isOpen: true,
   },
   {
     id: 5,
@@ -62,6 +77,9 @@ export const BUSINESS_MOCKS: Business[] = [
     isFavorite: true,
     imageUrl: '/r8.webp',
     tag: { label: 'New', color: 'brandAccent.main' },
+    description: 'Cocktails & ambiance',
+    distance: '1.1 km',
+    isOpen: false,
   },
   {
     id: 6,
@@ -72,6 +90,9 @@ export const BUSINESS_MOCKS: Business[] = [
     isFavorite: false,
     imageUrl: '/r6.jpg',
     tag: { label: 'Closing Soon', color: 'statusError.main' },
+    description: 'Traditional Milanese coffee',
+    distance: '0.8 km',
+    isOpen: true,
   },
   {
     id: 7,
@@ -82,6 +103,9 @@ export const BUSINESS_MOCKS: Business[] = [
     isFavorite: true,
     imageUrl: '/r7.jpg',
     tag: { label: 'Featured', color: 'statusFeatured.main' },
+    description: 'Fine Italian cuisine',
+    distance: '0.4 km',
+    isOpen: true,
   },
   {
     id: 8,
@@ -92,5 +116,8 @@ export const BUSINESS_MOCKS: Business[] = [
     isFavorite: false,
     imageUrl: '/r5.jpg',
     tag: { label: 'Popular', color: 'ratingGold.main' },
+    description: 'Cocktails & ambiance',
+    distance: '1.1 km',
+    isOpen: false,
   },
 ];

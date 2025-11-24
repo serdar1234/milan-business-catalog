@@ -9,7 +9,7 @@ const categoriesApi = api.injectEndpoints({
     getCategories: builder.query<{ data: Category[] }, string | undefined>({
       query: (lang = 'en') => `/categories?lang=${lang}`,
       providesTags: ['Category'],
-      keepUnusedDataFor: 24 * 60 * 60,
+      keepUnusedDataFor: 10 * 60,
     }),
   }),
 });

@@ -14,7 +14,7 @@ import { useClientSetting } from '@/layers/04_shared/hooks/useClientSetting';
 import { CURRENCIES, LANGUAGES } from '@/layers/04_shared/configs/settings';
 
 export const CurrencySwitch = ({ light }: { light?: boolean }) => {
-  const [language, setLanguage] = useClientSetting('language', 'EN');
+  const [language, setLanguage] = useClientSetting('language', 'en');
   const [currency, setCurrency] = useClientSetting('currency', 'EUR');
 
   const [anchorLang, setAnchorLang] = useState<null | HTMLElement>(null);

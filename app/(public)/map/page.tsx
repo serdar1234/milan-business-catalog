@@ -1,8 +1,11 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { Box, Button, Drawer } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
+import Drawer from '@mui/material/Drawer';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { CategoryBusinessList } from '@/layers/01_widgets/CategoryBusinessList/CategoryBusinessList';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
 import { FilterPanel } from '@/layers/02_features/FilterPanel/FilterPanel';
@@ -32,6 +35,7 @@ const MapContainerClient = dynamic(
 
 export default function MapPage() {
   const { open, setOpen, toggleDrawer } = useToggleDrawer();
+  const isSmall = useMediaQuery((theme) => theme.breakpoints.down('md'));
   const handleFilterToggle = () => {
     setOpen(true);
   };
@@ -65,7 +69,7 @@ export default function MapPage() {
             scrollbarWidth: 'thin',
           }}
         >
-          <CategoryBusinessList cols={1} />
+          <CategoryBusinessList cols={1} isSmall={isSmall} />
         </Box>
       </Box>
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">

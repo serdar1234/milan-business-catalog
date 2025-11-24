@@ -1,6 +1,6 @@
 'use client';
 
-import { MapPlaceCard } from '@/layers/02_features/MapPlaceCard/ui/MapPlaceCard';
+import { BusinessCardSmall } from '@/layers/02_features/BusinessCardSmall/BusinessCardSmall';
 import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import {
@@ -10,8 +10,11 @@ import {
   Typography,
   CircularProgress,
 } from '@mui/material';
-import { FILTER_BUTTONS, PLACE_LIST_MOCKS } from './mockData';
+import { FILTER_BUTTONS } from './mockData';
+import { BUSINESS_MOCKS } from '@/layers/04_shared/api/mocks/businessMocks';
 import dynamic from 'next/dynamic';
+
+const NUMBER_OF_BUSINESSES = 3;
 
 const MapContainerClient = dynamic(
   () =>
@@ -82,8 +85,8 @@ export const DesktopView = () => (
           <SearchForm hasBorder />
 
           <Box>
-            {PLACE_LIST_MOCKS.map((place) => (
-              <MapPlaceCard key={place.id} place={place} />
+            {BUSINESS_MOCKS.slice(0, NUMBER_OF_BUSINESSES).map((business) => (
+              <BusinessCardSmall key={business.id} business={business} />
             ))}
           </Box>
 
@@ -92,7 +95,7 @@ export const DesktopView = () => (
             color="text.secondary"
             sx={{ p: 2, textAlign: 'center' }}
           >
-            End of list. Showing 3 of 45 places.
+            End of list. Showing first {NUMBER_OF_BUSINESSES} of 45 places.
           </Typography>
         </Box>
 

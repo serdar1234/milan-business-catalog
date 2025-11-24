@@ -6,17 +6,16 @@ import Link from 'next/link';
 import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 import Image from 'next/image';
 
-interface MapPlaceCardProps {
-  place: Pick<Business, 'id' | 'name' | 'rating' | 'category' | 'imageUrl'> & {
-    distance: string;
-    description: string;
-    isOpen: boolean;
-  };
+interface BusinessCardSmallProps {
+  business: Business;
 }
 
-export const MapPlaceCard: React.FC<MapPlaceCardProps> = ({ place }) => {
-  const { id, imageUrl, name, rating, description, distance, isOpen } = place;
-  if (!id) console.log('No id for place', place);
+export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
+  business,
+}) => {
+  const { id, imageUrl, name, rating, description, distance, isOpen } =
+    business;
+  if (!id) console.log('No id for place', business);
   const url = encodeURIComponent(name);
   return (
     <Box
@@ -27,6 +26,7 @@ export const MapPlaceCard: React.FC<MapPlaceCardProps> = ({ place }) => {
         gap: 2,
         p: 2,
         my: 1,
+        width: '100%',
         textDecoration: 'none',
         border: '1px solid var(--color-border-grey)',
         borderRadius: 2,
@@ -50,7 +50,7 @@ export const MapPlaceCard: React.FC<MapPlaceCardProps> = ({ place }) => {
       >
         <Typography variant="caption" color="var(--color-border-grey)">
           <Image
-            src={`/${imageUrl}`}
+            src={imageUrl}
             alt={name}
             width={60}
             height={60}

@@ -3,29 +3,18 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MuiLink from '@mui/material/Link';
 
-import Link from 'next/link';
+import { NavColumn } from '@/layers/04_shared/ui/NavColumn';
 
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { FooterLogo } from './FooterLogo';
+import { FooterCats } from './FooterCats';
 import { LanguageCurrencySwitcher } from '@/layers/01_widgets/LanguageCurrencySwitcher/';
 
 const FOOTER_LINKS = [
-  {
-    title: 'Explore',
-    links: [
-      'Restaurants',
-      'Bars & Aperitivo',
-      'Cafés & Coffee',
-      'Shopping',
-      'Art & Culture',
-      'Nightlife',
-    ],
-  },
   {
     title: 'Neighborhoods',
     links: [
@@ -61,33 +50,6 @@ const Footer: React.FC = () => {
       p: 0.8,
     },
   };
-
-  const NavColumn: React.FC<{ title: string; links: string[] }> = ({
-    title,
-    links,
-  }) => (
-    <Box>
-      <Typography variant="h6" fontWeight="bold" color="white" sx={{ mb: 2 }}>
-        {title}
-      </Typography>
-      {links.map((link) => (
-        <MuiLink
-          component={Link}
-          href={`/${link.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
-          key={link}
-          underline="none"
-          sx={{
-            display: 'block',
-            mb: 1,
-            color: 'var(--color-transparent-7)',
-            '&:hover': { color: 'brandAccent.main' },
-          }}
-        >
-          <Typography variant="body2">{link}</Typography>
-        </MuiLink>
-      ))}
-    </Box>
-  );
 
   return (
     <Box
@@ -128,6 +90,8 @@ const Footer: React.FC = () => {
               </IconButton>
             </Box>
           </Grid>
+
+          <FooterCats />
 
           {FOOTER_LINKS.map((col) => (
             <Grid size={3} key={col.title}>

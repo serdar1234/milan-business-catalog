@@ -12,10 +12,12 @@ import BusinessCardGrid from '@/layers/02_features/BusinessCardGrid';
 
 interface CategoryBusinessListProps {
   cols?: number;
+  isSmall?: boolean;
 }
 
 export const CategoryBusinessList: React.FC<CategoryBusinessListProps> = ({
   cols = 2,
+  isSmall,
 }) => {
   const {
     data: businessList,
@@ -56,7 +58,11 @@ export const CategoryBusinessList: React.FC<CategoryBusinessListProps> = ({
       }}
     >
       <Grid container spacing={2} width={'100%'}>
-        <BusinessCardGrid data={featuredBusinesses} cols={cols} />
+        <BusinessCardGrid
+          data={featuredBusinesses}
+          cols={cols}
+          isSmall={isSmall}
+        />
         <Box
           sx={{
             width: '100%',

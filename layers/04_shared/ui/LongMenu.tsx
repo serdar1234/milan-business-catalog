@@ -12,16 +12,22 @@ import {
   Category,
   useGetCategoriesQuery,
 } from '@/layers/03_entities/category/categoryApi';
+import { useClientSetting } from '@/layers/04_shared/hooks/useClientSetting';
 
 const ITEM_HEIGHT = '50vh';
 
 export default function LongMenu({ title }: { title: string }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const [language] = useClientSetting('language', 'en');
 
   const [mobileOpen, setMobileOpen] = useState(false);
   useScrollLock(mobileOpen);
-  const { data: options, error, isLoading } = useGetCategoriesQuery(undefined);
+  const {
+    data: options,
+    error,
+    isLoading,
+  } = useGetCategoriesQuery(language, { refetchOnMountOrArgChange: false });
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

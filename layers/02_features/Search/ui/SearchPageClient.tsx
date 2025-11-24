@@ -130,6 +130,7 @@ export default function SearchPageClient({
           </Grid>
         </Grid>
       </Container>
+
       <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
         <Box
           padding={2}
