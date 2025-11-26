@@ -2,7 +2,7 @@
 
 import { Box, Typography, Container } from '@mui/material';
 import Image from 'next/image';
-import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
+import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
 import { HeroDesktopInfo } from './HeroDesktopInfo';
 
 const HERO_IMAGE_URL = '/mockHero.jpg';

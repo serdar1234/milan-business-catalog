@@ -1,0 +1,11 @@
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 360px;
+  height: 3rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-brand-accent);
+  overflow: hidden;
+  background-color: var(--color-surface);
+}

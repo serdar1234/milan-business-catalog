@@ -8,7 +8,7 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
+import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
 import { LanguageCurrencySwitcher } from '@/layers/01_widgets/LanguageCurrencySwitcher';
 
 const NAV_LINKS = [

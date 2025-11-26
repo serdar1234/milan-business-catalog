@@ -12,3 +12,6 @@ export const CURRENCIES: { code: CurrencyCode; name: string }[] = [
   { code: 'EUR', name: 'EUR' },
   { code: 'USD', name: 'USD' },
 ];
+
+export const LANGUAGE_STORAGE_KEY = 'language';
+export const DEFAULT_LANGUAGE_CODE = 'en';

@@ -1,7 +1,7 @@
 'use client';
 
 import { BusinessCardSmall } from '@/layers/02_features/BusinessCardSmall/BusinessCardSmall';
-import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
+import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import {
   Container,

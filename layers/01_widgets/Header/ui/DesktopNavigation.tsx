@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button, Box } from '@mui/material';
-import { SearchForm } from '@/layers/02_features/Search/ui/SearchForm';
+import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
 
 const NAV_LINKS = [
   { href: '/category/shopping', label: 'Shopping' },
