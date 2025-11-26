@@ -1,7 +1,7 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { FormEvent, useState, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
 import Autocomplete from '@mui/material/Autocomplete';
@@ -86,7 +86,6 @@ export const SearchForm: React.FC<{
   return (
     <Box
       component="form"
-      autoComplete="off"
       onSubmit={handleSubmit}
       className={style.searchWrapper}
       sx={{
@@ -102,7 +101,6 @@ export const SearchForm: React.FC<{
         onChange={handleAutocompleteChange}
         onClose={handleClose}
         loading={isFetching}
-        noOptionsText="Mamma mia, nothing found"
         loadingText="Searching..."
         getOptionLabel={(opt) => (typeof opt === 'string' ? opt : opt.name)}
         isOptionEqualToValue={(a, b) => a.id === b.id}

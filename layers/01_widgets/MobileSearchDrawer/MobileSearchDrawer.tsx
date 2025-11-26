@@ -1,21 +1,22 @@
 'use client';
 
-import { useState, FormEvent, useRef } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import {
   Drawer,
   Box,
   IconButton,
-  InputBase,
   Typography,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  ListItem,
   Grid,
   Button,
+  Autocomplete,
+  TextField,
+  ListItem,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SearchIcon from '@mui/icons-material/Search';
@@ -30,51 +31,77 @@ import {
   clearRecentSearches,
 } from '@/layers/03_entities/search/model/slice';
 
+import {
+  AutocompleteResult,
+  useGetAutocompleteSuggestionsQuery,
+} from '@/layers/03_entities/search/api/searchApi';
+
+import { useDebounce } from '@/layers/04_shared/hooks/useDebounce';
+import { useCurrentLanguage } from '@/layers/04_shared/hooks/useCurrentLanguage';
+import { SearchOptionItem } from '@/layers/04_shared/ui/SearchOptionItem';
+
 export const MobileSearchDrawer: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const isOpen = useSelector(selectIsSearchDrawerOpen);
   const recentSearches = useSelector(selectRecentSearches);
-  const [currentQuery, setCurrentQuery] = useState('');
+
+  const [query, setQuery] = useState('');
+  const [selectedOption, setSelectedOption] =
+    useState<AutocompleteResult | null>(null);
   const [historyKey, updateHistoryKey] = useState(42);
+
   const ref = useRef<HTMLInputElement>(null);
+  const currentLang = useCurrentLanguage();
+  const debouncedQuery = useDebounce(query, 500);
+
+  const { data: suggestions, isFetching } = useGetAutocompleteSuggestionsQuery(
+    { q: debouncedQuery, limit: 10, lang: currentLang },
+    { skip: debouncedQuery.trimStart() === '' },
+  );
+
+  const localOptions = query === '' ? [] : (suggestions ?? []);
 
   const setInputFocus = () => {
     ref.current?.focus();
   };
 
-  const handleSearchSubmit = (event: FormEvent | string) => {
-    const queryToSearch = typeof event === 'string' ? event : currentQuery;
-    const trimmedQuery = queryToSearch.trim();
-
-    if (trimmedQuery) {
-      const encodedQuery = encodeURIComponent(trimmedQuery);
-      dispatch(addRecentSearch(trimmedQuery));
-      router.push(`/search?q=${encodedQuery}`);
-      dispatch(closeSearchDrawer());
-      setCurrentQuery('');
-    }
-    if (typeof event !== 'string') {
-      event.preventDefault();
-    }
-  };
-
-  const handleClose = () => {
+  const handleCloseDrawer = () => {
     dispatch(closeSearchDrawer());
   };
 
-  const isRecentSearchListVisible = recentSearches.length > 0;
+  const runSearch = (searchValue: string) => {
+    const trimmed = searchValue.trim();
+    if (!trimmed) return;
+    const encodedQuery = encodeURIComponent(trimmed);
+    dispatch(addRecentSearch(trimmed));
+    router.push(`/search?q=${encodedQuery}`);
+    dispatch(closeSearchDrawer());
+    setQuery('');
+    setSelectedOption(null);
+  };
 
-  function handleClearRecentSearches(): void {
+  const handleClearRecentSearches = () => {
     dispatch(clearRecentSearches());
     updateHistoryKey((prev) => prev + 1);
-  }
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const finalValue = selectedOption?.name || query.trim();
+    if (finalValue) runSearch(finalValue);
+  };
+
+  const handleClearInput = () => {
+    setQuery('');
+    setSelectedOption(null);
+  };
 
   return (
     <Drawer
       anchor="top"
       open={isOpen}
-      onClose={handleClose}
+      onClose={handleCloseDrawer}
       slotProps={{
         paper: {
           sx: { width: '100%', height: '100vh', zIndex: 10 },
@@ -84,47 +111,79 @@ export const MobileSearchDrawer: React.FC = () => {
         },
       }}
     >
-      <Box sx={{ pt: 1, px: 2, height: '100%' }}>
-        <Box
-          component="form"
-          onSubmit={handleSearchSubmit}
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 1,
-            mb: 2,
-            p: 0.5,
-            borderRadius: '8px',
-            border: '1px solid var(--color-border-grey)',
-            bgcolor: 'background.paper',
+      <Box
+        sx={{ pt: 1, px: 2, height: '100%' }}
+        component="form"
+        onSubmit={handleSubmit}
+      >
+        <Autocomplete<AutocompleteResult, false, false, true>
+          freeSolo
+          options={localOptions}
+          inputValue={query}
+          onInputChange={(_, value) => setQuery(value)}
+          onChange={(_, value) => {
+            if (typeof value === 'string') setQuery(value);
+            else if (value) runSearch(value.name);
           }}
-        >
-          <IconButton onClick={handleClose} aria-label="back">
-            <ArrowBackIcon />
-          </IconButton>
-
-          <InputBase
-            inputRef={ref}
-            fullWidth
-            placeholder="Find shops, restaurants, and more..."
-            value={currentQuery}
-            onChange={(e) => setCurrentQuery(e.target.value)}
-            type="search"
-          />
-
-          {currentQuery.length > 0 ? (
-            <IconButton onClick={() => setCurrentQuery('')} aria-label="clear">
-              <CloseIcon />
-            </IconButton>
-          ) : (
-            <IconButton type="submit" aria-label="search">
-              <SearchIcon />
-            </IconButton>
+          onClose={handleClearInput}
+          loading={isFetching}
+          loadingText="Searching..."
+          getOptionLabel={(opt) => (typeof opt === 'string' ? opt : opt.name)}
+          isOptionEqualToValue={(a, b) => a.id === b.id}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              inputRef={ref}
+              placeholder="Find shops, restaurants, and more..."
+              variant="outlined"
+              fullWidth
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  height: '3rem',
+                  padding: 0,
+                  '& fieldset': {
+                    border: '1px solid var(--color-border-grey)',
+                  },
+                  '& input': { height: '100%', padding: '0 14px !important' },
+                },
+              }}
+              slotProps={{
+                input: {
+                  ...params.InputProps,
+                  startAdornment: (
+                    <>
+                      <IconButton onClick={handleCloseDrawer}>
+                        <ArrowBackIcon />
+                      </IconButton>
+                      {params.InputProps?.startAdornment}
+                    </>
+                  ),
+                  endAdornment:
+                    query.length > 0 ? (
+                      <>
+                        <IconButton onClick={handleClearInput}>
+                          <CloseIcon />
+                        </IconButton>
+                      </>
+                    ) : (
+                      <>
+                        <IconButton type="submit">
+                          <SearchIcon />
+                        </IconButton>
+                        {params.InputProps?.endAdornment}
+                      </>
+                    ),
+                },
+              }}
+            />
           )}
-        </Box>
+          renderOption={(props, option) => (
+            <SearchOptionItem props={props} option={option} key={option.id} />
+          )}
+        />
 
-        {isRecentSearchListVisible && (
-          <Box>
+        {recentSearches.length > 0 && (
+          <Box sx={{ mt: 2 }}>
             <Grid container>
               <Grid size={6} sx={{ display: 'flex', alignItems: 'center' }}>
                 <Typography variant="subtitle2" color="text.secondary">
@@ -136,25 +195,25 @@ export const MobileSearchDrawer: React.FC = () => {
                 sx={{ display: 'flex', justifyContent: 'flex-end' }}
               >
                 <Button
-                  onClick={() => handleClearRecentSearches()}
+                  onClick={handleClearRecentSearches}
                   size="small"
                   startIcon={<CloseIcon />}
-                  color="statusFeatured"
                   variant="outlined"
-                  sx={{ textTransform: 'capitalize', alignSelf: 'flex-end' }}
+                  sx={{ textTransform: 'capitalize' }}
                 >
                   Clear history
                 </Button>
               </Grid>
             </Grid>
+
             <List key={historyKey}>
-              {recentSearches.map((query) => (
-                <ListItem disablePadding key={query}>
-                  <ListItemButton onClick={() => handleSearchSubmit(query)}>
+              {recentSearches.map((q) => (
+                <ListItem disablePadding key={q}>
+                  <ListItemButton onClick={() => runSearch(q)}>
                     <ListItemIcon sx={{ minWidth: 40 }}>
                       <HistoryIcon color="action" />
                     </ListItemIcon>
-                    <ListItemText primary={query} />
+                    <ListItemText primary={q} />
                   </ListItemButton>
                 </ListItem>
               ))}
