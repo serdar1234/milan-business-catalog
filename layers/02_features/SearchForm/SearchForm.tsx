@@ -27,6 +27,7 @@ export const SearchForm: React.FC<{
   const dispatch = useDispatch();
 
   const [query, setQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedOption, setSelectedOption] =
     useState<AutocompleteResult | null>(null);
 
@@ -46,13 +47,15 @@ export const SearchForm: React.FC<{
 
   const runSearch = useCallback(
     (searchValue: string) => {
+      setIsLoading(true);
       const encoded = encodeURIComponent(searchValue);
       router.push(`/search?q=${encoded}`);
       dispatch(addRecentSearch(searchValue));
 
       setQuery('');
       setSelectedOption(null);
-      handleDrawerClose?.();
+      if (handleDrawerClose) handleDrawerClose();
+      setIsLoading(false);
     },
     [router, dispatch, handleDrawerClose],
   );
@@ -104,7 +107,9 @@ export const SearchForm: React.FC<{
         loadingText="Searching..."
         getOptionLabel={(opt) => (typeof opt === 'string' ? opt : opt.name)}
         isOptionEqualToValue={(a, b) => a.id === b.id}
-        renderInput={(params) => <SearchInput {...params} />}
+        renderInput={(params) => (
+          <SearchInput {...params} isLoading={isLoading} />
+        )}
         renderOption={(props, option) => (
           <SearchOptionItem props={props} option={option} key={option.id} />
         )}
