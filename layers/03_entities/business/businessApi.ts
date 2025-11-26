@@ -3,6 +3,12 @@ import {
   Business,
   BUSINESS_MOCKS,
 } from '../../04_shared/api/mocks/businessMocks';
+import { LanguageCode } from '@/layers/04_shared/configs/settings';
+
+interface CompanyParams {
+  id: number | string;
+  lang: LanguageCode;
+}
 
 export const businessApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -15,7 +21,17 @@ export const businessApi = api.injectEndpoints({
         });
       },
     }),
+
+    getCompanyDetails: builder.query<Business, CompanyParams>({
+      query: ({ id, lang }: CompanyParams) => `companies/${id}?lang=${lang}`,
+      providesTags: ['Business'],
+    }),
   }),
 });
 
-export const { useGetBusinessListQuery } = businessApi;
+// --- Экспорт хуков и функций для SSR ---
+export const { useGetBusinessListQuery, useGetCompanyDetailsQuery } =
+  businessApi;
+
+// 🚨 Экспорт initiate для использования в Server Components (SSR)
+export const { getCompanyDetails } = businessApi.endpoints;

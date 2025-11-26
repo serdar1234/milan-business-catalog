@@ -1,9 +1,10 @@
-import { Box, Grid } from '@mui/material';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import { HoursSection } from '@/layers/01_widgets/BusinessInformation/ui/BusinessHours';
 import {
   HourEntry,
-  HoursSection,
-} from '@/layers/01_widgets/BusinessInformation/ui/BusinessHours';
-import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
+  MOCK_BUSINESS_DETAILS,
+} from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { DesktopView } from './DesktopView';
 

@@ -3,10 +3,9 @@ import AccessibleIcon from '@mui/icons-material/Accessible';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 
-interface HourEntry {
-  day: string;
+export interface HourEntry {
+  id: number;
   hours: string;
-  isToday: boolean;
 }
 
 interface Feature {
@@ -99,13 +98,13 @@ export const MOCK_BUSINESS_DETAILS: BusinessDetails = {
     { label: 'Sommelier wine pairings' },
   ],
   hours: [
-    { day: 'Monday', hours: 'Closed', isToday: true },
-    { day: 'Tuesday', hours: '7:00 PM - 11:00 PM', isToday: false },
-    { day: 'Wednesday', hours: '7:00 PM - 11:00 PM', isToday: false },
-    { day: 'Thursday', hours: '7:00 PM - 11:00 PM', isToday: false },
-    { day: 'Friday', hours: '7:00 PM - 11:30 PM', isToday: false },
-    { day: 'Saturday', hours: '7:00 PM - 11:30 PM', isToday: false },
-    { day: 'Sunday', hours: '7:00 PM - 10:30 PM', isToday: false },
+    { id: 0, hours: '7:00 PM - 10:30 PM' },
+    { id: 1, hours: 'Closed' },
+    { id: 2, hours: '7:00 PM - 11:00 PM' },
+    { id: 3, hours: '7:00 PM - 11:00 PM' },
+    { id: 4, hours: '7:00 PM - 11:00 PM' },
+    { id: 5, hours: '7:00 PM - 11:30 PM' },
+    { id: 6, hours: '7:00 PM - 11:30 PM' },
   ],
   amenities: [
     { icon: WifiIcon, label: 'Free Wifi', isAvailable: true },

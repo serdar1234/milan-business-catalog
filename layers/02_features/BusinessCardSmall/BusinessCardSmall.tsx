@@ -13,7 +13,7 @@ interface BusinessCardSmallProps {
 export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
   business,
 }) => {
-  const { id, imageUrl, name, rating, description, distance, isOpen } =
+  const { id, images, name, average_rating, description, distance, isOpen } =
     business;
   if (!id) console.log('No id for place', business);
   const url = encodeURIComponent(name);
@@ -50,7 +50,7 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
       >
         <Typography variant="caption" color="var(--color-border-grey)">
           <Image
-            src={imageUrl}
+            src={images[0]}
             alt={name}
             width={60}
             height={60}
@@ -69,14 +69,14 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5 }}>
           <Rating
-            value={rating}
+            value={average_rating}
             readOnly
             precision={0.1}
             size="small"
             sx={{ mr: 0.5, color: 'brandPin.main' }}
           />
           <Typography variant="caption" color="text.secondary">
-            ({rating.toFixed(1)})
+            ({average_rating.toFixed(1)})
           </Typography>
         </Box>
         <Typography variant="body2" color="text.primary" sx={{ mb: 1 }}>

@@ -24,7 +24,7 @@ interface BusinessCardProps {
 }
 
 export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
-  const { name, category, rating, address, isFavorite, imageUrl, tag } =
+  const { name, category, average_rating, address, isFavorite, images, tag } =
     business;
 
   return (
@@ -49,7 +49,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
         <Link href={`/business/${slugify(name)}`}>
           <CardMedia
             component="img"
-            image={imageUrl}
+            image={images[0]}
             alt={name}
             sx={{ height: 200, objectFit: 'cover' }}
           />
@@ -110,19 +110,19 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
             color="text.secondary"
             fontWeight="medium"
           >
-            {category}
+            {category.name}
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Rating
               name="read-only"
-              value={rating}
+              value={average_rating}
               readOnly
               precision={0.1}
               size="small"
               sx={{ mr: 0.5 }}
             />
             <Typography variant="caption" color="text.secondary">
-              ({rating})
+              ({average_rating})
             </Typography>
           </Box>
         </Box>
