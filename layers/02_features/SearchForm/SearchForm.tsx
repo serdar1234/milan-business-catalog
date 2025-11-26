@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useState, useCallback } from 'react';
+import { FormEvent, useState, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
@@ -43,21 +43,35 @@ export const SearchForm: React.FC<{
     { skip: debouncedQuery.trimStart() === '' },
   );
 
-  const localOptions = query === '' ? [] : (suggestions ?? []);
+  const localOptions = useMemo(
+    () => (query === '' ? [] : (suggestions ?? [])),
+    [suggestions, query],
+  );
 
   const runSearch = useCallback(
     (searchValue: string) => {
       setIsLoading(true);
-      const encoded = encodeURIComponent(searchValue);
-      router.push(`/search?q=${encoded}`);
-      dispatch(addRecentSearch(searchValue));
+
+      const matchedOption = localOptions.find(
+        (opt) =>
+          opt.name.trim().toLowerCase() === searchValue.trim().toLowerCase(),
+      );
+
+      if (matchedOption) {
+        router.push(`/business/${matchedOption.id}`);
+        dispatch(addRecentSearch(matchedOption.name));
+      } else {
+        const encoded = encodeURIComponent(searchValue);
+        router.push(`/search?q=${encoded}`);
+        dispatch(addRecentSearch(searchValue));
+      }
 
       setQuery('');
       setSelectedOption(null);
-      if (handleDrawerClose) handleDrawerClose();
+      handleDrawerClose?.();
       setIsLoading(false);
     },
-    [router, dispatch, handleDrawerClose],
+    [router, dispatch, handleDrawerClose, localOptions],
   );
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -76,8 +90,14 @@ export const SearchForm: React.FC<{
       setQuery(trimmed);
       return;
     }
+
     if (newValue) {
-      runSearch(newValue.name);
+      router.push(`/business/${newValue.id}`);
+      dispatch(addRecentSearch(newValue.name));
+
+      setQuery('');
+      setSelectedOption(null);
+      handleDrawerClose?.();
     }
   };
 
