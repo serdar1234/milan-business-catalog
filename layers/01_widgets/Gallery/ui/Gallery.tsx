@@ -11,35 +11,24 @@ import {
 } from '@mui/material';
 import Image from 'next/image';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { PhotoLightbox } from '../../../04_shared/ui/PhotoLightbox';
+import { PhotoLightbox } from '@/layers/04_shared/ui/PhotoLightbox';
 import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
+// import { Photo } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
 
 const MOCK_PHOTOS = [
-  { id: 1, url: '/d1.jpg', alt: 'Interior view' },
-  { id: 2, url: '/d2.jpg', alt: 'Plate of food' },
-  { id: 3, url: '/d3.jpg', alt: 'Canal view' },
-  { id: 4, url: '/d4.jpg', alt: 'Bar area' },
-  { id: 5, url: '/d5.jpg', alt: 'Dinner table' },
-  { id: 6, url: '/d6.jpg', alt: 'Kitchen' },
-  { id: 7, url: '/d7.jpg', alt: 'Dessert' },
-  { id: 8, url: '/business.jpg', alt: 'Business' },
+  { id: 1, url: '/d1.jpg', filename: 'Interior view' },
+  { id: 2, url: '/d2.jpg', filename: 'Plate of food' },
+  { id: 3, url: '/d3.jpg', filename: 'Canal view' },
+  { id: 4, url: '/d4.jpg', filename: 'Bar area' },
+  { id: 5, url: '/d5.jpg', filename: 'Dinner table' },
+  { id: 6, url: '/d6.jpg', filename: 'Kitchen' },
+  { id: 7, url: '/d7.jpg', filename: 'Dessert' },
+  { id: 8, url: '/business.jpg', filename: 'Business' },
 ];
 
-interface Photo {
-  id: number;
-  url: string;
-  alt: string;
-}
-
-interface BusinessImagesGalleryProps {
-  photos?: Photo[];
-  businessName: string;
-}
-
-export const Gallery: React.FC<BusinessImagesGalleryProps> = ({
-  photos = MOCK_PHOTOS,
-  businessName,
-}) => {
+export const Gallery: React.FC = ({}) => {
+  const photos = MOCK_PHOTOS;
+  const businessName = 'Business';
   const isMobile = useViewportWidth();
   const [lightboxPhotoId, setLightboxPhotoId] = useState<number | null>(null);
   const router = useRouter();
@@ -81,7 +70,7 @@ export const Gallery: React.FC<BusinessImagesGalleryProps> = ({
             >
               <Image
                 src={item.url}
-                alt={item.alt}
+                alt={item.filename}
                 fill={true}
                 sizes="33vw"
                 style={{ objectFit: 'cover' }}
