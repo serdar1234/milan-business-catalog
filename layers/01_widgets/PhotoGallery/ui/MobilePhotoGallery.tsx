@@ -5,11 +5,7 @@ import { Grid } from '@mui/material';
 import { PhotoLightbox } from '@/layers/04_shared/ui/PhotoLightbox';
 import { useState } from 'react';
 
-interface Photo {
-  id: number;
-  url: string;
-  alt: string;
-}
+import { Photo } from './PhotoGallery';
 
 interface MobilePhotoProps {
   mobilePreviewPhotos: Photo[];
@@ -48,7 +44,7 @@ export function MobilePhotoGallery({ mobilePreviewPhotos }: MobilePhotoProps) {
         >
           <Image
             src={photo.url}
-            alt={photo.alt}
+            alt={photo.filename}
             fill={true}
             sizes="30vw"
             style={{ objectFit: 'cover' }}

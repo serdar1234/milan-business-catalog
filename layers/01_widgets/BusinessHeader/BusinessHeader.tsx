@@ -3,7 +3,7 @@ import { MobileBusinessHeader } from '@/layers/02_features/MobileBusinessHeader/
 import { BusinessHeroDesktop } from '@/layers/02_features/BusinessHeroDesktop/ui/BusinessHeroDesktop';
 import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 
-export default function BusinessHeader({ data }: { data?: Business }) {
+export function BusinessHeader({ data }: { data?: Business }) {
   return (
     <Box
       component="section"

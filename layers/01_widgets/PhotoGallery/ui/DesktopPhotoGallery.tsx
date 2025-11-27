@@ -7,13 +7,10 @@ import { Grid, Typography, Box } from '@mui/material';
 import styles from './PhotoGallery.module.css';
 import Link from 'next/link';
 import { PhotoLightbox } from '@/layers/04_shared/ui/PhotoLightbox';
+import { Photo } from './PhotoGallery';
 
 interface DesktopPreviewPhotos {
-  desktopPreviewPhotos: {
-    id: number;
-    url: string;
-    alt: string;
-  }[];
+  desktopPreviewPhotos: Photo[];
 }
 
 export function DesktopPhotoGallery({
@@ -42,7 +39,7 @@ export function DesktopPhotoGallery({
       >
         <Image
           src={firstPhoto.url}
-          alt={firstPhoto.alt}
+          alt={firstPhoto.filename}
           fill={true}
           sizes="66vw"
           style={{ objectFit: 'cover' }}
@@ -57,7 +54,7 @@ export function DesktopPhotoGallery({
             >
               <Image
                 src={photo.url}
-                alt={photo.alt}
+                alt={photo.filename}
                 fill={true}
                 sizes="33vw"
                 style={{ objectFit: 'cover' }}

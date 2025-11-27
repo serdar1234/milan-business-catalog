@@ -15,12 +15,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Image from 'next/image';
 import styles from './ui.module.css';
 import { ArrowButton } from '@/layers/04_shared/ui/ArrowButton';
-
-interface Photo {
-  id: number;
-  url: string;
-  alt: string;
-}
+import { Photo } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
 
 interface PhotoLightboxProps {
   open: boolean;
@@ -133,7 +128,7 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
               <Image
                 key={current.id}
                 src={current.url}
-                alt={current.alt}
+                alt={current.filename}
                 fill
                 style={{ objectFit: 'contain' }}
                 sizes="90vw"

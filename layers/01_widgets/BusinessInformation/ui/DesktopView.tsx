@@ -5,12 +5,12 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import LanguageIcon from '@mui/icons-material/Language';
 import EuroIcon from '@mui/icons-material/Euro';
 import { InfoRow } from './InfoRow';
-import { BusinessInformationProps } from './BusinessInformation';
-import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
+// import { BusinessInformationProps } from './BusinessInformation';
+import { MOCK_BUSINESS_DETAILS as mocks } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
+import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 
-export const DesktopView: React.FC<BusinessInformationProps> = ({
-  data = MOCK_BUSINESS_DETAILS,
-}) => {
+export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
+  const priceRange = '€€';
   return (
     <Box
       sx={{
@@ -34,21 +34,22 @@ export const DesktopView: React.FC<BusinessInformationProps> = ({
           <InfoRow
             icon={LocationOnIcon}
             title="Address"
-            content={data.address}
+            content={data?.address || ''}
             isLink
           />
-          <InfoRow icon={PhoneIcon} title="Phone" content={data.phone} isLink />
+          <InfoRow
+            icon={PhoneIcon}
+            title="Phone"
+            content={data?.phone || ''}
+            isLink
+          />
           <InfoRow
             icon={LanguageIcon}
             title="Website"
-            content={data.website}
+            content={data?.website}
             isLink
           />
-          <InfoRow
-            icon={EuroIcon}
-            title="Price Range"
-            content={data.priceRange}
-          />
+          <InfoRow icon={EuroIcon} title="Price Range" content={priceRange} />
         </Grid>
 
         {/* 2. Business Hours */}
@@ -56,9 +57,9 @@ export const DesktopView: React.FC<BusinessInformationProps> = ({
           <Typography variant="h6" fontWeight="bold" sx={{ mb: 1 }}>
             Hours
           </Typography>
-          <HoursSection hours={data.hours} />
+          <HoursSection hours={mocks.hours} />
 
-          {data.amenities.map((a) => (
+          {mocks.amenities.map((a) => (
             <Box
               key={a.label}
               sx={{ display: 'flex', alignItems: 'center', mb: 1 }}

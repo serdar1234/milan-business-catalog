@@ -16,11 +16,10 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
   const { id, images, name, average_rating, description, distance, isOpen } =
     business;
   if (!id) console.log('No id for place', business);
-  const url = encodeURIComponent(name);
   return (
     <Box
       component={Link}
-      href={`/business/${url}`}
+      href={`/business/${id}`}
       sx={{
         display: 'flex',
         gap: 2,
@@ -50,7 +49,7 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
       >
         <Typography variant="caption" color="var(--color-border-grey)">
           <Image
-            src={images[0]}
+            src={images[0]?.url}
             alt={name}
             width={60}
             height={60}

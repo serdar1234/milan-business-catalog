@@ -1,3 +1,5 @@
+import { Photo } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
+
 export interface Business {
   id: number;
   name: string;
@@ -12,7 +14,7 @@ export interface Business {
   average_rating: number;
   approved_reviews_count: number;
   category: { id: number; name: string };
-  images: string[];
+  images: Photo[];
   created_at: string;
   updated_at: string;
 
@@ -33,7 +35,7 @@ export const BUSINESS_MOCKS: Business[] = [
     average_rating: 4.8,
     address: 'Piazza del Duomo, 1',
     isFavorite: true,
-    images: ['/r1.jpg'],
+    images: [{ id: 1, filename: 'filename', url: '/r1.jpg' }],
     tag: { label: 'Closing Soon', color: 'statusError.main' },
     description: 'Fine Italian cuisine',
     distance: '0.4 km',
@@ -55,7 +57,7 @@ export const BUSINESS_MOCKS: Business[] = [
     average_rating: 4.5,
     address: 'Alzaia Naviglio Grande, 56',
     isFavorite: false,
-    images: ['/r2.jpg'],
+    images: [{ id: 1, filename: 'filename', url: '/r2.jpg' }],
     tag: { label: 'Featured', color: 'statusFeatured.main' },
     description: 'Cocktails & ambiance',
     distance: '1.1 km',
@@ -77,7 +79,7 @@ export const BUSINESS_MOCKS: Business[] = [
     average_rating: 4.9,
     address: 'Via Montenapoleone, 12',
     isFavorite: true,
-    images: ['/r3.jpg'],
+    images: [{ id: 1, filename: 'filename', url: '/r3.jpg' }],
     tag: { label: 'New', color: 'brandAccent.main' },
     description: 'Traditional Milanese coffee',
     distance: '0.8 km',
@@ -99,7 +101,7 @@ export const BUSINESS_MOCKS: Business[] = [
     average_rating: 4.6,
     address: 'Corso Como, 15',
     isFavorite: false,
-    images: ['/r4.jpg'],
+    images: [{ id: 1, filename: 'filename', url: '/r4.jpg' }],
     tag: { label: 'Popular', color: 'ratingGold.main' },
     description: 'Fine Italian cuisine',
     distance: '0.4 km',
@@ -121,7 +123,7 @@ export const BUSINESS_MOCKS: Business[] = [
     average_rating: 4.7,
     address: 'Via Torino, 22',
     isFavorite: true,
-    images: ['/r8.webp'],
+    images: [{ id: 1, filename: 'filename', url: '/r8.webp' }],
     tag: { label: 'New', color: 'brandAccent.main' },
     description: 'Cocktails & ambiance',
     distance: '1.1 km',
@@ -143,7 +145,7 @@ export const BUSINESS_MOCKS: Business[] = [
     average_rating: 4.4,
     address: 'Viale Pasubio, 8',
     isFavorite: false,
-    images: ['/r6.jpg'],
+    images: [{ id: 1, filename: 'filename', url: '/r6.jpg' }],
     tag: { label: 'Closing Soon', color: 'statusError.main' },
     description: 'Traditional Milanese coffee',
     distance: '0.8 km',
@@ -165,7 +167,7 @@ export const BUSINESS_MOCKS: Business[] = [
     average_rating: 4.8,
     address: 'Via Dante, 7',
     isFavorite: true,
-    images: ['/r7.jpg'],
+    images: [{ id: 1, filename: 'filename', url: '/r7.jpg' }],
     tag: { label: 'Featured', color: 'statusFeatured.main' },
     description: 'Fine Italian cuisine',
     distance: '0.4 km',
@@ -187,7 +189,7 @@ export const BUSINESS_MOCKS: Business[] = [
     average_rating: 4.5,
     address: 'Corso Venezia, 30',
     isFavorite: false,
-    images: ['/r5.jpg'],
+    images: [{ id: 1, filename: 'filename', url: '/r5.jpg' }],
     tag: { label: 'Popular', color: 'ratingGold.main' },
     description: 'Cocktails & ambiance',
     distance: '1.1 km',

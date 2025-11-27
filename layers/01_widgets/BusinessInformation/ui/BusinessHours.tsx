@@ -23,10 +23,16 @@ const ScheduleRow: React.FC<HourEntry> = ({ hours, id }) => {
         sx={{
           color: isToday ? 'brandAccent.main' : 'text.primary',
           fontWeight: isToday ? 'bold' : 'normal',
+          '&::before': {
+            content: `'${day}'`,
+            display: { xs: 'inline', md: 'none', lg: 'inline' },
+          },
+          '&::after': {
+            content: `'${day.substring(0, 3)}'`,
+            display: { xs: 'none', md: 'inline', lg: 'none' },
+          },
         }}
-      >
-        {day}
-      </Typography>
+      />
 
       <Typography
         variant="body1"

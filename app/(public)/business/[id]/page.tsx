@@ -1,8 +1,7 @@
-import BusinessPageClient from '@/layers/01_widgets/BusinessPageClient/BusinessPageClient';
+import { BusinessPageWrapper } from '@/layers/01_widgets/BusinessPageWrapper/BusinessPageWrapper';
 import { createServerStore } from '@/layers/03_entities/store/serverStore';
 import { getCompanyDetails } from '@/layers/03_entities/business/businessApi';
-import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
-import BusinessHeader from '@/layers/01_widgets/BusinessHeader/BusinessHeader';
+import { BusinessHeader } from '@/layers/01_widgets/BusinessHeader/BusinessHeader';
 import { MobileQuickActions } from '@/layers/01_widgets/MobileQuickActions/ui/MobileQuickActions';
 import { notFound } from 'next/navigation';
 
@@ -10,10 +9,34 @@ interface Props {
   params: { id: string };
 }
 
-export function generateMetadata() {
+export async function generateMetadata({ params }: Props) {
+  const { id } = await params;
+  const lang = 'en';
+  const res = await fetch(
+    `https://api.milanplaces.com/api/v1/companies/${id}?lang=${lang}`,
+    {
+      next: { revalidate: 60 },
+    },
+  );
+
+  if (!res.ok) {
+    return {
+      title: 'Business not found',
+      description: 'This business does not exist.',
+    };
+  }
+
+  const json = await res.json();
+  const business = json.data;
+
   return {
-    title: MOCK_BUSINESS_DETAILS.name,
-    description: MOCK_BUSINESS_DETAILS.description,
+    title: business.name,
+    description: business.description,
+    openGraph: {
+      title: business.name,
+      description: business.description,
+      images: business.images?.[0]?.url ? [business.images[0].url] : [],
+    },
   };
 }
 
@@ -38,16 +61,15 @@ export default async function BusinessPage({ params }: Props) {
     notFound();
   }
 
-  const preloadedState = store.getState();
   return (
     <>
       <BusinessHeader data={data} />
       <MobileQuickActions
-        phone={MOCK_BUSINESS_DETAILS.phone}
-        address={MOCK_BUSINESS_DETAILS.address}
-        isFavorite={MOCK_BUSINESS_DETAILS.isFavorite}
+        phone={data.phone}
+        address={data.address}
+        isFavorite={data.isFavorite || true}
       />
-      <BusinessPageClient preloadedState={preloadedState} />;
+      <BusinessPageWrapper data={data} />;
     </>
   );
 }
