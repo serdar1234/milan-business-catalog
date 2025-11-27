@@ -1,11 +1,14 @@
-import { PhotoGallery } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
-import { Box, Container, Grid } from '@mui/material';
-import { BusinessInformation } from '@/layers/01_widgets/BusinessInformation/ui/BusinessInformation';
-import { About } from '@/layers/01_widgets/About/ui/About';
-import { Location } from '@/layers/01_widgets/Location/ui/Location';
-import { SimilarPlaces } from '@/layers/01_widgets/SimilarPlaces/ui/SimilarPlaces';
-import { ReviewsRatings } from '@/layers/01_widgets/ReviewsRatings/ui/ReviewsRatings';
+import BusinessPageClient from '@/layers/01_widgets/BusinessPageClient/BusinessPageClient';
+import { createServerStore } from '@/layers/03_entities/store/serverStore';
+import { getCompanyDetails } from '@/layers/03_entities/business/businessApi';
 import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
+import BusinessHeader from '@/layers/01_widgets/BusinessHeader/BusinessHeader';
+import { MobileQuickActions } from '@/layers/01_widgets/MobileQuickActions/ui/MobileQuickActions';
+import { notFound } from 'next/navigation';
+
+interface Props {
+  params: { id: string };
+}
 
 export function generateMetadata() {
   return {
@@ -14,23 +17,37 @@ export function generateMetadata() {
   };
 }
 
-export default function BusinessPage() {
+export default async function BusinessPage({ params }: Props) {
+  const { id } = await params;
+  const lang = 'en';
+  const store = createServerStore();
+  const result = await store.dispatch(
+    getCompanyDetails.initiate({ id, lang }, { forceRefetch: true }),
+  );
+  const { data, error } = result;
+
+  if (error && 'status' in error && error.status === 404) {
+    notFound();
+  }
+
+  if (error) {
+    throw new Error('Failed to load business');
+  }
+
+  if (!data) {
+    notFound();
+  }
+
+  const preloadedState = store.getState();
   return (
-    <Box component="section" sx={{ py: 3, bgcolor: 'background.default' }}>
-      <Container maxWidth="lg">
-        <Grid container spacing={3}>
-          <Grid size={{ xs: 12, md: 8 }}>
-            <PhotoGallery />
-            <About />
-            <ReviewsRatings />
-          </Grid>
-          <Grid size={{ xs: 12, md: 4 }}>
-            <BusinessInformation />
-            <Location />
-            <SimilarPlaces />
-          </Grid>
-        </Grid>
-      </Container>
-    </Box>
+    <>
+      <BusinessHeader data={data} />
+      <MobileQuickActions
+        phone={MOCK_BUSINESS_DETAILS.phone}
+        address={MOCK_BUSINESS_DETAILS.address}
+        isFavorite={MOCK_BUSINESS_DETAILS.isFavorite}
+      />
+      <BusinessPageClient preloadedState={preloadedState} />;
+    </>
   );
 }

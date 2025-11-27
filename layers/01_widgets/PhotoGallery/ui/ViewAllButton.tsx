@@ -17,7 +17,8 @@ export default function ViewAllButton({
       color="brandAccent.main"
       sx={{
         display: { xs: 'block', md: 'none' },
-        position: 'absolute',
+        position: { xs: 'static', sm: 'absolute' },
+        marginTop: { xs: '-1rem', sm: 0 },
         top: '2.5rem',
         right: { xs: '0.5rem', sm: '1rem' },
       }}

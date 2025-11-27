@@ -9,6 +9,8 @@ export const api = createApi({
   baseQuery,
   tagTypes: ['Category', 'Business', 'User', 'Autocomplete'],
   keepUnusedDataFor: 60 * 60,
-
+  refetchOnMountOrArgChange: false,
+  refetchOnReconnect: false,
+  refetchOnFocus: false,
   endpoints: () => ({}),
 });

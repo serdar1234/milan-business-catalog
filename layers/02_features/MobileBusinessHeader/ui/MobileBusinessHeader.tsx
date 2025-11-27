@@ -16,22 +16,10 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LanguageIcon from '@mui/icons-material/Language';
 import Link from 'next/link';
-
-interface MobileBusinessHeaderData {
-  name: string;
-  category: string;
-  rating: number;
-  district: string;
-  isOpen: boolean;
-  isLargeCard?: boolean;
-  address: string;
-  phone: string;
-  email: string;
-  website: string;
-}
+import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 
 interface MobileBusinessHeaderProps {
-  data: MobileBusinessHeaderData;
+  data?: Business;
 }
 
 export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
@@ -40,14 +28,14 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
   const {
     name,
     category,
-    rating,
-    district,
+    average_rating,
     isOpen,
     address,
+    city,
     phone,
     email,
     website,
-  } = data;
+  } = data!;
   const contactItems = [
     {
       icon: PlaceIcon,
@@ -121,7 +109,9 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
             {name}
           </Typography>
           <Typography variant="body2" color="surface" sx={{ mb: 1 }}>
-            <Link href={`/category/${category.toLowerCase()}`}>{category}</Link>
+            <Link href={`/category/${category.name.toLowerCase()}`}>
+              {category.name}
+            </Link>
           </Typography>
         </Grid>
         {/* QR code */}
@@ -159,13 +149,13 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
           <Grid sx={{ display: 'flex', alignItems: 'center' }}>
             <StarIcon sx={{ color: 'secondary.main', fontSize: 18, mr: 0.5 }} />
             <Typography variant="body2" fontWeight="bold">
-              {rating}
+              {average_rating}
             </Typography>
           </Grid>
           <Grid sx={{ display: 'flex', alignItems: 'center' }}>
             <PlaceIcon sx={{ color: 'brandPin.main', fontSize: 18, mr: 0.5 }} />
             <Typography variant="body2" color="grey.300">
-              {district} District
+              {city}
             </Typography>
           </Grid>
           <Grid sx={{ display: 'flex', alignItems: 'center' }}>

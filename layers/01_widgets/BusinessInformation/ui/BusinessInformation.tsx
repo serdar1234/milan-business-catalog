@@ -21,9 +21,8 @@ export interface BusinessInformationProps {
   data?: BusinessDetails;
 }
 
-export const BusinessInformation: React.FC<BusinessInformationProps> = ({
-  data = MOCK_BUSINESS_DETAILS,
-}) => {
+export const BusinessInformation: React.FC<BusinessInformationProps> = () => {
+  const data = MOCK_BUSINESS_DETAILS;
   return (
     <Grid size={12} sx={{ mb: 4 }}>
       <Box display={{ xs: 'block', md: 'none' }}>

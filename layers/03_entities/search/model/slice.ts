@@ -1,4 +1,4 @@
-import { RootState } from '@/layers/04_shared/lib/store';
+import { RootState } from '@/layers/03_entities/store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface RecentSearchState {

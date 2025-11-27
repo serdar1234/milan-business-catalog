@@ -10,31 +10,10 @@ import NearMeIcon from '@mui/icons-material/NearMe';
 import { BusinessActionsBar } from '../../BusinessActionsBar/ui/BusinessActionsBar';
 import Link from 'next/link';
 import { AppBreadcrumbs } from '@/layers/04_shared/ui/AppBreadcrumbs';
-
-interface HeroData {
-  id: number;
-  name: string;
-  category: string;
-  description: string;
-  rating: number;
-  reviews: number;
-  tags: string[];
-  priceRange: string;
-  distance: string;
-  isOpen: boolean;
-  statusText: string;
-  imageUrl: string;
-  district: string;
-  address: string;
-  phone: string;
-  email: string;
-  website: string;
-  views: number;
-  saves: number;
-}
+import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 
 interface BusinessHeroDesktopProps {
-  data: HeroData;
+  data?: Business;
 }
 
 export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
@@ -44,24 +23,27 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
     name,
     category,
     description,
-    rating,
-    reviews,
-    tags,
-    priceRange,
+    average_rating,
+    approved_reviews_count,
+
     distance,
     isOpen,
-    statusText,
-    imageUrl,
+
+    images,
     phone,
     website,
     address,
-    views,
-    saves,
-  } = data;
+  } = data!;
+  const imageUrl = images[0] ?? '/business.jpg';
+  const tags = ['Lunch', 'Dinner', 'Dessert'];
+  const priceRange = '€€';
+  const statusText = '23:00';
+  const views = 1000;
+  const saves = 100;
 
   const BREADCRUMBS = [
     { label: 'Home', href: '/' },
-    { label: category, href: '/category/' + category.toLowerCase() },
+    { label: category.name, href: '/category/' + category.name.toLowerCase() },
     { label: name },
   ];
 
@@ -84,7 +66,7 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
             left: 0,
             width: '100%',
             height: '100%',
-            backgroundImage: `url("/${imageUrl}")`,
+            backgroundImage: `url("${imageUrl}")`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             zIndex: 1,
@@ -155,16 +137,16 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
               '&:hover': { bgcolor: 'statusError.dark' },
             }}
           >
-            <Link href={`/category/${category}`}>{category}</Link>
+            <Link href={`/category/${category.name}`}>{category.name}</Link>
           </Button>
 
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
             <StarIcon sx={{ color: 'secondary.main', fontSize: 20, mr: 0.5 }} />
             <Typography variant="h6" fontWeight="bold" sx={{ mr: 1 }}>
-              {rating}
+              {average_rating}
             </Typography>
             <Typography variant="body1" color="grey.400">
-              ({reviews} reviews)
+              ({approved_reviews_count} rating count)
             </Typography>
           </Box>
 

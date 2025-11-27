@@ -24,6 +24,7 @@ export const businessApi = api.injectEndpoints({
 
     getCompanyDetails: builder.query<Business, CompanyParams>({
       query: ({ id, lang }: CompanyParams) => `companies/${id}?lang=${lang}`,
+      transformResponse: (response: { data: Business }) => response.data,
       providesTags: ['Business'],
     }),
   }),

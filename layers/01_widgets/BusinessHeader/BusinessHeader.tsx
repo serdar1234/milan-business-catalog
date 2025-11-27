@@ -1,10 +1,9 @@
 import { Box, Container } from '@mui/material';
 import { MobileBusinessHeader } from '@/layers/02_features/MobileBusinessHeader/ui/MobileBusinessHeader';
 import { BusinessHeroDesktop } from '@/layers/02_features/BusinessHeroDesktop/ui/BusinessHeroDesktop';
+import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 
-import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
-
-export default function BusinessHeader() {
+export default function BusinessHeader({ data }: { data?: Business }) {
   return (
     <Box
       component="section"
@@ -13,9 +12,9 @@ export default function BusinessHeader() {
       }}
     >
       <Container maxWidth="lg">
-        <MobileBusinessHeader data={MOCK_BUSINESS_DETAILS} />
+        <MobileBusinessHeader data={data} />
 
-        <BusinessHeroDesktop data={MOCK_BUSINESS_DETAILS} />
+        <BusinessHeroDesktop data={data} />
       </Container>
     </Box>
   );
