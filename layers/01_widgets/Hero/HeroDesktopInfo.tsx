@@ -1,4 +1,7 @@
-import { Box, Typography, Grid, Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
 import ExploreIcon from '@mui/icons-material/Explore';
 import MapIcon from '@mui/icons-material/Map';
 import PlaceIcon from '@mui/icons-material/Place';
@@ -8,7 +11,8 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 
 import Link from 'next/link';
-import styles from './HeroSearch.module.css';
+import styles from './HeroDesktopInfo.module.css';
+// import HeroStats from './HeroStats';
 
 const QUICK_DISCOVER_CATEGORIES = [
   { name: 'Aperitivo Bars', count: 324, icon: LocalBarIcon, href: '/bars' },
@@ -20,12 +24,6 @@ const QUICK_DISCOVER_CATEGORIES = [
   },
   { name: 'Winter Cafés', count: 189, icon: LocalCafeIcon, href: '/cafes' },
   { name: 'Art Galleries', count: 78, icon: ColorLensIcon, href: '/art' },
-];
-
-const STATS = [
-  { value: '1.234', label: 'Local spots' },
-  { value: '4.7', label: 'Avg rating' },
-  { value: '6°C', label: 'Today' },
 ];
 
 export const HeroDesktopInfo: React.FC = () => {
@@ -71,7 +69,7 @@ export const HeroDesktopInfo: React.FC = () => {
             <Button
               variant="contained"
               component={Link}
-              href="/discover"
+              href="/search?q=milano"
               className={styles['left-col__button']}
               sx={{
                 padding: '0.75rem 1.5rem',
@@ -147,34 +145,9 @@ export const HeroDesktopInfo: React.FC = () => {
           </Box>
         </Grid>
       </Grid>
-      <Box width={'40%'}>
-        <Grid container sx={{ mt: 2, pt: 3 }}>
-          {STATS.map((stat) => (
-            <Grid size={4} key={stat.label} sx={{ textAlign: 'left' }}>
-              <Box sx={{ color: 'brandPin.main', mb: 0.5 }}>
-                <Typography
-                  variant="h4"
-                  component="span"
-                  fontWeight="bold"
-                  sx={{
-                    verticalAlign: 'middle',
-                    fontFamily: (theme) => theme.typography.fontFamily,
-                  }}
-                >
-                  {stat.value}
-                </Typography>
-              </Box>
-              <Typography
-                variant="caption"
-                color="brandAccent.contrastText"
-                display="block"
-              >
-                {stat.label}
-              </Typography>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+      {/* <Box width={'40%'}>
+        <HeroStats />
+      </Box> */}
     </Box>
   );
 };

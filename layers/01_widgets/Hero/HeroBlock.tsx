@@ -7,7 +7,7 @@ import { HeroDesktopInfo } from './HeroDesktopInfo';
 
 const HERO_IMAGE_URL = '/mockHero.jpg';
 
-export const HeroSearch: React.FC = () => {
+export const HeroBlock: React.FC = () => {
   return (
     <Box
       component={'figure'}

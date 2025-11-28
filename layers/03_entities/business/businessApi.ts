@@ -1,8 +1,5 @@
 import { api } from '@/layers/03_entities/api/baseApi';
-import {
-  Business,
-  BUSINESS_MOCKS,
-} from '../../04_shared/api/mocks/businessMocks';
+import { Business } from '../../04_shared/api/mocks/businessMocks';
 import { LanguageCode } from '@/layers/04_shared/configs/settings';
 
 interface CompanyParams {
@@ -10,16 +7,26 @@ interface CompanyParams {
   lang: LanguageCode;
 }
 
+interface BusinessListParams {
+  lang?: LanguageCode;
+  page?: number;
+  per_page?: number;
+  category_id?: number;
+  city?: string;
+  country?: string;
+  rating_min?: number;
+  sort?: 'rating' | 'created_at';
+}
+
 export const businessApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getBusinessList: builder.query<Business[], undefined>({
-      queryFn: () => {
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            resolve({ data: BUSINESS_MOCKS });
-          }, 500);
-        });
-      },
+    getBusinessList: builder.query<Business[], BusinessListParams | undefined>({
+      query: (params) => ({
+        url: 'companies',
+        params,
+      }),
+      transformResponse: (response: { data: Business[] }) => response.data,
+      providesTags: ['Business'],
     }),
 
     getCompanyDetails: builder.query<Business, CompanyParams>({
@@ -35,4 +42,4 @@ export const { useGetBusinessListQuery, useGetCompanyDetailsQuery } =
   businessApi;
 
 // 🚨 Экспорт initiate для использования в Server Components (SSR)
-export const { getCompanyDetails } = businessApi.endpoints;
+export const { getCompanyDetails, getBusinessList } = businessApi.endpoints;

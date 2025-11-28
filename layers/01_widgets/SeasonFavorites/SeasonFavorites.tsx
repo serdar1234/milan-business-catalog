@@ -10,7 +10,8 @@ export const SeasonFavorites: React.FC = () => {
     data: businessList,
     isLoading,
     isError,
-  } = useGetBusinessListQuery(undefined);
+  } = useGetBusinessListQuery({ sort: 'rating' });
+
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('md'));
   const numberOfCols = isMobile ? 2 : 3;
 

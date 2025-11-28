@@ -13,9 +13,9 @@ import Image from 'next/image';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { PhotoLightbox } from '@/layers/04_shared/ui/PhotoLightbox';
 import { useViewportWidth } from '@/layers/04_shared/hooks/useViewportWidth';
-// import { Photo } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
+import { Photo } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
 
-const MOCK_PHOTOS = [
+const MOCK_PHOTOS: Photo[] = [
   { id: 1, url: '/d1.jpg', filename: 'Interior view' },
   { id: 2, url: '/d2.jpg', filename: 'Plate of food' },
   { id: 3, url: '/d3.jpg', filename: 'Canal view' },

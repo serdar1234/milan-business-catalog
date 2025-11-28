@@ -49,7 +49,7 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
       >
         <Typography variant="caption" color="var(--color-border-grey)">
           <Image
-            src={images[0]?.url}
+            src={images[0]?.url || '/logo.png'}
             alt={name}
             width={60}
             height={60}
@@ -81,19 +81,21 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
         <Typography variant="body2" color="text.primary" sx={{ mb: 1 }}>
           {description}
         </Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            position: 'relative',
-            bottom: 0,
-            left: '-4.5rem',
-          }}
-        >
-          <Typography variant="caption" color="text.secondary">
-            {distance} away
-          </Typography>
-        </Box>
+        {distance && (
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              position: 'relative',
+              bottom: 0,
+              left: '-4.5rem',
+            }}
+          >
+            <Typography variant="caption" color="text.secondary">
+              {distance} away
+            </Typography>
+          </Box>
+        )}
 
         {isOpen && (
           <Chip

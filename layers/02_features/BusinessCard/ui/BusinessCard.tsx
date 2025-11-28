@@ -56,7 +56,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
         <Link href={`/business/${id}`}>
           <CardMedia
             component="img"
-            image={images[0]?.url}
+            image={images[0]?.url || '/fish.jpg'}
             alt={name}
             sx={{ height: 200, objectFit: 'cover' }}
           />

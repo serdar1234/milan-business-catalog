@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
-import { StoreProvider } from '@/layers/04_shared/providers/StoreProvider';
-import { MuiThemeProvider } from '@/layers/04_shared/providers/MuiThemeProvider';
+import { StoreProvider } from '@/layers/03_entities/providers/StoreProvider';
+import { MuiThemeProvider } from '@/layers/03_entities/providers/MuiThemeProvider';
 import { Header } from '@/layers/01_widgets/Header/ui/Header';
 import { Playfair_Display, Inter } from 'next/font/google';
 import Box from '@mui/material/Box';
