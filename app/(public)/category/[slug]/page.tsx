@@ -2,7 +2,7 @@ import { Box, Container } from '@mui/material';
 import style from './CategoryPage.module.css';
 import { CategoryFilters } from '@/layers/01_widgets/CategoryFilters/CategoryFilters';
 import LongMenu from '@/layers/04_shared/ui/LongMenu';
-import { CategoryBusinessList } from '@/layers/01_widgets/CategoryBusinessList/CategoryBusinessList';
+import { BusinessList } from '@/layers/01_widgets/BusinessList/BusinessList';
 import type { Metadata } from 'next';
 import { getTitleFromSlug } from '@/layers/04_shared/utils/helpers';
 type Props = {
@@ -30,7 +30,7 @@ export default function CategoryPage() {
             <CategoryFilters />
           </div>
           <div className={style['grid-item__main']}>
-            <CategoryBusinessList />
+            {/* <BusinessList /> */}
           </div>
         </div>
       </Container>

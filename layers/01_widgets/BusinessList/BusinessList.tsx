@@ -1,37 +1,30 @@
-'use client';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Pagination from '@mui/material/Pagination';
+import CircularProgress from '@mui/material/CircularProgress';
 
-import {
-  Box,
-  CircularProgress,
-  Grid,
-  Pagination,
-  Typography,
-} from '@mui/material';
 import BusinessCardGrid from '@/layers/02_features/BusinessCardGrid';
-import { useGetSearchResultsQuery } from '@/layers/03_entities/search/api/searchApi';
-import { useState } from 'react';
+import { SearchResults } from '@/layers/04_shared/hooks/useSearchResults';
 
-interface CategoryBusinessListProps {
-  query: string;
+interface BusinessListProps extends SearchResults {
   cols?: number;
   isSmall?: boolean;
 }
 
-export const CategoryBusinessList: React.FC<CategoryBusinessListProps> = ({
-  query,
+export const BusinessList: React.FC<BusinessListProps> = ({
+  page,
+  setPage,
+  businessList,
+  meta,
+  isLoading,
+  isError,
   cols = 2,
   isSmall,
 }) => {
-  const [page, setPage] = useState(1);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
-  const { data, isLoading, isError } = useGetSearchResultsQuery({
-    q: query,
-    page,
-    per_page: 10,
-  });
-  const { data: businessList, meta } = data || {};
 
   if (isLoading) {
     return (
@@ -50,7 +43,12 @@ export const CategoryBusinessList: React.FC<CategoryBusinessListProps> = ({
   }
 
   if (businessList && businessList.length === 0) {
-    return null;
+    return (
+      <Typography color="primary.main" sx={{ textAlign: 'center', p: 4 }}>
+        Oops! We couldn&apos;t find any businesses matching your search. Please
+        try again with different keywords.
+      </Typography>
+    );
   }
 
   return (

@@ -15,8 +15,9 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { ViewType } from '@/layers/02_features/SearchHeaderVersions';
 import styles from './SearchPageClient.module.css';
 import { FilterPanel } from '@/layers/02_features/FilterPanel/FilterPanel';
-import { CategoryBusinessList } from '@/layers/01_widgets/CategoryBusinessList/CategoryBusinessList';
+import { BusinessList } from '@/layers/01_widgets/BusinessList/BusinessList';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
+import { useSearchResults } from '@/layers/04_shared/hooks/useSearchResults';
 
 const MapContainerClient = dynamic(
   () =>
@@ -59,6 +60,8 @@ export default function SearchPageClient({
   const { open, toggleDrawer, setOpen } = useToggleDrawer();
 
   const [currentView, setCurrentView] = useState<ViewType>(initialView);
+  const { page, setPage, businessList, meta, isLoading, isError } =
+    useSearchResults(searchQuery);
   const DUMMY_TOTAL_RESULTS = 47;
 
   const handleViewChange = (newView: ViewType) => {
@@ -111,8 +114,13 @@ export default function SearchPageClient({
                   alignBoxs: 'center',
                 }}
               >
-                <CategoryBusinessList
-                  query={searchQuery}
+                <BusinessList
+                  page={page}
+                  setPage={setPage}
+                  businessList={businessList}
+                  meta={meta}
+                  isLoading={isLoading}
+                  isError={isError}
                   cols={currentView === 'list' ? 1 : 2}
                 />
               </Box>

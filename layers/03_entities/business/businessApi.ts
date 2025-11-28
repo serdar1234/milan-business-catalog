@@ -2,11 +2,6 @@ import { api } from '@/layers/03_entities/api/baseApi';
 import { Business } from '../../04_shared/api/mocks/businessMocks';
 import { LanguageCode } from '@/layers/04_shared/configs/settings';
 
-interface CompanyParams {
-  id: number | string;
-  lang: LanguageCode;
-}
-
 interface BusinessListParams {
   lang?: LanguageCode;
   page?: number;
@@ -16,6 +11,11 @@ interface BusinessListParams {
   country?: string;
   rating_min?: number;
   sort?: 'rating' | 'created_at';
+}
+
+interface CompanyParams {
+  id: number | string;
+  lang: LanguageCode;
 }
 
 export const businessApi = api.injectEndpoints({
