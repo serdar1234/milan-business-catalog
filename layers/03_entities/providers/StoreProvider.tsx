@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import { Provider } from 'react-redux';
-import { makeStore } from '@/layers/03_entities/store';
-import type { AppStore } from '@/layers/03_entities/store';
+import { type AppStore, makeStore } from '@/layers/03_entities/store';
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [store] = useState<AppStore>(() => makeStore());

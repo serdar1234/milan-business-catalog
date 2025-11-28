@@ -4,6 +4,7 @@ import { getCompanyDetails } from '@/layers/03_entities/business/businessApi';
 import { BusinessHeader } from '@/layers/01_widgets/BusinessHeader/BusinessHeader';
 import { MobileQuickActions } from '@/layers/01_widgets/MobileQuickActions/ui/MobileQuickActions';
 import { notFound } from 'next/navigation';
+import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
 
 interface Props {
   params: { id: string };
@@ -11,7 +12,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
-  const lang = 'en';
+  const { lang } = await getSSRPreferences();
   const res = await fetch(
     `https://api.milanplaces.com/api/v1/companies/${id}?lang=${lang}`,
     {
@@ -42,7 +43,8 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function BusinessPage({ params }: Props) {
   const { id } = await params;
-  const lang = 'en';
+  const { lang } = await getSSRPreferences();
+
   const store = createServerStore();
   const result = await store.dispatch(
     getCompanyDetails.initiate({ id, lang }, { forceRefetch: true }),

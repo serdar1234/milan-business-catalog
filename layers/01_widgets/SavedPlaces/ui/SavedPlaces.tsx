@@ -42,7 +42,7 @@ export const SavedPlaces: React.FC = () => {
           </Typography>
           <Button
             component={Link}
-            href="/saved/manage"
+            href="#"
             variant="text"
             color="brandAccent"
             sx={{ fontWeight: 'bold' }}

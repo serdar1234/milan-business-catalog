@@ -1,5 +1,8 @@
 import { cookies } from 'next/headers';
-import { LanguageCode, CurrencyCode } from '../configs/settings';
+import {
+  LanguageCode,
+  CurrencyCode,
+} from '@/layers/04_shared/configs/settings';
 
 export async function getSSRPreferences() {
   const store = cookies();

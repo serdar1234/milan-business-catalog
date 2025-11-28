@@ -31,7 +31,7 @@ export function FooterCats() {
           data.map((cat) => (
             <MuiLink
               component={Link}
-              href={`/${cat.name.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
+              href={`/category/${cat.name.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
               key={cat.id}
               underline="none"
               sx={{
