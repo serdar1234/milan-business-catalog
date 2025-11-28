@@ -20,8 +20,8 @@ const NAV_ITEMS = [
   { label: 'Home', icon: HomeIcon, href: '/' },
   { label: 'Map', icon: MapIcon, href: '/map' },
   { label: 'Search', icon: TravelExploreIcon, href: '/map' },
-  { label: 'Saved', icon: FavoriteIcon, href: '/saved' },
-  { label: 'Profile', icon: PersonIcon, href: '/profile' },
+  { label: 'Saved', icon: FavoriteIcon, href: '#' },
+  { label: 'Profile', icon: PersonIcon, href: '#' },
 ];
 type NavLabel = 'Home' | 'Map' | 'Search' | 'Saved' | 'Profile';
 
