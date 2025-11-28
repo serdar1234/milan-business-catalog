@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Drawer from '@mui/material/Drawer';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { BusinessList } from '@/layers/01_widgets/BusinessList/BusinessList';
+// import { BusinessList } from '@/layers/01_widgets/BusinessList/BusinessList';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
 import { FilterPanel } from '@/layers/02_features/FilterPanel/FilterPanel';
 

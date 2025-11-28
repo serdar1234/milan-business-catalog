@@ -5,6 +5,8 @@ import { StoreProvider } from '@/layers/03_entities/providers/StoreProvider';
 import { MuiThemeProvider } from '@/layers/03_entities/providers/MuiThemeProvider';
 import { Header } from '@/layers/01_widgets/Header/ui/Header';
 import { Playfair_Display, Inter } from 'next/font/google';
+import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
+import SyncPreferences from '@/layers/04_shared/utils/SyncPreferences';
 import Box from '@mui/material/Box';
 import './globals.css';
 const MobileNavBar = dynamic(
@@ -43,6 +45,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const prefs = await getSSRPreferences();
+
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <MuiThemeProvider>
@@ -59,6 +63,10 @@ export default async function RootLayout({
               <Footer />
             </AppRouterCacheProvider>
           </StoreProvider>
+          <SyncPreferences
+            serverLang={prefs.lang}
+            serverCurrency={prefs.currency}
+          />
         </body>
       </MuiThemeProvider>
     </html>

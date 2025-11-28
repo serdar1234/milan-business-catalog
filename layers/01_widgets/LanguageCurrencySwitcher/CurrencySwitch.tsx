@@ -10,12 +10,16 @@ import LanguageIcon from '@mui/icons-material/Language';
 import EuroIcon from '@mui/icons-material/Euro';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-import { useClientSetting } from '@/layers/04_shared/hooks/useClientSetting';
+// import { useClientSetting } from '@/layers/04_shared/hooks/useClientSetting';
 import { CURRENCIES, LANGUAGES } from '@/layers/04_shared/configs/settings';
+import { usePreferenceSetting } from '@/layers/04_shared/hooks/usePreferenceSetting';
 
 export const CurrencySwitch = ({ light }: { light?: boolean }) => {
-  const [language, setLanguage] = useClientSetting('language', 'en');
-  const [currency, setCurrency] = useClientSetting('currency', 'EUR');
+  // const [language, setLanguage] = useClientSetting('language', 'en');
+  // const [currency, setCurrency] = useClientSetting('currency', 'EUR');
+
+  const [language, setLanguage] = usePreferenceSetting('language', 'en');
+  const [currency, setCurrency] = usePreferenceSetting('currency', 'EUR');
 
   const [anchorLang, setAnchorLang] = useState<null | HTMLElement>(null);
   const [anchorCurr, setAnchorCurr] = useState<null | HTMLElement>(null);
