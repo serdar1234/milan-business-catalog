@@ -1,40 +1,48 @@
 import { api } from '@/layers/03_entities/api/baseApi';
+import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 import { type LanguageCode } from '@/layers/04_shared/configs/settings';
 
-export interface AutocompleteResult {
-  name: string;
-  city: string;
-  country: string;
-  id: number;
-}
-
-interface AutocompleteApiResponse {
-  data: AutocompleteResult[];
-}
-
-interface AutocompleteParams {
+export type SearchParams = {
   q: string;
-  limit: number;
-  lang: LanguageCode;
+  lang?: LanguageCode;
+  page?: number;
+  per_page?: number;
+  category_id?: number;
+  city?: string;
+  country?: string;
+  rating_min?: number;
+  radius?: number;
+  lat?: number;
+  lon?: number;
+  sort?: string;
+};
+
+export interface SearchResult {
+  data: Business[];
+  meta: {
+    pagination: {
+      page: number;
+      per_page: number;
+      total_pages: number;
+      total_count: number;
+    };
+    source: string;
+  };
 }
 
 export const searchApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getAutocompleteSuggestions: builder.query<
-      AutocompleteResult[],
-      AutocompleteParams
-    >({
-      query: ({ q, limit, lang }) => ({
-        url: `/companies/autocomplete?q=${q}&limit=${limit}&lang=${lang}`,
-        method: 'GET',
+    getSearchResults: builder.query<SearchResult, SearchParams>({
+      query: (params) => ({
+        url: `companies/search`,
+        params,
       }),
-      transformResponse: (response: AutocompleteApiResponse) => {
-        return response.data;
-      },
-      providesTags: [{ type: 'Autocomplete', id: 'LIST' }],
+      providesTags: [{ type: 'Search', id: 'LIST' }],
       keepUnusedDataFor: 60,
     }),
   }),
 });
 
-export const { useGetAutocompleteSuggestionsQuery } = searchApi;
+export const { useGetSearchResultsQuery } = searchApi;
+
+export const { getSearchResults } = searchApi.endpoints;

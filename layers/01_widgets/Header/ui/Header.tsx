@@ -84,7 +84,7 @@ export const Header: FC = () => {
 
           <IconButton
             component={Link}
-            href="/profile"
+            href="#"
             sx={{ color: 'primary.contrastText' }}
           >
             <SharedIcon iconName="User" />

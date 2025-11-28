@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
 export const api = createApi({
   reducerPath: 'api',
   baseQuery,
-  tagTypes: ['Category', 'Business', 'User', 'Autocomplete'],
+  tagTypes: ['Category', 'Business', 'User', 'Autocomplete', 'Search'],
   keepUnusedDataFor: 60 * 60,
   refetchOnMountOrArgChange: false,
   refetchOnReconnect: false,

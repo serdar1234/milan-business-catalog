@@ -7,23 +7,31 @@ import {
   Pagination,
   Typography,
 } from '@mui/material';
-import { useGetBusinessListQuery } from '@/layers/03_entities/business/businessApi';
 import BusinessCardGrid from '@/layers/02_features/BusinessCardGrid';
+import { useGetSearchResultsQuery } from '@/layers/03_entities/search/api/searchApi';
+import { useState } from 'react';
 
 interface CategoryBusinessListProps {
+  query: string;
   cols?: number;
   isSmall?: boolean;
 }
 
 export const CategoryBusinessList: React.FC<CategoryBusinessListProps> = ({
+  query,
   cols = 2,
   isSmall,
 }) => {
-  const {
-    data: businessList,
-    isLoading,
-    isError,
-  } = useGetBusinessListQuery(undefined);
+  const [page, setPage] = useState(1);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+  const { data, isLoading, isError } = useGetSearchResultsQuery({
+    q: query,
+    page,
+    per_page: 10,
+  });
+  const { data: businessList, meta } = data || {};
 
   if (isLoading) {
     return (
@@ -41,9 +49,7 @@ export const CategoryBusinessList: React.FC<CategoryBusinessListProps> = ({
     );
   }
 
-  const featuredBusinesses = businessList?.slice(0, 6) || [];
-
-  if (featuredBusinesses.length === 0) {
+  if (businessList && businessList.length === 0) {
     return null;
   }
 
@@ -59,7 +65,7 @@ export const CategoryBusinessList: React.FC<CategoryBusinessListProps> = ({
     >
       <Grid container spacing={2} width={'100%'}>
         <BusinessCardGrid
-          data={featuredBusinesses}
+          data={businessList || []}
           cols={cols}
           isSmall={isSmall}
         />
@@ -71,7 +77,11 @@ export const CategoryBusinessList: React.FC<CategoryBusinessListProps> = ({
             justifyContent: 'center',
           }}
         >
-          <Pagination count={10} />
+          <Pagination
+            count={meta?.pagination.total_pages || 0}
+            page={page}
+            onChange={handleChange}
+          />
         </Box>
       </Grid>
     </Box>

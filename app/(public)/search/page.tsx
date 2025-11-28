@@ -3,6 +3,7 @@ import SearchPageClient from '@/layers/02_features/Search/ui/SearchPageClient';
 import type { ViewType } from '@/layers/02_features/SearchHeaderVersions';
 import type { Metadata } from 'next';
 import { getTitleFromSlug } from '@/layers/04_shared/utils/helpers';
+
 type MetaProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
@@ -32,6 +33,7 @@ interface Props {
 export default async function SearchPage({ searchParams }: Props) {
   const params = await searchParams;
   const searchQuery = params.q || '';
+
   if (!searchQuery) {
     redirect('/search?q=milano');
   }

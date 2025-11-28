@@ -34,7 +34,7 @@ import {
 import {
   AutocompleteResult,
   useGetAutocompleteSuggestionsQuery,
-} from '@/layers/03_entities/search/api/searchApi';
+} from '@/layers/03_entities/autocomplete/api';
 
 import { useDebounce } from '@/layers/04_shared/hooks/useDebounce';
 import { useCurrentLanguage } from '@/layers/04_shared/hooks/useCurrentLanguage';

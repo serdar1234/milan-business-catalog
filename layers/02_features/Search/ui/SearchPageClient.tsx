@@ -111,7 +111,10 @@ export default function SearchPageClient({
                   alignBoxs: 'center',
                 }}
               >
-                <CategoryBusinessList cols={currentView === 'list' ? 1 : 2} />
+                <CategoryBusinessList
+                  query={searchQuery}
+                  cols={currentView === 'list' ? 1 : 2}
+                />
               </Box>
             )}
           </Grid>
