@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:local": "next dev -H 0.0.0.0 -p 3000 --turbopack",
     "build": "next build --turbopack",
     "format": "prettier --write \"{app,layers}/**/*.{ts,tsx,json}\"",
     "start": "next start",

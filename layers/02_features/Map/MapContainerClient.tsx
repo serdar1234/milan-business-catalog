@@ -1,14 +1,13 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import * as L from 'leaflet';
+import L, { Map as LeafletMap } from 'leaflet';
 import {
   MapContainer,
   TileLayer,
   Marker,
   Popup,
   ScaleControl,
-  useMapEvents,
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
@@ -17,41 +16,20 @@ import customDivIcon from '@/layers/04_shared/utils/customDivIcon';
 import { MapFilterButton } from './MapFilterButton';
 import HomeControl from './HomeControl';
 import { MapUpdater } from '@/layers/04_shared/utils/MapUpdater';
+import { MILAN_CENTER, ZOOM } from '@/layers/04_shared/utils/constants';
+import { MapEventsHandler } from './MapEventsHandler';
+import { ResizeHandler } from './ResizeHandler';
 
 interface MapContainerClientProps {
-  center: [number, number];
-  zoom: number;
+  center?: [number, number];
+  zoom?: number;
   showMapControls?: boolean;
+
   onFilterClick?: () => void;
 
-  /** New props */
   onMapMove?: (lat: number, lon: number) => void;
   onMapZoom?: (zoom: number) => void;
 }
-
-function MapEventsHandler({
-  onMapMove,
-  onMapZoom,
-}: {
-  onMapMove?: (lat: number, lon: number) => void;
-  onMapZoom?: (zoom: number) => void;
-}) {
-  useMapEvents({
-    moveend(map) {
-      const center = map.target.getCenter();
-      onMapMove?.(center.lat, center.lng);
-    },
-    zoomend(map) {
-      const zoom = map.target.getZoom();
-      onMapZoom?.(zoom);
-    },
-  });
-
-  return null;
-}
-
-const ZOOM = 13;
-const MILAN_CENTER: [number, number] = [45.4642, 9.19];
 
 export const MapContainerClient: React.FC<MapContainerClientProps> = ({
   center = MILAN_CENTER,
@@ -61,7 +39,7 @@ export const MapContainerClient: React.FC<MapContainerClientProps> = ({
   onMapMove,
   onMapZoom,
 }) => {
-  const mapRef = useRef(null);
+  const mapRef = useRef<LeafletMap | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -82,6 +60,7 @@ export const MapContainerClient: React.FC<MapContainerClientProps> = ({
       <MapContainer
         center={center}
         zoom={zoom}
+        scrollWheelZoom={false}
         zoomControl={false}
         gestureHandling={true}
         gestureHandlingOptions={{
@@ -94,15 +73,13 @@ export const MapContainerClient: React.FC<MapContainerClientProps> = ({
         style={{ height: '100%', width: '100%' }}
         ref={mapRef}
       >
+        <ResizeHandler />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {/* Обновление позиции при изменении search params */}
         <MapUpdater newPosition={center} />
-
-        {/* Снимаем события карты */}
         <MapEventsHandler onMapMove={onMapMove} onMapZoom={onMapZoom} />
 
         {showMapControls && (

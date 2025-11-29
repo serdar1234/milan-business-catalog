@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 
 import Box from '@mui/material/Box';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
-import MapSidebar from './components/MapSidebar';
-import MapFilterDrawer from './components/MapFilterDrawer';
+import MapSidebar from '@/layers/02_features/Map/MapSidebar';
+import MapFilterDrawer from '@/layers/02_features/Map/MapFilterDrawer';
 import { Spinner } from '@/layers/04_shared/ui/Spinner';
 
 const MapContainerClient = dynamic(

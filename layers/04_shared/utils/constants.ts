@@ -1,4 +1,4 @@
-export const DAYS = [
+const DAYS = [
   'Sunday',
   'Monday',
   'Tuesday',
@@ -7,3 +7,8 @@ export const DAYS = [
   'Friday',
   'Saturday',
 ];
+
+const ZOOM = 13;
+const MILAN_CENTER: [number, number] = [45.4642, 9.19];
+
+export { DAYS, ZOOM, MILAN_CENTER };
