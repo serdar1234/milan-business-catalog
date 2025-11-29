@@ -1,13 +1,9 @@
 import MapPageClient from './MapPageClient';
 
-interface Props {
-  searchParams: {
-    lat: string;
-    lon: string;
-    zoom: string;
-  };
-}
-
-export default async function MapPage({ searchParams }: Props) {
-  return <MapPageClient searchParams={searchParams} />;
+export default function MapPage({
+  searchParams,
+}: {
+  searchParams: Record<string, string>;
+}) {
+  return <MapPageClient initialSearchParams={searchParams} />;
 }

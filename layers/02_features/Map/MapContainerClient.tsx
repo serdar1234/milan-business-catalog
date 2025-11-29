@@ -8,6 +8,7 @@ import {
   Marker,
   Popup,
   ScaleControl,
+  useMapEvents,
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css';
@@ -18,10 +19,35 @@ import HomeControl from './HomeControl';
 import { MapUpdater } from '@/layers/04_shared/utils/MapUpdater';
 
 interface MapContainerClientProps {
-  center?: [number, number];
-  zoom?: number;
+  center: [number, number];
+  zoom: number;
   showMapControls?: boolean;
   onFilterClick?: () => void;
+
+  /** New props */
+  onMapMove?: (lat: number, lon: number) => void;
+  onMapZoom?: (zoom: number) => void;
+}
+
+function MapEventsHandler({
+  onMapMove,
+  onMapZoom,
+}: {
+  onMapMove?: (lat: number, lon: number) => void;
+  onMapZoom?: (zoom: number) => void;
+}) {
+  useMapEvents({
+    moveend(map) {
+      const center = map.target.getCenter();
+      onMapMove?.(center.lat, center.lng);
+    },
+    zoomend(map) {
+      const zoom = map.target.getZoom();
+      onMapZoom?.(zoom);
+    },
+  });
+
+  return null;
 }
 
 const ZOOM = 13;
@@ -32,8 +58,11 @@ export const MapContainerClient: React.FC<MapContainerClientProps> = ({
   zoom = ZOOM,
   showMapControls = false,
   onFilterClick,
+  onMapMove,
+  onMapZoom,
 }) => {
   const mapRef = useRef(null);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       import('leaflet-gesture-handling').then(({ GestureHandling }) => {
@@ -69,7 +98,13 @@ export const MapContainerClient: React.FC<MapContainerClientProps> = ({
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
+        {/* Обновление позиции при изменении search params */}
         <MapUpdater newPosition={center} />
+
+        {/* Снимаем события карты */}
+        <MapEventsHandler onMapMove={onMapMove} onMapZoom={onMapZoom} />
+
         {showMapControls && (
           <>
             <HomeControl position="topleft" centralPosition={center} />
@@ -79,6 +114,7 @@ export const MapContainerClient: React.FC<MapContainerClientProps> = ({
             )}
           </>
         )}
+
         <Marker icon={customDivIcon('Milano', true)} position={center}>
           <Popup offset={[0, -10]}>Benvenuti a Milano!</Popup>
         </Marker>

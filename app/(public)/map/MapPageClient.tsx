@@ -1,8 +1,9 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import Box from '@mui/material/Box';
+import { useRouter } from 'next/navigation';
 
+import Box from '@mui/material/Box';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
 import MapSidebar from './components/MapSidebar';
 import MapFilterDrawer from './components/MapFilterDrawer';
@@ -19,23 +20,27 @@ const MapContainerClient = dynamic(
   },
 );
 
-interface Props {
-  searchParams: {
-    lat: string;
-    lon: string;
-    zoom: string;
-  };
-}
-
-export default function MapPageClient({ searchParams }: Props) {
+export default function MapPageClient({
+  initialSearchParams,
+}: {
+  initialSearchParams: Record<string, string>;
+}) {
   const { open, setOpen, toggleDrawer } = useToggleDrawer();
+  const router = useRouter();
 
-  // параметры карты из URL
-  const lat = parseFloat(searchParams.lat ?? '45.4641');
-  const lon = parseFloat(searchParams.lon ?? '9.1919');
-  const zoom = parseInt(searchParams.zoom ?? '13');
+  const initialLat = parseFloat(initialSearchParams.lat ?? '45.4642');
+  const initialLon = parseFloat(initialSearchParams.lon ?? '9.19');
+  const initialZoom = parseInt(initialSearchParams.zoom ?? '13');
 
-  console.log('lat', lat, 'lon', lon, 'zoom', zoom);
+  function updateURL(lat: number, lon: number, zoom?: number) {
+    const params = new URLSearchParams();
+
+    params.set('lat', lat.toFixed(6));
+    params.set('lon', lon.toFixed(6));
+    if (zoom !== undefined) params.set('zoom', String(zoom));
+
+    router.replace(`/map?${params.toString()}`);
+  }
 
   const handleFilterToggle = () => {
     setOpen(true);
@@ -55,9 +60,10 @@ export default function MapPageClient({ searchParams }: Props) {
         {/* MAP */}
         <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 60%' } }}>
           <MapContainerClient
-            // lat={lat}
-            // lon={lon}
-            // zoom={zoom}
+            center={[initialLat, initialLon]}
+            zoom={initialZoom}
+            onMapMove={(lat, lon) => updateURL(lat, lon)}
+            onMapZoom={(zoom) => updateURL(initialLat, initialLon, zoom)}
             showMapControls
             onFilterClick={handleFilterToggle}
           />
