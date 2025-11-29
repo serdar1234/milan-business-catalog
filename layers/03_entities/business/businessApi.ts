@@ -42,4 +42,4 @@ export const { useGetBusinessListQuery, useGetCompanyDetailsQuery } =
   businessApi;
 
 // 🚨 Экспорт initiate для использования в Server Components (SSR)
-export const { getCompanyDetails, getBusinessList } = businessApi.endpoints;
+// export const { getCompanyDetails, getBusinessList } = businessApi.endpoints;

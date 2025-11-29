@@ -13,7 +13,7 @@ export const NavColumn: React.FC<{ title: string; links: string[] }> = ({
     {links.map((link) => (
       <MuiLink
         component={Link}
-        href={`/${link.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
+        href={`#${link.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
         key={link}
         underline="none"
         sx={{

@@ -44,3 +44,20 @@ button.close-btn {
   color: var(--color-surface);
   z-index: 1500;
 }
+
+a.roundIconButton {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background-color: var(--color-surface);
+  color: var(--color-brand-accent);
+  border: 1px solid var(--color-border-grey);
+  border-radius: 50%;
+}
+
+a.roundIconButton:hover {
+  background-color: transparent;
+  color: var(--color-brand-accent);
+}

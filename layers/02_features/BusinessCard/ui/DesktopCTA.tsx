@@ -1,8 +1,10 @@
-import { Box, Button, IconButton } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import PhoneIcon from '@mui/icons-material/Phone';
+import RoundIconButton from '@/layers/04_shared/ui/RoundIconButton';
 
-export const DesktopCTA = () => {
+export const DesktopCTA = ({ phone }: { phone: string }) => {
   return (
     <Box
       sx={{
@@ -10,10 +12,6 @@ export const DesktopCTA = () => {
         gap: 1,
         p: 2,
         pt: 0,
-      }}
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
       }}
     >
       <Button
@@ -26,29 +24,12 @@ export const DesktopCTA = () => {
         Reserve
       </Button>
 
-      <IconButton
-        size="large"
-        sx={{
-          bgcolor: 'background.default',
-          color: 'brandAccent.main',
-          border: '1px solid var(--color-border-grey)',
-        }}
-        aria-label="Get directions"
-      >
+      <RoundIconButton href="#">
         <DirectionsIcon />
-      </IconButton>
-
-      <IconButton
-        size="large"
-        sx={{
-          bgcolor: 'background.default',
-          color: 'brandAccent.main',
-          border: '1px solid var(--color-border-grey)',
-        }}
-        aria-label="Call business"
-      >
+      </RoundIconButton>
+      <RoundIconButton href={`tel:${phone}`}>
         <PhoneIcon />
-      </IconButton>
+      </RoundIconButton>
     </Box>
   );
 };
