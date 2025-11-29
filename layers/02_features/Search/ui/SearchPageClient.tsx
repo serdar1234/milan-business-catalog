@@ -2,22 +2,22 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
 import Drawer from '@mui/material/Drawer';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { SearchHeader } from '@/layers/01_widgets/SearchHeader/SearchHeader';
-import { useRouter } from 'next/navigation';
-import { usePathname, useSearchParams } from 'next/navigation';
 import { ViewType } from '@/layers/02_features/SearchHeaderVersions';
-import styles from './SearchPageClient.module.css';
+import { SearchHeader } from '@/layers/01_widgets/SearchHeader/SearchHeader';
 import { FilterPanel } from '@/layers/02_features/FilterPanel/FilterPanel';
 import { BusinessList } from '@/layers/01_widgets/BusinessList/BusinessList';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
 import { useSearchResults } from '@/layers/04_shared/hooks/useSearchResults';
+import { Spinner } from '@/layers/04_shared/ui/Spinner';
+import styles from './SearchPageClient.module.css';
 
 const MapContainerClient = dynamic(
   () =>
@@ -26,20 +26,7 @@ const MapContainerClient = dynamic(
     ),
   {
     ssr: false,
-    loading: () => (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '60vh',
-          width: '100%',
-          backgroundColor: 'var(--color-secondary-main)',
-        }}
-      >
-        <CircularProgress size={60} color="primary" />
-      </div>
-    ),
+    loading: () => <Spinner />,
   },
 );
 

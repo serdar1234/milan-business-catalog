@@ -2,10 +2,9 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
-import CircularProgress from '@mui/material/CircularProgress';
-
 import BusinessCardGrid from '@/layers/02_features/BusinessCardGrid';
 import { SearchResults } from '@/layers/04_shared/hooks/useSearchResults';
+import { Spinner } from '@/layers/04_shared/ui/Spinner';
 
 interface BusinessListProps extends SearchResults {
   cols?: number;
@@ -27,11 +26,7 @@ export const BusinessList: React.FC<BusinessListProps> = ({
   };
 
   if (isLoading) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', py: '2rem' }}>
-        <CircularProgress sx={{ color: 'var(--color-brand-accent)' }} />
-      </Box>
-    );
+    return <Spinner bgcolor="transparent" />;
   }
 
   if (isError) {

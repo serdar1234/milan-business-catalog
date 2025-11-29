@@ -4,7 +4,14 @@ import DirectionsIcon from '@mui/icons-material/Directions';
 import PhoneIcon from '@mui/icons-material/Phone';
 import RoundIconButton from '@/layers/04_shared/ui/RoundIconButton';
 
-export const DesktopCTA = ({ phone }: { phone: string }) => {
+export const DesktopCTA = ({
+  phone,
+  coordinates,
+}: {
+  phone: string;
+  coordinates: { lat: number; lon: number };
+}) => {
+  console.log('coordinates', coordinates);
   return (
     <Box
       sx={{

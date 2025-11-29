@@ -3,16 +3,14 @@
 import { BusinessCardSmall } from '@/layers/02_features/BusinessCardSmall/BusinessCardSmall';
 import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import {
-  Container,
-  Box,
-  Button,
-  Typography,
-  CircularProgress,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import { FILTER_BUTTONS } from './mockData';
 import { BUSINESS_MOCKS } from '@/layers/04_shared/api/mocks/businessMocks';
 import dynamic from 'next/dynamic';
+import { Spinner } from '@/layers/04_shared/ui/Spinner';
 
 const NUMBER_OF_BUSINESSES = 3;
 
@@ -23,19 +21,7 @@ const MapContainerClient = dynamic(
     ),
   {
     ssr: false,
-    loading: () => (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '60vh',
-          backgroundColor: 'var(--color-secondary-main)',
-        }}
-      >
-        <CircularProgress size={60} color="primary" />
-      </div>
-    ),
+    loading: () => <Spinner bgcolor="transparent" />,
   },
 );
 
@@ -50,7 +36,7 @@ export const DesktopView = () => (
         sx={{
           display: 'grid',
           gridTemplateColumns: '1fr 2fr',
-          height: 700,
+          minHeight: 700,
           borderRadius: 2,
           overflow: 'hidden',
           boxShadow: 4,

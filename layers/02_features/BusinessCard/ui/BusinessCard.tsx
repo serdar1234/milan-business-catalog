@@ -36,7 +36,6 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
     coordinates,
   } = business;
 
-  console.log('coordinates', coordinates);
   return (
     <Card
       component={'article'}
@@ -160,7 +159,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
       </CardContent>
 
       <MobileCTA />
-      <DesktopCTA phone={phone} />
+      <DesktopCTA phone={phone} coordinates={coordinates} />
     </Card>
   );
 };

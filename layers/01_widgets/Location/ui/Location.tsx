@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Typography, Grid, Button, CircularProgress } from '@mui/material';
+import { Box, Typography, Grid, Button } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import LocalParkingIcon from '@mui/icons-material/LocalParking';
@@ -15,6 +15,7 @@ import {
 } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 
 import dynamic from 'next/dynamic';
+import { Spinner } from '@/layers/04_shared/ui/Spinner';
 const MapContainerClient = dynamic(
   () =>
     import('@/layers/02_features/Map/MapContainerClient').then(
@@ -22,19 +23,7 @@ const MapContainerClient = dynamic(
     ),
   {
     ssr: false,
-    loading: () => (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '60vh',
-          backgroundColor: 'var(--color-secondary-main)',
-        }}
-      >
-        <CircularProgress size={60} color="primary" />
-      </div>
-    ),
+    loading: () => <Spinner bgcolor="transparent" color="secondary" />,
   },
 );
 
