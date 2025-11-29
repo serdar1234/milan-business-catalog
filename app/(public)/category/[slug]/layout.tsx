@@ -1,5 +1,6 @@
 import { CategoryHeader } from '@/layers/01_widgets/CategoryHeader/CategoryHeader';
-import { titleCase } from '@/layers/04_shared/utils/helpers';
+import { BASE_URL } from '@/layers/03_entities/api/baseApi';
+import { notFound } from 'next/navigation';
 
 interface CategoryLayoutProps {
   children: React.ReactNode;
@@ -11,8 +12,12 @@ export default async function CategoryLayout({
   params,
 }: CategoryLayoutProps) {
   const { slug } = await params;
-
-  const categoryName = titleCase(slug);
+  const categoryData = await fetch(`${BASE_URL}/categories/${slug}`);
+  if (!categoryData.ok) {
+    notFound();
+  }
+  const json = await categoryData.json();
+  const { name: categoryName } = json.data;
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },

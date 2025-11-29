@@ -91,7 +91,7 @@ const Footer: React.FC = () => {
             </Box>
           </Grid>
 
-          <FooterCats />
+          <FooterCats cats_num={7} />
 
           {FOOTER_LINKS.map((col) => (
             <Grid size={3} key={col.title}>

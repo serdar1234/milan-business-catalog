@@ -1,4 +1,6 @@
-import { Box, Container, Grid } from '@mui/material';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 import { CategoryCard } from '@/layers/02_features/CategoryCard/ui/CategoryCard';
 import LocalBarIcon from '@mui/icons-material/LocalBar';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
@@ -9,44 +11,24 @@ import MuseumIcon from '@mui/icons-material/Museum';
 import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
 import SpaIcon from '@mui/icons-material/Spa';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
+import { Category } from '@/layers/03_entities/category/categoryApi';
+import { fetchCategories } from '@/layers/04_shared/utils/helpers.server';
 
-const CATEGORIES = [
-  { name: 'Cafes', icon: CoffeeIcon, count: 189, href: '/category/cafes' },
-  {
-    name: 'Restaurants',
-    icon: RestaurantIcon,
-    count: 567,
-    href: '/category/restaurants',
-  },
-  {
-    name: 'Shopping',
-    icon: ShoppingBagIcon,
-    count: 420,
-    href: '/category/shopping',
-  },
-  {
-    name: 'Aperitivo Bars',
-    icon: LocalBarIcon,
-    count: 324,
-    href: '/category/bars',
-  },
-  { name: 'Museums', icon: MuseumIcon, count: 112, href: '/category/museums' },
-  {
-    name: 'Art Galleries',
-    icon: ColorLensIcon,
-    count: 78,
-    href: '/category/art',
-  },
-  {
-    name: 'Theaters',
-    icon: TheaterComedyIcon,
-    count: 55,
-    href: '/category/theaters',
-  },
-  { name: 'Wellness', icon: SpaIcon, count: 90, href: '/category/wellness' },
+const icons = [
+  CoffeeIcon,
+  RestaurantIcon,
+  ShoppingBagIcon,
+  LocalBarIcon,
+  MuseumIcon,
+  ColorLensIcon,
+  TheaterComedyIcon,
+  SpaIcon,
 ];
 
-export const BrowseByCategory: React.FC = () => {
+export async function BrowseByCategory() {
+  const cats: Category[] | null = await fetchCategories(8);
+  if (!cats) return null;
+
   return (
     <Box
       component="section"
@@ -62,7 +44,7 @@ export const BrowseByCategory: React.FC = () => {
         />
 
         <Grid container spacing={{ xs: 1, md: 2 }} justifyContent="center">
-          {CATEGORIES.map((cat) => (
+          {cats.map((cat) => (
             <Grid
               key={cat.name}
               size={{ xs: 3, md: 1.5 }}
@@ -73,9 +55,9 @@ export const BrowseByCategory: React.FC = () => {
             >
               <CategoryCard
                 name={cat.name}
-                icon={cat.icon}
-                count={cat.count}
-                href={cat.href}
+                icon={icons[cat.id - 1]}
+                count={cat.companies_count}
+                href={`/category/${cat.slug}`}
               />
             </Grid>
           ))}
@@ -83,4 +65,4 @@ export const BrowseByCategory: React.FC = () => {
       </Container>
     </Box>
   );
-};
+}

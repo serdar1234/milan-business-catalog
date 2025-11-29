@@ -1,5 +1,3 @@
-'use client';
-
 import { Box, Typography, Container } from '@mui/material';
 import Image from 'next/image';
 import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';

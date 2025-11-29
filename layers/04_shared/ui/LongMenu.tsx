@@ -8,10 +8,7 @@ import Menu from '@mui/material/Menu';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuItem from '@mui/material/MenuItem';
 import { useScrollLock } from '../hooks/useScrollLock';
-import {
-  Category,
-  useGetCategoriesQuery,
-} from '@/layers/03_entities/category/categoryApi';
+import { useGetCategoriesQuery } from '@/layers/03_entities/category/categoryApi';
 import { useClientSetting } from '@/layers/04_shared/hooks/useClientSetting';
 
 const ITEM_HEIGHT = '50vh';
@@ -87,11 +84,8 @@ export default function LongMenu({ title }: { title: string }) {
         {isLoading && <p>Loading...</p>}
         {error && null}
         {(options &&
-          options.data.map((option: Category) => (
-            <Link
-              key={option.id}
-              href={`/category/${option.name.toLocaleLowerCase().replace(' ', '-')}`}
-            >
+          options.map((option) => (
+            <Link key={option.id} href={`/category/${option.slug}`}>
               <MenuItem key={option.id} selected={option.id === 1}>
                 {option.name}
               </MenuItem>

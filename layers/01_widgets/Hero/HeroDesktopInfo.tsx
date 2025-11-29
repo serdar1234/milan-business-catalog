@@ -12,21 +12,18 @@ import ColorLensIcon from '@mui/icons-material/ColorLens';
 
 import Link from 'next/link';
 import styles from './HeroDesktopInfo.module.css';
-// import HeroStats from './HeroStats';
+import { fetchCategories } from '@/layers/04_shared/utils/helpers.server';
+import { SvgIconComponent } from '@mui/icons-material';
 
-const QUICK_DISCOVER_CATEGORIES = [
-  { name: 'Aperitivo Bars', count: 324, icon: LocalBarIcon, href: '/bars' },
-  {
-    name: 'Cozy Restaurants',
-    count: 567,
-    icon: RestaurantIcon,
-    href: '/restaurants',
-  },
-  { name: 'Winter Cafés', count: 189, icon: LocalCafeIcon, href: '/cafes' },
-  { name: 'Art Galleries', count: 78, icon: ColorLensIcon, href: '/art' },
+const icons: SvgIconComponent[] = [
+  LocalBarIcon,
+  LocalCafeIcon,
+  RestaurantIcon,
+  ColorLensIcon,
 ];
 
-export const HeroDesktopInfo: React.FC = () => {
+export async function HeroDesktopInfo() {
+  const cats = await fetchCategories(4);
   return (
     <Box
       sx={{
@@ -99,55 +96,64 @@ export const HeroDesktopInfo: React.FC = () => {
         </Grid>
 
         {/* === RIGHT COLUMN === */}
-        <Grid size={5} className={styles['right-col']}>
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-            <PlaceIcon
-              fontSize="small"
-              sx={{ mr: 1, color: 'brandPin.main' }}
-            />
-            <Typography
-              variant="h6"
-              fontWeight="bold"
-              sx={{
-                color: 'brandAccent.contrastText',
-              }}
-            >
-              Quick Discover
-            </Typography>
-          </Box>
-
-          <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
-            {QUICK_DISCOVER_CATEGORIES.map((cat) => (
-              <Box
-                key={cat.name}
-                component="li"
-                className={styles['quick-discover__link']}
+        {cats && (
+          <Grid size={5} className={styles['right-col']}>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+              <PlaceIcon
+                fontSize="small"
+                sx={{ mr: 1, color: 'brandPin.main' }}
+              />
+              <Typography
+                variant="h6"
+                fontWeight="bold"
+                sx={{
+                  color: 'brandAccent.contrastText',
+                }}
               >
-                <Link
-                  href={`/category${cat.href}`}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    paddingTop: '0.5rem',
-                  }}
-                >
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                    <cat.icon sx={{ fontSize: 20 }} />
-                    <Typography variant="body2" fontWeight="medium">
-                      {cat.name}
-                    </Typography>
+                Quick Discover
+              </Typography>
+            </Box>
+
+            <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
+              {cats.map((cat) => {
+                const Icon = icons[cat.id - 1 || 0];
+                return (
+                  <Box
+                    key={cat.name}
+                    component="li"
+                    className={styles['quick-discover__link']}
+                  >
+                    <Link
+                      href={`/category/${cat.slug}`}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        paddingTop: '0.5rem',
+                      }}
+                    >
+                      <Box
+                        sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
+                      >
+                        <Icon sx={{ fontSize: 20 }} />
+                        <Typography variant="body2" fontWeight="medium">
+                          {cat.name}
+                        </Typography>
+                      </Box>
+                      <Typography variant="body2">
+                        {cat.companies_count} places
+                      </Typography>
+                    </Link>
                   </Box>
-                  <Typography variant="body2">{cat.count} places</Typography>
-                </Link>
-              </Box>
-            ))}
-          </Box>
-        </Grid>
+                );
+              })}
+            </Box>
+          </Grid>
+        )}
       </Grid>
       {/* <Box width={'40%'}>
         <HeroStats />
       </Box> */}
     </Box>
   );
-};
+}

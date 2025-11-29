@@ -2,20 +2,23 @@ import { Box, Container } from '@mui/material';
 import style from './CategoryPage.module.css';
 import { CategoryFilters } from '@/layers/01_widgets/CategoryFilters/CategoryFilters';
 import LongMenu from '@/layers/04_shared/ui/LongMenu';
-import { BusinessList } from '@/layers/01_widgets/BusinessList/BusinessList';
+// import { BusinessList } from '@/layers/01_widgets/BusinessList/BusinessList';
 import type { Metadata } from 'next';
-import { getTitleFromSlug } from '@/layers/04_shared/utils/helpers';
+// import { getTitleFromSlug } from '@/layers/04_shared/utils/helpers';
+import { BASE_URL } from '@/layers/03_entities/api/baseApi';
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = (await params).slug;
-  const titleCase = getTitleFromSlug(slug);
+  const category = await fetch(`${BASE_URL}/categories/${slug}`);
+  const json = await category.json();
+  const { name } = json.data;
 
   return {
-    title: titleCase + ' category',
-    description: `${titleCase} businesses in Milano`,
+    title: name + ' category',
+    description: `${name} businesses in Milano`,
   };
 }
 export default function CategoryPage() {
