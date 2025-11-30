@@ -78,7 +78,7 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
           </Typography>
         </Box>
         <Typography variant="body2" color="text.primary" sx={{ mb: 1 }}>
-          {description}
+          {description?.substring(0, 45) + '...'}
         </Typography>
         {distance && (
           <Box
