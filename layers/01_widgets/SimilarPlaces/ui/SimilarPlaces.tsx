@@ -1,31 +1,33 @@
-import { Box, Container, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { ViewedPlaceCard } from '@/layers/02_features/ViewedPlaceCard/ui/ViewedPlaceCard';
 import Link from 'next/link';
 
 const VIEWED_MOCKS = [
   {
-    id: 1,
+    slug: 'trattoria-milanese',
     name: 'Trattoria Milanese',
     subtitle: 'Traditional cuisine',
     rating: 4.6,
-    distance: '0.4 km away',
+    address: '0.4 km away',
     imageUrl: 'r1.jpg',
   },
   {
-    id: 2,
+    slug: 'boutique-quadrilatero',
     name: 'Boutique Quadrilatero',
     subtitle: 'Fashion • Luxury shopping',
     rating: 4.8,
-    distance: '0.9 km away',
+    address: '0.9 km away',
     imageUrl: 'r2.jpg',
   },
   {
-    id: 3,
+    slug: 'pizzeria-milano',
     name: 'Pizzeria Milano',
     subtitle: 'Pizza • Italian cuisine',
     rating: 4.3,
-    distance: '0.6 km away',
+    address: '0.6 km away',
     imageUrl: 'r3.jpg',
   },
 ];
@@ -46,7 +48,7 @@ export const SimilarPlaces: React.FC = () => {
 
         <Box>
           {VIEWED_MOCKS.map((place) => (
-            <ViewedPlaceCard key={place.id} place={place} withArrow={false} />
+            <ViewedPlaceCard key={place.slug} place={place} withArrow={false} />
           ))}
         </Box>
         <Typography

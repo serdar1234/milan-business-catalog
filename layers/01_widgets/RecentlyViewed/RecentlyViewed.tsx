@@ -5,10 +5,9 @@ import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { ViewedPlaceCard } from '@/layers/02_features/ViewedPlaceCard/ui/ViewedPlaceCard';
 import { getRecentlyViewed } from '@/layers/04_shared/utils/recentlyViewed';
 
-export const RecentlyViewed: React.FC = () => {
+const RecentlyViewed: React.FC = () => {
   const viewedBusinesses = getRecentlyViewed();
   if (viewedBusinesses.length === 0) return null;
-  console.log('recently viewed', viewedBusinesses);
   return (
     <Box
       component="section"
@@ -33,3 +32,5 @@ export const RecentlyViewed: React.FC = () => {
     </Box>
   );
 };
+
+export default RecentlyViewed;

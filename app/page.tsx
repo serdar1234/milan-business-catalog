@@ -3,7 +3,7 @@ import { ExploreDistricts } from '@/layers/01_widgets/ExploreDistricts/ui/Explor
 import { ExploreOnMap } from '@/layers/01_widgets/ExploreOnMap/ui/ExploreOnMap';
 import { HeroBlock } from '@/layers/01_widgets/Hero/HeroBlock';
 import { LocalInsights } from '@/layers/01_widgets/LocalInsights/ui/LocalInsights';
-import { RecentlyViewed } from '@/layers/01_widgets/RecentlyViewed/ui/RecentlyViewed';
+import RecentlyViewed from '@/layers/01_widgets/RecentlyViewed';
 import { SavedPlaces } from '@/layers/01_widgets/SavedPlaces/ui/SavedPlaces';
 import { SeasonFavorites } from '@/layers/01_widgets/SeasonFavorites/SeasonFavorites';
 import WinterSpecials from '@/layers/01_widgets/WinterSpecials/';
