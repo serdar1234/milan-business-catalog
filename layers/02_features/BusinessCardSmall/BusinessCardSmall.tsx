@@ -22,15 +22,17 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
       sx={{
         display: 'flex',
         gap: 2,
-        p: 2,
-        my: 1,
-        width: '100%',
+        padding: '1rem 0.5rem',
+        mb: 2,
+        alignItems: 'center',
         textDecoration: 'none',
-        border: '1px solid var(--color-border-grey)',
+        bgcolor: 'background.paper',
         borderRadius: 2,
-        transition: 'background-color 0.2s',
+        boxShadow: 1,
+        transition: 'box-shadow 0.2s, transform 0.2s',
         '&:hover': {
-          borderColor: 'brandAccent.main',
+          boxShadow: 4,
+          transform: 'translateY(-1px)',
         },
       }}
     >
@@ -40,21 +42,20 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
           width: 60,
           height: 60,
           borderRadius: 1,
-          bgcolor: 'var( --color-border-grey)',
+          bgcolor: 'var(--color-border-grey)',
           display: 'flex',
           justifyContent: 'center',
+          alignItems: 'center',
           overflow: 'hidden',
         }}
       >
-        <Typography variant="caption" color="var(--color-border-grey)">
-          <Image
-            src={images[0]?.url || '/logo.png'}
-            alt={name}
-            width={60}
-            height={60}
-            style={{ objectFit: 'fill' }}
-          />
-        </Typography>
+        <Image
+          src={images[0]?.url || '/logo.png'}
+          alt={name}
+          width={60}
+          height={60}
+          style={{ objectFit: 'cover' }}
+        />
       </Box>
       <Box sx={{ flexGrow: 1, position: 'relative' }}>
         <Typography
@@ -77,9 +78,21 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
             ({average_rating.toFixed(1)})
           </Typography>
         </Box>
-        <Typography variant="body2" color="text.primary" sx={{ mb: 1 }}>
-          {description?.substring(0, 45) + '...'}
-        </Typography>
+        <Typography
+          variant="body2"
+          color="text.primary"
+          sx={{
+            mb: 1,
+            '&::before': {
+              content: `'${description?.substring(0, 45) + '...'}'`,
+              display: { xs: 'inline', sm: 'none', md: 'inline' },
+            },
+            '&::after': {
+              content: `'${description}'`,
+              display: { xs: 'none', sm: 'inline', md: 'none' },
+            },
+          }}
+        />
         {distance && (
           <Box
             sx={{

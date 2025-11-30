@@ -101,18 +101,18 @@ export const customTheme = createTheme({
     },
     ratingGold: {
       main: '#FACC15', // Bright Gold
-      light: '#FDE047', // Lighter Gold (около +20% яркости)
-      dark: '#CA8A04', // Darker Gold (около -20% яркости)
+      light: '#FDE047', // Lighter Gold
+      dark: '#CA8A04', // Darker Gold
       contrastText: '#1F1E1B',
     },
     statusError: {
-      main: '#A31F2E', // dark red (Closing Soon)
+      main: '#A31F2E', // dark red
       dark: '#7A1824',
       light: '#F4D3D6',
       contrastText: '#FFE0E2',
     },
     statusFeatured: {
-      main: '#114B3C', // dark green (Featured)
+      main: '#114B3C', // dark green
       contrastText: '#FFFFFF',
       light: '#3D7A6A', // Lighten 20%
       dark: '#0C372B', // Darken 20%

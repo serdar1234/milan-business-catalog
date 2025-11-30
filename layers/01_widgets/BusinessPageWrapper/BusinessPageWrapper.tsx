@@ -23,7 +23,10 @@ export function BusinessPageWrapper({ data }: { data?: Business }) {
           <Grid size={{ xs: 12, md: 4 }}>
             <BusinessInformation data={data} />
             <Location business={data} />
-            <SimilarPlaces />
+            <SimilarPlaces
+              id={data?.category.id ?? 1}
+              slug={data?.category.slug ?? ''}
+            />
           </Grid>
         </Grid>
       </Container>

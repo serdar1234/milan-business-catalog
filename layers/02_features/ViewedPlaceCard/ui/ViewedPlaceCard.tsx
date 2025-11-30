@@ -2,6 +2,7 @@ import { Box, Typography, Rating } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export interface ViewedPlace {
   slug: string;
@@ -29,14 +30,14 @@ export const ViewedPlaceCard: React.FC<ViewedPlaceCardProps> = ({
       href={`/business/${slug}`}
       sx={{
         display: 'flex',
-        alignItems: 'center',
         gap: 2,
         p: 2,
+        mb: 2,
+        alignItems: 'center',
         textDecoration: 'none',
         bgcolor: 'background.paper',
         borderRadius: 2,
         boxShadow: 1,
-        mb: 2,
         transition: 'box-shadow 0.2s, transform 0.2s',
         '&:hover': {
           boxShadow: 4,
@@ -50,13 +51,21 @@ export const ViewedPlaceCard: React.FC<ViewedPlaceCardProps> = ({
           width: 80,
           height: 80,
           borderRadius: 1,
-          bgcolor: 'surface.main',
-          backgroundImage: `url(/${imageUrl || 'r2.jpg'})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          bgcolor: 'var(--color-border-grey)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          overflow: 'hidden',
         }}
-      />
-
+      >
+        <Image
+          src={imageUrl || '/r2.jpg'}
+          alt={name}
+          width={80}
+          height={80}
+          style={{ objectFit: 'cover' }}
+        />
+      </Box>
       <Box sx={{ flexGrow: 1, minWidth: 0 }}>
         <Typography
           variant="body1"
