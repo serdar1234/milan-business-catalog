@@ -37,9 +37,5 @@ export const businessApi = api.injectEndpoints({
   }),
 });
 
-// --- Экспорт хуков и функций для SSR ---
 export const { useGetBusinessListQuery, useGetCompanyDetailsQuery } =
   businessApi;
-
-// 🚨 Экспорт initiate для использования в Server Components (SSR)
-// export const { getCompanyDetails, getBusinessList } = businessApi.endpoints;

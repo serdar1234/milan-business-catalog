@@ -1,12 +1,12 @@
-import React from 'react';
 import Link from 'next/link';
-import { Button, Box } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
 
 const NAV_LINKS = [
-  { href: '/category/shopping', label: 'Shopping' },
-  { href: '/category/culture', label: 'Culture' },
-  { href: '/category/food-and-drink', label: 'Food & Drink' },
+  { href: '/category/hospitality-5', label: 'Hospitality' },
+  { href: '/category/retail-6', label: 'Retail' },
+  { href: '/category/transportation-8', label: 'Transportation' },
   { href: '/map', label: 'Map View' },
 ];
 

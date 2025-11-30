@@ -19,6 +19,7 @@ import { Spinner } from '@/layers/04_shared/ui/Spinner';
 import { addRecentlyViewed } from '@/layers/04_shared/utils/recentlyViewed';
 import { useEffect } from 'react';
 import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
+import { ViewedPlace } from '@/layers/02_features/ViewedPlaceCard/ui/ViewedPlaceCard';
 const MapContainerClient = dynamic(
   () =>
     import('@/layers/02_features/Map/MapContainerClient').then(
@@ -58,10 +59,20 @@ const ACTION_BUTTONS: {
 
 export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
   const data = MOCK_BUSINESS_DETAILS;
+
   useEffect(() => {
     if (!business) return;
-    addRecentlyViewed(business.slug);
-  }, [business, business?.slug]);
+    const company: ViewedPlace = {
+      slug: business.slug,
+      name: business.name,
+      subtitle: business.category.name,
+      rating: business.average_rating,
+      address: business.address,
+      imageUrl: business.images?.[0]?.url || '',
+    };
+    addRecentlyViewed(company);
+  }, [business]);
+
   const MapBlock = (
     <Box
       sx={{

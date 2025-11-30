@@ -18,4 +18,6 @@ const ACTION_COLORS = {
   SAVE: 'statusError.main',
 };
 
-export { DAYS, ZOOM, MILAN_CENTER, ACTION_COLORS };
+const MAX_RECENT_PLACES = 4;
+
+export { DAYS, ZOOM, MILAN_CENTER, ACTION_COLORS, MAX_RECENT_PLACES };

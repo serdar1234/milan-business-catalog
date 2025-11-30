@@ -1,20 +1,18 @@
 'use client';
 
 import { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Link from 'next/link';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  IconButton,
-  Drawer,
-} from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Drawer from '@mui/material/Drawer';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import { DesktopNavigation } from './DesktopNavigation';
 import { MobileDrawerContent } from './MobileDrawerContent';
 import { SharedIcon } from '@/layers/04_shared/ui/Icon';
 import { useScrollLock } from '@/layers/04_shared/hooks/useScrollLock';
-import { useDispatch } from 'react-redux';
 import { openSearchDrawer } from '@/layers/03_entities/search/model/slice';
 
 export const Header: FC = () => {

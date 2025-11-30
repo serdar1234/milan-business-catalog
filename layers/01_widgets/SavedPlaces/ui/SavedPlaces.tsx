@@ -28,7 +28,7 @@ export const SavedPlaces: React.FC = () => {
         display: { xs: 'block', md: 'none' },
       }}
     >
-      <Container maxWidth="sm">
+      <Container>
         <Box
           sx={{
             display: 'flex',

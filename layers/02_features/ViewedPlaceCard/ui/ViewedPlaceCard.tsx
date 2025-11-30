@@ -1,13 +1,14 @@
 import { Box, Typography, Rating } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
 
-interface ViewedPlace {
-  id: number;
+export interface ViewedPlace {
+  slug: string;
   name: string;
   subtitle: string;
   rating: number;
-  distance: string;
+  address: string;
   imageUrl: string;
 }
 
@@ -20,12 +21,12 @@ export const ViewedPlaceCard: React.FC<ViewedPlaceCardProps> = ({
   place,
   withArrow = true,
 }) => {
-  const { id, name, subtitle, rating, distance, imageUrl } = place;
+  const { slug, name, subtitle, rating, address, imageUrl } = place;
 
   return (
     <Box
       component={Link}
-      href={`/business/${id}`}
+      href={`/business/${slug}`}
       sx={{
         display: 'flex',
         alignItems: 'center',
@@ -50,7 +51,7 @@ export const ViewedPlaceCard: React.FC<ViewedPlaceCardProps> = ({
           height: 80,
           borderRadius: 1,
           bgcolor: 'surface.main',
-          backgroundImage: `url(/${imageUrl})`,
+          backgroundImage: `url(/${imageUrl || 'r2.jpg'})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -80,8 +81,9 @@ export const ViewedPlaceCard: React.FC<ViewedPlaceCardProps> = ({
           />
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <LocationOnIcon fontSize="small" sx={{ m: 0.5, ml: 0 }} />
           <Typography variant="body2" color="text.secondary">
-            {distance}
+            {address}
           </Typography>
         </Box>
       </Box>
