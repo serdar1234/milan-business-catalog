@@ -49,7 +49,7 @@ export default function SearchPageClient({
   const [currentView, setCurrentView] = useState<ViewType>(initialView);
   const { page, setPage, businessList, meta, isLoading, isError } =
     useSearchResults(searchQuery);
-  const DUMMY_TOTAL_RESULTS = 47;
+  const total_results = meta?.pagination?.total_count || 0;
 
   const handleViewChange = (newView: ViewType) => {
     setCurrentView(newView);
@@ -67,7 +67,7 @@ export default function SearchPageClient({
   return (
     <>
       <SearchHeader
-        totalResults={DUMMY_TOTAL_RESULTS}
+        totalResults={total_results}
         currentView={currentView}
         onViewChange={handleViewChange}
         onAllFilterClick={handleAllFiltersOpen}

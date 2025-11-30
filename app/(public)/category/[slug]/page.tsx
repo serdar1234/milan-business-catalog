@@ -4,7 +4,6 @@ import { CategoryFilters } from '@/layers/01_widgets/CategoryFilters/CategoryFil
 import LongMenu from '@/layers/04_shared/ui/LongMenu';
 // import { BusinessList } from '@/layers/01_widgets/BusinessList/BusinessList';
 import type { Metadata } from 'next';
-// import { getTitleFromSlug } from '@/layers/04_shared/utils/helpers';
 import { BASE_URL } from '@/layers/03_entities/api/baseApi';
 type Props = {
   params: Promise<{ slug: string }>;

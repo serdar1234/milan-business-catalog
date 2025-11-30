@@ -17,7 +17,7 @@ export default async function CategoryLayout({
     notFound();
   }
   const json = await categoryData.json();
-  const { name: categoryName } = json.data;
+  const { name: categoryName, companies_count } = json.data;
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
@@ -26,7 +26,11 @@ export default async function CategoryLayout({
 
   return (
     <>
-      <CategoryHeader categoryName={categoryName} breadcrumbs={breadcrumbs} />
+      <CategoryHeader
+        categoryName={categoryName}
+        placeCount={companies_count}
+        breadcrumbs={breadcrumbs}
+      />
       {children}
     </>
   );

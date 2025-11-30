@@ -20,6 +20,7 @@ import { addRecentlyViewed } from '@/layers/04_shared/utils/recentlyViewed';
 import { useEffect } from 'react';
 import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 import { ViewedPlace } from '@/layers/02_features/ViewedPlaceCard/ui/ViewedPlaceCard';
+import { MILAN_CENTER } from '@/layers/04_shared/utils/constants';
 const MapContainerClient = dynamic(
   () =>
     import('@/layers/02_features/Map/MapContainerClient').then(
@@ -59,9 +60,11 @@ const ACTION_BUTTONS: {
 
 export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
   const data = MOCK_BUSINESS_DETAILS;
+  const { lat, lon } = business?.coordinates || {};
+  const mapCenter: [number, number] = lat && lon ? [lat, lon] : MILAN_CENTER;
 
   useEffect(() => {
-    if (!business) return;
+    if (!business || !business.slug) return;
     const company: ViewedPlace = {
       slug: business.slug,
       name: business.name,
@@ -84,7 +87,7 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
         overflow: 'hidden',
       }}
     >
-      <MapContainerClient />
+      <MapContainerClient center={mapCenter} />
       <Box
         sx={{
           position: 'absolute',
