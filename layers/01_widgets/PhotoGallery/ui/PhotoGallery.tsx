@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { MobilePhotoGallery } from './MobilePhotoGallery';
 import { DesktopPhotoGallery } from './DesktopPhotoGallery';

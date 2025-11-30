@@ -45,7 +45,8 @@ button.close-btn {
   z-index: 1500;
 }
 
-a.roundIconButton {
+a.roundIconButton,
+button.roundIconButton {
   min-width: 0;
   display: inline-flex;
   align-items: center;
@@ -57,7 +58,8 @@ a.roundIconButton {
   border-radius: 50%;
 }
 
-a.roundIconButton:hover {
+a.roundIconButton:hover,
+button.roundIconButton:hover {
   background-color: transparent;
   color: var(--color-brand-accent);
 }

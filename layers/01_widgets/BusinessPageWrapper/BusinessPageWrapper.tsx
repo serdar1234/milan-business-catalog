@@ -1,5 +1,7 @@
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 import { PhotoGallery } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
-import { Box, Container, Grid } from '@mui/material';
 import { BusinessInformation } from '@/layers/01_widgets/BusinessInformation/ui/BusinessInformation';
 import { About } from '@/layers/01_widgets/About/ui/About';
 import { Location } from '@/layers/01_widgets/Location/ui/Location';
@@ -20,7 +22,7 @@ export function BusinessPageWrapper({ data }: { data?: Business }) {
           </Grid>
           <Grid size={{ xs: 12, md: 4 }}>
             <BusinessInformation data={data} />
-            <Location />
+            <Location business={data} />
             <SimilarPlaces />
           </Grid>
         </Grid>

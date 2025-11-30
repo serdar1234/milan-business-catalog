@@ -1,17 +1,14 @@
-import { Box, Typography, Grid, ButtonBase } from '@mui/material';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import ButtonBase from '@mui/material/ButtonBase';
+import Typography from '@mui/material/Typography';
 
 import PhoneIcon from '@mui/icons-material/Phone';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-
-const ACTION_COLORS = {
-  CALL: 'brandAccent.main',
-  DIRECTIONS: 'primary.main',
-  RESERVE: 'statusFeatured.main',
-  SAVE: 'statusError.main',
-};
+import { ACTION_COLORS } from '@/layers/04_shared/utils/constants';
 
 interface MobileQuickActionsProps {
   phone: string;

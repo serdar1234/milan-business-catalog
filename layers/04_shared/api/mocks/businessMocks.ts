@@ -1,7 +1,9 @@
 import { Photo } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
+import { Category } from '@/layers/03_entities/category/categoryApi';
 
 export interface Business {
   id: number;
+  slug: string;
   name: string;
   description?: string;
   address: string;
@@ -13,7 +15,7 @@ export interface Business {
   coordinates: { lat: number; lon: number };
   average_rating: number;
   approved_reviews_count: number;
-  category: { id: number; name: string };
+  category: Category;
   images: Photo[];
   created_at: string;
   updated_at: string;
@@ -31,7 +33,8 @@ export const BUSINESS_MOCKS: Business[] = [
   {
     id: 1,
     name: 'Il Duomo Secret Café',
-    category: { id: 1, name: 'Cafes' },
+    slug: 'il-duomo-secret-cafe',
+    category: { id: 1, name: 'Cafes', slug: 'cafes', companies_count: 1 },
     average_rating: 4.8,
     address: 'Piazza del Duomo, 1',
     isFavorite: true,
@@ -52,8 +55,9 @@ export const BUSINESS_MOCKS: Business[] = [
   },
   {
     id: 2,
+    slug: 'navigli-aperitivo-bar',
     name: 'Navigli Aperitivo Bar',
-    category: { id: 2, name: 'Bars' },
+    category: { id: 2, name: 'Bars', slug: 'bars', companies_count: 1 },
     average_rating: 4.5,
     address: 'Alzaia Naviglio Grande, 56',
     isFavorite: false,
@@ -75,7 +79,13 @@ export const BUSINESS_MOCKS: Business[] = [
   {
     id: 3,
     name: 'Cozy Trattoria Milanese',
-    category: { id: 3, name: 'Restaurants' },
+    slug: 'cozy-trattoria-milanese',
+    category: {
+      id: 3,
+      name: 'Restaurants',
+      slug: 'restaurants',
+      companies_count: 1,
+    },
     average_rating: 4.9,
     address: 'Via Montenapoleone, 12',
     isFavorite: true,
@@ -97,7 +107,8 @@ export const BUSINESS_MOCKS: Business[] = [
   {
     id: 4,
     name: 'Luna Café Milano',
-    category: { id: 1, name: 'Cafes' },
+    slug: 'luna-cafe-milano',
+    category: { id: 1, name: 'Cafes', slug: 'cafes', companies_count: 1 },
     average_rating: 4.6,
     address: 'Corso Como, 15',
     isFavorite: false,
@@ -119,7 +130,8 @@ export const BUSINESS_MOCKS: Business[] = [
   {
     id: 5,
     name: 'Brew & Chill',
-    category: { id: 1, name: 'Cafes' },
+    slug: 'brew-and-chill',
+    category: { id: 1, name: 'Cafes', slug: 'cafes', companies_count: 1 },
     average_rating: 4.7,
     address: 'Via Torino, 22',
     isFavorite: true,
@@ -141,7 +153,8 @@ export const BUSINESS_MOCKS: Business[] = [
   {
     id: 6,
     name: 'Espresso Express',
-    category: { id: 1, name: 'Cafes' },
+    slug: 'espresso-express',
+    category: { id: 1, name: 'Cafes', slug: 'cafes', companies_count: 1 },
     average_rating: 4.4,
     address: 'Viale Pasubio, 8',
     isFavorite: false,
@@ -163,7 +176,8 @@ export const BUSINESS_MOCKS: Business[] = [
   {
     id: 7,
     name: 'Caffè Milano Arte',
-    category: { id: 1, name: 'Cafes' },
+    slug: 'caffe-milano-arte',
+    category: { id: 1, name: 'Cafes', slug: 'cafes', companies_count: 1 },
     average_rating: 4.8,
     address: 'Via Dante, 7',
     isFavorite: true,
@@ -185,7 +199,8 @@ export const BUSINESS_MOCKS: Business[] = [
   {
     id: 8,
     name: 'Morning Brew Milano',
-    category: { id: 1, name: 'Cafes' },
+    slug: 'morning-brew-milano',
+    category: { id: 1, name: 'Cafes', slug: 'cafes', companies_count: 1 },
     average_rating: 4.5,
     address: 'Corso Venezia, 30',
     isFavorite: false,

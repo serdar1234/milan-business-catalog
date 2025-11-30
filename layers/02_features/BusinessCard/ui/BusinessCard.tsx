@@ -15,8 +15,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 import Link from 'next/link';
 
 import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
-import { MobileCTA } from './MobileCTA';
-import { DesktopCTA } from './DesktopCTA';
+import { MobileCTA, DesktopCTA } from '@/layers/04_shared/ui/CTAbuttons';
 
 interface BusinessCardProps {
   business: Business;
@@ -24,7 +23,7 @@ interface BusinessCardProps {
 
 export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
   const {
-    id,
+    slug,
     name,
     category,
     average_rating,
@@ -55,7 +54,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
       }}
     >
       <Box sx={{ position: 'relative' }}>
-        <Link href={`/business/${id}`}>
+        <Link href={`/business/${slug}`}>
           <CardMedia
             component="img"
             image={images[0]?.url || '/fish.jpg'}
@@ -136,7 +135,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
           </Box>
         </Box>
 
-        <Link href={`/business/${id}`}>
+        <Link href={`/business/${slug}`}>
           <Typography
             variant="h6"
             component="div"

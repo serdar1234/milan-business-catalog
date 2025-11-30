@@ -11,4 +11,11 @@ const DAYS = [
 const ZOOM = 13;
 const MILAN_CENTER: [number, number] = [45.4642, 9.19];
 
-export { DAYS, ZOOM, MILAN_CENTER };
+const ACTION_COLORS = {
+  CALL: 'brandAccent.main',
+  DIRECTIONS: 'primary.main',
+  RESERVE: 'statusFeatured.main',
+  SAVE: 'statusError.main',
+};
+
+export { DAYS, ZOOM, MILAN_CENTER, ACTION_COLORS };

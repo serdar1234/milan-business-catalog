@@ -1,6 +1,9 @@
 'use client';
 
-import { Box, Typography, Grid, Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import LocalParkingIcon from '@mui/icons-material/LocalParking';
@@ -9,13 +12,13 @@ import { TransportRow } from './TransportRow';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { LocationButton } from '@/layers/04_shared/ui/LocationButton';
 
-import {
-  BusinessDetails,
-  MOCK_BUSINESS_DETAILS,
-} from '@/layers/04_shared/api/mocks/businessDetailsMocks';
+import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 
 import dynamic from 'next/dynamic';
 import { Spinner } from '@/layers/04_shared/ui/Spinner';
+import { addRecentlyViewed } from '@/layers/04_shared/utils/recentlyViewed';
+import { useEffect } from 'react';
+import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 const MapContainerClient = dynamic(
   () =>
     import('@/layers/02_features/Map/MapContainerClient').then(
@@ -28,7 +31,7 @@ const MapContainerClient = dynamic(
 );
 
 interface BusinessDetailsProps {
-  data?: BusinessDetails;
+  business?: Business;
 }
 
 const ACTION_BUTTONS: {
@@ -53,9 +56,12 @@ const ACTION_BUTTONS: {
   },
 ];
 
-export const Location: React.FC<BusinessDetailsProps> = ({
-  data = MOCK_BUSINESS_DETAILS,
-}) => {
+export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
+  const data = MOCK_BUSINESS_DETAILS;
+  useEffect(() => {
+    if (!business) return;
+    addRecentlyViewed(business.slug);
+  }, [business, business?.slug]);
   const MapBlock = (
     <Box
       sx={{

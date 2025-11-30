@@ -1,9 +1,10 @@
 import MapPageClient from './MapPageClient';
 
-export default function MapPage({
+export default async function MapPage({
   searchParams,
 }: {
   searchParams: Record<string, string>;
 }) {
-  return <MapPageClient initialSearchParams={searchParams} />;
+  const params = await searchParams;
+  return <MapPageClient initialSearchParams={params} />;
 }

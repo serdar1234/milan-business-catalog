@@ -1,6 +1,9 @@
+'use client';
+
 import { Box, Container } from '@mui/material';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { ViewedPlaceCard } from '@/layers/02_features/ViewedPlaceCard/ui/ViewedPlaceCard';
+import { getRecentlyViewed } from '@/layers/04_shared/utils/recentlyViewed';
 
 const VIEWED_MOCKS = [
   {
@@ -22,6 +25,8 @@ const VIEWED_MOCKS = [
 ];
 
 export const RecentlyViewed: React.FC = () => {
+  const viewedBusinesses = getRecentlyViewed();
+  console.log(viewedBusinesses);
   return (
     <Box
       component="section"

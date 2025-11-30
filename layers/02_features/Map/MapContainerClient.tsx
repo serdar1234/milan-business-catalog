@@ -40,7 +40,6 @@ export const MapContainerClient: React.FC<MapContainerClientProps> = ({
   onMapZoom,
 }) => {
   const mapRef = useRef<LeafletMap | null>(null);
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       import('leaflet-gesture-handling').then(({ GestureHandling }) => {

@@ -13,13 +13,12 @@ interface BusinessCardSmallProps {
 export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
   business,
 }) => {
-  const { id, images, name, average_rating, description, distance, isOpen } =
+  const { slug, images, name, average_rating, description, distance, isOpen } =
     business;
-  if (!id) console.log('No id for place', business);
   return (
     <Box
       component={Link}
-      href={`/business/${id}`}
+      href={`/business/${slug}`}
       sx={{
         display: 'flex',
         gap: 2,
