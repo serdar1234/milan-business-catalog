@@ -9,20 +9,10 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { FILTER_BUTTONS, type FilterButton } from './mockData';
 // import { BUSINESS_MOCKS } from '@/layers/04_shared/api/mocks/businessMocks';
-import dynamic from 'next/dynamic';
 import { Spinner } from '@/layers/04_shared/ui/Spinner';
 import { useGetBusinessListQuery } from '@/layers/03_entities/business/businessApi';
 import { useState } from 'react';
-const MapContainerClient = dynamic(
-  () =>
-    import('@/layers/02_features/Map/MapContainerClient').then(
-      (mod) => mod.MapContainerClient,
-    ),
-  {
-    ssr: false,
-    loading: () => <Spinner bgcolor="transparent" />,
-  },
-);
+import { MapContainerClient } from '@/layers/02_features/Map';
 
 const NUMBER_OF_BUSINESSES = 3;
 

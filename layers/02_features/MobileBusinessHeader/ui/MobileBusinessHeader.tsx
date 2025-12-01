@@ -16,7 +16,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LanguageIcon from '@mui/icons-material/Language';
 import Link from 'next/link';
-import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
+import { Business } from '@/layers/04_shared/types/types';
 
 interface MobileBusinessHeaderProps {
   data?: Business;

@@ -1,4 +1,4 @@
-import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
+import { Business } from '@/layers/04_shared/types/types';
 import { Grid } from '@mui/material';
 import React from 'react';
 import { BusinessCard } from '../BusinessCard/ui/BusinessCard';

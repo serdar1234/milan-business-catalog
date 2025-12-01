@@ -14,7 +14,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 
 import Link from 'next/link';
 
-import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
+import { Business } from '@/layers/04_shared/types/types';
 import { MobileCTA, DesktopCTA } from '@/layers/04_shared/ui/CTAbuttons';
 
 interface BusinessCardProps {

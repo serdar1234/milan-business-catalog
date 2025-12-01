@@ -1,23 +1,6 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { useGetSearchResultsQuery } from '@/layers/03_entities/search/api/searchApi';
-import { Business } from '../api/mocks/businessMocks';
-
-export interface SearchResults {
-  page: number;
-  setPage: Dispatch<SetStateAction<number>>;
-  businessList: Business[];
-  meta?: {
-    pagination: {
-      page: number;
-      per_page: number;
-      total_pages: number;
-      total_count: number;
-    };
-    source: string;
-  };
-  isLoading: boolean;
-  isError: boolean;
-}
+import { SearchResults } from '../types/types';
 
 export const useSearchResults = (query: string): SearchResults => {
   const [page, setPage] = useState(1);

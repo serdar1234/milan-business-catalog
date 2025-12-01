@@ -3,8 +3,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import BusinessCardGrid from '@/layers/02_features/BusinessCardGrid';
-import { SearchResults } from '@/layers/04_shared/hooks/useSearchResults';
 import { Spinner } from '@/layers/04_shared/ui/Spinner';
+import { SearchResults } from '@/layers/04_shared/types/types';
 
 interface BusinessListProps extends SearchResults {
   cols?: number;

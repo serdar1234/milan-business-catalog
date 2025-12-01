@@ -7,7 +7,7 @@ import EuroIcon from '@mui/icons-material/Euro';
 import { InfoRow } from './InfoRow';
 // import { BusinessInformationProps } from './BusinessInformation';
 import { MOCK_BUSINESS_DETAILS as mocks } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
-import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
+import { Business } from '@/layers/04_shared/types/types';
 
 export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
   const priceRange = '€€';

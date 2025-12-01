@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Box from '@mui/material/Box';
@@ -16,19 +15,8 @@ import { FilterPanel } from '@/layers/02_features/FilterPanel/FilterPanel';
 import { BusinessList } from '@/layers/01_widgets/BusinessList/BusinessList';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
 import { useSearchResults } from '@/layers/04_shared/hooks/useSearchResults';
-import { Spinner } from '@/layers/04_shared/ui/Spinner';
+import { MapContainerClient } from '@/layers/02_features/Map';
 import styles from './SearchPageClient.module.css';
-
-const MapContainerClient = dynamic(
-  () =>
-    import('@/layers/02_features/Map/MapContainerClient').then(
-      (mod) => mod.MapContainerClient,
-    ),
-  {
-    ssr: false,
-    loading: () => <Spinner />,
-  },
-);
 
 interface SearchPageClientProps {
   searchQuery: string;

@@ -1,33 +1,4 @@
-import { Photo } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
-import { Category } from '@/layers/03_entities/category/categoryApi';
-
-export interface Business {
-  id: number;
-  slug: string;
-  name: string;
-  description?: string;
-  address: string;
-  city: string;
-  country: string;
-  phone: string;
-  website: string;
-  email: string;
-  coordinates: { lat: number; lon: number };
-  average_rating: number;
-  approved_reviews_count: number;
-  category: Category;
-  images: Photo[];
-  created_at: string;
-  updated_at: string;
-
-  isFavorite?: boolean;
-  distance?: string;
-  isOpen?: boolean;
-  tag?: {
-    label: string;
-    color: string;
-  };
-}
+import { Business } from '../../types/types';
 
 export const BUSINESS_MOCKS: Business[] = [
   {

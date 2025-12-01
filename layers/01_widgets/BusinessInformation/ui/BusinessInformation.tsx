@@ -7,7 +7,7 @@ import {
 } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { DesktopView } from './DesktopView';
-import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
+import { Business } from '@/layers/04_shared/types/types';
 
 // interface BusinessDetails {
 //   address: string;

@@ -10,7 +10,7 @@ import NearMeIcon from '@mui/icons-material/NearMe';
 import { BusinessActionsBar } from '../../BusinessActionsBar/ui/BusinessActionsBar';
 import Link from 'next/link';
 import { AppBreadcrumbs } from '@/layers/04_shared/ui/AppBreadcrumbs';
-import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
+import { Business } from '@/layers/04_shared/types/types';
 
 interface BusinessHeroDesktopProps {
   data?: Business;

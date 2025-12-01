@@ -3,7 +3,7 @@ import { Box, Typography, Grid } from '@mui/material';
 // import { FeatureList } from '@/layers/04_shared/ui/FeatureList';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { RatingBox } from '@/layers/04_shared/ui/RatingBox';
-import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
+import { Business } from '@/layers/04_shared/types/types';
 
 type Props = {
   data?: Business;

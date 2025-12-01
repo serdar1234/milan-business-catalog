@@ -4,6 +4,7 @@ import { MobileQuickActions } from '@/layers/01_widgets/MobileQuickActions/ui/Mo
 import { notFound } from 'next/navigation';
 import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
 import { BASE_URL } from '@/layers/03_entities/api/baseApi';
+import { Business } from '@/layers/04_shared/types/types';
 
 interface Props {
   params: { slug: string };
@@ -50,14 +51,14 @@ export default async function BusinessPage({ params }: Props) {
   }
 
   const json = await res.json();
-  const data = json.data;
+  const data: Business = json.data;
 
   return (
     <>
       <BusinessHeader data={data} />
       <MobileQuickActions
         phone={data.phone}
-        address={data.address}
+        coordinates={data.coordinates}
         isFavorite={data.isFavorite || true}
       />
       <BusinessPageWrapper data={data} />;

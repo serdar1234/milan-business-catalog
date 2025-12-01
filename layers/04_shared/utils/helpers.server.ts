@@ -1,8 +1,16 @@
 import { Category } from '@/layers/03_entities/category/categoryApi';
 import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
 import { BASE_URL } from '@/layers/03_entities/api/baseApi';
-import { Business } from '../api/mocks/businessMocks';
+import { Meta, Business } from '../types/types';
 
+export async function fetchCategory(slug: string, lang = 'en') {
+  const res = await fetch(`${BASE_URL}/categories/${slug}?lang=${lang}`, {
+    next: { revalidate: 300 },
+  });
+
+  if (!res.ok) return null;
+  return res.json() as Promise<{ data: Category }>;
+}
 export async function fetchCategories(limit = 8): Promise<Category[] | null> {
   try {
     const { lang } = await getSSRPreferences();
@@ -18,12 +26,12 @@ export async function fetchCategories(limit = 8): Promise<Category[] | null> {
   }
 }
 
-export async function fetchCategoryBusinesses(
+export async function fetchCategoryBusinesses({
   page = 1,
   limit = 10,
   category_id = 1,
   sort = 'rating',
-): Promise<Business[] | null> {
+}): Promise<{ data: Business[]; meta: Meta } | null> {
   try {
     const { lang } = await getSSRPreferences();
     const res = await fetch(
@@ -32,8 +40,7 @@ export async function fetchCategoryBusinesses(
     if (!res.ok) return null;
 
     const json = await res.json();
-    const businesses: Business[] = json.data;
-    return businesses;
+    return json;
   } catch (err) {
     console.error('Failed to fetch businesses', err);
     return null;

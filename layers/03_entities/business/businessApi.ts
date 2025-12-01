@@ -1,5 +1,5 @@
 import { api } from '@/layers/03_entities/api/baseApi';
-import { Business } from '../../04_shared/api/mocks/businessMocks';
+import { Business } from '@/layers/04_shared/types/types';
 import { LanguageCode } from '@/layers/04_shared/configs/settings';
 
 interface BusinessListParams {

@@ -4,8 +4,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { BASE_URL } from '@/layers/03_entities/api/baseApi';
-import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
 import { BusinessCardSmall } from '@/layers/02_features/BusinessCardSmall/BusinessCardSmall';
+import { Business } from '@/layers/04_shared/types/types';
 
 export async function SimilarPlaces({
   id,

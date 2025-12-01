@@ -31,7 +31,7 @@ interface MapContainerClientProps {
   onMapZoom?: (zoom: number) => void;
 }
 
-export const MapContainerClient: React.FC<MapContainerClientProps> = ({
+const MapContainerClient: React.FC<MapContainerClientProps> = ({
   center = MILAN_CENTER,
   zoom = ZOOM,
   showMapControls = false,
@@ -98,3 +98,5 @@ export const MapContainerClient: React.FC<MapContainerClientProps> = ({
     </Box>
   );
 };
+
+export default MapContainerClient;

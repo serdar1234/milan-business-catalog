@@ -1,5 +1,5 @@
 import { api } from '@/layers/03_entities/api/baseApi';
-import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
+import { Business } from '@/layers/04_shared/types/types';
 import { type LanguageCode } from '@/layers/04_shared/configs/settings';
 
 export type SearchParams = {

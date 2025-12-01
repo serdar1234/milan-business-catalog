@@ -1,24 +1,12 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 
 import Box from '@mui/material/Box';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
 import MapSidebar from '@/layers/02_features/Map/MapSidebar';
 import MapFilterDrawer from '@/layers/02_features/Map/MapFilterDrawer';
-import { Spinner } from '@/layers/04_shared/ui/Spinner';
-
-const MapContainerClient = dynamic(
-  () =>
-    import('@/layers/02_features/Map/MapContainerClient').then(
-      (mod) => mod.MapContainerClient,
-    ),
-  {
-    ssr: false,
-    loading: () => <Spinner height="100%" />,
-  },
-);
+import { MapContainerClient } from '@/layers/02_features/Map';
 
 export default function MapPageClient({
   initialSearchParams,

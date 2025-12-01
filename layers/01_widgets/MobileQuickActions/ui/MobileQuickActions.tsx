@@ -9,18 +9,20 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { ACTION_COLORS } from '@/layers/04_shared/utils/constants';
+import Link from 'next/link';
 
 interface MobileQuickActionsProps {
   phone: string;
-  address: string;
+  coordinates: { lat: number; lon: number };
   isFavorite: boolean;
 }
 
 export const MobileQuickActions: React.FC<MobileQuickActionsProps> = ({
   phone,
-  address,
+  coordinates,
   isFavorite,
 }) => {
+  const { lat, lon } = coordinates;
   const actions = [
     {
       label: 'Call Now',
@@ -32,7 +34,7 @@ export const MobileQuickActions: React.FC<MobileQuickActionsProps> = ({
       label: 'Directions',
       icon: NearMeIcon,
       color: ACTION_COLORS.DIRECTIONS,
-      href: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`,
+      href: `/map?lat=${lat}&lon=${lon}`,
     },
     {
       label: 'Reserve',
@@ -56,9 +58,8 @@ export const MobileQuickActions: React.FC<MobileQuickActionsProps> = ({
   }) => (
     <Grid size={6}>
       <ButtonBase
-        component={href ? 'a' : 'button'}
+        component={href ? Link : 'button'}
         href={href}
-        target={href ? '_blank' : undefined}
         sx={{
           width: '100%',
           p: 2,

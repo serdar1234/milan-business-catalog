@@ -14,23 +14,12 @@ import { LocationButton } from '@/layers/04_shared/ui/LocationButton';
 
 import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 
-import dynamic from 'next/dynamic';
-import { Spinner } from '@/layers/04_shared/ui/Spinner';
 import { addRecentlyViewed } from '@/layers/04_shared/utils/recentlyViewed';
 import { useEffect } from 'react';
-import { Business } from '@/layers/04_shared/api/mocks/businessMocks';
+import { Business } from '@/layers/04_shared/types/types';
 import { ViewedPlace } from '@/layers/02_features/ViewedPlaceCard/ui/ViewedPlaceCard';
 import { MILAN_CENTER } from '@/layers/04_shared/utils/constants';
-const MapContainerClient = dynamic(
-  () =>
-    import('@/layers/02_features/Map/MapContainerClient').then(
-      (mod) => mod.MapContainerClient,
-    ),
-  {
-    ssr: false,
-    loading: () => <Spinner bgcolor="transparent" color="secondary" />,
-  },
-);
+import { MapContainerClient } from '@/layers/02_features/Map';
 
 interface BusinessDetailsProps {
   business?: Business;
@@ -87,7 +76,7 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
         overflow: 'hidden',
       }}
     >
-      <MapContainerClient center={mapCenter} />
+      <MapContainerClient center={mapCenter} showMapControls />
       <Box
         sx={{
           position: 'absolute',
