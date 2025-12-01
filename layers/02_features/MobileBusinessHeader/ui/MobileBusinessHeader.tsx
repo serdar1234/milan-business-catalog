@@ -109,9 +109,7 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
             {name}
           </Typography>
           <Typography variant="body2" color="surface" sx={{ mb: 1 }}>
-            <Link href={`/category/${category.name.toLowerCase()}`}>
-              {category.name}
-            </Link>
+            <Link href={`/category/${category.slug}`}>{category.name}</Link>
           </Typography>
         </Grid>
         {/* QR code */}

@@ -1,7 +1,8 @@
-import { Box, Container, Typography, Button } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import { Box, Container, Button } from '@mui/material';
+import FolderSpecialIcon from '@mui/icons-material/FolderSpecial';
 import Link from 'next/link';
 import { SavedPlaceCard } from '@/layers/02_features/SavedPlaceCard/ui/SavedPlaceCard';
+import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 
 const SAVED_MOCKS = [
   {
@@ -29,27 +30,7 @@ export const SavedPlaces: React.FC = () => {
       }}
     >
       <Container>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            mb: 3,
-          }}
-        >
-          <Typography variant="h5" fontWeight="bold" color="text.primary">
-            Your Saved Places
-          </Typography>
-          <Button
-            component={Link}
-            href="#"
-            variant="text"
-            color="brandAccent"
-            sx={{ fontWeight: 'bold' }}
-          >
-            Manage
-          </Button>
-        </Box>
+        <WidgetHeader title="Your Saved Places" />
 
         <Box>
           {SAVED_MOCKS.map((place) => (
@@ -61,10 +42,10 @@ export const SavedPlaces: React.FC = () => {
           <Button
             fullWidth
             component={Link}
-            href="/search"
+            href="#"
             variant="outlined"
-            color="primary"
-            startIcon={<AddIcon />}
+            color="brandAccent"
+            startIcon={<FolderSpecialIcon />}
             sx={{
               py: 1.5,
               fontWeight: 'bold',
@@ -72,7 +53,7 @@ export const SavedPlaces: React.FC = () => {
               bgcolor: 'background.paper',
             }}
           >
-            Save a New Place
+            Manage
           </Button>
         </Box>
       </Container>

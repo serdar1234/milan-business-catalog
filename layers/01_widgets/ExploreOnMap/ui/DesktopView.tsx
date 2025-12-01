@@ -7,11 +7,12 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import { FILTER_BUTTONS } from './mockData';
+import { FILTER_BUTTONS, type FilterButton } from './mockData';
 // import { BUSINESS_MOCKS } from '@/layers/04_shared/api/mocks/businessMocks';
 import dynamic from 'next/dynamic';
 import { Spinner } from '@/layers/04_shared/ui/Spinner';
 import { useGetBusinessListQuery } from '@/layers/03_entities/business/businessApi';
+import { useState } from 'react';
 const MapContainerClient = dynamic(
   () =>
     import('@/layers/02_features/Map/MapContainerClient').then(
@@ -26,11 +27,16 @@ const MapContainerClient = dynamic(
 const NUMBER_OF_BUSINESSES = 3;
 
 export const DesktopView = () => {
+  const [selectedFilter, setSelectedFilter] = useState<FilterButton>('All');
+  const args = {
+    category_id:
+      selectedFilter === 'All' ? undefined : selectedFilter === 'Bars' ? 1 : 2,
+  };
   const {
     data: businessList,
     isLoading,
     isError,
-  } = useGetBusinessListQuery({ sort: 'rating' });
+  } = useGetBusinessListQuery({ ...args });
 
   if (isLoading) {
     return <Spinner bgcolor="transparent" />;
@@ -71,14 +77,15 @@ export const DesktopView = () => {
               {FILTER_BUTTONS.map((label) => (
                 <Button
                   key={label}
-                  variant={label === 'All' ? 'contained' : 'outlined'}
+                  variant={label === selectedFilter ? 'contained' : 'outlined'}
                   size="small"
-                  color={label === 'All' ? 'brandAccent' : 'inherit'}
+                  color={label === selectedFilter ? 'brandAccent' : 'inherit'}
                   sx={{
-                    color: label === 'All' ? 'white' : 'text.primary',
+                    color: label === selectedFilter ? 'white' : 'text.primary',
                     borderColor: 'var(--color-border-grey)',
                     textTransform: 'capitalize',
                   }}
+                  onClick={() => setSelectedFilter(label)}
                 >
                   {label}
                 </Button>
@@ -87,7 +94,7 @@ export const DesktopView = () => {
 
             <SearchForm hasBorder />
 
-            <Box>
+            <Box margin="1rem 0">
               {businessList
                 .slice(1, NUMBER_OF_BUSINESSES + 1)
                 .map((business) => (

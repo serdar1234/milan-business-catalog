@@ -13,11 +13,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = (await params).slug;
   const category = await fetch(`${BASE_URL}/categories/${slug}`);
   const json = await category.json();
-  const { name } = json.data;
+  const { name, companies_count } = json.data;
 
   return {
     title: name + ' category',
-    description: `${name} businesses in Milano`,
+    description: `${companies_count + ' ' + name.toLowerCase()} businesses in Milano`,
   };
 }
 export default function CategoryPage() {

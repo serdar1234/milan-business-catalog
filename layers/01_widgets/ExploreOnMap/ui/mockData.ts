@@ -4,4 +4,5 @@ export const NEARBY_CHIPS = [
   { label: '15 Bars', bgColor: '#E0E7E9' },
 ];
 
-export const FILTER_BUTTONS = ['All', 'Bars', 'Restaurants'];
+export type FilterButton = 'All' | 'Bars' | 'Restaurants';
+export const FILTER_BUTTONS: FilterButton[] = ['All', 'Bars', 'Restaurants'];

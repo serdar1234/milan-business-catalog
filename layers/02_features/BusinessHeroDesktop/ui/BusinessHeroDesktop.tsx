@@ -43,7 +43,7 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
 
   const BREADCRUMBS = [
     { label: 'Home', href: '/' },
-    { label: category.name, href: '/category/' + category.name.toLowerCase() },
+    { label: category.name, href: '/category/' + category.slug },
     { label: name },
   ];
 

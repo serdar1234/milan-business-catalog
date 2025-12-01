@@ -6,13 +6,13 @@ import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
 import { BASE_URL } from '@/layers/03_entities/api/baseApi';
 
 interface Props {
-  params: { id: string };
+  params: { slug: string };
 }
 
 export async function generateMetadata({ params }: Props) {
-  const { id } = await params;
+  const { slug } = await params;
   const { lang } = await getSSRPreferences();
-  const res = await fetch(`${BASE_URL}/companies/${id}?lang=${lang}`, {
+  const res = await fetch(`${BASE_URL}/companies/${slug}?lang=${lang}`, {
     next: { revalidate: 60 },
   });
 
@@ -38,10 +38,10 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function BusinessPage({ params }: Props) {
-  const { id } = await params;
+  const { slug } = await params;
   const { lang } = await getSSRPreferences();
 
-  const res = await fetch(`${BASE_URL}/companies/${id}?lang=${lang}`, {
+  const res = await fetch(`${BASE_URL}/companies/${slug}?lang=${lang}`, {
     next: { revalidate: 60 },
   });
 
