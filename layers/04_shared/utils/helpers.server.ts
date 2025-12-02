@@ -39,10 +39,29 @@ export async function fetchCategoryBusinesses({
     );
     if (!res.ok) return null;
 
-    const json = await res.json();
-    return json;
+    return res.json();
   } catch (err) {
     console.error('Failed to fetch businesses', err);
+    return null;
+  }
+}
+
+export async function fetchSearchResults({
+  query = '',
+  page = 1,
+  limit = 10,
+  category_id = 0,
+  sort = 'rating',
+}): Promise<{ data: Business[]; meta: Meta } | null> {
+  try {
+    const { lang } = await getSSRPreferences();
+    const url = `${BASE_URL}/companies/search?q=${encodeURIComponent(query)}&page=${page}&per_page=${limit}${category_id ? `&category_id=${category_id}` : ''}&sort=${sort}&lang=${lang}`;
+    const res = await fetch(url, { next: { revalidate: 60 } });
+
+    if (!res.ok) return null;
+    return res.json();
+  } catch (err) {
+    console.error('Failed to fetch search results', err);
     return null;
   }
 }

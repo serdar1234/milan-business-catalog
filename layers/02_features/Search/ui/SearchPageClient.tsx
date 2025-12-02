@@ -17,17 +17,20 @@ import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
 import { useSearchResults } from '@/layers/04_shared/hooks/useSearchResults';
 import { MapContainerClient } from '@/layers/02_features/Map';
 import styles from './SearchPageClient.module.css';
+import { Business, Meta } from '@/layers/04_shared/types/types';
 
 interface SearchPageClientProps {
   searchQuery: string;
   initialView: ViewType;
   pageTitle: string;
+  initialResult: { data: Business[]; meta: Meta };
 }
 
 export default function SearchPageClient({
   searchQuery,
   initialView,
   pageTitle,
+  initialResult,
 }: SearchPageClientProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -36,7 +39,7 @@ export default function SearchPageClient({
 
   const [currentView, setCurrentView] = useState<ViewType>(initialView);
   const { page, setPage, businessList, meta, isLoading, isError } =
-    useSearchResults(searchQuery);
+    useSearchResults(searchQuery, initialResult);
   const total_results = meta?.pagination?.total_count || 0;
 
   const handleViewChange = (newView: ViewType) => {

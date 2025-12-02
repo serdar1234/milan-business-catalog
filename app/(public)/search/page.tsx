@@ -3,6 +3,7 @@ import SearchPageClient from '@/layers/02_features/Search/ui/SearchPageClient';
 import type { ViewType } from '@/layers/02_features/SearchHeaderVersions';
 import type { Metadata } from 'next';
 import { getTitleFromSlug } from '@/layers/04_shared/utils/helpers';
+import { fetchSearchResults } from '@/layers/04_shared/utils/helpers.server';
 
 type MetaProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -43,11 +44,18 @@ export default async function SearchPage({ searchParams }: Props) {
   const pageTitle =
     decodedQuery === 'milano' ? 'All Businesses in Milan' : decodedQuery;
 
+  const initialResult = await fetchSearchResults({
+    query: decodedQuery,
+    page: 1,
+  });
+  if (!initialResult) return null;
+
   return (
     <SearchPageClient
       searchQuery={decodedQuery}
       initialView={initial}
       pageTitle={pageTitle}
+      initialResult={initialResult}
     />
   );
 }

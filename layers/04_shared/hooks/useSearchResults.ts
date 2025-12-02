@@ -1,18 +1,39 @@
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import { useGetSearchResultsQuery } from '@/layers/03_entities/search/api/searchApi';
-import { SearchResults } from '../types/types';
+import { SearchResult } from '@/layers/03_entities/search/api/searchApi';
+import { Business, Meta } from '@/layers/04_shared/types/types';
 
-export const useSearchResults = (query: string): SearchResults => {
-  const [page, setPage] = useState(1);
+export interface UseSearchResults {
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
+  businessList: Business[];
+  meta: Meta | null;
+  isLoading: boolean;
+  isError: boolean;
+}
 
-  const { data, isLoading, isError } = useGetSearchResultsQuery({
-    q: query,
-    page,
-    per_page: 10,
-  });
+export const useSearchResults = (
+  query: string,
+  initialResult?: SearchResult,
+): UseSearchResults => {
+  const [page, setPage] = useState(initialResult?.meta.pagination.page ?? 1);
 
-  const businessList = data?.data ?? [];
-  const meta = data?.meta;
+  const shouldSkip =
+    Boolean(initialResult) && page === initialResult?.meta.pagination.page;
+
+  const { data, isLoading, isError } = useGetSearchResultsQuery(
+    {
+      q: query,
+      page,
+      per_page: 10,
+    },
+    {
+      skip: shouldSkip,
+    },
+  );
+
+  const businessList = data?.data ?? initialResult?.data ?? [];
+  const meta = data?.meta ?? initialResult?.meta ?? null;
 
   return {
     page,

@@ -31,6 +31,7 @@ export interface SearchResult {
 }
 
 export const searchApi = api.injectEndpoints({
+  overrideExisting: true,
   endpoints: (builder) => ({
     getSearchResults: builder.query<SearchResult, SearchParams>({
       query: (params) => ({
@@ -44,5 +45,3 @@ export const searchApi = api.injectEndpoints({
 });
 
 export const { useGetSearchResultsQuery } = searchApi;
-
-export const { getSearchResults } = searchApi.endpoints;

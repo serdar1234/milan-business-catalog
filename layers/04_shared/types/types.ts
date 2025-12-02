@@ -41,7 +41,7 @@ export interface SearchResults {
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
   businessList: Business[];
-  meta?: Meta;
+  meta?: Meta | null;
   isLoading: boolean;
   isError: boolean;
 }
