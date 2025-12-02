@@ -2,6 +2,7 @@ import { useState, Dispatch, SetStateAction } from 'react';
 import { useGetSearchResultsQuery } from '@/layers/03_entities/search/api/searchApi';
 import { SearchResult } from '@/layers/03_entities/search/api/searchApi';
 import { Business, Meta } from '@/layers/04_shared/types/types';
+import { LanguageCode } from '../configs/settings';
 
 export interface UseSearchResults {
   page: number;
@@ -14,17 +15,22 @@ export interface UseSearchResults {
 
 export const useSearchResults = (
   query: string,
-  initialResult?: SearchResult,
+  lang: LanguageCode,
+  initialResult: SearchResult,
 ): UseSearchResults => {
-  const [page, setPage] = useState(initialResult?.meta.pagination.page ?? 1);
+  const [page, setPage] = useState(initialResult?.meta.pagination.page);
 
   const { data, isLoading, isError } = useGetSearchResultsQuery({
     q: query,
     page,
+    lang,
     per_page: 10,
   });
 
-  const businessList = data?.data ?? initialResult?.data ?? [];
+  const businessList =
+    page === initialResult?.meta.pagination.page
+      ? initialResult?.data
+      : (data?.data ?? initialResult?.data ?? []);
   const meta = data?.meta ?? initialResult?.meta ?? null;
 
   return {

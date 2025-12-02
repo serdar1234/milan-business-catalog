@@ -38,7 +38,6 @@ export async function fetchCategoryBusinesses({
       `${BASE_URL}/companies?page=${page}&per_page=${limit}&category_id=${category_id}&sort=${sort}&lang=${lang}`,
     );
     if (!res.ok) return null;
-
     return res.json();
   } catch (err) {
     console.error('Failed to fetch businesses', err);
@@ -52,9 +51,9 @@ export async function fetchSearchResults({
   limit = 10,
   category_id = 0,
   sort = 'rating',
+  lang = 'en',
 }): Promise<{ data: Business[]; meta: Meta } | null> {
   try {
-    const { lang } = await getSSRPreferences();
     const url = `${BASE_URL}/companies/search?q=${encodeURIComponent(query)}&page=${page}&per_page=${limit}${category_id ? `&category_id=${category_id}` : ''}&sort=${sort}&lang=${lang}`;
     const res = await fetch(url, { next: { revalidate: 60 } });
 

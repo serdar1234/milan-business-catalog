@@ -18,12 +18,14 @@ import { useSearchResults } from '@/layers/04_shared/hooks/useSearchResults';
 import { MapContainerClient } from '@/layers/02_features/Map';
 import styles from './SearchPageClient.module.css';
 import { Business, Meta } from '@/layers/04_shared/types/types';
+import { LanguageCode } from '@/layers/04_shared/configs/settings';
 
 interface SearchPageClientProps {
   searchQuery: string;
   initialView: ViewType;
   pageTitle: string;
   initialResult: { data: Business[]; meta: Meta };
+  lang: LanguageCode;
 }
 
 export default function SearchPageClient({
@@ -31,6 +33,7 @@ export default function SearchPageClient({
   initialView,
   pageTitle,
   initialResult,
+  lang,
 }: SearchPageClientProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -39,7 +42,7 @@ export default function SearchPageClient({
 
   const [currentView, setCurrentView] = useState<ViewType>(initialView);
   const { page, setPage, businessList, meta, isLoading, isError } =
-    useSearchResults(searchQuery, initialResult);
+    useSearchResults(searchQuery, lang, initialResult);
   const total_results = meta?.pagination?.total_count || 0;
 
   const handleViewChange = (newView: ViewType) => {

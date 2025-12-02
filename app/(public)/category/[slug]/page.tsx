@@ -68,7 +68,7 @@ export default async function CategoryPage({ params }: Props) {
             <div className={style['grid-item__main']}>
               <CategoryBusinessList
                 id={id}
-                slug={slug}
+                lang={lang}
                 initialResult={initialResult}
               />
             </div>
