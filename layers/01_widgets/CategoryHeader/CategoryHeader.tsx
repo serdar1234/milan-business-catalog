@@ -24,7 +24,6 @@ export const CategoryHeader: React.FC<CategoryHeaderProps> = ({
       }}
     >
       <Box maxWidth="lg" sx={{ mx: 'auto' }}>
-        {/* Breadcrumbs */}
         {breadcrumbs.length > 0 && (
           <Box>
             <AppBreadcrumbs items={breadcrumbs} />

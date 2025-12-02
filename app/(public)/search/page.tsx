@@ -24,14 +24,14 @@ export async function generateMetadata({
   };
 }
 
-interface Props {
+interface SearchPageProps {
   searchParams: {
     q?: string;
     view?: ViewType;
   };
 }
 
-export default async function SearchPage({ searchParams }: Props) {
+export default async function SearchPage({ searchParams }: SearchPageProps) {
   const params = await searchParams;
   const searchQuery = params.q || '';
 

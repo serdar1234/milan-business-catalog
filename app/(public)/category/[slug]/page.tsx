@@ -10,6 +10,7 @@ import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
 import { fetchCategory } from '@/layers/04_shared/utils/helpers.server';
 import { notFound } from 'next/navigation';
 import { CategoryHeader } from '@/layers/01_widgets/CategoryHeader/CategoryHeader';
+import { fetchCategoryBusinesses } from '@/layers/04_shared/utils/helpers.server';
 
 type Props = { params: { slug: string } };
 
@@ -35,8 +36,13 @@ export default async function CategoryPage({ params }: Props) {
   const json = await fetchCategory(slug, lang);
 
   if (!json) notFound();
-
   const { name, companies_count, id } = json.data;
+
+  const initialResult = await fetchCategoryBusinesses({
+    category_id: id,
+    lang,
+  });
+  if (!initialResult) return null;
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
@@ -60,7 +66,11 @@ export default async function CategoryPage({ params }: Props) {
               <CategoryFilters />
             </div>
             <div className={style['grid-item__main']}>
-              <CategoryBusinessList id={id} slug={slug} />
+              <CategoryBusinessList
+                id={id}
+                slug={slug}
+                initialResult={initialResult}
+              />
             </div>
           </div>
         </Container>

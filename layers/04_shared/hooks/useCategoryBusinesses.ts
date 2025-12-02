@@ -1,9 +1,9 @@
 import { useState, Dispatch, SetStateAction } from 'react';
-import { useGetSearchResultsQuery } from '@/layers/03_entities/search/api/searchApi';
 import { SearchResult } from '@/layers/03_entities/search/api/searchApi';
 import { Business, Meta } from '@/layers/04_shared/types/types';
+import { useGetFullBusinessListQuery } from '@/layers/03_entities/business/businessApi';
 
-export interface UseSearchResults {
+export interface useCategoryBusinesses {
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
   businessList: Business[];
@@ -12,14 +12,14 @@ export interface UseSearchResults {
   isError: boolean;
 }
 
-export const useSearchResults = (
-  query: string,
+export const useCategoryBusinesses = (
+  id: number,
   initialResult?: SearchResult,
-): UseSearchResults => {
+): useCategoryBusinesses => {
   const [page, setPage] = useState(initialResult?.meta.pagination.page ?? 1);
 
-  const { data, isLoading, isError } = useGetSearchResultsQuery({
-    q: query,
+  const { data, isLoading, isError } = useGetFullBusinessListQuery({
+    category_id: id,
     page,
     per_page: 10,
   });

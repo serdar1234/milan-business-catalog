@@ -1,5 +1,5 @@
 import { api } from '@/layers/03_entities/api/baseApi';
-import { Business } from '@/layers/04_shared/types/types';
+import { Business, Meta } from '@/layers/04_shared/types/types';
 import { LanguageCode } from '@/layers/04_shared/configs/settings';
 
 interface BusinessListParams {
@@ -29,6 +29,17 @@ export const businessApi = api.injectEndpoints({
       providesTags: ['Business'],
     }),
 
+    getFullBusinessList: builder.query<
+      { data: Business[]; meta: Meta },
+      BusinessListParams | undefined
+    >({
+      query: (params) => ({
+        url: 'companies',
+        params,
+      }),
+      providesTags: ['Business'],
+    }),
+
     getCompanyDetails: builder.query<Business, CompanyParams>({
       query: ({ id, lang }: CompanyParams) => `companies/${id}?lang=${lang}`,
       transformResponse: (response: { data: Business }) => response.data,
@@ -37,5 +48,8 @@ export const businessApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetBusinessListQuery, useGetCompanyDetailsQuery } =
-  businessApi;
+export const {
+  useGetBusinessListQuery,
+  useGetFullBusinessListQuery,
+  useGetCompanyDetailsQuery,
+} = businessApi;

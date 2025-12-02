@@ -31,9 +31,9 @@ export async function fetchCategoryBusinesses({
   limit = 10,
   category_id = 1,
   sort = 'rating',
+  lang = 'en',
 }): Promise<{ data: Business[]; meta: Meta } | null> {
   try {
-    const { lang } = await getSSRPreferences();
     const res = await fetch(
       `${BASE_URL}/companies?page=${page}&per_page=${limit}&category_id=${category_id}&sort=${sort}&lang=${lang}`,
     );
