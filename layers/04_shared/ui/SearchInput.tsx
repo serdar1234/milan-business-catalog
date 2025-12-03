@@ -1,3 +1,5 @@
+'use client';
+
 import { AutocompleteRenderInputParams } from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import IconButton from '@mui/material/IconButton';

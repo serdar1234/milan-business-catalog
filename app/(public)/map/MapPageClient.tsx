@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
@@ -8,31 +9,68 @@ import MapSidebar from '@/layers/02_features/Map/MapSidebar';
 import MapFilterDrawer from '@/layers/02_features/Map/MapFilterDrawer';
 import { MapContainerClient } from '@/layers/02_features/Map';
 
-export default function MapPageClient({
-  initialSearchParams,
-}: {
-  initialSearchParams: Record<string, string>;
-}) {
+function debounce<F extends (...args: number[]) => void>(fn: F, delay: number) {
+  let timeout: NodeJS.Timeout;
+  return (...args: Parameters<F>) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
+}
+
+export default function MapPageClient() {
   const { open, setOpen, toggleDrawer } = useToggleDrawer();
   const router = useRouter();
 
-  const initialLat = parseFloat(initialSearchParams.lat ?? '45.4642');
-  const initialLon = parseFloat(initialSearchParams.lon ?? '9.19');
-  const initialZoom = parseInt(initialSearchParams.zoom ?? '13');
+  const isNavigatingAway = useRef(false);
 
-  function updateURL(lat: number, lon: number, zoom?: number) {
-    const params = new URLSearchParams();
+  useEffect(() => {
+    return () => {
+      isNavigatingAway.current = true;
+    };
+  }, []);
 
-    params.set('lat', lat.toFixed(6));
-    params.set('lon', lon.toFixed(6));
-    if (zoom !== undefined) params.set('zoom', String(zoom));
+  // Начальные значения
+  const [center, setCenter] = useState<[number, number]>([45.4642, 9.19]);
+  const [zoom, setZoom] = useState(13);
 
-    router.replace(`/map?${params.toString()}`);
-  }
+  // Функция обновления URL
+  const updateURL = useRef<
+    ((lat: number, lon: number, zoom: number) => void) | null
+  >(null);
 
-  const handleFilterToggle = () => {
-    setOpen(true);
+  useEffect(() => {
+    updateURL.current = debounce(
+      (lat: number, lon: number, zoomLevel: number) => {
+        if (isNavigatingAway.current) return;
+
+        const params = new URLSearchParams();
+        params.set('lat', lat.toFixed(6));
+        params.set('lon', lon.toFixed(6));
+        params.set('zoom', String(zoomLevel));
+
+        router.replace(`/map?${params.toString()}`, { scroll: false });
+      },
+      50,
+    );
+
+    return () => {
+      updateURL.current = null;
+    };
+  }, [router]);
+
+  const handleMapMove = (lat: number, lon: number, newZoom: number) => {
+    setCenter([lat, lon]);
+    setZoom(newZoom);
+    updateURL.current?.(lat, lon, newZoom);
   };
+
+  const handleMapZoom = (newZoom: number) => {
+    const [lat, lon] = center;
+    setZoom(newZoom);
+    updateURL.current?.(lat, lon, newZoom);
+  };
+
+  const handleFilterToggle = () => setOpen(true);
 
   return (
     <>
@@ -45,19 +83,17 @@ export default function MapPageClient({
           width: '100%',
         }}
       >
-        {/* MAP */}
         <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 60%' } }}>
           <MapContainerClient
-            center={[initialLat, initialLon]}
-            zoom={initialZoom}
-            onMapMove={(lat, lon) => updateURL(lat, lon)}
-            onMapZoom={(zoom) => updateURL(initialLat, initialLon, zoom)}
+            center={center}
+            zoom={zoom}
+            onMapMove={handleMapMove}
+            onMapZoom={handleMapZoom}
             showMapControls
             onFilterClick={handleFilterToggle}
           />
         </Box>
 
-        {/* SIDEBAR (пока пустой) */}
         <Box
           sx={{
             flex: { xs: '1 1 auto', md: '1 1 40%' },
@@ -70,7 +106,6 @@ export default function MapPageClient({
         </Box>
       </Box>
 
-      {/* DRAWER */}
       <MapFilterDrawer open={open} toggleDrawer={toggleDrawer} />
     </>
   );

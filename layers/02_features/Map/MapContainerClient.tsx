@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import L, { Map as LeafletMap } from 'leaflet';
+import { useEffect } from 'react';
+import L from 'leaflet';
 import {
   MapContainer,
   TileLayer,
@@ -27,7 +27,7 @@ interface MapContainerClientProps {
 
   onFilterClick?: () => void;
 
-  onMapMove?: (lat: number, lon: number) => void;
+  onMapMove?: (lat: number, lon: number, zoom: number) => void;
   onMapZoom?: (zoom: number) => void;
 }
 
@@ -39,7 +39,6 @@ const MapContainerClient: React.FC<MapContainerClientProps> = ({
   onMapMove,
   onMapZoom,
 }) => {
-  const mapRef = useRef<LeafletMap | null>(null);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       import('leaflet-gesture-handling').then(({ GestureHandling }) => {
@@ -70,7 +69,6 @@ const MapContainerClient: React.FC<MapContainerClientProps> = ({
           },
         }}
         style={{ height: '100%', width: '100%' }}
-        ref={mapRef}
       >
         <ResizeHandler />
         <TileLayer
