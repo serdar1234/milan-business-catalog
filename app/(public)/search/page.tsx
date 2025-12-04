@@ -25,14 +25,16 @@ export async function generateMetadata({
   };
 }
 
-interface SearchPageProps {
-  searchParams: {
-    q?: string;
-    view?: ViewType;
-  };
-}
+type SearchPageProps = {
+  q?: string;
+  view?: ViewType;
+};
 
-export default async function SearchPage({ searchParams }: SearchPageProps) {
+export default async function SearchPage({
+  searchParams,
+}: {
+  searchParams: SearchPageProps | Promise<SearchPageProps>;
+}) {
   const params = await searchParams;
   const searchQuery = params.q || '';
   const { lang } = await getSSRPreferences();

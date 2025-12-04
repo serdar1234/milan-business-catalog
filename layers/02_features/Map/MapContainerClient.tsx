@@ -15,29 +15,20 @@ import Box from '@mui/material/Box';
 import customDivIcon from '@/layers/04_shared/utils/customDivIcon';
 import { MapFilterButton } from './MapFilterButton';
 import HomeControl from './HomeControl';
-import { MapUpdater } from '@/layers/04_shared/utils/MapUpdater';
-import { MILAN_CENTER, ZOOM } from '@/layers/04_shared/utils/constants';
-import { MapEventsHandler } from './MapEventsHandler';
+import { MILAN_CENTER } from '@/layers/04_shared/utils/constants';
+import { ZOOM } from '@/layers/04_shared/utils/constants';
 import { ResizeHandler } from './ResizeHandler';
 
 interface MapContainerClientProps {
   center?: [number, number];
-  zoom?: number;
   showMapControls?: boolean;
-
   onFilterClick?: () => void;
-
-  onMapMove?: (lat: number, lon: number, zoom: number) => void;
-  onMapZoom?: (zoom: number) => void;
 }
 
 const MapContainerClient: React.FC<MapContainerClientProps> = ({
-  center = MILAN_CENTER,
-  zoom = ZOOM,
+  center,
   showMapControls = false,
   onFilterClick,
-  onMapMove,
-  onMapZoom,
 }) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -56,8 +47,8 @@ const MapContainerClient: React.FC<MapContainerClientProps> = ({
       }}
     >
       <MapContainer
-        center={center}
-        zoom={zoom}
+        center={center || MILAN_CENTER}
+        zoom={ZOOM}
         scrollWheelZoom={false}
         zoomControl={false}
         gestureHandling={true}
@@ -68,16 +59,12 @@ const MapContainerClient: React.FC<MapContainerClientProps> = ({
             scrollMac: 'Please use \u2318 + scroll to zoom the map',
           },
         }}
-        style={{ height: '100%', width: '100%' }}
       >
         <ResizeHandler />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
-        <MapUpdater newPosition={center} />
-        <MapEventsHandler onMapMove={onMapMove} onMapZoom={onMapZoom} />
 
         {showMapControls && (
           <>
@@ -89,9 +76,11 @@ const MapContainerClient: React.FC<MapContainerClientProps> = ({
           </>
         )}
 
-        <Marker icon={customDivIcon('Milano', true)} position={center}>
-          <Popup offset={[0, -10]}>Benvenuti a Milano!</Popup>
-        </Marker>
+        {center && (
+          <Marker icon={customDivIcon('Milano', true)} position={center}>
+            <Popup offset={[0, -10]}>Benvenuti a Milano!</Popup>
+          </Marker>
+        )}
       </MapContainer>
     </Box>
   );
