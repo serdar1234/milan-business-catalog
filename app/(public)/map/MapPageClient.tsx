@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
 import { useToggleDrawer } from '@/layers/04_shared/hooks/useToggleDrawer';
@@ -9,20 +9,11 @@ import MapSidebar from '@/layers/02_features/Map/MapSidebar';
 import MapFilterDrawer from '@/layers/02_features/Map/MapFilterDrawer';
 import { MapContainerClient } from '@/layers/02_features/Map';
 
-function debounce<F extends (...args: number[]) => void>(fn: F, delay: number) {
-  let timeout: NodeJS.Timeout;
-  return (...args: Parameters<F>) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => fn(...args), delay);
-  };
-}
-
 export default function MapPageClient() {
   const { open, setOpen, toggleDrawer } = useToggleDrawer();
   const router = useRouter();
 
   const isNavigatingAway = useRef(false);
-
   useEffect(() => {
     return () => {
       isNavigatingAway.current = true;
@@ -33,42 +24,82 @@ export default function MapPageClient() {
   const [center, setCenter] = useState<[number, number]>([45.4642, 9.19]);
   const [zoom, setZoom] = useState(13);
 
-  // Функция обновления URL
-  const updateURL = useRef<
-    ((lat: number, lon: number, zoom: number) => void) | null
-  >(null);
+  // Реф для debounce таймаута (browser setTimeout возвращает number)
+  const timeoutRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    updateURL.current = debounce(
-      (lat: number, lon: number, zoomLevel: number) => {
-        if (isNavigatingAway.current) return;
+  // Вспомогательная функция — обновить URL (без эффектов)
+  const replaceUrl = useCallback(
+    (lat: number, lon: number, zoomLevel: number) => {
+      if (isNavigatingAway.current) return;
+      const params = new URLSearchParams();
+      // console.log('[replaceUrl] raw coords:', lat, lon, zoomLevel);
+      params.set('lat', lat.toFixed(6));
+      params.set('lon', lon.toFixed(6));
+      params.set('zoom', String(zoomLevel));
+      const newUrl = `/map?${params.toString()}`;
 
-        const params = new URLSearchParams();
-        params.set('lat', lat.toFixed(6));
-        params.set('lon', lon.toFixed(6));
-        params.set('zoom', String(zoomLevel));
+      // console.log('[MapPageClient] router.replace ->', newUrl);
+      // используем router.replace (App Router)
+      router.replace(newUrl, { scroll: false });
+    },
+    [router],
+  );
 
-        router.replace(`/map?${params.toString()}`, { scroll: false });
-      },
-      50,
-    );
+  // Debounced handler — гарантированно доступен сразу (нет useEffect гонок)
+  const debouncedReplace = useCallback(
+    (lat: number, lon: number, zoomLevel: number, delay = 50) => {
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+      }
+      // setTimeout возвращает number в браузере
+      timeoutRef.current = window.setTimeout(() => {
+        replaceUrl(lat, lon, zoomLevel);
+        timeoutRef.current = null;
+      }, delay) as unknown as number;
+    },
+    [replaceUrl],
+  );
 
-    return () => {
-      updateURL.current = null;
-    };
-  }, [router]);
+  // Обработчики, которые передаются в MapContainerClient
+  const handleMapMove = useCallback(
+    (lat: number, lon: number, newZoom: number) => {
+      // console.log('[MapPageClient] handleMapMove', lat, lon, newZoom);
+      // console.log('[handleMapMove] args:', {
+      //   lat,
+      //   lon,
+      //   newZoom,
+      //   isLatNumber: typeof lat,
+      //   isLonNumber: typeof lon,
+      // });
+      if (
+        !Number.isFinite(lat) ||
+        !Number.isFinite(lon) ||
+        !Number.isFinite(newZoom)
+      ) {
+        console.warn(
+          '[handleMapMove] skipping invalid coords',
+          lat,
+          lon,
+          newZoom,
+        );
+        return;
+      }
+      setCenter([lat, lon]);
+      setZoom(newZoom);
+      debouncedReplace(lat, lon, newZoom);
+    },
+    [debouncedReplace],
+  );
 
-  const handleMapMove = (lat: number, lon: number, newZoom: number) => {
-    setCenter([lat, lon]);
-    setZoom(newZoom);
-    updateURL.current?.(lat, lon, newZoom);
-  };
-
-  const handleMapZoom = (newZoom: number) => {
-    const [lat, lon] = center;
-    setZoom(newZoom);
-    updateURL.current?.(lat, lon, newZoom);
-  };
+  const handleMapZoom = useCallback(
+    (newZoom: number) => {
+      const [lat, lon] = center;
+      // console.log('[MapPageClient] handleMapZoom', newZoom);
+      setZoom(newZoom);
+      debouncedReplace(lat, lon, newZoom);
+    },
+    [center, debouncedReplace],
+  );
 
   const handleFilterToggle = () => setOpen(true);
 
