@@ -1,26 +1,16 @@
+'use client';
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import Chip from '@mui/material/Chip';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Rating from '@mui/material/Rating';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
-
-type UserLabel = 'Verified' | 'Tourist';
-
-interface Insight {
-  id: number;
-  user: string;
-  avatarUrl: string;
-  text: string;
-  timeAgo: string;
-  rating: number;
-  locationText?: string;
-
-  label?: UserLabel;
-  likes?: number;
-}
+import { Insight } from '@/layers/01_widgets/LocalInsights/ui/LocalInsights';
+import { formatRelativeTime } from '@/layers/04_shared/utils/formatRelativeTime';
+import { useCurrentLanguage } from '@/layers/04_shared/hooks/useCurrentLanguage';
+import Link from 'next/link';
 
 interface InsightCardProps {
   insight: Insight;
@@ -31,28 +21,16 @@ export const InsightCard: React.FC<InsightCardProps> = ({
   insight,
   isDesktop = false,
 }) => {
-  const { user, avatarUrl, text, timeAgo, rating, locationText, label, likes } =
-    insight;
-
-  let chipColor: 'statusFeatured' | 'brandAccent' = 'brandAccent';
-  if (label !== 'Verified') {
-    chipColor = 'statusFeatured';
-  }
+  const lang = useCurrentLanguage();
+  const { name, rating, comment, created_at, company } = insight;
+  const timeAgo = formatRelativeTime(created_at, lang);
 
   const MobileHeader = (
     <Box sx={{ flexGrow: 1 }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
         <Typography variant="body1" fontWeight="bold" color="text.primary">
-          {user}
+          {name}
         </Typography>
-        {label && (
-          <Chip
-            label={label}
-            size="small"
-            color={chipColor}
-            sx={{ height: 20, fontWeight: 'medium', color: 'white' }}
-          />
-        )}
       </Box>
     </Box>
   );
@@ -67,7 +45,7 @@ export const InsightCard: React.FC<InsightCardProps> = ({
         }}
       >
         <Typography variant="body1" fontWeight="bold" color="text.primary">
-          {user}
+          {name}
         </Typography>
         <Rating
           value={rating}
@@ -76,7 +54,7 @@ export const InsightCard: React.FC<InsightCardProps> = ({
           sx={{ color: 'brandPin.main' }}
         />
         <Typography variant="body2" color="text.secondary">
-          {timeAgo} ago
+          {timeAgo}
         </Typography>
       </Box>
     </Box>
@@ -89,8 +67,8 @@ export const InsightCard: React.FC<InsightCardProps> = ({
       <CardContent sx={{ p: 3, '&:last-child': { pb: 3 } }}>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1.5 }}>
           <Avatar
-            src={avatarUrl}
-            alt={user}
+            src={''}
+            alt={name}
             sx={{
               width: isDesktop ? 48 : 48,
               height: isDesktop ? 48 : 48,
@@ -100,7 +78,7 @@ export const InsightCard: React.FC<InsightCardProps> = ({
           {isDesktop ? DesktopHeader : MobileHeader}
         </Box>
         <Typography variant="body1" sx={{ mb: 1.5 }}>
-          &quot;{text}&quot;
+          &quot;{comment}&quot;
         </Typography>
         {isDesktop ? (
           <Box
@@ -111,14 +89,21 @@ export const InsightCard: React.FC<InsightCardProps> = ({
               mt: 2,
             }}
           >
-            {locationText && (
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            {company?.slug && (
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
                 <PlaceOutlinedIcon
                   sx={{ color: 'brandPin.main', fontSize: 18, mr: 0.5 }}
                 />
-                <Typography variant="body2" color="text.secondary">
-                  Visited {locationText}
-                </Typography>
+                <Link href={`/business/${company.slug}`}>
+                  <Typography variant="body2" color="text.secondary">
+                    Visited {company.name}
+                  </Typography>
+                </Link>
               </Box>
             )}
           </Box>
@@ -136,11 +121,8 @@ export const InsightCard: React.FC<InsightCardProps> = ({
               size="small"
               sx={{ color: 'brandPin.main', mr: 1 }}
             />
-            <Typography variant="caption" fontWeight="medium" sx={{ mr: 2 }}>
-              {likes} likes
-            </Typography>
             <Typography variant="caption" fontWeight="medium">
-              • {timeAgo} ago
+              {timeAgo}
             </Typography>
           </Box>
         )}

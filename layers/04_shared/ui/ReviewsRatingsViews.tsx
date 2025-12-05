@@ -1,10 +1,16 @@
-import { Box, Button, Grid } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 import Link from 'next/link';
-import { INSIGHT_MOCKS } from '@/layers/04_shared/api/mocks/localInsightsMocks';
 import { InsightCard } from '@/layers/02_features/InsightCard/ui/InsightCard';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
+import { Insight } from '@/layers/01_widgets/LocalInsights/ui/LocalInsights';
 
-export const MobileView = ({ withButton = false }) => (
+interface Props {
+  withButton?: boolean;
+  data: Insight[];
+}
+export const MobileView = ({ withButton = false, data }: Props) => (
   <Box
     display={{ xs: 'block', md: 'none' }}
     component="section"
@@ -17,7 +23,7 @@ export const MobileView = ({ withButton = false }) => (
   >
     <WidgetHeader title="Reviews & Ratings" />
     <Box>
-      {INSIGHT_MOCKS.slice(0, 2).map((insight) => (
+      {data.slice(0, 2).map((insight) => (
         <InsightCard key={insight.id} insight={insight} isDesktop={false} />
       ))}
     </Box>
@@ -37,10 +43,10 @@ export const MobileView = ({ withButton = false }) => (
   </Box>
 );
 
-export const DesktopView = ({ withButton = false }) => (
+export const DesktopView = ({ withButton = false, data }: Props) => (
   <Box display={{ xs: 'none', md: 'block' }}>
     <Grid container spacing={4} justifyContent="center">
-      {INSIGHT_MOCKS.map((insight) => (
+      {data.map((insight) => (
         <Grid size={4} key={insight.id}>
           <InsightCard insight={insight} isDesktop={true} />
         </Grid>

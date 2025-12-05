@@ -6,9 +6,11 @@ import { LocalInsights } from '@/layers/01_widgets/LocalInsights/ui/LocalInsight
 import RecentlyViewed from '@/layers/01_widgets/RecentlyViewed';
 // import { SavedPlaces } from '@/layers/01_widgets/SavedPlaces/ui/SavedPlaces';
 import { SeasonFavorites } from '@/layers/01_widgets/SeasonFavorites/SeasonFavorites';
+import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
 // import WinterSpecials from '@/layers/01_widgets/WinterSpecials/';
 
-export default function Home() {
+export default async function Home() {
+  const { lang } = await getSSRPreferences();
   return (
     <>
       <HeroBlock />
@@ -17,7 +19,7 @@ export default function Home() {
       {/* <ExploreDistricts /> */}
       <ExploreOnMap />
       {/* <WinterSpecials /> */}
-      <LocalInsights />
+      <LocalInsights lang={lang} />
       <RecentlyViewed />
       {/* <SavedPlaces /> */}
     </>

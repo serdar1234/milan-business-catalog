@@ -1,4 +1,4 @@
-import { MobileView } from '@/layers/04_shared/ui/ReviewsRatings';
+import { MobileView } from '@/layers/04_shared/ui/ReviewsRatingsViews';
 import { DesktopReviewsRatings } from './DesktopReviewsRatings';
 import { Business } from '@/layers/04_shared/types/types';
 import { ReviewStats } from '../../BusinessPageWrapper/BusinessPageWrapper';
@@ -25,11 +25,11 @@ export const ReviewsRatings = async ({ data }: { data: Business }) => {
 
   const json = await res.json();
   const reviews = json.data;
-  console.log('reviews ', reviews);
+
   return (
     <>
-      <MobileView />
-      <DesktopReviewsRatings stats={stats} />
+      <MobileView data={reviews} />
+      <DesktopReviewsRatings stats={stats} reviews={reviews} />
     </>
   );
 };
