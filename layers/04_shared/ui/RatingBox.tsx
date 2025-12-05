@@ -19,7 +19,7 @@ export const RatingBox = ({ name, data }: { name: string; data: number }) => (
           color: 'brandAccent.main',
         }}
       >
-        {name === 'Rating' ? data : `${data}+`}
+        {data}
       </Typography>
       <Typography variant="body2" color="text.secondary">
         {name}

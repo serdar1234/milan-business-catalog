@@ -38,6 +38,9 @@ export const Gallery: React.FC = ({}) => {
   const handleLightboxClose = () => {
     setLightboxPhotoId(null);
   };
+
+  if (photos.length === 0) return null;
+
   return (
     <Box sx={{ p: 3, mx: 'auto' }} maxWidth="lg">
       <Box>

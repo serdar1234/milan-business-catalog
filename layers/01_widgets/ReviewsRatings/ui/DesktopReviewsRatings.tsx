@@ -1,28 +1,27 @@
 'use client';
 
-import { Box, Button, Grid, Collapse } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { InsightCard } from '@/layers/02_features/InsightCard/ui/InsightCard';
 import { INSIGHT_MOCKS } from '@/layers/04_shared/api/mocks/localInsightsMocks';
 import { withRatingHeader } from '@/layers/04_shared/hocs/withRatingHeader';
-import {
-  MOCK_STATS,
-  ReviewStats,
-} from '@/layers/04_shared/api/mocks/reviewStatsMocks';
-import { RatingPanel } from '@/layers/02_features/RatingPanel/RatingPanel';
+// import { MOCK_STATS } from '@/layers/04_shared/api/mocks/reviewStatsMocks';
+// import { RatingPanel } from '@/layers/02_features/RatingPanel/RatingPanel';
 import { useState } from 'react';
+import { ReviewStats } from '../../BusinessPageWrapper/BusinessPageWrapper';
 
-interface DesktopReviewsRatingsProps {
-  stats?: ReviewStats;
+interface Props {
+  stats: ReviewStats;
 }
 
 const RatedWidgetHeader = withRatingHeader(WidgetHeader);
 const INITIAL_REVIEWS_COUNT = 3;
 
-export const DesktopReviewsRatings: React.FC<DesktopReviewsRatingsProps> = ({
-  stats = MOCK_STATS,
-}) => {
+export const DesktopReviewsRatings: React.FC<Props> = ({ stats }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const allInsights = INSIGHT_MOCKS;
   const initialInsights = allInsights.slice(0, INITIAL_REVIEWS_COUNT);
@@ -53,7 +52,7 @@ export const DesktopReviewsRatings: React.FC<DesktopReviewsRatingsProps> = ({
       />
 
       <Grid container spacing={4}>
-        <RatingPanel {...stats} />
+        {/* <RatingPanel {...stats} /> */}
         <Grid size={12}>
           {initialInsights.map((insight) => (
             <InsightCard key={insight.id} insight={insight} />

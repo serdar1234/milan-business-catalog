@@ -1,8 +1,5 @@
+import { ReviewStats } from '@/layers/01_widgets/BusinessPageWrapper/BusinessPageWrapper';
 import { Box, Typography, Rating, Button } from '@mui/material';
-import {
-  MOCK_STATS,
-  ReviewStats,
-} from '@/layers/04_shared/api/mocks/reviewStatsMocks';
 
 interface WithRatingHeaderProps {
   title: string;
@@ -25,7 +22,8 @@ export const withRatingHeader = <P extends object>(
     stats,
     ...restProps
   }) => {
-    const finalStats = stats || MOCK_STATS;
+    const finalStats = stats;
+    const count = finalStats.approved_reviews_count;
 
     return (
       <Box
@@ -46,19 +44,19 @@ export const withRatingHeader = <P extends object>(
                 fontFamily: (theme) => theme.typography.fontFamily,
               }}
             >
-              {finalStats.averageRating.toFixed(1)}
+              {finalStats.average_rating.toFixed(1)}
             </Typography>
 
             <Rating
               name={`rating-for-${title}`}
               readOnly
               sx={{ color: 'brandPin.main' }}
-              value={finalStats.averageRating}
+              value={finalStats.average_rating}
               precision={0.1}
             />
 
             <Typography variant="body2" color="text.secondary">
-              {finalStats.totalReviews} reviews
+              {count} review{count === 1 ? '' : 's'}
             </Typography>
           </Box>
         </Box>

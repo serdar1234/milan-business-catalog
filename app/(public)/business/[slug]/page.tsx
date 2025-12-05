@@ -7,7 +7,7 @@ import { BASE_URL } from '@/layers/03_entities/api/baseApi';
 import { Business } from '@/layers/04_shared/types/types';
 
 interface Props {
-  params: { slug: string };
+  params: { slug: string } | Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props) {

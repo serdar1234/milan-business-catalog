@@ -1,4 +1,4 @@
-import { ReviewStats } from '@/layers/04_shared/api/mocks/reviewStatsMocks';
+import { ReviewStats } from '@/layers/01_widgets/BusinessPageWrapper/BusinessPageWrapper';
 import { RatingBar } from '@/layers/04_shared/ui/RatingBar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';

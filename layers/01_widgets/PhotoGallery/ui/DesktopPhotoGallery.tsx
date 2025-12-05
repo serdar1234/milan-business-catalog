@@ -18,6 +18,9 @@ export function DesktopPhotoGallery({
 }: DesktopPreviewPhotos) {
   const [lightboxPhotoId, setLightboxPhotoId] = useState<number | null>(null);
   const params = useParams();
+
+  if (desktopPreviewPhotos.length === 0) return null;
+
   const firstPhoto = desktopPreviewPhotos[0];
   const photos = desktopPreviewPhotos.slice(1, 4);
   const numberOfPhotos = desktopPreviewPhotos.length;
@@ -35,11 +38,11 @@ export function DesktopPhotoGallery({
       <Grid
         size={8}
         className={styles['image-wrapper']}
-        onClick={() => handlePhotoClick(firstPhoto.id)}
+        onClick={() => handlePhotoClick(firstPhoto.id || 0)}
       >
         <Image
-          src={firstPhoto.url}
-          alt={firstPhoto.filename}
+          src={firstPhoto.url || ''}
+          alt={firstPhoto.filename || ''}
           fill={true}
           sizes="66vw"
           style={{ objectFit: 'cover' }}

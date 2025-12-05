@@ -23,7 +23,7 @@ export default function ViewAllButton({
         right: { xs: '0.5rem', sm: '1rem' },
       }}
     >
-      <Link href={`./${params.id}/gallery/`}>View all ({photolength})</Link>
+      <Link href={`./${params.slug}/gallery/`}>View all ({photolength})</Link>
     </Typography>
   );
 }

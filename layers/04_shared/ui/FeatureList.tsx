@@ -1,6 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
-
+/**
+ * was used in widget About.tsx desktop version
+ * @param param0
+ * @returns
+ */
 export const FeatureList: React.FC<{
   title: string;
   items: { label: string }[];

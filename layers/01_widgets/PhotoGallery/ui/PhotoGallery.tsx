@@ -2,18 +2,6 @@ import Grid from '@mui/material/Grid';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { MobilePhotoGallery } from './MobilePhotoGallery';
 import { DesktopPhotoGallery } from './DesktopPhotoGallery';
-import ViewAllButton from './ViewAllButton';
-
-const MOCK_PHOTOS = [
-  { id: 8, url: '/business.jpg', filename: 'Business' },
-  { id: 1, url: '/d1.jpg', filename: 'Interior_view' },
-  { id: 2, url: '/d2.jpg', filename: 'Plate_of_food' },
-  { id: 3, url: '/d3.jpg', filename: 'Canal view' },
-  { id: 4, url: '/d4.jpg', filename: 'Bar area' },
-  { id: 5, url: '/d5.jpg', filename: 'Dinner table' },
-  { id: 6, url: '/d6.jpg', filename: 'Kitchen' },
-  { id: 7, url: '/d7.jpg', filename: 'Dessert' },
-];
 
 export interface Photo {
   id: number;
@@ -25,7 +13,7 @@ interface PhotoGalleryProps {
   photos?: Photo[];
 }
 
-export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
+export const PhotoGallery = ({ photos }: PhotoGalleryProps) => {
   return (
     <Grid
       size={12}
@@ -39,11 +27,10 @@ export const PhotoGallery = ({ photos = MOCK_PHOTOS }: PhotoGalleryProps) => {
       }}
     >
       <WidgetHeader title="Photo Gallery" />
-      <ViewAllButton photolength={photos.length} />
 
-      <MobilePhotoGallery mobilePreviewPhotos={photos} />
+      <MobilePhotoGallery mobilePreviewPhotos={photos ?? []} />
 
-      <DesktopPhotoGallery desktopPreviewPhotos={photos} />
+      <DesktopPhotoGallery desktopPreviewPhotos={photos ?? []} />
     </Grid>
   );
 };

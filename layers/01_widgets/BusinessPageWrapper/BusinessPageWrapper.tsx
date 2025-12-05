@@ -9,16 +9,21 @@ import { SimilarPlaces } from '@/layers/01_widgets/SimilarPlaces/ui/SimilarPlace
 import { ReviewsRatings } from '@/layers/01_widgets/ReviewsRatings/ui/ReviewsRatings';
 import { Business } from '@/layers/04_shared/types/types';
 
-export function BusinessPageWrapper({ data }: { data?: Business }) {
+export interface ReviewStats {
+  average_rating: number;
+  approved_reviews_count: number;
+}
+export function BusinessPageWrapper({ data }: { data: Business }) {
   const photos = data?.images.length ? data.images : undefined;
+
   return (
     <Box component="section" sx={{ py: 3, bgcolor: 'background.default' }}>
       <Container maxWidth="lg">
         <Grid container spacing={3}>
           <Grid size={{ xs: 12, md: 8 }}>
-            <PhotoGallery photos={photos} />
+            {photos && <PhotoGallery photos={photos} />}
             <About data={data} />
-            <ReviewsRatings />
+            <ReviewsRatings data={data} />
           </Grid>
           <Grid size={{ xs: 12, md: 4 }}>
             <BusinessInformation data={data} />
