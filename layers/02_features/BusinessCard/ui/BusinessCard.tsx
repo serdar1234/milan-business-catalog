@@ -15,7 +15,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 import Link from 'next/link';
 
 import { Business } from '@/layers/04_shared/types/types';
-import { MobileCTA, DesktopCTA } from '@/layers/04_shared/ui/CTAbuttons';
+import { CTAbuttons } from '@/layers/04_shared/ui/CTAbuttons';
 
 interface BusinessCardProps {
   business: Business;
@@ -49,7 +49,6 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
           boxShadow: 8,
           transform: 'translateY(-2px)',
         },
-        pb: { xs: 8, md: 0 },
         position: 'relative',
       }}
     >
@@ -157,8 +156,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
         </Box>
       </CardContent>
 
-      <MobileCTA />
-      <DesktopCTA phone={phone} coordinates={coordinates} />
+      <CTAbuttons phone={phone} coordinates={coordinates} />
     </Card>
   );
 };

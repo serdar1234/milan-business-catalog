@@ -4,13 +4,7 @@ import { INSIGHT_MOCKS } from '@/layers/04_shared/api/mocks/localInsightsMocks';
 import { InsightCard } from '@/layers/02_features/InsightCard/ui/InsightCard';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 
-interface MobileViewProps {
-  withButton?: boolean;
-}
-
-export const MobileView: React.FC<MobileViewProps> = ({
-  withButton = true,
-}) => (
+export const MobileView = ({ withButton = false }) => (
   <Box
     display={{ xs: 'block', md: 'none' }}
     component="section"
@@ -43,7 +37,7 @@ export const MobileView: React.FC<MobileViewProps> = ({
   </Box>
 );
 
-export const DesktopView = () => (
+export const DesktopView = ({ withButton = false }) => (
   <Box display={{ xs: 'none', md: 'block' }}>
     <Grid container spacing={4} justifyContent="center">
       {INSIGHT_MOCKS.map((insight) => (
@@ -53,20 +47,22 @@ export const DesktopView = () => (
       ))}
     </Grid>
 
-    <Box sx={{ textAlign: 'center', mt: 6 }}>
-      <Button
-        component={Link}
-        href="/stories"
-        variant="contained"
-        color="primary"
-        sx={{
-          fontWeight: 'bold',
-          color: 'white',
-          px: 4,
-        }}
-      >
-        Read More Stories
-      </Button>
-    </Box>
+    {withButton && (
+      <Box sx={{ textAlign: 'center', mt: 6 }}>
+        <Button
+          component={Link}
+          href="/stories"
+          variant="contained"
+          color="primary"
+          sx={{
+            fontWeight: 'bold',
+            color: 'white',
+            px: 4,
+          }}
+        >
+          Read More Stories
+        </Button>
+      </Box>
+    )}
   </Box>
 );

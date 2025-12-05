@@ -8,9 +8,8 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { FILTER_BUTTONS, type FilterButton } from './mockData';
-// import { BUSINESS_MOCKS } from '@/layers/04_shared/api/mocks/businessMocks';
 import { Spinner } from '@/layers/04_shared/ui/Spinner';
-import { useGetBusinessListQuery } from '@/layers/03_entities/business/businessApi';
+import { useGetFullBusinessListQuery } from '@/layers/03_entities/business/businessApi';
 import { useState } from 'react';
 import { MapContainerClient } from '@/layers/02_features/Map';
 
@@ -22,11 +21,9 @@ export const DesktopView = () => {
     category_id:
       selectedFilter === 'All' ? undefined : selectedFilter === 'Bars' ? 1 : 2,
   };
-  const {
-    data: businessList,
-    isLoading,
-    isError,
-  } = useGetBusinessListQuery({ ...args });
+  const { data, isLoading, isError } = useGetFullBusinessListQuery({ ...args });
+  const businessList = data?.data;
+  const meta = data?.meta;
 
   if (isLoading) {
     return <Spinner bgcolor="transparent" />;
@@ -97,7 +94,8 @@ export const DesktopView = () => {
               color="text.secondary"
               sx={{ p: 2, textAlign: 'center' }}
             >
-              End of list. Showing first {NUMBER_OF_BUSINESSES} of 45 places.
+              End of list. Showing first {NUMBER_OF_BUSINESSES} of{' '}
+              {meta?.pagination.total_count} places.
             </Typography>
           </Box>
 
