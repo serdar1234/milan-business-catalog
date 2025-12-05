@@ -1,10 +1,11 @@
-import { ReviewStats } from '@/layers/01_widgets/BusinessPageWrapper/BusinessPageWrapper';
+import { ReviewStats } from '@/layers/04_shared/api/mocks/reviewStatsMocks';
 import { RatingBar } from '@/layers/04_shared/ui/RatingBar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 export const RatingPanel: React.FC<ReviewStats> = (stats) => {
+  if (!stats.breakdown.length) return null;
   return (
     <>
       <Grid size={5}>

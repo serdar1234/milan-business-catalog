@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic';
+import NextDynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { StoreProvider } from '@/layers/03_entities/providers/StoreProvider';
@@ -9,15 +9,18 @@ import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
 import SyncPreferences from '@/layers/04_shared/utils/SyncPreferences';
 import Box from '@mui/material/Box';
 import './globals.css';
-const MobileNavBar = dynamic(
+
+const MobileNavBar = NextDynamic(
   () => import('@/layers/01_widgets/MobileNavBar/ui/MobileNavBar'),
 );
-const Footer = dynamic(() => import('@/layers/01_widgets/Footer/ui/Footer'));
+const Footer = NextDynamic(
+  () => import('@/layers/01_widgets/Footer/ui/Footer'),
+);
 
-const ScrollToTopButton = dynamic(
+const ScrollToTopButton = NextDynamic(
   () => import('@/layers/02_features/ScrollToTopButton'),
 );
-const MobileSearchDrawer = dynamic(() =>
+const MobileSearchDrawer = NextDynamic(() =>
   import('@/layers/01_widgets/MobileSearchDrawer/MobileSearchDrawer').then(
     (mod) => mod.MobileSearchDrawer,
   ),
@@ -35,11 +38,11 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Milan Business Catalog',
   description: 'Best places to visit in Milan',
 };
-
 export default async function RootLayout({
   children,
 }: Readonly<{
