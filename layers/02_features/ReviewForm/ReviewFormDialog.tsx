@@ -73,10 +73,10 @@ export const ReviewFormDialog: React.FC<ReviewFormDialogProps> = ({
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
       <DialogTitle>Write a Review</DialogTitle>
-      <Box component="form" onSubmit={handleSubmit}>
-        <DialogContent dividers>
+      <Box component="form" onSubmit={handleSubmit} m={2} mt={0}>
+        <DialogContent>
           <TextField
             required
             autoFocus
@@ -101,7 +101,7 @@ export const ReviewFormDialog: React.FC<ReviewFormDialogProps> = ({
             onChange={handleChange}
           />
 
-          <Box sx={{ mt: 2, mb: 1 }}>
+          <Box sx={{ mb: 1 }}>
             <Typography component="legend" variant="body1">
               Rate the business
             </Typography>
@@ -130,7 +130,7 @@ export const ReviewFormDialog: React.FC<ReviewFormDialogProps> = ({
             onChange={handleChange}
           />
           {validationError && (
-            <Alert severity="error" variant="outlined" sx={{ mt: 1, mb: 2 }}>
+            <Alert severity="error" variant="outlined" sx={{ my: 1 }}>
               {validationError}
             </Alert>
           )}

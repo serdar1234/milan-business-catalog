@@ -28,7 +28,7 @@ export const ReviewsRatings = async ({ data }: { data: Business }) => {
 
   return (
     <>
-      <MobileView data={reviews} />
+      <MobileView data={reviews} withButton />
       <DesktopReviewsRatings stats={stats} reviews={reviews} />
     </>
   );
