@@ -1,7 +1,7 @@
 import { MobileView } from '@/layers/04_shared/ui/ReviewsRatingsViews';
 import { DesktopReviewsRatings } from './DesktopReviewsRatings';
 import { Business } from '@/layers/04_shared/types/types';
-import { ReviewStats } from '../../BusinessPageWrapper/BusinessPageWrapper';
+import { ReviewStats } from '../BusinessPageWrapper/BusinessPageWrapper';
 import { BASE_URL } from '@/layers/03_entities/api/baseApi';
 import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
 

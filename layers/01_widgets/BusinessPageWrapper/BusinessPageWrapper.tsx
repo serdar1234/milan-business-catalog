@@ -6,7 +6,7 @@ import { BusinessInformation } from '@/layers/01_widgets/BusinessInformation/ui/
 import { About } from '@/layers/01_widgets/About/ui/About';
 import { Location } from '@/layers/01_widgets/Location/ui/Location';
 import { SimilarPlaces } from '@/layers/01_widgets/SimilarPlaces/ui/SimilarPlaces';
-import { ReviewsRatings } from '@/layers/01_widgets/ReviewsRatings/ui/ReviewsRatings';
+import { ReviewsRatings } from '@/layers/01_widgets/ReviewsRatings/ReviewsRatings';
 import { Business } from '@/layers/04_shared/types/types';
 
 export interface ReviewStats {
