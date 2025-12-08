@@ -12,6 +12,11 @@ import { Business } from '@/layers/04_shared/types/types';
 export interface ReviewStats {
   average_rating: number;
   approved_reviews_count: number;
+  ratings_breakdown: {
+    stars: number;
+    count: number;
+    percentage: number;
+  }[];
 }
 export function BusinessPageWrapper({ data }: { data: Business }) {
   const photos = data?.images.length ? data.images : undefined;

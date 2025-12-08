@@ -9,6 +9,7 @@ export const ReviewsRatings = async ({ data }: { data: Business }) => {
   const stats: ReviewStats = {
     average_rating: data?.average_rating ?? 0,
     approved_reviews_count: data?.approved_reviews_count ?? 0,
+    ratings_breakdown: data?.ratings_breakdown ?? [],
   };
   const { slug } = data;
   const { lang } = await getSSRPreferences();

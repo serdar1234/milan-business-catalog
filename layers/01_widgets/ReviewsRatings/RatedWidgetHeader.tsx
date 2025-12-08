@@ -43,7 +43,6 @@ export const RatedWidgetHeader: React.FC<Props> = ({
       }).unwrap();
       setIsDialogOpen(false);
     } catch (err) {
-      console.log('Error object: ', err);
       console.error('Error submitting review', err);
     }
   };

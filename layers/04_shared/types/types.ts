@@ -16,6 +16,11 @@ interface Business {
   coordinates: { lat: number; lon: number };
   average_rating: number;
   approved_reviews_count: number;
+  ratings_breakdown: {
+    stars: number;
+    count: number;
+    percentage: number;
+  }[];
   category: Category;
   images: Photo[];
   created_at: string;

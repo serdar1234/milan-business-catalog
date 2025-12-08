@@ -10,6 +10,7 @@ import { InsightCard } from '@/layers/02_features/InsightCard/ui/InsightCard';
 import { ReviewStats } from '@/layers/01_widgets/BusinessPageWrapper/BusinessPageWrapper';
 import { Insight } from '@/layers/01_widgets/LocalInsights/ui/LocalInsights';
 import { RatedWidgetHeader } from './RatedWidgetHeader';
+import { RatingPanel } from '@/layers/02_features/RatingPanel/RatingPanel';
 
 interface Props {
   stats: ReviewStats;
@@ -28,6 +29,7 @@ export const DesktopReviewsRatings: React.FC<Props> = ({
   const initialInsights = reviews.slice(0, INITIAL_REVIEWS_COUNT);
   const collapsibleInsights = reviews.slice(INITIAL_REVIEWS_COUNT);
   const canCollapse = collapsibleInsights.length > 0;
+  const hasRatings = stats.average_rating > 0;
 
   const handleToggleExpand = () => {
     setIsExpanded((prev) => !prev);
@@ -53,7 +55,7 @@ export const DesktopReviewsRatings: React.FC<Props> = ({
       />
 
       <Grid container spacing={4}>
-        {/* <RatingPanel {...stats} /> */}
+        {hasRatings && <RatingPanel {...stats} />}
         <Grid size={12}>
           {initialInsights.map((insight) => (
             <InsightCard key={insight.id} insight={insight} />
