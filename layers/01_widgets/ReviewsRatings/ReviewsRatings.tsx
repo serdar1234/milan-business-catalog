@@ -1,4 +1,4 @@
-import { MobileView } from '@/layers/04_shared/ui/ReviewsRatingsViews';
+import { MobileReviewsRatings } from '@/layers/01_widgets/ReviewsRatings/MobileReviewsRatings';
 import { DesktopReviewsRatings } from './DesktopReviewsRatings';
 import { Business } from '@/layers/04_shared/types/types';
 import { ReviewStats } from '../BusinessPageWrapper/BusinessPageWrapper';
@@ -28,8 +28,8 @@ export const ReviewsRatings = async ({ data }: { data: Business }) => {
 
   return (
     <>
-      <MobileView data={reviews} withButton />
-      <DesktopReviewsRatings stats={stats} reviews={reviews} />
+      <MobileReviewsRatings data={reviews} withButton slug={slug} />
+      <DesktopReviewsRatings stats={stats} reviews={reviews} slug={slug} />
     </>
   );
 };

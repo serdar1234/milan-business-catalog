@@ -9,29 +9,43 @@ import Typography from '@mui/material/Typography';
 import { ReviewFormDialog } from '@/layers/02_features/ReviewForm/ReviewFormDialog';
 import { ReviewStats } from '@/layers/01_widgets/BusinessPageWrapper/BusinessPageWrapper';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
+import { useCurrentLanguage } from '@/layers/04_shared/hooks/useCurrentLanguage';
+import { ReviewFormData } from '@/layers/04_shared/types/types';
+import { useSubmitReviewMutation } from '@/layers/03_entities/business/businessApi';
 
-interface WithRatingHeaderProps {
+interface Props {
   title: string;
   buttonText?: string;
   stats: ReviewStats;
+  slug: string;
   [key: string]: unknown;
 }
 
-export const RatedWidgetHeader: React.FC<WithRatingHeaderProps> = ({
+export const RatedWidgetHeader: React.FC<Props> = ({
   title,
   buttonText,
   stats,
+  slug,
   ...restProps
 }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const lang = useCurrentLanguage();
   const count = stats.approved_reviews_count;
-
+  const [submitReview, { isLoading, isError }] = useSubmitReviewMutation();
   const handleOpenDialog = () => setIsDialogOpen(true);
   const handleCloseDialog = () => setIsDialogOpen(false);
-  const handleSubmitReview = (data: { name: string; rating: number }) => {
-    console.log('Отзыв готов к отправке API:', data);
-    alert(`Отзыв от ${data.name} отправлен (рейтинг: ${data.rating})`);
-    // RTK Query mutation here
+  const handleSubmitReview = async (formData: ReviewFormData) => {
+    try {
+      await submitReview({
+        slug,
+        formData,
+        lang,
+      }).unwrap();
+      setIsDialogOpen(false);
+    } catch (err) {
+      console.log('Error object: ', err);
+      console.error('Error submitting review', err);
+    }
   };
   return (
     <>
@@ -72,9 +86,9 @@ export const RatedWidgetHeader: React.FC<WithRatingHeaderProps> = ({
 
         <Button
           variant="outlined"
+          disabled={isLoading}
           onClick={handleOpenDialog}
           sx={{
-            textTransform: 'capitalize',
             color: 'brandAccent.main',
             border: '2px solid',
             borderColor: 'currentColor',
@@ -88,6 +102,7 @@ export const RatedWidgetHeader: React.FC<WithRatingHeaderProps> = ({
         onClose={handleCloseDialog}
         onSubmit={handleSubmitReview}
       />
+      {isError && <p style={{ color: 'red' }}>Server error</p>}
     </>
   );
 };

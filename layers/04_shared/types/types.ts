@@ -2,7 +2,7 @@ import { Photo } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
 import { Category } from '@/layers/03_entities/category/categoryApi';
 import { Dispatch, SetStateAction } from 'react';
 
-export interface Business {
+interface Business {
   id: number;
   slug: string;
   name: string;
@@ -37,7 +37,7 @@ interface Pagination {
   total_count: number;
 }
 
-export interface SearchResults {
+interface SearchResults {
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
   businessList: Business[];
@@ -46,7 +46,16 @@ export interface SearchResults {
   isError: boolean;
 }
 
-export interface Meta {
+interface Meta {
   pagination: Pagination;
   source: string;
 }
+
+interface ReviewFormData {
+  name: string;
+  email: string;
+  rating: number;
+  comment: string;
+}
+
+export type { Business, Pagination, SearchResults, Meta, ReviewFormData };

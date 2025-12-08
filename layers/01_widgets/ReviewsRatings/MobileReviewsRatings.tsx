@@ -7,20 +7,38 @@ import { InsightCard } from '@/layers/02_features/InsightCard/ui/InsightCard';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { Insight } from '@/layers/01_widgets/LocalInsights/ui/LocalInsights';
 import { ReviewFormDialog } from '@/layers/02_features/ReviewForm/ReviewFormDialog';
+import { useSubmitReviewMutation } from '@/layers/03_entities/business/businessApi';
+import { useCurrentLanguage } from '@/layers/04_shared/hooks/useCurrentLanguage';
+import { ReviewFormData } from '@/layers/04_shared/types/types';
 
 interface Props {
   withButton?: boolean;
   data: Insight[];
+  slug: string;
 }
-export const MobileView = ({ withButton = false, data }: Props) => {
+export const MobileReviewsRatings = ({
+  withButton = false,
+  data,
+  slug,
+}: Props) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const currentLang = useCurrentLanguage();
+  const [submitReview, { isLoading, isError }] = useSubmitReviewMutation();
 
   const handleOpenDialog = () => setIsDialogOpen(true);
   const handleCloseDialog = () => setIsDialogOpen(false);
-  const handleSubmitReview = (reviewData: unknown) => {
-    console.log('Отзыв отправлен:', reviewData);
-    setIsDialogOpen(false);
-    // Здесь должна быть логика API (например, RTK Query мутация)
+  const handleSubmitReview = async (formData: ReviewFormData) => {
+    try {
+      await submitReview({
+        slug,
+        formData,
+        lang: currentLang,
+      }).unwrap();
+      setIsDialogOpen(false);
+    } catch (err) {
+      console.log('Error object: ', err);
+      console.error('Error submitting review', err);
+    }
   };
   return (
     <Box
@@ -44,6 +62,7 @@ export const MobileView = ({ withButton = false, data }: Props) => {
         <Box sx={{ textAlign: 'center', mt: 4 }}>
           <Button
             component="button"
+            disabled={isLoading}
             onClick={handleOpenDialog}
             variant="text"
             color="brandAccent"
@@ -53,7 +72,7 @@ export const MobileView = ({ withButton = false, data }: Props) => {
           </Button>
         </Box>
       )}
-
+      {isError && <p style={{ color: 'red' }}>Server error</p>}
       <ReviewFormDialog
         open={isDialogOpen}
         onClose={handleCloseDialog}

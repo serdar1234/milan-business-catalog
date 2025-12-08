@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import { MobileView } from '@/layers/04_shared/ui/ReviewsRatingsViews';
+import { MobileReviewsRatings } from '@/layers/01_widgets/ReviewsRatings/MobileReviewsRatings';
 import { BASE_URL } from '@/layers/03_entities/api/baseApi';
 import { LanguageCode } from '@/layers/04_shared/configs/settings';
 import Grid from '@mui/material/Grid';
@@ -38,7 +38,7 @@ export const LocalInsights: React.FC<{ lang: LanguageCode }> = async ({
           title="Local Insights"
           subtitle="Real experiences from visitors discovering Milano"
         />
-        <MobileView data={data} />
+        <MobileReviewsRatings data={data} />
         <Box display={{ xs: 'none', md: 'block' }}>
           <Grid container spacing={4} justifyContent="center">
             {data.map((insight) => (

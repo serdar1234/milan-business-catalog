@@ -13,12 +13,17 @@ import { RatedWidgetHeader } from './RatedWidgetHeader';
 
 interface Props {
   stats: ReviewStats;
+  slug: string;
   reviews: Insight[];
 }
 
 const INITIAL_REVIEWS_COUNT = 3;
 
-export const DesktopReviewsRatings: React.FC<Props> = ({ stats, reviews }) => {
+export const DesktopReviewsRatings: React.FC<Props> = ({
+  stats,
+  slug,
+  reviews,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const initialInsights = reviews.slice(0, INITIAL_REVIEWS_COUNT);
   const collapsibleInsights = reviews.slice(INITIAL_REVIEWS_COUNT);
@@ -43,6 +48,7 @@ export const DesktopReviewsRatings: React.FC<Props> = ({ stats, reviews }) => {
       <RatedWidgetHeader
         title="Reviews & Ratings"
         stats={stats}
+        slug={slug}
         buttonText="Write a Review"
       />
 

@@ -12,13 +12,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-
-interface ReviewFormData {
-  name: string;
-  email: string;
-  rating: number;
-  comment: string;
-}
+import { ReviewFormData } from '@/layers/04_shared/types/types';
 
 interface ReviewFormDialogProps {
   open: boolean;
