@@ -59,7 +59,7 @@ export default async function BusinessPage({ params }: Props) {
       <MobileQuickActions
         phone={data.phone}
         coordinates={data.coordinates}
-        isFavorite={data.isFavorite || true}
+        // isFavorite={data.isFavorite || true}
       />
       <BusinessPageWrapper data={data} />;
     </>

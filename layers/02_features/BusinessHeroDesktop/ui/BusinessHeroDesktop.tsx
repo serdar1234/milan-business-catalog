@@ -25,10 +25,9 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
     description,
     average_rating,
     approved_reviews_count,
-
     distance,
     isOpen,
-
+    coordinates,
     images,
     phone,
     website,
@@ -220,6 +219,8 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
         address={address}
         views={views}
         saves={saves}
+        lat={coordinates.lat}
+        lon={coordinates.lon}
       />
     </Box>
   );

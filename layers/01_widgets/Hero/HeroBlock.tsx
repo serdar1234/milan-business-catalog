@@ -1,4 +1,6 @@
-import { Box, Typography, Container } from '@mui/material';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
 import { HeroDesktopInfo } from './HeroDesktopInfo';

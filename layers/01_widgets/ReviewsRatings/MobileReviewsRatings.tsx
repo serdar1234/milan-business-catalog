@@ -78,7 +78,7 @@ export const MobileReviewsRatings = ({
         open={snackbarOpen}
         autoHideDuration={4000}
         onClose={closeSnackbar}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
         <Alert onClose={closeSnackbar} severity="success" variant="filled">
           Your review was successfully submitted and is awaiting approval.

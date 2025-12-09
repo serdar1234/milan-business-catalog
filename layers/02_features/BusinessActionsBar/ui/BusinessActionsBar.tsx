@@ -1,11 +1,12 @@
 import { Box, Button, Typography } from '@mui/material';
 
-import EventNoteIcon from '@mui/icons-material/EventNote';
+// import EventNoteIcon from '@mui/icons-material/EventNote';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LanguageIcon from '@mui/icons-material/Language';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import Link from 'next/link';
 
 interface BusinessActionsBarProps {
   phone: string;
@@ -13,17 +14,22 @@ interface BusinessActionsBarProps {
   address: string;
   views: number;
   saves: number;
+  lat: number;
+  lon: number;
 }
 
 export const BusinessActionsBar: React.FC<BusinessActionsBarProps> = ({
   phone,
   website,
-  address,
+  // address,
+  lat,
+  lon,
   views,
   saves,
 }) => {
   const phoneHref = `tel:${phone.replace(/\s/g, '')}`;
-  const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
+  const directionsHref = `/map?lat=${lat}&lon=${lon}`;
+  // `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
 
   return (
     <Box
@@ -39,20 +45,20 @@ export const BusinessActionsBar: React.FC<BusinessActionsBarProps> = ({
       }}
     >
       <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-        <Button
+        {/* <Button
           variant="contained"
           color="brandAccent"
           startIcon={<EventNoteIcon />}
         >
           Reserve
-        </Button>
+        </Button> */}
 
         <Button
+          component={Link}
           variant="contained"
           color="primary"
           startIcon={<NearMeIcon />}
           href={directionsHref}
-          target="_blank"
         >
           Directions
         </Button>

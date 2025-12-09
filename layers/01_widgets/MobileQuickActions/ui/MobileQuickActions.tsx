@@ -5,8 +5,8 @@ import Typography from '@mui/material/Typography';
 
 import PhoneIcon from '@mui/icons-material/Phone';
 import NearMeIcon from '@mui/icons-material/NearMe';
-import EventNoteIcon from '@mui/icons-material/EventNote';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+// import EventNoteIcon from '@mui/icons-material/EventNote';
+// import FavoriteIcon from '@mui/icons-material/Favorite';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { ACTION_COLORS } from '@/layers/04_shared/utils/constants';
 import Link from 'next/link';
@@ -14,13 +14,13 @@ import Link from 'next/link';
 interface MobileQuickActionsProps {
   phone: string;
   coordinates: { lat: number; lon: number };
-  isFavorite: boolean;
+  isFavorite?: boolean;
 }
 
 export const MobileQuickActions: React.FC<MobileQuickActionsProps> = ({
   phone,
   coordinates,
-  isFavorite,
+  // isFavorite,
 }) => {
   const { lat, lon } = coordinates;
   const actions = [
@@ -36,18 +36,18 @@ export const MobileQuickActions: React.FC<MobileQuickActionsProps> = ({
       color: ACTION_COLORS.DIRECTIONS,
       href: `/map?lat=${lat}&lon=${lon}`,
     },
-    {
-      label: 'Reserve',
-      icon: EventNoteIcon,
-      color: ACTION_COLORS.RESERVE,
-      onClick: () => console.log('Open Reserve Modal'),
-    },
-    {
-      label: 'Save',
-      icon: FavoriteIcon,
-      color: ACTION_COLORS.SAVE,
-      iconColor: isFavorite ? 'white' : 'white',
-    },
+    // {
+    //   label: 'Reserve',
+    //   icon: EventNoteIcon,
+    //   color: ACTION_COLORS.RESERVE,
+    //   onClick: () => console.log('Open Reserve Modal'),
+    // },
+    // {
+    //   label: 'Save',
+    //   icon: FavoriteIcon,
+    //   color: ACTION_COLORS.SAVE,
+    //   iconColor: isFavorite ? 'white' : 'white',
+    // },
   ];
 
   const ActionTile: React.FC<(typeof actions)[0]> = ({
