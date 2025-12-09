@@ -1,5 +1,11 @@
 import { api } from '@/layers/03_entities/api/baseApi';
-import { Business, Meta, ReviewFormData } from '@/layers/04_shared/types/types';
+import {
+  Business,
+  Meta,
+  Review,
+  ReviewFormData,
+  ReviewResponse,
+} from '@/layers/04_shared/types/types';
 import type { LanguageCode } from '@/layers/04_shared/configs/settings';
 
 interface BusinessListParams {
@@ -14,7 +20,7 @@ interface BusinessListParams {
 }
 
 interface CompanyParams {
-  id: number | string;
+  slug: string;
   lang: LanguageCode;
 }
 
@@ -33,7 +39,7 @@ interface ReviewPayload {
   };
 }
 
-interface ReviewResponse {
+interface ReviewPostResponse {
   id: number;
   status: 'pending' | 'approved';
 }
@@ -61,12 +67,20 @@ export const businessApi = api.injectEndpoints({
     }),
 
     getCompanyDetails: builder.query<Business, CompanyParams>({
-      query: ({ id, lang }: CompanyParams) => `companies/${id}?lang=${lang}`,
+      query: ({ slug, lang }: CompanyParams) =>
+        `companies/${slug}?lang=${lang}`,
       transformResponse: (response: { data: Business }) => response.data,
       providesTags: ['Business'],
     }),
 
-    submitReview: builder.mutation<ReviewResponse, SubmitReviewArgs>({
+    getCompanyReviews: builder.query<Review[], CompanyParams>({
+      query: ({ slug, lang }: CompanyParams) =>
+        `companies/${slug}/reviews?lang=${lang}`,
+      transformResponse: (response: { data: Review[] }) => response.data,
+      providesTags: ['Business', 'Review'],
+    }),
+
+    submitReview: builder.mutation<ReviewPostResponse, SubmitReviewArgs>({
       query: ({ slug, formData, lang }) => {
         const body: ReviewPayload = {
           review: {
@@ -101,5 +115,6 @@ export const {
   useGetBusinessListQuery,
   useGetFullBusinessListQuery,
   useGetCompanyDetailsQuery,
+  useGetCompanyReviewsQuery,
   useSubmitReviewMutation,
 } = businessApi;

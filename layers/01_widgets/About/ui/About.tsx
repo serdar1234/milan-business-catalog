@@ -1,8 +1,6 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import { RatingBox } from '@/layers/04_shared/ui/RatingBox';
 import { Business } from '@/layers/04_shared/types/types';
 
 type Props = {
@@ -24,11 +22,6 @@ const MobileView: React.FC<Props> = ({ data }) => (
         <Typography variant="body1" color="data.secondary" sx={{ mb: 3 }}>
           {data?.description ?? ''}
         </Typography>
-
-        <Grid container spacing={2}>
-          <RatingBox name="Rating" data={data?.average_rating || 0} />
-          <RatingBox name="Reviews" data={data?.approved_reviews_count || 0} />
-        </Grid>
       </Box>
     </Box>
   </Box>

@@ -28,7 +28,7 @@ export function BusinessPageWrapper({ data }: { data: Business }) {
           <Grid size={{ xs: 12, md: 8 }}>
             {photos && <PhotoGallery photos={photos} />}
             <About data={data} />
-            <ReviewsRatings data={data} />
+            <ReviewsRatings slug={data.slug} />
           </Grid>
           <Grid size={{ xs: 12, md: 4 }}>
             <BusinessInformation data={data} />

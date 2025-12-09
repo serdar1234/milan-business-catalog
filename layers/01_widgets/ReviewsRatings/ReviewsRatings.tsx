@@ -1,31 +1,58 @@
+'use client';
+
 import { MobileReviewsRatings } from '@/layers/01_widgets/ReviewsRatings/MobileReviewsRatings';
 import { DesktopReviewsRatings } from './DesktopReviewsRatings';
-import { Business } from '@/layers/04_shared/types/types';
 import { ReviewStats } from '../BusinessPageWrapper/BusinessPageWrapper';
-import { BASE_URL } from '@/layers/03_entities/api/baseApi';
-import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
+import {
+  useGetCompanyDetailsQuery,
+  useGetCompanyReviewsQuery,
+} from '@/layers/03_entities/business/businessApi';
+import { useCurrentLanguage } from '@/layers/04_shared/hooks/useCurrentLanguage';
+import { Spinner } from '@/layers/04_shared/ui/Spinner';
+import { Insight } from '@/layers/04_shared/types/types';
 
-export const ReviewsRatings = async ({ data }: { data: Business }) => {
+export const ReviewsRatings = ({ slug }: { slug: string }) => {
+  const lang = useCurrentLanguage();
+  const input = { slug, lang };
+  const {
+    data: reviewsData,
+    isLoading,
+    isError,
+  } = useGetCompanyReviewsQuery(input);
+  const {
+    data: businessData,
+    isLoading: businessLoading,
+    isError: businessError,
+  } = useGetCompanyDetailsQuery(input);
+
   const stats: ReviewStats = {
-    average_rating: data?.average_rating ?? 0,
-    approved_reviews_count: data?.approved_reviews_count ?? 0,
-    ratings_breakdown: data?.ratings_breakdown ?? [],
+    average_rating: businessData?.average_rating ?? 0,
+    approved_reviews_count: businessData?.approved_reviews_count ?? 0,
+    ratings_breakdown: businessData?.ratings_breakdown ?? [],
   };
-  const { slug } = data;
-  const { lang } = await getSSRPreferences();
+  const reviews: Insight[] =
+    (reviewsData &&
+      reviewsData.map((review) => ({
+        id: review.id,
+        name: review.name,
+        rating: review.rating,
+        comment: review.comment,
+        created_at: review.created_at,
+        company: {
+          id: businessData?.id ?? 0,
+          slug: businessData?.slug ?? '',
+          name: businessData?.name ?? '',
+        },
+      }))) ??
+    [];
 
-  const res = await fetch(
-    `${BASE_URL}/companies/${slug}/reviews?lang=${lang}`,
-    {
-      next: { revalidate: 60 },
-    },
-  );
-  if (!res.ok) {
-    return null;
+  if (isLoading || businessLoading) {
+    return <Spinner bgcolor="transparent" />;
   }
 
-  const json = await res.json();
-  const reviews = json.data;
+  if (isError || businessError) {
+    return null;
+  }
 
   return (
     <>

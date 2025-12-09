@@ -63,4 +63,41 @@ interface ReviewFormData {
   comment: string;
 }
 
-export type { Business, Pagination, SearchResults, Meta, ReviewFormData };
+export interface Insight {
+  id: number;
+  name: string;
+  rating: number;
+  comment: string;
+  created_at: string;
+  company: Company;
+}
+export interface Company {
+  id: number;
+  slug: string;
+  name: string;
+}
+
+interface Review {
+  id: number;
+  name: string;
+  email: string;
+  rating: number;
+  comment: string;
+  approved: boolean;
+  created_at: string;
+}
+
+interface ReviewResponse {
+  data: Review[];
+  meta: Meta;
+}
+
+export type {
+  Business,
+  Pagination,
+  SearchResults,
+  Meta,
+  ReviewFormData,
+  Review,
+  ReviewResponse,
+};
