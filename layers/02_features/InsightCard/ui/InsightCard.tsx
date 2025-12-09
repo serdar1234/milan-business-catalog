@@ -7,7 +7,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Rating from '@mui/material/Rating';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
-import { Insight } from '@/layers/01_widgets/LocalInsights/ui/LocalInsights';
+import { Insight } from '@/layers/04_shared/types/types';
 import { formatRelativeTime } from '@/layers/04_shared/utils/formatRelativeTime';
 import { useCurrentLanguage } from '@/layers/04_shared/hooks/useCurrentLanguage';
 import Link from 'next/link';

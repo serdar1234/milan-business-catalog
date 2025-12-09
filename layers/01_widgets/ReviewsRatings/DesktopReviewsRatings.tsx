@@ -8,7 +8,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { InsightCard } from '@/layers/02_features/InsightCard/ui/InsightCard';
 import { ReviewStats } from '@/layers/01_widgets/BusinessPageWrapper/BusinessPageWrapper';
-import { Insight } from '@/layers/01_widgets/LocalInsights/ui/LocalInsights';
+import { Insight } from '@/layers/04_shared/types/types';
 import { RatedWidgetHeader } from './RatedWidgetHeader';
 import { RatingPanel } from '@/layers/02_features/RatingPanel/RatingPanel';
 

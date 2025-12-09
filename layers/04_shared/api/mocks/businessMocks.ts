@@ -7,6 +7,33 @@ export const BUSINESS_MOCKS: Business[] = [
     slug: 'il-duomo-secret-cafe',
     category: { id: 1, name: 'Cafes', slug: 'cafes', companies_count: 1 },
     average_rating: 4.8,
+    ratings_breakdown: [
+      {
+        stars: 1,
+        count: 0,
+        percentage: 0,
+      },
+      {
+        stars: 2,
+        count: 8,
+        percentage: 1,
+      },
+      {
+        stars: 3,
+        count: 25,
+        percentage: 3,
+      },
+      {
+        stars: 4,
+        count: 152,
+        percentage: 18,
+      },
+      {
+        stars: 5,
+        count: 660,
+        percentage: 78,
+      },
+    ],
     address: 'Piazza del Duomo, 1',
     isFavorite: true,
     images: [{ id: 1, filename: 'filename', url: '/r1.jpg' }],
@@ -30,6 +57,33 @@ export const BUSINESS_MOCKS: Business[] = [
     name: 'Navigli Aperitivo Bar',
     category: { id: 2, name: 'Bars', slug: 'bars', companies_count: 1 },
     average_rating: 4.5,
+    ratings_breakdown: [
+      {
+        stars: 1,
+        count: 0,
+        percentage: 0,
+      },
+      {
+        stars: 2,
+        count: 8,
+        percentage: 1,
+      },
+      {
+        stars: 3,
+        count: 25,
+        percentage: 3,
+      },
+      {
+        stars: 4,
+        count: 152,
+        percentage: 18,
+      },
+      {
+        stars: 5,
+        count: 660,
+        percentage: 78,
+      },
+    ],
     address: 'Alzaia Naviglio Grande, 56',
     isFavorite: false,
     images: [{ id: 1, filename: 'filename', url: '/r2.jpg' }],
@@ -58,6 +112,33 @@ export const BUSINESS_MOCKS: Business[] = [
       companies_count: 1,
     },
     average_rating: 4.9,
+    ratings_breakdown: [
+      {
+        stars: 1,
+        count: 0,
+        percentage: 0,
+      },
+      {
+        stars: 2,
+        count: 8,
+        percentage: 1,
+      },
+      {
+        stars: 3,
+        count: 25,
+        percentage: 3,
+      },
+      {
+        stars: 4,
+        count: 152,
+        percentage: 18,
+      },
+      {
+        stars: 5,
+        count: 660,
+        percentage: 78,
+      },
+    ],
     address: 'Via Montenapoleone, 12',
     isFavorite: true,
     images: [{ id: 1, filename: 'filename', url: '/r3.jpg' }],
@@ -81,6 +162,33 @@ export const BUSINESS_MOCKS: Business[] = [
     slug: 'luna-cafe-milano',
     category: { id: 1, name: 'Cafes', slug: 'cafes', companies_count: 1 },
     average_rating: 4.6,
+    ratings_breakdown: [
+      {
+        stars: 1,
+        count: 0,
+        percentage: 0,
+      },
+      {
+        stars: 2,
+        count: 8,
+        percentage: 1,
+      },
+      {
+        stars: 3,
+        count: 25,
+        percentage: 3,
+      },
+      {
+        stars: 4,
+        count: 152,
+        percentage: 18,
+      },
+      {
+        stars: 5,
+        count: 660,
+        percentage: 78,
+      },
+    ],
     address: 'Corso Como, 15',
     isFavorite: false,
     images: [{ id: 1, filename: 'filename', url: '/r4.jpg' }],
@@ -104,6 +212,33 @@ export const BUSINESS_MOCKS: Business[] = [
     slug: 'brew-and-chill',
     category: { id: 1, name: 'Cafes', slug: 'cafes', companies_count: 1 },
     average_rating: 4.7,
+    ratings_breakdown: [
+      {
+        stars: 1,
+        count: 0,
+        percentage: 0,
+      },
+      {
+        stars: 2,
+        count: 8,
+        percentage: 1,
+      },
+      {
+        stars: 3,
+        count: 25,
+        percentage: 3,
+      },
+      {
+        stars: 4,
+        count: 152,
+        percentage: 18,
+      },
+      {
+        stars: 5,
+        count: 660,
+        percentage: 78,
+      },
+    ],
     address: 'Via Torino, 22',
     isFavorite: true,
     images: [{ id: 1, filename: 'filename', url: '/r8.webp' }],
@@ -127,6 +262,33 @@ export const BUSINESS_MOCKS: Business[] = [
     slug: 'espresso-express',
     category: { id: 1, name: 'Cafes', slug: 'cafes', companies_count: 1 },
     average_rating: 4.4,
+    ratings_breakdown: [
+      {
+        stars: 1,
+        count: 0,
+        percentage: 0,
+      },
+      {
+        stars: 2,
+        count: 8,
+        percentage: 1,
+      },
+      {
+        stars: 3,
+        count: 25,
+        percentage: 3,
+      },
+      {
+        stars: 4,
+        count: 152,
+        percentage: 18,
+      },
+      {
+        stars: 5,
+        count: 660,
+        percentage: 78,
+      },
+    ],
     address: 'Viale Pasubio, 8',
     isFavorite: false,
     images: [{ id: 1, filename: 'filename', url: '/r6.jpg' }],
@@ -150,6 +312,33 @@ export const BUSINESS_MOCKS: Business[] = [
     slug: 'caffe-milano-arte',
     category: { id: 1, name: 'Cafes', slug: 'cafes', companies_count: 1 },
     average_rating: 4.8,
+    ratings_breakdown: [
+      {
+        stars: 1,
+        count: 0,
+        percentage: 0,
+      },
+      {
+        stars: 2,
+        count: 8,
+        percentage: 1,
+      },
+      {
+        stars: 3,
+        count: 25,
+        percentage: 3,
+      },
+      {
+        stars: 4,
+        count: 152,
+        percentage: 18,
+      },
+      {
+        stars: 5,
+        count: 660,
+        percentage: 78,
+      },
+    ],
     address: 'Via Dante, 7',
     isFavorite: true,
     images: [{ id: 1, filename: 'filename', url: '/r7.jpg' }],
@@ -173,6 +362,33 @@ export const BUSINESS_MOCKS: Business[] = [
     slug: 'morning-brew-milano',
     category: { id: 1, name: 'Cafes', slug: 'cafes', companies_count: 1 },
     average_rating: 4.5,
+    ratings_breakdown: [
+      {
+        stars: 1,
+        count: 0,
+        percentage: 0,
+      },
+      {
+        stars: 2,
+        count: 8,
+        percentage: 1,
+      },
+      {
+        stars: 3,
+        count: 25,
+        percentage: 3,
+      },
+      {
+        stars: 4,
+        count: 152,
+        percentage: 18,
+      },
+      {
+        stars: 5,
+        count: 660,
+        percentage: 78,
+      },
+    ],
     address: 'Corso Venezia, 30',
     isFavorite: false,
     images: [{ id: 1, filename: 'filename', url: '/r5.jpg' }],

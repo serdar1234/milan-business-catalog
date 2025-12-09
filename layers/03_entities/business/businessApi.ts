@@ -4,7 +4,6 @@ import {
   Meta,
   Review,
   ReviewFormData,
-  ReviewResponse,
 } from '@/layers/04_shared/types/types';
 import type { LanguageCode } from '@/layers/04_shared/configs/settings';
 
