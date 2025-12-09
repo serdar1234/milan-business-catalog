@@ -1,17 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { InsightCard } from '@/layers/02_features/InsightCard/ui/InsightCard';
-import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import { Insight } from '@/layers/04_shared/types/types';
-import { ReviewFormDialog } from '@/layers/02_features/ReviewForm/ReviewFormDialog';
-import { useSubmitReviewMutation } from '@/layers/03_entities/business/businessApi';
-import { useCurrentLanguage } from '@/layers/04_shared/hooks/useCurrentLanguage';
-import { ReviewFormData } from '@/layers/04_shared/types/types';
 import Grid from '@mui/material/Grid';
+import Snackbar from '@mui/material/Snackbar';
+
+import { Insight } from '@/layers/04_shared/types/types';
+import { InsightCard } from '@/layers/02_features/InsightCard/ui/InsightCard';
+import { ReviewFormDialog } from '@/layers/02_features/ReviewForm/ReviewFormDialog';
 import { RatingBox } from '@/layers/04_shared/ui/RatingBox';
+import { useReviewDialog } from '@/layers/04_shared/hooks/useReviewDialog';
+import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 
 interface Props {
   withButton?: boolean;
@@ -23,31 +23,20 @@ export const MobileReviewsRatings = ({
   data,
   slug,
 }: Props) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const currentLang = useCurrentLanguage();
-  const [submitReview, { isLoading, isError }] = useSubmitReviewMutation();
-
-  const handleOpenDialog = () => setIsDialogOpen(true);
-  const handleCloseDialog = () => setIsDialogOpen(false);
+  const {
+    isDialogOpen,
+    handleOpenDialog,
+    handleCloseDialog,
+    handleSubmitReview,
+    isLoading,
+    isError,
+    snackbarOpen,
+    closeSnackbar,
+  } = useReviewDialog(slug);
   const average_rating =
     (
       data?.reduce((acc, insight) => acc + insight.rating, 0) / data.length
     ).toFixed(1) || 0;
-  const handleSubmitReview = async (formData: ReviewFormData) => {
-    if (!slug) {
-      return;
-    }
-    try {
-      await submitReview({
-        slug,
-        formData,
-        lang: currentLang,
-      }).unwrap();
-      setIsDialogOpen(false);
-    } catch (err) {
-      console.error('Error submitting review', err);
-    }
-  };
   return (
     <Box
       display={{ xs: 'block', md: 'none' }}
@@ -85,6 +74,16 @@ export const MobileReviewsRatings = ({
         </Box>
       )}
       {isError && <p style={{ color: 'red' }}>Server error</p>}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={4000}
+        onClose={closeSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <Alert onClose={closeSnackbar} severity="success" variant="filled">
+          Your review was successfully submitted and is awaiting approval.
+        </Alert>
+      </Snackbar>
       <ReviewFormDialog
         open={isDialogOpen}
         onClose={handleCloseDialog}

@@ -1,17 +1,16 @@
 'use client';
-import { useState } from 'react';
 
+import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
+import Snackbar from '@mui/material/Snackbar';
 import Typography from '@mui/material/Typography';
 
 import { ReviewFormDialog } from '@/layers/02_features/ReviewForm/ReviewFormDialog';
 import { ReviewStats } from '@/layers/01_widgets/BusinessPageWrapper/BusinessPageWrapper';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import { useCurrentLanguage } from '@/layers/04_shared/hooks/useCurrentLanguage';
-import { ReviewFormData } from '@/layers/04_shared/types/types';
-import { useSubmitReviewMutation } from '@/layers/03_entities/business/businessApi';
+import { useReviewDialog } from '@/layers/04_shared/hooks/useReviewDialog';
 
 interface Props {
   title: string;
@@ -28,24 +27,18 @@ export const RatedWidgetHeader: React.FC<Props> = ({
   slug,
   ...restProps
 }) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const lang = useCurrentLanguage();
+  const {
+    isDialogOpen,
+    handleOpenDialog,
+    handleCloseDialog,
+    handleSubmitReview,
+    isLoading,
+    isError,
+    snackbarOpen,
+    closeSnackbar,
+  } = useReviewDialog(slug);
   const count = stats.approved_reviews_count;
-  const [submitReview, { isLoading, isError }] = useSubmitReviewMutation();
-  const handleOpenDialog = () => setIsDialogOpen(true);
-  const handleCloseDialog = () => setIsDialogOpen(false);
-  const handleSubmitReview = async (formData: ReviewFormData) => {
-    try {
-      await submitReview({
-        slug,
-        formData,
-        lang,
-      }).unwrap();
-      setIsDialogOpen(false);
-    } catch (err) {
-      console.error('Error submitting review', err);
-    }
-  };
+
   return (
     <>
       <Box
@@ -96,6 +89,16 @@ export const RatedWidgetHeader: React.FC<Props> = ({
           {buttonText}
         </Button>
       </Box>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={4000}
+        onClose={closeSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <Alert onClose={closeSnackbar} severity="success" variant="filled">
+          Your review was successfully submitted and is awaiting approval.
+        </Alert>
+      </Snackbar>
       <ReviewFormDialog
         open={isDialogOpen}
         onClose={handleCloseDialog}
