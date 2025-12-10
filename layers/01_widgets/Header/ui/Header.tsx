@@ -80,13 +80,13 @@ export const Header: FC = () => {
             <SharedIcon iconName="Search" />
           </IconButton>
 
-          <IconButton
+          {/* <IconButton
             component={Link}
             href="#"
             sx={{ color: 'primary.contrastText' }}
           >
             <SharedIcon iconName="User" />
-          </IconButton>
+          </IconButton> */}
         </Box>
       </Toolbar>
 

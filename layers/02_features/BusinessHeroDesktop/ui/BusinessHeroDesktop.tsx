@@ -1,10 +1,9 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
+// import IconButton from '@mui/material/IconButton';
 
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ShareIcon from '@mui/icons-material/Share';
+// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarIcon from '@mui/icons-material/Star';
 // import RestaurantIcon from '@mui/icons-material/Restaurant';
 // import EuroIcon from '@mui/icons-material/Euro';
@@ -14,6 +13,7 @@ import { BusinessActionsBar } from '../../BusinessActionsBar/ui/BusinessActionsB
 import Link from 'next/link';
 import { AppBreadcrumbs } from '@/layers/04_shared/ui/AppBreadcrumbs';
 import type { Business } from '@/layers/04_shared/types/types';
+import { ShareButtonWithMenu } from '../../ShareButton/ShareButtonWithMenu';
 
 interface BusinessHeroDesktopProps {
   data?: Business;
@@ -93,7 +93,7 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
             zIndex: 3,
           }}
         >
-          <IconButton
+          {/* <IconButton
             sx={{
               color: 'brandAccent.main',
               bgcolor: 'rgba(255, 255, 255, 0.5)',
@@ -101,20 +101,11 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
                 bgcolor: 'rgba(255, 255, 255, 0.7)',
               },
             }}
+            aria-label="add to favorites"
           >
             <FavoriteBorderIcon />
-          </IconButton>
-          <IconButton
-            sx={{
-              color: 'brandAccent.main',
-              bgcolor: 'rgba(255, 255, 255, 0.5)',
-              '&:hover': {
-                bgcolor: 'rgba(255, 255, 255, 0.7)',
-              },
-            }}
-          >
-            <ShareIcon />
-          </IconButton>
+          </IconButton> */}
+          <ShareButtonWithMenu companyName={name} />
         </Box>
 
         <Box
