@@ -112,13 +112,15 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
             mb: 1,
           }}
         >
-          <Typography
-            variant="caption"
-            color="text.secondary"
-            fontWeight="medium"
-          >
-            {category.name}
-          </Typography>
+          <Link href={`/category/${category.slug}`}>
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              fontWeight="medium"
+            >
+              {category.name}
+            </Typography>
+          </Link>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Rating
               name="read-only"
@@ -150,9 +152,11 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
           <PlaceIcon
             sx={{ fontSize: 16, color: 'brandAccent.main', mr: 0.5 }}
           />
-          <Typography variant="body2" color="text.secondary">
-            {address}
-          </Typography>
+          <Link href={`/map?lat=${coordinates.lat}&lon=${coordinates.lon}`}>
+            <Typography variant="body2" color="text.secondary">
+              {address}
+            </Typography>
+          </Link>
         </Box>
       </CardContent>
 

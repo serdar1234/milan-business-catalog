@@ -1,16 +1,19 @@
-import { Box, Typography, Button, IconButton } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import StarIcon from '@mui/icons-material/Star';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
-import EuroIcon from '@mui/icons-material/Euro';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import NearMeIcon from '@mui/icons-material/NearMe';
+// import RestaurantIcon from '@mui/icons-material/Restaurant';
+// import EuroIcon from '@mui/icons-material/Euro';
+// import AccessTimeIcon from '@mui/icons-material/AccessTime';
+// import NearMeIcon from '@mui/icons-material/NearMe';
 import { BusinessActionsBar } from '../../BusinessActionsBar/ui/BusinessActionsBar';
 import Link from 'next/link';
 import { AppBreadcrumbs } from '@/layers/04_shared/ui/AppBreadcrumbs';
-import { Business } from '@/layers/04_shared/types/types';
+import type { Business } from '@/layers/04_shared/types/types';
 
 interface BusinessHeroDesktopProps {
   data?: Business;
@@ -25,8 +28,8 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
     description,
     average_rating,
     approved_reviews_count,
-    distance,
-    isOpen,
+    // distance,
+    // isOpen,
     coordinates,
     images,
     phone,
@@ -34,9 +37,9 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
     address,
   } = data!;
   const imageUrl = images[0] ?? '/business.jpg';
-  const tags = ['Lunch', 'Dinner', 'Dessert'];
-  const priceRange = '€€';
-  const statusText = '23:00';
+  // const tags = ['Lunch', 'Dinner', 'Dessert'];
+  // const priceRange = '€€';
+  // const statusText = '23:00';
   const views = 1000;
   const saves = 100;
 
@@ -136,18 +139,23 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
               '&:hover': { bgcolor: 'statusError.dark' },
             }}
           >
-            <Link href={`/category/${category.name}`}>{category.name}</Link>
+            <Link href={`/category/${category.slug}`}>{category.name}</Link>
           </Button>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-            <StarIcon sx={{ color: 'secondary.main', fontSize: 20, mr: 0.5 }} />
-            <Typography variant="h6" fontWeight="bold" sx={{ mr: 1 }}>
-              {average_rating}
-            </Typography>
-            <Typography variant="body1" color="grey.400">
-              ({approved_reviews_count} rating count)
-            </Typography>
-          </Box>
+          {approved_reviews_count > 0 && (
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+              <StarIcon
+                sx={{ color: 'secondary.main', fontSize: 20, mr: 0.5 }}
+              />
+              <Typography variant="h6" fontWeight="bold" sx={{ mr: 1 }}>
+                {average_rating}
+              </Typography>
+
+              <Typography variant="body1" color="grey.400">
+                (total reviews: {approved_reviews_count})
+              </Typography>
+            </Box>
+          )}
 
           <Typography
             variant="h3"
@@ -165,7 +173,7 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
             {description}
           </Typography>
 
-          <Box
+          {/* <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -210,7 +218,7 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
                 {isOpen ? `Open until ${statusText}` : 'Closed Now'}
               </Typography>
             </Box>
-          </Box>
+          </Box> */}
         </Box>
       </Box>
       <BusinessActionsBar

@@ -1,17 +1,16 @@
-import { Box, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 export const InfoRow: React.FC<{
   icon: React.ElementType;
   title: string;
-  content: React.ReactNode;
+  content: string;
   isLink?: boolean;
 }> = ({ icon: Icon, title, content, isLink }) => {
   let linkText: string = '';
   if (isLink) {
     if (title === 'Website') linkText = 'https://' + content;
     else if (title === 'Phone') linkText = 'tel:' + content;
-    else if (title === 'Address')
-      linkText = `https://maps.google.com/?q=${encodeURIComponent(content as string)}`;
   }
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>

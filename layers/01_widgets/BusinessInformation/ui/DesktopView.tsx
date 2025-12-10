@@ -1,16 +1,19 @@
-import { HoursSection } from '@/layers/01_widgets/BusinessInformation/ui/BusinessHours';
-import { Box, Typography, Grid } from '@mui/material';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LanguageIcon from '@mui/icons-material/Language';
-import EuroIcon from '@mui/icons-material/Euro';
+// import EuroIcon from '@mui/icons-material/Euro';
+import { HoursSection } from '@/layers/01_widgets/BusinessInformation/ui/BusinessHours';
 import { InfoRow } from './InfoRow';
 // import { BusinessInformationProps } from './BusinessInformation';
 import { MOCK_BUSINESS_DETAILS as mocks } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 import { Business } from '@/layers/04_shared/types/types';
+import Link from 'next/link';
 
 export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
-  const priceRange = '€€';
+  // const priceRange = '€€';
   return (
     <Box
       sx={{
@@ -31,12 +34,31 @@ export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
       <Grid container spacing={4}>
         {/* 1. Address, Phone, Website, Price Range */}
         <Grid size={12}>
-          <InfoRow
-            icon={LocationOnIcon}
-            title="Address"
-            content={data?.address || ''}
-            isLink
-          />
+          <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
+            <LocationOnIcon
+              sx={{ color: 'brandAccent.main', mr: 2, mt: 0.25, fontSize: 24 }}
+            />
+            {data?.address && (
+              <Box>
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  color="text.primary"
+                >
+                  Address
+                </Typography>
+                <Link
+                  href={
+                    data?.coordinates.lat
+                      ? `/map?lat=${data?.coordinates.lat}&lon=${data?.coordinates.lon}`
+                      : ''
+                  }
+                >
+                  {data?.address}
+                </Link>
+              </Box>
+            )}
+          </Box>
           <InfoRow
             icon={PhoneIcon}
             title="Phone"
@@ -46,10 +68,10 @@ export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
           <InfoRow
             icon={LanguageIcon}
             title="Website"
-            content={data?.website}
+            content={data?.website || ''}
             isLink
           />
-          <InfoRow icon={EuroIcon} title="Price Range" content={priceRange} />
+          {/* <InfoRow icon={EuroIcon} title="Price Range" content={priceRange} /> */}
         </Grid>
 
         {/* 2. Business Hours */}
@@ -59,7 +81,7 @@ export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
           </Typography>
           <HoursSection hours={mocks.hours} />
 
-          {mocks.amenities.map((a) => (
+          {/* {mocks.amenities.map((a) => (
             <Box
               key={a.label}
               sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
@@ -69,7 +91,7 @@ export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
                 {a.label}
               </Typography>
             </Box>
-          ))}
+          ))} */}
         </Grid>
       </Grid>
     </Box>

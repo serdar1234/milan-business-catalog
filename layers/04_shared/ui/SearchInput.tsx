@@ -19,7 +19,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
       {...params}
       fullWidth
       variant="outlined"
-      placeholder="Find shops, restaurants, and more"
+      placeholder="Search..."
       sx={{
         '& .MuiOutlinedInput-root': {
           height: '3rem',

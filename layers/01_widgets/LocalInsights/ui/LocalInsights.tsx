@@ -16,6 +16,7 @@ export const LocalInsights: React.FC<{ lang: LanguageCode }> = async ({
     return null;
   }
   const { data }: { data: Insight[] } = await result.json();
+  const insights = data.slice(0, 3);
 
   return (
     <Box component="section" sx={{ py: 8, bgcolor: 'background.default' }}>
@@ -26,7 +27,7 @@ export const LocalInsights: React.FC<{ lang: LanguageCode }> = async ({
         />
         <Box>
           <Grid container spacing={{ xs: 2, md: 4 }} justifyContent="center">
-            {data.map((insight) => (
+            {insights.map((insight) => (
               <Grid size={{ xs: 12, md: 4 }} key={insight.id}>
                 <InsightCard insight={insight} isDesktop={true} />
               </Grid>
