@@ -4,6 +4,7 @@ import { type LanguageCode } from '@/layers/04_shared/configs/settings';
 export interface AutocompleteResult {
   name: string;
   city: string;
+  slug: string;
   country: string;
   id: number;
 }

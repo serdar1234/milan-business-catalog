@@ -7,11 +7,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 
-import StarIcon from '@mui/icons-material/Star';
+// import StarIcon from '@mui/icons-material/Star';
+// import AccessTimeIcon from '@mui/icons-material/AccessTime';
+// import GridViewIcon from '@mui/icons-material/GridView';
+// import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PlaceIcon from '@mui/icons-material/Place';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import GridViewIcon from '@mui/icons-material/GridView';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LanguageIcon from '@mui/icons-material/Language';
@@ -28,19 +28,20 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
   const {
     name,
     category,
-    average_rating,
-    isOpen,
+    // average_rating,
+    // isOpen,
+    // city,
     address,
-    city,
     phone,
     email,
     website,
+    coordinates,
   } = data!;
   const contactItems = [
     {
       icon: PlaceIcon,
       text: address,
-      href: `https://maps.google.com/?q=${encodeURIComponent(address)}`,
+      href: `/map?lat=${coordinates.lat}&lon=${coordinates.lon}`,
       type: 'address',
     },
     {
@@ -63,21 +64,19 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
       display={{ xs: 'flex', md: 'none' }}
       sx={{
         flexDirection: 'column',
-        p: 3,
-        bgcolor: 'background.paper',
-        borderRadius: 2,
+        py: 3,
       }}
     >
       <Grid
         container
-        spacing={2}
         bgcolor="primary.main"
         sx={{
           position: 'relative',
           display: 'flex',
+          flexDirection: 'column',
           color: 'white',
           p: 3,
-          mb: 2,
+          m: '0 1rem 1rem 1rem',
           maxHeight: 300,
           borderRadius: 3,
           boxShadow: 3,
@@ -86,7 +85,7 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
         }}
       >
         {/* Restaurant icon */}
-        <Grid
+        {/* <Grid
           size={'auto'}
           sx={{
             bgcolor: 'rgba(255,255,255,0.1)',
@@ -97,23 +96,26 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
           }}
         >
           <RestaurantIcon sx={{ fontSize: 36, color: 'white' }} />
-        </Grid>
-        <Grid size={6} sx={{ minWidth: 0 }}>
-          <Typography
-            variant="h5"
-            component={'h1'}
-            fontWeight="bold"
-            lineHeight={1.2}
-            sx={{ mb: 1 }}
-          >
-            {name}
-          </Typography>
-          <Typography variant="body2" color="surface" sx={{ mb: 1 }}>
-            <Link href={`/category/${category.slug}`}>{category.name}</Link>
-          </Typography>
-        </Grid>
+        </Grid> */}
+        {/* <Grid
+          // size={6}
+          sx={{ minWidth: 0 }}
+        > */}
+        <Typography
+          variant="h5"
+          component={'h1'}
+          fontWeight="bold"
+          lineHeight={1.2}
+          sx={{ mb: 1 }}
+        >
+          {name}
+        </Typography>
+        <Typography variant="body2" color="surface" sx={{ mb: 1 }}>
+          <Link href={`/category/${category.slug}`}>{category.name}</Link>
+        </Typography>
+        {/* </Grid> */}
         {/* QR code */}
-        <Grid size={'grow'}>
+        {/* <Grid size={'grow'}>
           <Box
             sx={{
               p: 1.5,
@@ -132,9 +134,9 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
           >
             <GridViewIcon sx={{ fontSize: 28, color: 'white' }} />
           </Box>
-        </Grid>
+        </Grid> */}
         {/* Rating and district */}
-        <Grid
+        {/* <Grid
           size={6}
           sx={{
             display: 'flex',
@@ -171,7 +173,7 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
               Open Now
             </Typography>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Grid>
       {/* Contact items */}
       <List>
@@ -198,9 +200,9 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
                         textDecoration: 'none',
                         wordBreak: 'break-word',
                       }}
-                      component={'a'}
+                      component={item.type === 'address' ? Link : 'a'}
                       href={item.href}
-                      target="_blank"
+                      target={item.type === 'address' ? '_self' : '_blank'}
                       rel="noopener"
                     >
                       {item.text}

@@ -57,7 +57,6 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
               mr: 2,
               overflow: 'hidden',
               textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
             }}
           >
             {name}

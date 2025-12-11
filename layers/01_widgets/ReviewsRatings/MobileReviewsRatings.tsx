@@ -34,9 +34,9 @@ export const MobileReviewsRatings = ({
     closeSnackbar,
   } = useReviewDialog(slug);
   const average_rating =
-    (
-      data?.reduce((acc, insight) => acc + insight.rating, 0) / data.length
-    ).toFixed(1) || 0;
+    data.length > 0
+      ? data?.reduce((acc, insight) => acc + insight.rating, 0) / data.length
+      : 0;
   return (
     <Box
       display={{ xs: 'block', md: 'none' }}
@@ -50,7 +50,7 @@ export const MobileReviewsRatings = ({
     >
       <WidgetHeader title="Reviews & Ratings" />
       <Grid container spacing={2} sx={{ mb: 2 }}>
-        <RatingBox name="Rating" data={+average_rating} />
+        <RatingBox name="Rating" data={average_rating} />
         <RatingBox name="Reviews" data={data.length || 0} />
       </Grid>
       <Box>

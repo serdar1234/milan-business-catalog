@@ -3,21 +3,19 @@
 import { useState, useRef, FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import {
-  Drawer,
-  Box,
-  IconButton,
-  Typography,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Grid,
-  Button,
-  Autocomplete,
-  TextField,
-  ListItem,
-} from '@mui/material';
+import Drawer from '@mui/material/Drawer';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import ListItem from '@mui/material/ListItem';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SearchIcon from '@mui/icons-material/Search';
 import HistoryIcon from '@mui/icons-material/History';
@@ -70,12 +68,11 @@ export const MobileSearchDrawer: React.FC = () => {
     dispatch(closeSearchDrawer());
   };
 
-  const runSearch = (searchValue: string) => {
+  const runSearch = (searchValue: string, id?: number) => {
     const trimmed = searchValue.trim();
     if (!trimmed) return;
-    const encodedQuery = encodeURIComponent(trimmed);
     dispatch(addRecentSearch(trimmed));
-    router.push(`/search?q=${encodedQuery}`);
+    router.push(`/business/${id}`);
     dispatch(closeSearchDrawer());
     setQuery('');
     setSelectedOption(null);
@@ -123,7 +120,7 @@ export const MobileSearchDrawer: React.FC = () => {
           onInputChange={(_, value) => setQuery(value)}
           onChange={(_, value) => {
             if (typeof value === 'string') setQuery(value);
-            else if (value) runSearch(value.name);
+            else if (value) runSearch(value.name, value.id);
           }}
           onClose={handleClearInput}
           loading={isFetching}
