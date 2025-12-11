@@ -20,6 +20,7 @@ export const PhotoGallery = ({ photos }: PhotoGalleryProps) => {
       sx={{
         px: { xs: 1, sm: 2, md: 3 },
         py: 3,
+        mb: 3,
         bgcolor: 'background.paper',
         position: 'relative',
         borderRadius: '1rem',

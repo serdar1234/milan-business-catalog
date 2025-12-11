@@ -11,6 +11,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/X';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { usePathname } from 'next/navigation';
 
 interface ShareButtonWithMenuProps {
   companyName: string;
@@ -25,6 +26,7 @@ export const ShareButtonWithMenu: React.FC<ShareButtonWithMenuProps> = ({
   const [alertSeverity, setAlertSeverity] = useState<'success' | 'error'>(
     'success',
   );
+  const pathname = usePathname();
 
   const handleSnackbarClose = (
     _event?: React.SyntheticEvent | Event,
@@ -51,7 +53,8 @@ export const ShareButtonWithMenu: React.FC<ShareButtonWithMenuProps> = ({
     setAnchorEl(null);
   };
 
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const currentUrl =
+    typeof window !== 'undefined' ? `${window.location.origin}${pathname}` : '';
   const shareText = `Check out ${companyName} on Milan Business Catalog!`;
 
   const shareOnPlatform = (urlTemplate: string) => {
@@ -61,13 +64,22 @@ export const ShareButtonWithMenu: React.FC<ShareButtonWithMenuProps> = ({
   };
 
   const shareOnFacebook = () => {
+    if (!currentUrl) {
+      showSnackbar('Error: Cannot retrieve current page URL.', 'error');
+      return;
+    }
     const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
       currentUrl,
     )}`;
+    console.log('fb url', facebookUrl);
     shareOnPlatform(facebookUrl);
   };
 
   const shareOnTwitter = () => {
+    if (!currentUrl) {
+      showSnackbar('Error: Cannot retrieve current page URL.', 'error');
+      return;
+    }
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
       shareText,
     )}&url=${encodeURIComponent(currentUrl)}`;
@@ -76,7 +88,7 @@ export const ShareButtonWithMenu: React.FC<ShareButtonWithMenuProps> = ({
 
   const copyLink = () => {
     handleClose();
-    if (navigator.clipboard) {
+    if (typeof window !== 'undefined' && navigator.clipboard) {
       navigator.clipboard.writeText(currentUrl);
       showSnackbar('Link copied to clipboard!', 'success');
     } else {

@@ -27,7 +27,12 @@ export const BusinessInformation: React.FC<BusinessInformationProps> = ({
 }) => {
   const data2 = MOCK_BUSINESS_DETAILS;
   return (
-    <Grid size={12} sx={{ mb: 4 }}>
+    <Grid
+      size={12}
+      sx={{ mb: 4 }}
+      component="section"
+      aria-label="Business Location and Operating Hours"
+    >
       <Box display={{ xs: 'block', md: 'none' }}>
         <WidgetHeader title="Opening Hours" />
         <HoursSection hours={data2.hours} />

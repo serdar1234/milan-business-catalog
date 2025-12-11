@@ -1,54 +1,54 @@
 'use client';
 
+import { useEffect } from 'react';
+import Link from 'next/link';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DirectionsIcon from '@mui/icons-material/Directions';
-import LocalParkingIcon from '@mui/icons-material/LocalParking';
-import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
-import { TransportRow } from './TransportRow';
+// import LocalParkingIcon from '@mui/icons-material/LocalParking';
+// import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
+// import { TransportRow } from './TransportRow';
+// import { LocationButton } from '@/layers/04_shared/ui/LocationButton';
+// import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
+
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import { LocationButton } from '@/layers/04_shared/ui/LocationButton';
-
-import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
-
 import { addRecentlyViewed } from '@/layers/04_shared/utils/recentlyViewed';
-import { useEffect } from 'react';
 import { Business } from '@/layers/04_shared/types/types';
 import { ViewedPlace } from '@/layers/02_features/ViewedPlaceCard/ui/ViewedPlaceCard';
-import { MILAN_CENTER } from '@/layers/04_shared/utils/constants';
 import { MapContainerClient } from '@/layers/02_features/Map';
+import { MILAN_CENTER } from '@/layers/04_shared/utils/constants';
 
 interface BusinessDetailsProps {
   business?: Business;
 }
 
-const ACTION_BUTTONS: {
-  label: string;
-  Icon: React.ElementType;
-  colorKey: string;
-}[] = [
-  {
-    label: 'Directions',
-    Icon: DirectionsIcon,
-    colorKey: 'primary',
-  },
-  {
-    label: 'Parking',
-    Icon: LocalParkingIcon,
-    colorKey: 'brandAccent',
-  },
-  {
-    label: 'Transit',
-    Icon: DirectionsBusIcon,
-    colorKey: 'statusFeatured',
-  },
-];
+// const ACTION_BUTTONS: {
+//   label: string;
+//   Icon: React.ElementType;
+//   colorKey: string;
+// }[] = [
+//   {
+//     label: 'Directions',
+//     Icon: DirectionsIcon,
+//     colorKey: 'primary',
+//   },
+//   {
+//     label: 'Parking',
+//     Icon: LocalParkingIcon,
+//     colorKey: 'brandAccent',
+//   },
+//   {
+//     label: 'Transit',
+//     Icon: DirectionsBusIcon,
+//     colorKey: 'statusFeatured',
+//   },
+// ];
 
 export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
-  const data = MOCK_BUSINESS_DETAILS;
+  // const data = MOCK_BUSINESS_DETAILS;
   const { lat, lon } = business?.coordinates || {};
   const mapCenter: [number, number] = lat && lon ? [lat, lon] : MILAN_CENTER;
 
@@ -95,18 +95,20 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
         <LocationOnIcon
           sx={{ color: 'brandAccent.main', mr: 1, fontSize: 24 }}
         />
-        <Box>
+        <Link href={`/map?lat=${lat}&lon=${lon}`}>
           <Typography variant="body1" fontWeight="bold">
-            {data.fullAddress}
+            {business?.address}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {data.cityPostal}
+            {business?.city + ', ' + business?.country}
           </Typography>
-        </Box>
+        </Link>
       </Box>
 
       <Button
         variant="contained"
+        LinkComponent={Link}
+        href={`/map?lat=${lat}&lon=${lon}`}
         sx={{
           display: { xs: 'none', md: 'flex' },
           position: 'absolute',
@@ -121,7 +123,7 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
         }}
         startIcon={<DirectionsIcon sx={{ color: 'primary' }} />}
       >
-        Get Directions
+        Show on map
       </Button>
     </Box>
   );
@@ -134,7 +136,7 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
 
       {MapBlock}
 
-      <Grid container spacing={2} sx={{ mb: 3 }}>
+      {/* <Grid container spacing={2} sx={{ mb: 3 }}>
         {ACTION_BUTTONS.map((button) => (
           <LocationButton
             key={button.label}
@@ -149,7 +151,7 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
         {data.transportInfo.map((info, index) => (
           <TransportRow key={index} {...info} />
         ))}
-      </Box>
+      </Box> */}
     </Box>
   );
 
@@ -163,7 +165,7 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
       >
         {MapBlock}
 
-        <Grid>
+        {/* <Grid>
           <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
             Getting Here
           </Typography>
@@ -172,13 +174,15 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
               <TransportRow key={index} {...info} />
             ))}
           </Box>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Box>
   );
 
   return (
     <Box
+      component="section"
+      aria-label="Business location"
       sx={{
         p: { xs: 3, md: 4 },
         mb: 4,

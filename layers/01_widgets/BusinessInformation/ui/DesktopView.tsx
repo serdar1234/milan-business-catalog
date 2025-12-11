@@ -33,7 +33,7 @@ export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
 
       <Grid container spacing={4}>
         {/* 1. Address, Phone, Website, Price Range */}
-        <Grid size={12}>
+        <Grid size={12} aria-label="Business Contact Information">
           <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
             <LocationOnIcon
               sx={{ color: 'brandAccent.main', mr: 2, mt: 0.25, fontSize: 24 }}
@@ -75,7 +75,7 @@ export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
         </Grid>
 
         {/* 2. Business Hours */}
-        <Grid size={12}>
+        <Grid size={12} aria-label="Business Operating Hours">
           <Typography variant="h6" fontWeight="bold" sx={{ mb: 1 }}>
             Hours
           </Typography>

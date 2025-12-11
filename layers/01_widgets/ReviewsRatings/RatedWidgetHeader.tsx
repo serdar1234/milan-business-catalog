@@ -8,7 +8,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Typography from '@mui/material/Typography';
 
 import { ReviewFormDialog } from '@/layers/02_features/ReviewForm/ReviewFormDialog';
-import { ReviewStats } from '@/layers/01_widgets/BusinessPageWrapper/BusinessPageWrapper';
+import { ReviewStats } from '@/layers/04_shared/types/types';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { useReviewDialog } from '@/layers/04_shared/hooks/useReviewDialog';
 

@@ -25,7 +25,7 @@ export async function SimilarPlaces({
       boxShadow={4}
       borderRadius={'1rem'}
       sx={{
-        py: 6,
+        p: 2,
         bgcolor: 'background.paper',
       }}
     >
@@ -37,14 +37,16 @@ export async function SimilarPlaces({
             <BusinessCardSmall key={place.slug} business={place} />
           ))}
         </Box>
-        <Typography
-          variant="body1"
-          color="brandAccent.main"
-          textAlign="start"
-          mt={2}
-        >
-          <Link href={`/category/${slug}`}>View all similar places</Link>
-        </Typography>
+        <Link href={`/category/${slug}`}>
+          <Typography
+            variant="body1"
+            color="brandAccent.main"
+            textAlign="start"
+            mt={2}
+          >
+            View all similar places
+          </Typography>
+        </Link>
       </Container>
     </Box>
   );

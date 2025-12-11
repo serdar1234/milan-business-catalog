@@ -2,7 +2,7 @@
 
 import { MobileReviewsRatings } from '@/layers/01_widgets/ReviewsRatings/MobileReviewsRatings';
 import { DesktopReviewsRatings } from './DesktopReviewsRatings';
-import { ReviewStats } from '../BusinessPageWrapper/BusinessPageWrapper';
+import { ReviewStats } from '@/layers/04_shared/types/types';
 import {
   useGetCompanyDetailsQuery,
   useGetCompanyReviewsQuery,

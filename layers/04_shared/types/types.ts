@@ -101,3 +101,13 @@ export type {
   Review,
   ReviewResponse,
 };
+
+export interface ReviewStats {
+  average_rating: number;
+  approved_reviews_count: number;
+  ratings_breakdown: {
+    stars: number;
+    count: number;
+    percentage: number;
+  }[];
+}

@@ -21,10 +21,11 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
       href={`/business/${slug}`}
       sx={{
         display: 'flex',
-        gap: 2,
-        padding: '1rem 0.5rem',
+        flexDirection: 'column',
+        gap: 1,
+        padding: '1rem',
         mb: 2,
-        alignItems: 'center',
+        alignItems: 'stretch',
         textDecoration: 'none',
         bgcolor: 'background.paper',
         borderRadius: 2,
@@ -36,37 +37,33 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
         },
       }}
     >
+      {/* 1. TOP SECTION */}
       <Box
         sx={{
-          flexShrink: 0,
-          width: 60,
-          height: 60,
-          borderRadius: 1,
-          bgcolor: 'var(--color-border-grey)',
+          flexGrow: 1,
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          overflow: 'hidden',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          mb: 1,
         }}
       >
-        <Image
-          src={images[0]?.url || '/logo.png'}
-          alt={name}
-          width={60}
-          height={60}
-          style={{ objectFit: 'cover' }}
-        />
-      </Box>
-      <Box sx={{ flexGrow: 1, position: 'relative' }}>
-        <Typography
-          variant="body2"
-          fontWeight="bold"
-          color="brandAccent.main"
-          sx={{ mb: 0.2 }}
-        >
-          {name}
-        </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5 }}>
+        <Box>
+          <Typography
+            variant="body1"
+            fontWeight="bold"
+            color="brandAccent.main"
+            sx={{
+              mr: 2,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {name}
+          </Typography>
+        </Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
           <Rating
             value={average_rating}
             readOnly
@@ -74,55 +71,78 @@ export const BusinessCardSmall: React.FC<BusinessCardSmallProps> = ({
             size="small"
             sx={{ mr: 0.5, color: 'brandPin.main' }}
           />
-          <Typography variant="caption" color="text.secondary">
+          <Typography variant="body2" color="text.secondary">
             ({average_rating.toFixed(1)})
           </Typography>
         </Box>
-        <Typography
-          variant="body2"
-          color="text.primary"
+      </Box>
+
+      {/* 2. BOTTOM SECTION */}
+      <Box sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+        <Box
           sx={{
-            mb: 1,
-            '&::before': {
-              content: `'${description?.substring(0, 45) + '...'}'`,
-              display: { xs: 'inline', sm: 'none', md: 'inline' },
-            },
-            '&::after': {
-              content: `'${description}'`,
-              display: { xs: 'none', sm: 'inline', md: 'none' },
-            },
+            flexShrink: 0,
+            width: 70,
+            height: 70,
+            borderRadius: 1,
+            bgcolor: 'var(--color-border-grey)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
           }}
-        />
-        {distance && (
+        >
+          <Image
+            src={images[0]?.url || '/logo.png'}
+            alt={name}
+            width={70}
+            height={70}
+            style={{ objectFit: 'cover' }}
+          />
+        </Box>
+
+        <Box sx={{ flexGrow: 1, position: 'relative', minHeight: 70 }}>
+          <Typography
+            variant="body2"
+            color="text.primary"
+            sx={{
+              display: '-webkit-box',
+              overflow: 'hidden',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 2,
+              mb: 1,
+            }}
+          >
+            {description}
+          </Typography>
+
           <Box
             sx={{
               display: 'flex',
-              alignItems: 'center',
-              position: 'relative',
-              bottom: 0,
-              left: '-4.5rem',
+              justifyContent: 'space-between',
+              alignItems: 'flex-end',
+              mt: 'auto',
             }}
           >
-            <Typography variant="caption" color="text.secondary">
-              {distance} away
-            </Typography>
-          </Box>
-        )}
+            {distance && (
+              <Typography variant="caption" color="text.secondary">
+                {distance} away
+              </Typography>
+            )}
 
-        {isOpen && (
-          <Chip
-            label="Open Now"
-            size="small"
-            color="statusFeatured"
-            sx={{
-              position: 'absolute',
-              bottom: 0,
-              right: 0,
-              height: 20,
-              fontWeight: 'medium',
-            }}
-          />
-        )}
+            {isOpen && (
+              <Chip
+                label="Open Now"
+                size="small"
+                color="statusFeatured"
+                sx={{
+                  height: 20,
+                  fontWeight: 'medium',
+                }}
+              />
+            )}
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
