@@ -1,9 +1,9 @@
 'use client';
 
-import Image from 'next/image';
-import { Grid } from '@mui/material';
-import { PhotoLightbox } from '@/layers/04_shared/ui/PhotoLightbox';
 import { useState } from 'react';
+import Image from 'next/image';
+import Grid from '@mui/material/Grid';
+import { PhotoLightbox } from '@/layers/04_shared/ui/PhotoLightbox';
 
 import { Photo } from './PhotoGallery';
 
@@ -12,11 +12,11 @@ interface MobilePhotoProps {
 }
 
 export function MobilePhotoGallery({ mobilePreviewPhotos }: MobilePhotoProps) {
-  const [lightboxPhotoId, setLightboxPhotoId] = useState<number | null>(null);
+  const [lightboxPhotoId, setLightboxPhotoId] = useState<string | null>(null);
 
   const previewPhotos = mobilePreviewPhotos.slice(0, 3);
 
-  const handlePhotoClick = (photoId: number) => setLightboxPhotoId(photoId);
+  const handlePhotoClick = (photoId: string) => setLightboxPhotoId(photoId);
   const handleLightboxClose = () => setLightboxPhotoId(null);
 
   return (
@@ -28,8 +28,8 @@ export function MobilePhotoGallery({ mobilePreviewPhotos }: MobilePhotoProps) {
       {previewPhotos.map((photo) => (
         <Grid
           size={4}
-          key={photo.id}
-          onClick={() => handlePhotoClick(photo.id)}
+          key={photo.id || photo.url}
+          onClick={() => handlePhotoClick(photo.url)}
           sx={{
             display: 'flex',
             justifyContent: 'center',

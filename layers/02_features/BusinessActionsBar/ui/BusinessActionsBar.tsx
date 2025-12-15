@@ -42,7 +42,7 @@ export const BusinessActionsBar: React.FC<BusinessActionsBarProps> = ({
         pr: 2,
         bgcolor: 'background.paper',
         position: 'relative',
-        zIndex: 10,
+        // zIndex: 10,
       }}
     >
       <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>

@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: business.name,
     description: business.description,
+    metadataBase: new URL('https://milanplaces.com'),
     openGraph: {
       title: business.name,
       description: business.description,

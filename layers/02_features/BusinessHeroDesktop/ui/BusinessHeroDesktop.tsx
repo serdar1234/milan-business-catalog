@@ -36,7 +36,7 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
     website,
     address,
   } = data!;
-  const imageUrl = images[0] ?? '/business.jpg';
+  const imageUrl = images[0].url ?? '/business.jpg';
   // const tags = ['Lunch', 'Dinner', 'Dessert'];
   // const priceRange = '€€';
   // const statusText = '23:00';

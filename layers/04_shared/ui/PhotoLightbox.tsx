@@ -20,7 +20,7 @@ import { Photo } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
 interface PhotoLightboxProps {
   open: boolean;
   onClose: () => void;
-  initialPhotoId: number | null;
+  initialPhotoId: string | null;
   photos: Photo[];
 }
 
@@ -35,7 +35,7 @@ export const PhotoLightbox: React.FC<PhotoLightboxProps> = ({
   const touchStartX = useRef(0);
   const [index, setIndex] = useState(() => {
     if (initialPhotoId != null) {
-      const i = photos.findIndex((p) => p.id === initialPhotoId);
+      const i = photos.findIndex((p) => p.url === initialPhotoId);
       return i >= 0 ? i : 0;
     }
     return 0;

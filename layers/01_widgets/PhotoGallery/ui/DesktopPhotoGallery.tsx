@@ -1,11 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { Grid, Typography, Box } from '@mui/material';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import styles from './PhotoGallery.module.css';
-import Link from 'next/link';
 import { PhotoLightbox } from '@/layers/04_shared/ui/PhotoLightbox';
 import { Photo } from './PhotoGallery';
 
@@ -16,16 +15,13 @@ interface DesktopPreviewPhotos {
 export function DesktopPhotoGallery({
   desktopPreviewPhotos,
 }: DesktopPreviewPhotos) {
-  const [lightboxPhotoId, setLightboxPhotoId] = useState<number | null>(null);
-  const params = useParams();
-
+  const [lightboxPhotoId, setLightboxPhotoId] = useState<string | null>(null);
   if (desktopPreviewPhotos.length === 0) return null;
 
   const firstPhoto = desktopPreviewPhotos[0];
   const photos = desktopPreviewPhotos.slice(1, 4);
-  const numberOfPhotos = desktopPreviewPhotos.length;
 
-  const handlePhotoClick = (photoId: number) => {
+  const handlePhotoClick = (photoId: string) => {
     setLightboxPhotoId(photoId);
   };
 
@@ -38,7 +34,8 @@ export function DesktopPhotoGallery({
       <Grid
         size={8}
         className={styles['image-wrapper']}
-        onClick={() => handlePhotoClick(firstPhoto.id || 0)}
+        onClick={() => handlePhotoClick(firstPhoto.url)}
+        sx={{ cursor: 'pointer', position: 'relative' }}
       >
         <Image
           src={firstPhoto.url || ''}
@@ -50,9 +47,9 @@ export function DesktopPhotoGallery({
       </Grid>
       <Grid size={4} rowGap={2} display={'flex'} flexDirection={'column'}>
         {photos.map((photo) => (
-          <Grid key={photo.id} className={styles['image-wrapper']}>
+          <Grid key={photo.id || photo.url} className={styles['image-wrapper']}>
             <Box
-              onClick={() => handlePhotoClick(photo.id)}
+              onClick={() => handlePhotoClick(photo.url)}
               sx={{ cursor: 'pointer', height: '100%', position: 'relative' }}
             >
               <Image
@@ -67,15 +64,6 @@ export function DesktopPhotoGallery({
         ))}
       </Grid>
 
-      {numberOfPhotos > 4 && (
-        <Grid size={12}>
-          <Typography variant="body1" color="brandAccent.main">
-            <Link href={`./${params.id}/gallery/`}>
-              View all {numberOfPhotos} photos
-            </Link>
-          </Typography>
-        </Grid>
-      )}
       {!!lightboxPhotoId && (
         <PhotoLightbox
           open={!!lightboxPhotoId}

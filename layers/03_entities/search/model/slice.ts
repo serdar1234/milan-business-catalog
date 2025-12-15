@@ -1,8 +1,12 @@
 import { RootState } from '@/layers/03_entities/store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+interface SearchItem {
+  value: string;
+  slug: string;
+}
 interface RecentSearchState {
-  searches: string[];
+  searches: SearchItem[];
   isDrawerOpen: boolean;
 }
 
@@ -17,13 +21,11 @@ const recentSearchSlice = createSlice({
   name: 'recentSearch',
   initialState,
   reducers: {
-    addRecentSearch: (state, action: PayloadAction<string>) => {
-      const newQuery = action.payload.trim();
+    addRecentSearch: (state, action: PayloadAction<SearchItem>) => {
+      const newQuery = action.payload.slug;
       if (!newQuery) return;
-      state.searches = state.searches.filter(
-        (s) => s.toLowerCase() !== newQuery.toLowerCase(),
-      );
-      state.searches.unshift(newQuery);
+      state.searches = state.searches.filter((s) => s.slug !== newQuery);
+      state.searches.unshift(action.payload);
       if (state.searches.length > MAX_RECENT_SEARCHES) {
         state.searches.pop();
       }

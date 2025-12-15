@@ -59,17 +59,22 @@ export const SearchForm: React.FC<{
 
       if (matchedOption) {
         router.push(`/business/${matchedOption.id}`);
-        dispatch(addRecentSearch(matchedOption.name));
+        setQuery('');
+        setSelectedOption(null);
+        handleDrawerClose?.();
+        dispatch(
+          addRecentSearch({
+            value: matchedOption.name,
+            slug: matchedOption.slug,
+          }),
+        );
       } else {
-        const encoded = encodeURIComponent(searchValue);
-        router.push(`/search?q=${encoded}`);
-        dispatch(addRecentSearch(searchValue));
+        router.push(`/search?q=${encodeURIComponent(searchValue)}`);
+        setQuery('');
+        setSelectedOption(null);
+        handleDrawerClose?.();
+        dispatch(addRecentSearch({ value: searchValue, slug: '' }));
       }
-
-      setQuery('');
-      setSelectedOption(null);
-      handleDrawerClose?.();
-      setIsLoading(false);
     },
     [router, dispatch, handleDrawerClose, localOptions],
   );
@@ -92,8 +97,8 @@ export const SearchForm: React.FC<{
     }
 
     if (newValue) {
-      router.push(`/business/${newValue.id}`);
-      dispatch(addRecentSearch(newValue.name));
+      router.push(`/business/${newValue.slug}`);
+      dispatch(addRecentSearch({ value: newValue.name, slug: newValue.slug }));
 
       setQuery('');
       setSelectedOption(null);

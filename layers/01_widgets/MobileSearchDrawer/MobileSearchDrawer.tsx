@@ -68,11 +68,17 @@ export const MobileSearchDrawer: React.FC = () => {
     dispatch(closeSearchDrawer());
   };
 
-  const runSearch = (searchValue: string, id?: number) => {
+  const runSearch = (searchValue: string, slug?: string) => {
     const trimmed = searchValue.trim();
+    console.log('run search', searchValue, slug);
     if (!trimmed) return;
-    dispatch(addRecentSearch(trimmed));
-    router.push(`/business/${id}`);
+    dispatch(
+      addRecentSearch({
+        value: searchValue,
+        slug: slug ?? '',
+      }),
+    );
+    router.push(`/business/${slug}`);
     dispatch(closeSearchDrawer());
     setQuery('');
     setSelectedOption(null);
@@ -120,7 +126,7 @@ export const MobileSearchDrawer: React.FC = () => {
           onInputChange={(_, value) => setQuery(value)}
           onChange={(_, value) => {
             if (typeof value === 'string') setQuery(value);
-            else if (value) runSearch(value.name, value.id);
+            else if (value) runSearch(value.name, value.slug);
           }}
           onClose={handleClearInput}
           loading={isFetching}
@@ -205,12 +211,12 @@ export const MobileSearchDrawer: React.FC = () => {
 
             <List key={historyKey}>
               {recentSearches.map((q) => (
-                <ListItem disablePadding key={q}>
-                  <ListItemButton onClick={() => runSearch(q)}>
+                <ListItem disablePadding key={q.slug}>
+                  <ListItemButton onClick={() => runSearch(q.value, q.slug)}>
                     <ListItemIcon sx={{ minWidth: 40 }}>
                       <HistoryIcon color="action" />
                     </ListItemIcon>
-                    <ListItemText primary={q} />
+                    <ListItemText primary={q.value} />
                   </ListItemButton>
                 </ListItem>
               ))}
