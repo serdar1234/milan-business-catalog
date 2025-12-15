@@ -1,7 +1,14 @@
 'use client';
 
-import { FormEvent, useState, useCallback, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
+import {
+  FormEvent,
+  useState,
+  useCallback,
+  useMemo,
+  useTransition,
+  useEffect,
+} from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
 import Autocomplete from '@mui/material/Autocomplete';
@@ -23,14 +30,25 @@ export const SearchForm: React.FC<{
   hasBorder?: boolean;
   handleDrawerClose?: () => void;
 }> = ({ hasBorder = false, handleDrawerClose }) => {
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const dispatch = useDispatch();
 
   const [query, setQuery] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+
   const [selectedOption, setSelectedOption] =
     useState<AutocompleteResult | null>(null);
-
+  const pathname = usePathname();
+  const handleResetQuery = async () => {
+    setQuery('');
+    setSelectedOption(null);
+  };
+  useEffect(() => {
+    async function reset() {
+      await handleResetQuery();
+    }
+    reset();
+  }, [pathname]);
   const currentLang = useCurrentLanguage();
   const debouncedQuery = useDebounce(query, 500);
 
@@ -50,15 +68,15 @@ export const SearchForm: React.FC<{
 
   const runSearch = useCallback(
     (searchValue: string) => {
-      setIsLoading(true);
-
       const matchedOption = localOptions.find(
         (opt) =>
           opt.name.trim().toLowerCase() === searchValue.trim().toLowerCase(),
       );
 
       if (matchedOption) {
-        router.push(`/business/${matchedOption.id}`);
+        startTransition(() => {
+          router.push(`/business/${matchedOption.slug}`);
+        });
         setQuery('');
         setSelectedOption(null);
         handleDrawerClose?.();
@@ -69,7 +87,9 @@ export const SearchForm: React.FC<{
           }),
         );
       } else {
-        router.push(`/search?q=${encodeURIComponent(searchValue)}`);
+        startTransition(() => {
+          router.push(`/search?q=${encodeURIComponent(searchValue)}`);
+        });
         setQuery('');
         setSelectedOption(null);
         handleDrawerClose?.();
@@ -97,7 +117,9 @@ export const SearchForm: React.FC<{
     }
 
     if (newValue) {
-      router.push(`/business/${newValue.slug}`);
+      startTransition(() => {
+        router.push(`/business/${newValue.slug}`);
+      });
       dispatch(addRecentSearch({ value: newValue.name, slug: newValue.slug }));
 
       setQuery('');
@@ -133,7 +155,7 @@ export const SearchForm: React.FC<{
         getOptionLabel={(opt) => (typeof opt === 'string' ? opt : opt.name)}
         isOptionEqualToValue={(a, b) => a.id === b.id}
         renderInput={(params) => (
-          <SearchInput {...params} isLoading={isLoading} />
+          <SearchInput {...params} isLoading={isPending} />
         )}
         renderOption={(props, option) => (
           <SearchOptionItem props={props} option={option} key={option.id} />

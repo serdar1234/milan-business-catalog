@@ -70,7 +70,6 @@ export const MobileSearchDrawer: React.FC = () => {
 
   const runSearch = (searchValue: string, slug?: string) => {
     const trimmed = searchValue.trim();
-    console.log('run search', searchValue, slug);
     if (!trimmed) return;
     dispatch(
       addRecentSearch({
