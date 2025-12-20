@@ -38,7 +38,7 @@ import { useDebounce } from '@/layers/04_shared/hooks/useDebounce';
 import { useCurrentLanguage } from '@/layers/04_shared/hooks/useCurrentLanguage';
 import { SearchOptionItem } from '@/layers/04_shared/ui/SearchOptionItem';
 
-export const MobileSearchDrawer: React.FC = () => {
+const MobileSearchDrawer: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const isOpen = useSelector(selectIsSearchDrawerOpen);
@@ -77,7 +77,7 @@ export const MobileSearchDrawer: React.FC = () => {
         slug: slug ?? '',
       }),
     );
-    router.push(`/business/${slug}`);
+    router.push(slug ? `/business/${slug}` : `/search?q=${searchValue}`);
     dispatch(closeSearchDrawer());
     setQuery('');
     setSelectedOption(null);
@@ -189,7 +189,7 @@ export const MobileSearchDrawer: React.FC = () => {
             <Grid container>
               <Grid size={6} sx={{ display: 'flex', alignItems: 'center' }}>
                 <Typography variant="subtitle2" color="text.secondary">
-                  Recent Searches
+                  Recently Searched Places
                 </Typography>
               </Grid>
               <Grid
@@ -226,3 +226,5 @@ export const MobileSearchDrawer: React.FC = () => {
     </Drawer>
   );
 };
+
+export default MobileSearchDrawer;

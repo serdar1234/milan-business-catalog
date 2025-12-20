@@ -20,10 +20,8 @@ const Footer = NextDynamic(
 const ScrollToTopButton = NextDynamic(
   () => import('@/layers/02_features/ScrollToTopButton'),
 );
-const MobileSearchDrawer = NextDynamic(() =>
-  import('@/layers/01_widgets/MobileSearchDrawer/MobileSearchDrawer').then(
-    (mod) => mod.MobileSearchDrawer,
-  ),
+const MobileSearchDrawer = NextDynamic(
+  () => import('@/layers/01_widgets/MobileSearchDrawer/MobileSearchDrawer'),
 );
 
 const playfair = Playfair_Display({

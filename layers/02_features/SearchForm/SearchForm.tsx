@@ -39,15 +39,11 @@ export const SearchForm: React.FC<{
   const [selectedOption, setSelectedOption] =
     useState<AutocompleteResult | null>(null);
   const pathname = usePathname();
-  const handleResetQuery = async () => {
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setQuery('');
     setSelectedOption(null);
-  };
-  useEffect(() => {
-    async function reset() {
-      await handleResetQuery();
-    }
-    reset();
   }, [pathname]);
   const currentLang = useCurrentLanguage();
   const debouncedQuery = useDebounce(query, 500);
