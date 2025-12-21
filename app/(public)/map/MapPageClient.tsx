@@ -8,9 +8,10 @@ import { MapContainerClient } from '@/layers/02_features/Map';
 
 interface Props {
   initialCenter?: [number, number];
+  activeSlug?: string;
 }
 
-export default function MapPageClient({ initialCenter }: Props) {
+export default function MapPageClient({ initialCenter, activeSlug }: Props) {
   const { open, setOpen, toggleDrawer } = useToggleDrawer();
   const handleFilterToggle = () => setOpen(true);
 
@@ -29,6 +30,7 @@ export default function MapPageClient({ initialCenter }: Props) {
           <MapContainerClient
             center={initialCenter}
             showMapControls
+            activeSlug={activeSlug}
             onFilterClick={handleFilterToggle}
           />
         </Box>
@@ -41,7 +43,7 @@ export default function MapPageClient({ initialCenter }: Props) {
             scrollbarWidth: 'thin',
           }}
         >
-          <MapSidebar />
+          <MapSidebar activeSlug={activeSlug} />
         </Box>
       </Box>
 

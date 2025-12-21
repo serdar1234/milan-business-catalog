@@ -22,6 +22,7 @@ import { ResizeHandler } from './ResizeHandler';
 interface MapContainerClientProps {
   center?: [number, number];
   showMapControls?: boolean;
+  activeSlug?: string;
   onFilterClick?: () => void;
 }
 

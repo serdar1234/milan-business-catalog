@@ -1,6 +1,6 @@
 import MapPageClient from './MapPageClient';
 
-type SP = { lat?: string; lon?: string };
+type SP = { lat?: string; lon?: string; slug?: string };
 
 export default async function MapPage({
   searchParams,
@@ -10,8 +10,9 @@ export default async function MapPage({
   const params = await searchParams;
   const lat = parseFloat(params.lat ?? '');
   const lon = parseFloat(params.lon ?? '');
+  const slug = params.slug;
   const initialCenter: [number, number] | undefined =
     lat && lon ? [lat, lon] : undefined;
 
-  return <MapPageClient initialCenter={initialCenter} />;
+  return <MapPageClient initialCenter={initialCenter} activeSlug={slug} />;
 }
