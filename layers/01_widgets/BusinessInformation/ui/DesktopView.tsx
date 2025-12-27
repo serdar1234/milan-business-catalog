@@ -1,16 +1,13 @@
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import PhoneIcon from '@mui/icons-material/Phone';
-import LanguageIcon from '@mui/icons-material/Language';
+
 // import EuroIcon from '@mui/icons-material/Euro';
 import { HoursSection } from '@/layers/01_widgets/BusinessInformation/ui/BusinessHours';
-import { InfoRow } from './InfoRow';
 // import { BusinessInformationProps } from './BusinessInformation';
 import { MOCK_BUSINESS_DETAILS as mocks } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 import { Business } from '@/layers/04_shared/types/types';
-import Link from 'next/link';
+import AddressPhoneWebsite from './AddressPhoneWebsite';
 
 export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
   // const priceRange = '€€';
@@ -33,46 +30,7 @@ export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
 
       <Grid container spacing={4}>
         {/* 1. Address, Phone, Website, Price Range */}
-        <Grid size={12} aria-label="Business Contact Information">
-          <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
-            <LocationOnIcon
-              sx={{ color: 'brandAccent.main', mr: 2, mt: 0.25, fontSize: 24 }}
-            />
-            {data?.address && (
-              <Box>
-                <Typography
-                  variant="body1"
-                  fontWeight="bold"
-                  color="text.primary"
-                >
-                  Address
-                </Typography>
-                <Link
-                  href={
-                    data?.coordinates.lat
-                      ? `/map?lat=${data?.coordinates.lat}&lon=${data?.coordinates.lon}&slug=${data?.slug}`
-                      : ''
-                  }
-                >
-                  {data?.address}
-                </Link>
-              </Box>
-            )}
-          </Box>
-          <InfoRow
-            icon={PhoneIcon}
-            title="Phone"
-            content={data?.phone || ''}
-            isLink
-          />
-          <InfoRow
-            icon={LanguageIcon}
-            title="Website"
-            content={data?.website || ''}
-            isLink
-          />
-          {/* <InfoRow icon={EuroIcon} title="Price Range" content={priceRange} /> */}
-        </Grid>
+        <AddressPhoneWebsite data={data} />
 
         {/* 2. Business Hours */}
         <Grid size={12} aria-label="Business Operating Hours">
