@@ -152,7 +152,9 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
           <PlaceIcon
             sx={{ fontSize: 16, color: 'brandAccent.main', mr: 0.5 }}
           />
-          <Link href={`/map?lat=${coordinates.lat}&lon=${coordinates.lon}`}>
+          <Link
+            href={`/map?lat=${coordinates.lat}&lon=${coordinates.lon}&slug=${slug}`}
+          >
             <Typography variant="body2" color="text.secondary">
               {address}
             </Typography>
@@ -160,7 +162,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
         </Box>
       </CardContent>
 
-      <CTAbuttons phone={phone} coordinates={coordinates} />
+      <CTAbuttons phone={phone} coordinates={coordinates} slug={slug} />
     </Card>
   );
 };

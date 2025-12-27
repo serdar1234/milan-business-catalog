@@ -95,7 +95,7 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
         <LocationOnIcon
           sx={{ color: 'brandAccent.main', mr: 1, fontSize: 24 }}
         />
-        <Link href={`/map?lat=${lat}&lon=${lon}`}>
+        <Link href={`/map?lat=${lat}&lon=${lon}&slug=${business?.slug}`}>
           <Typography variant="body1" fontWeight="bold">
             {business?.address}
           </Typography>
@@ -108,7 +108,7 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
       <Button
         variant="contained"
         LinkComponent={Link}
-        href={`/map?lat=${lat}&lon=${lon}`}
+        href={`/map?lat=${lat}&lon=${lon}&slug=${business?.slug}`}
         sx={{
           display: { xs: 'none', md: 'flex' },
           position: 'absolute',

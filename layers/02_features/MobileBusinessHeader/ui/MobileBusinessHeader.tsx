@@ -31,6 +31,7 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
     // average_rating,
     // isOpen,
     // city,
+    slug,
     address,
     phone,
     email,
@@ -41,7 +42,7 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
     {
       icon: PlaceIcon,
       text: address,
-      href: `/map?lat=${coordinates.lat}&lon=${coordinates.lon}`,
+      href: `/map?lat=${coordinates.lat}&lon=${coordinates.lon}&slug=${slug}`,
       type: 'address',
     },
     {

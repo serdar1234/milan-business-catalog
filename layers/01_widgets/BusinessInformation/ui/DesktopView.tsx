@@ -50,7 +50,7 @@ export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
                 <Link
                   href={
                     data?.coordinates.lat
-                      ? `/map?lat=${data?.coordinates.lat}&lon=${data?.coordinates.lon}`
+                      ? `/map?lat=${data?.coordinates.lat}&lon=${data?.coordinates.lon}&slug=${data?.slug}`
                       : ''
                   }
                 >

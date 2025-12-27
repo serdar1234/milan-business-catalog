@@ -18,6 +18,7 @@ interface BusinessActionsBarProps {
   saves: number;
   lat: number;
   lon: number;
+  slug: string;
 }
 
 export const BusinessActionsBar: React.FC<BusinessActionsBarProps> = ({
@@ -26,11 +27,12 @@ export const BusinessActionsBar: React.FC<BusinessActionsBarProps> = ({
   // address,
   lat,
   lon,
+  slug,
   // views,
   // saves,
 }) => {
   const phoneHref = `tel:${phone.replace(/\s/g, '')}`;
-  const directionsHref = `/map?lat=${lat}&lon=${lon}`;
+  const directionsHref = `/map?lat=${lat}&lon=${lon}&slug=${slug}`;
 
   return (
     <Box

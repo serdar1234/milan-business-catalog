@@ -35,6 +35,7 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
     phone,
     website,
     address,
+    slug,
   } = data!;
   const imageUrl = images[0]?.url ?? '/business.jpg';
   // const tags = ['Lunch', 'Dinner', 'Dessert'];
@@ -220,6 +221,7 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
         saves={saves}
         lat={coordinates.lat}
         lon={coordinates.lon}
+        slug={slug}
       />
     </Box>
   );

@@ -9,14 +9,16 @@ import { useRouter } from 'next/navigation';
 export const CTAbuttons = ({
   phone,
   coordinates,
+  slug,
 }: {
   phone: string;
   coordinates: { lat: number; lon: number };
+  slug: string;
 }) => {
   const router = useRouter();
   const handleClick = () => {
     const { lat, lon } = coordinates;
-    const url = `/map?lat=${lat}&lon=${lon}`;
+    const url = `/map?lat=${lat}&lon=${lon}&slug=${slug}`;
     router.push(url);
   };
   return (

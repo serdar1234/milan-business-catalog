@@ -15,11 +15,13 @@ interface MobileQuickActionsProps {
   phone: string;
   coordinates: { lat: number; lon: number };
   isFavorite?: boolean;
+  slug: string;
 }
 
 export const MobileQuickActions: React.FC<MobileQuickActionsProps> = ({
   phone,
   coordinates,
+  slug,
   // isFavorite,
 }) => {
   const { lat, lon } = coordinates;
@@ -34,7 +36,7 @@ export const MobileQuickActions: React.FC<MobileQuickActionsProps> = ({
       label: 'Directions',
       icon: NearMeIcon,
       color: ACTION_COLORS.DIRECTIONS,
-      href: `/map?lat=${lat}&lon=${lon}`,
+      href: `/map?lat=${lat}&lon=${lon}&slug=${slug}`,
     },
     // {
     //   label: 'Reserve',
