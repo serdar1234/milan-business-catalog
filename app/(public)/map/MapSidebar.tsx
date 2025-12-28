@@ -1,9 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { Business } from '@/layers/04_shared/types/types';
 import { Spinner } from '@/layers/04_shared/ui/Spinner';
+
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+
 import PhoneIcon from '@mui/icons-material/Phone';
 import LanguageIcon from '@mui/icons-material/Language';
 import Grid from '@mui/material/Grid';
@@ -22,6 +29,7 @@ interface MapSidebarProps {
 }
 
 export default function MapSidebar({ business, isSearching }: MapSidebarProps) {
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   if (isSearching) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
@@ -56,166 +64,221 @@ export default function MapSidebar({ business, isSearching }: MapSidebarProps) {
     ratings_breakdown,
     images,
   } = business;
+  const mainImage = images?.[0]?.url || '/images/placeholder.svg';
 
   return (
-    <Grid container spacing={0} mb={5}>
-      {/* --- БЛОК 1: Основная инфо (Заголовок) --- */}
-      <Grid size={12} sx={{ p: 2, pb: 1 }}>
-        <Chip
-          label={category?.name}
-          size="small"
-          color="brandAccent"
-          sx={{ mb: 1, fontWeight: 'bold', float: { xs: 'none', sm: 'right' } }}
-        />
-        <Typography
-          variant="h4"
-          component="h1"
-          sx={{ fontWeight: 'bold', mb: 0.5 }}
-        >
-          {name}
-        </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Rating
-            value={average_rating}
-            readOnly
-            precision={0.1}
+    <>
+      <Grid container spacing={0} mb={8}>
+        {/* --- БЛОК 1: Основная инфо (Заголовок) --- */}
+        <Grid size={12} sx={{ p: 2, pb: 1 }}>
+          <Chip
+            label={category?.name}
             size="small"
+            color="brandAccent"
+            sx={{
+              mb: 1,
+              fontWeight: 'bold',
+              float: { xs: 'none', sm: 'right' },
+            }}
           />
-          <Typography variant="body2" fontWeight="bold">
-            {average_rating}
+          <Typography
+            variant="h4"
+            component="h1"
+            sx={{ fontWeight: 'bold', mb: 0.5 }}
+          >
+            {name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            ({approved_reviews_count} reviews)
-          </Typography>
-        </Box>
-      </Grid>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Rating
+              value={average_rating}
+              readOnly
+              precision={0.1}
+              size="small"
+            />
+            <Typography variant="body2" fontWeight="bold">
+              {average_rating}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              ({approved_reviews_count} reviews)
+            </Typography>
+          </Box>
+        </Grid>
 
-      {/* --- БЛОК 2: Изображение (Мини-галерея) --- */}
-      <Grid size={{ xs: 12, sm: 6, md: 12 }} sx={{ p: 2 }}>
-        <Box
+        {/* --- БЛОК 2: Изображение (Мини-галерея) --- */}
+        <Grid size={{ xs: 12, sm: 6, md: 12 }} sx={{ p: 2 }}>
+          <Box
+            onClick={() => setIsImageModalOpen(true)}
+            sx={{
+              position: 'relative',
+              width: '100%',
+              height: 200,
+              borderRadius: 2,
+              overflow: 'hidden',
+              bgcolor: 'grey.100',
+              cursor: 'pointer',
+              transition: 'transform 0.2s ease-in-out, filter 0.2s',
+              '&:hover': {
+                transform: 'scale(1.02)',
+                filter: 'brightness(0.9)',
+              },
+            }}
+          >
+            <Image
+              src={mainImage}
+              alt={name || 'Business'}
+              fill
+              style={{ objectFit: 'cover' }}
+            />
+          </Box>
+        </Grid>
+
+        {/* --- БЛОК 3: Описание --- */}
+        <Grid size={{ xs: 12, sm: 6, md: 12 }} sx={{ p: 2 }}>
+          <Typography
+            variant="subtitle2"
+            color="text.secondary"
+            sx={{ textTransform: 'uppercase', mb: 1, fontWeight: 'bold' }}
+          >
+            About
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{ lineHeight: 1.6, color: 'text.primary' }}
+          >
+            {description}
+          </Typography>
+        </Grid>
+
+        <Divider
           sx={{
-            position: 'relative',
             width: '100%',
-            height: 200,
-            borderRadius: 2,
-            overflow: 'hidden',
-            bgcolor: 'grey.100',
+            my: 1,
+            display: { xs: 'block', sm: 'none', md: 'block' },
+          }}
+        />
+
+        {/* --- БЛОК 4: Контакты --- */}
+        <Grid size={{ xs: 12, sm: 6, md: 12 }} sx={{ p: 2 }}>
+          <Typography
+            variant="subtitle2"
+            color="text.secondary"
+            sx={{ textTransform: 'uppercase', mb: 1, fontWeight: 'bold' }}
+          >
+            Contact Info
+          </Typography>
+          {address && (
+            <InfoRow title={address} icon={LocationOnIcon} content={address} />
+          )}
+          {phone && (
+            <InfoRow title="Phone" icon={PhoneIcon} content={phone} isLink />
+          )}
+          {website && (
+            <InfoRow
+              title="Website"
+              icon={LanguageIcon}
+              content={website}
+              isLink
+            />
+          )}
+          {email && (
+            <InfoRow title="Email" icon={EmailIcon} content={email} isLink />
+          )}
+        </Grid>
+
+        {/* --- БЛОК 5: Детализация рейтинга --- */}
+        <Grid size={{ xs: 12, sm: 6, md: 12 }} sx={{ p: 2 }}>
+          <Typography
+            variant="subtitle2"
+            color="text.secondary"
+            sx={{ textTransform: 'uppercase', mb: 2, fontWeight: 'bold' }}
+          >
+            Ratings Breakdown
+          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+            {ratings_breakdown
+              ?.slice()
+              .reverse()
+              .map((item) => (
+                <Box
+                  key={item.stars}
+                  sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
+                >
+                  <Typography
+                    variant="caption"
+                    sx={{ minWidth: 45, fontWeight: 'bold' }}
+                  >
+                    {item.stars} stars
+                  </Typography>
+                  <LinearProgress
+                    variant="determinate"
+                    value={item.percentage}
+                    sx={{
+                      flexGrow: 1,
+                      height: 8,
+                      borderRadius: 5,
+                      bgcolor: 'grey.200',
+                      '& .MuiLinearProgress-bar': {
+                        bgcolor:
+                          item.percentage > 0 ? 'brandPin.main' : 'grey.300',
+                      },
+                    }}
+                  />
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      minWidth: 30,
+                      textAlign: 'right',
+                      color: 'text.secondary',
+                    }}
+                  >
+                    {item.count}
+                  </Typography>
+                </Box>
+              ))}
+          </Box>
+        </Grid>
+      </Grid>
+      {/* 🚨 ДИАЛОГ ДЛЯ ПРОСМОТРА ФОТО --- */}
+      <Dialog
+        open={isImageModalOpen}
+        onClose={() => setIsImageModalOpen(false)}
+        maxWidth="lg"
+        slotProps={{
+          paper: {
+            sx: {
+              bgcolor: 'transparent',
+              boxShadow: 'none',
+              overflow: 'visible',
+            },
+          },
+        }}
+      >
+        <IconButton
+          onClick={() => setIsImageModalOpen(false)}
+          sx={{
+            position: 'absolute',
+            top: -40,
+            right: 0,
+            color: 'white',
+            bgcolor: 'rgba(0,0,0,0.3)',
+            '&:hover': { bgcolor: 'rgba(0,0,0,0.5)' },
           }}
         >
-          <Image
-            src={images?.[0]?.url || '/images/placeholder.svg'}
-            alt={name || 'Business'}
-            fill
-            style={{ objectFit: 'cover' }}
-          />
-        </Box>
-      </Grid>
+          <CloseIcon />
+        </IconButton>
 
-      {/* --- БЛОК 3: Описание --- */}
-      <Grid size={{ xs: 12, sm: 6, md: 12 }} sx={{ p: 2 }}>
-        <Typography
-          variant="subtitle2"
-          color="text.secondary"
-          sx={{ textTransform: 'uppercase', mb: 1, fontWeight: 'bold' }}
-        >
-          About
-        </Typography>
-        <Typography
-          variant="body2"
-          sx={{ lineHeight: 1.6, color: 'text.primary' }}
-        >
-          {description}
-        </Typography>
-      </Grid>
-
-      <Divider
-        sx={{
-          width: '100%',
-          my: 1,
-          display: { xs: 'block', sm: 'none', md: 'block' },
-        }}
-      />
-
-      {/* --- БЛОК 4: Контакты --- */}
-      <Grid size={{ xs: 12, sm: 6, md: 12 }} sx={{ p: 2 }}>
-        <Typography
-          variant="subtitle2"
-          color="text.secondary"
-          sx={{ textTransform: 'uppercase', mb: 1, fontWeight: 'bold' }}
-        >
-          Contact Info
-        </Typography>
-        {address && (
-          <InfoRow title={address} icon={LocationOnIcon} content={address} />
-        )}
-        {phone && (
-          <InfoRow title="Phone" icon={PhoneIcon} content={phone} isLink />
-        )}
-        {website && (
-          <InfoRow
-            title="Website"
-            icon={LanguageIcon}
-            content={website}
-            isLink
-          />
-        )}
-        {email && (
-          <InfoRow title="Email" icon={EmailIcon} content={email} isLink />
-        )}
-      </Grid>
-
-      {/* --- БЛОК 5: Детализация рейтинга --- */}
-      <Grid size={{ xs: 12, sm: 6, md: 12 }} sx={{ p: 2 }}>
-        <Typography
-          variant="subtitle2"
-          color="text.secondary"
-          sx={{ textTransform: 'uppercase', mb: 2, fontWeight: 'bold' }}
-        >
-          Ratings Breakdown
-        </Typography>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-          {ratings_breakdown
-            ?.slice()
-            .reverse()
-            .map((item) => (
-              <Box
-                key={item.stars}
-                sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
-              >
-                <Typography
-                  variant="caption"
-                  sx={{ minWidth: 45, fontWeight: 'bold' }}
-                >
-                  {item.stars} stars
-                </Typography>
-                <LinearProgress
-                  variant="determinate"
-                  value={item.percentage}
-                  sx={{
-                    flexGrow: 1,
-                    height: 8,
-                    borderRadius: 5,
-                    bgcolor: 'grey.200',
-                    '& .MuiLinearProgress-bar': {
-                      bgcolor:
-                        item.percentage > 0 ? 'brandPin.main' : 'grey.300',
-                    },
-                  }}
-                />
-                <Typography
-                  variant="caption"
-                  sx={{
-                    minWidth: 30,
-                    textAlign: 'right',
-                    color: 'text.secondary',
-                  }}
-                >
-                  {item.count}
-                </Typography>
-              </Box>
-            ))}
-        </Box>
-      </Grid>
-    </Grid>
+        <DialogContent sx={{ p: 0, display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ position: 'relative', width: '90vw', height: '80vh' }}>
+            <Image
+              src={mainImage}
+              alt={name || 'Full view'}
+              fill
+              style={{ objectFit: 'contain' }}
+              quality={100}
+            />
+          </Box>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
