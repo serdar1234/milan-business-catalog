@@ -6,7 +6,7 @@ import { fetchCategories } from '@/layers/04_shared/utils/helpers.server';
 
 type MobileViewFn = () => Promise<React.ReactElement>;
 export const MobileView: MobileViewFn = async function () {
-  const cats = await fetchCategories();
+  const cats = await fetchCategories(8);
   return (
     <Container sx={{ display: { xs: 'block', md: 'none' } }}>
       <Box

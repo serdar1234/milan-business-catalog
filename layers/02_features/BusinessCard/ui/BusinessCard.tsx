@@ -77,30 +77,32 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
           />
         )}
 
-        <IconButton
-          aria-label="add to favorites"
-          sx={{
-            position: 'absolute',
-            top: 8,
-            right: 8,
-            color: isFavorite ? 'brandPin.main' : 'background.paper',
-            bgcolor: 'rgba(255, 255, 255, 0.5)',
-            '&:hover': {
-              bgcolor: 'rgba(255, 255, 255, 0.7)',
-            },
-          }}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log(`Toggle favorite for ${name}`);
-          }}
-        >
-          {isFavorite ? (
-            <FavoriteIcon />
-          ) : (
-            <FavoriteBorderOutlinedIcon sx={{ color: 'brandAccent.main' }} />
-          )}
-        </IconButton>
+        {isFavorite !== undefined && (
+          <IconButton
+            aria-label="add to favorites"
+            sx={{
+              position: 'absolute',
+              top: 8,
+              right: 8,
+              color: isFavorite ? 'brandPin.main' : 'background.paper',
+              bgcolor: 'rgba(255, 255, 255, 0.5)',
+              '&:hover': {
+                bgcolor: 'rgba(255, 255, 255, 0.7)',
+              },
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log(`Toggle favorite for ${name}`);
+            }}
+          >
+            {isFavorite ? (
+              <FavoriteIcon />
+            ) : (
+              <FavoriteBorderOutlinedIcon sx={{ color: 'brandAccent.main' }} />
+            )}
+          </IconButton>
+        )}
       </Box>
 
       <CardContent>

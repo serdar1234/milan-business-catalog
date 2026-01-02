@@ -11,14 +11,19 @@ export async function fetchCategory(slug: string, lang = 'en') {
   if (!res.ok) return null;
   return res.json() as Promise<{ data: Category }>;
 }
-export async function fetchCategories(limit = 8): Promise<Category[] | null> {
+export async function fetchCategories(
+  limit?: number,
+): Promise<Category[] | null> {
   try {
     const { lang } = await getSSRPreferences();
     const res = await fetch(`${BASE_URL}/categories?lang=${lang}`);
     if (!res.ok) return null;
 
     const json = await res.json();
-    const cats: Category[] = json.data.slice(0, limit);
+    let cats: Category[] = json.data;
+    if (limit) {
+      cats = cats.slice(0, limit);
+    }
     return cats;
   } catch (err) {
     console.error('Failed to fetch categories', err);

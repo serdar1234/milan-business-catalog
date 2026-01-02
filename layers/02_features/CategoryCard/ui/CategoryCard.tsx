@@ -38,10 +38,8 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
         boxShadow: { xs: 0, md: 1 },
       }}
     >
-      {/* Контейнер для иконки */}
       <Box
         sx={{
-          // Десктопные стили: иконка в круге
           display: 'flex',
           width: 64,
           height: 64,
@@ -65,7 +63,7 @@ export const CategoryCard: React.FC<CategoryCardProps> = ({
         fontWeight="medium"
         textAlign="center"
         color="text.primary"
-        sx={{ mt: { xs: 0.5, md: 0 } }}
+        sx={{ mt: { xs: 0.5, md: 0 }, wordBreak: 'break-all' }}
       >
         {name}
       </Typography>
