@@ -5,7 +5,7 @@ export default function customDivIcon(name?: string, selected?: boolean) {
     iconSize: [38, 38],
     html: `
   <div style="text-align: center;">
-  <img src="/${selected ? 'favorite-place-svgrepo-com' : 'next'}.svg" style="position: relative; width: 38px; height: auto; z-index: ${selected ? '2;' : '1'}" alt="${name}" />
+  <img src="/favorite-place-svgrepo-com.svg" style="position: relative; width: 38px; height: auto; z-index: ${selected ? '2;' : '1'}" alt="${name}" />
   </div>
   `,
     className: '',

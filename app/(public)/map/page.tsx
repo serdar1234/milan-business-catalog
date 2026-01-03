@@ -2,8 +2,9 @@ import Box from '@mui/material/Box';
 import MapSidebar from '@/app/(public)/map/MapSidebar';
 import { MapContainerClient } from '@/layers/02_features/Map';
 import { BASE_URL } from '@/layers/03_entities/api/baseApi';
+import type { Business } from '@/layers/04_shared/types/types';
 
-type SP = { lat?: string; lon?: string; slug?: string };
+type SP = { slug?: string };
 
 export default async function MapPage({
   searchParams,
@@ -11,23 +12,19 @@ export default async function MapPage({
   searchParams: SP | Promise<SP>;
 }) {
   const params = await searchParams;
-  const lat = parseFloat(params.lat ?? '');
-  const lon = parseFloat(params.lon ?? '');
   const slug = params.slug;
-  const initialCenter: [number, number] | undefined =
-    lat && lon ? [lat, lon] : undefined;
 
-  let businessData = null;
+  let businessData: Business | null = null;
 
   if (slug) {
     try {
       const response = await fetch(`${BASE_URL}/companies/${slug}`, {
         next: { revalidate: 60 },
       });
+
       if (response.ok) {
         const result = await response.json();
         businessData = result.data;
-        console.log('Business data:', businessData);
       }
     } catch (error) {
       console.error('Error fetching business data:', error);
@@ -46,7 +43,8 @@ export default async function MapPage({
     >
       <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 60%' } }}>
         <MapContainerClient
-          center={initialCenter}
+          centerBusiness={businessData ?? undefined}
+          businesses={businessData ? [businessData] : []}
           showMapControls
           activeSlug={slug}
         />

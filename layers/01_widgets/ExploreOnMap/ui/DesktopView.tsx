@@ -32,8 +32,8 @@ export const DesktopView = () => {
   if (isError || !businessList) {
     return null;
   }
-  const { lat, lon } = businessList[1]?.coordinates;
-  const coordinates: [number, number] = [lat, lon];
+  // const { lat, lon } = businessList[1]?.coordinates;
+  // const coordinates: [number, number] = [lat, lon];
 
   return (
     <Box display={{ xs: 'none', md: 'block' }}>
@@ -107,7 +107,7 @@ export const DesktopView = () => {
               alignItems: 'center',
             }}
           >
-            <MapContainerClient showMapControls center={coordinates} />
+            <MapContainerClient showMapControls businesses={businessList} />
           </Box>
         </Box>
       </Container>

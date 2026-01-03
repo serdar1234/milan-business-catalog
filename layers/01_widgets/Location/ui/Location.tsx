@@ -8,52 +8,21 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import DirectionsIcon from '@mui/icons-material/Directions';
-// import LocalParkingIcon from '@mui/icons-material/LocalParking';
-// import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
-// import { TransportRow } from './TransportRow';
-// import { LocationButton } from '@/layers/04_shared/ui/LocationButton';
-// import { MOCK_BUSINESS_DETAILS } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
 import { addRecentlyViewed } from '@/layers/04_shared/utils/recentlyViewed';
 import { Business } from '@/layers/04_shared/types/types';
 import { ViewedPlace } from '@/layers/02_features/ViewedPlaceCard/ui/ViewedPlaceCard';
 import { MapContainerClient } from '@/layers/02_features/Map';
-import { MILAN_CENTER } from '@/layers/04_shared/utils/constants';
 
 interface BusinessDetailsProps {
   business?: Business;
 }
 
-// const ACTION_BUTTONS: {
-//   label: string;
-//   Icon: React.ElementType;
-//   colorKey: string;
-// }[] = [
-//   {
-//     label: 'Directions',
-//     Icon: DirectionsIcon,
-//     colorKey: 'primary',
-//   },
-//   {
-//     label: 'Parking',
-//     Icon: LocalParkingIcon,
-//     colorKey: 'brandAccent',
-//   },
-//   {
-//     label: 'Transit',
-//     Icon: DirectionsBusIcon,
-//     colorKey: 'statusFeatured',
-//   },
-// ];
-
 export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
-  // const data = MOCK_BUSINESS_DETAILS;
-  const { lat, lon } = business?.coordinates || {};
-  const mapCenter: [number, number] = lat && lon ? [lat, lon] : MILAN_CENTER;
-
   useEffect(() => {
     if (!business || !business.slug) return;
+
     const company: ViewedPlace = {
       slug: business.slug,
       name: business.name,
@@ -62,6 +31,7 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
       address: business.address,
       imageUrl: business.images?.[0]?.url || '',
     };
+
     addRecentlyViewed(company);
   }, [business]);
 
@@ -76,7 +46,12 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
         overflow: 'hidden',
       }}
     >
-      <MapContainerClient center={mapCenter} showMapControls />
+      <MapContainerClient
+        centerBusiness={business}
+        businesses={business ? [business] : []}
+        showMapControls
+      />
+
       <Box
         sx={{
           position: 'absolute',
@@ -95,12 +70,12 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
         <LocationOnIcon
           sx={{ color: 'brandAccent.main', mr: 1, fontSize: 24 }}
         />
-        <Link href={`/map?lat=${lat}&lon=${lon}&slug=${business?.slug}`}>
+        <Link href={`/map?slug=${business?.slug}`}>
           <Typography variant="body1" fontWeight="bold">
             {business?.address}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {business?.city + ', ' + business?.country}
+            {business?.city}, {business?.country}
           </Typography>
         </Link>
       </Box>
@@ -108,7 +83,7 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
       <Button
         variant="contained"
         LinkComponent={Link}
-        href={`/map?lat=${lat}&lon=${lon}&slug=${business?.slug}`}
+        href={`/map?slug=${business?.slug}`}
         sx={{
           display: { xs: 'none', md: 'flex' },
           position: 'absolute',
@@ -135,23 +110,6 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
       </Typography>
 
       {MapBlock}
-
-      {/* <Grid container spacing={2} sx={{ mb: 3 }}>
-        {ACTION_BUTTONS.map((button) => (
-          <LocationButton
-            key={button.label}
-            label={button.label}
-            Icon={button.Icon}
-            colorKey={button.colorKey}
-          />
-        ))}
-      </Grid>
-
-      <Box>
-        {data.transportInfo.map((info, index) => (
-          <TransportRow key={index} {...info} />
-        ))}
-      </Box> */}
     </Box>
   );
 
@@ -164,17 +122,6 @@ export const Location: React.FC<BusinessDetailsProps> = ({ business }) => {
         sx={{ display: 'flex', flexDirection: 'column' }}
       >
         {MapBlock}
-
-        {/* <Grid>
-          <Typography variant="h6" fontWeight="bold" sx={{ mb: 2 }}>
-            Getting Here
-          </Typography>
-          <Box>
-            {data.transportInfo.map((info, index) => (
-              <TransportRow key={index} {...info} />
-            ))}
-          </Box>
-        </Grid> */}
       </Grid>
     </Box>
   );

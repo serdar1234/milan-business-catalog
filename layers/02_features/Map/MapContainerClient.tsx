@@ -18,19 +18,26 @@ import HomeControl from './HomeControl';
 import { MILAN_CENTER } from '@/layers/04_shared/utils/constants';
 import { ZOOM } from '@/layers/04_shared/utils/constants';
 import { ResizeHandler } from './ResizeHandler';
+import { Business } from '@/layers/04_shared/types/types';
 
 interface MapContainerClientProps {
-  center?: LatLngTuple;
-  markers?: LatLngTuple[];
+  centerBusiness?: Business;
+  businesses?: Business[];
   showMapControls?: boolean;
   activeSlug?: string;
   onFilterClick?: () => void;
 }
 
+const toLatLngTuple = (b: Business): LatLngTuple => [
+  b.coordinates.lat,
+  b.coordinates.lon,
+];
+
 const MapContainerClient: React.FC<MapContainerClientProps> = ({
-  center,
-  markers,
+  centerBusiness,
+  businesses,
   showMapControls = false,
+  activeSlug,
   onFilterClick,
 }) => {
   useEffect(() => {
@@ -41,6 +48,8 @@ const MapContainerClient: React.FC<MapContainerClientProps> = ({
     }
   }, []);
 
+  const center = centerBusiness ? toLatLngTuple(centerBusiness) : MILAN_CENTER;
+
   return (
     <Box
       sx={{
@@ -50,7 +59,7 @@ const MapContainerClient: React.FC<MapContainerClientProps> = ({
       }}
     >
       <MapContainer
-        center={center || MILAN_CENTER}
+        center={center}
         zoom={ZOOM}
         scrollWheelZoom={false}
         zoomControl={false}
@@ -79,20 +88,49 @@ const MapContainerClient: React.FC<MapContainerClientProps> = ({
           </>
         )}
 
-        {center && (
-          <Marker icon={customDivIcon('Milano', true)} position={center}>
+        {centerBusiness && (
+          <Marker
+            icon={customDivIcon(centerBusiness.name, true)}
+            position={toLatLngTuple(centerBusiness)}
+          >
             <Popup offset={[0, -10]}>
-              Central marker position is: {center}
+              <strong>{centerBusiness.name}</strong>
+              <br />
+              {centerBusiness.address}, {centerBusiness.city}
+              <br />⭐ {centerBusiness.average_rating} (
+              {centerBusiness.approved_reviews_count} reviews)
             </Popup>
           </Marker>
         )}
-        {markers &&
-          markers.length > 0 &&
-          markers.map((marker) => (
-            <Marker key={marker.toString()} position={marker}>
-              <Popup offset={[0, -10]}>Marker position is: {marker}</Popup>
-            </Marker>
-          ))}
+        {businesses?.map((business) => (
+          <Marker
+            key={business.id}
+            position={toLatLngTuple(business)}
+            icon={customDivIcon(business.name, business.slug === activeSlug)}
+          >
+            <Popup offset={[0, -10]}>
+              <Box sx={{ minWidth: 200 }}>
+                <strong>{business.name}</strong>
+                <br />
+                <span>{business.category.name}</span>
+                <br />⭐ {business.average_rating} (
+                {business.approved_reviews_count})
+                <br />
+                <span>{business.address}</span>
+                <br />
+                {business.isOpen !== undefined && (
+                  <strong
+                    style={{
+                      color: business.isOpen ? 'green' : 'red',
+                    }}
+                  >
+                    {business.isOpen ? 'Open now' : 'Closed'}
+                  </strong>
+                )}
+              </Box>
+            </Popup>
+          </Marker>
+        ))}
       </MapContainer>
     </Box>
   );
