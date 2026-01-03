@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import L from 'leaflet';
+import L, { LatLngTuple } from 'leaflet';
 import {
   MapContainer,
   TileLayer,
@@ -20,7 +20,8 @@ import { ZOOM } from '@/layers/04_shared/utils/constants';
 import { ResizeHandler } from './ResizeHandler';
 
 interface MapContainerClientProps {
-  center?: [number, number];
+  center?: LatLngTuple;
+  markers?: LatLngTuple[];
   showMapControls?: boolean;
   activeSlug?: string;
   onFilterClick?: () => void;
@@ -28,6 +29,7 @@ interface MapContainerClientProps {
 
 const MapContainerClient: React.FC<MapContainerClientProps> = ({
   center,
+  markers,
   showMapControls = false,
   onFilterClick,
 }) => {
@@ -79,9 +81,18 @@ const MapContainerClient: React.FC<MapContainerClientProps> = ({
 
         {center && (
           <Marker icon={customDivIcon('Milano', true)} position={center}>
-            <Popup offset={[0, -10]}>Benvenuti a Milano!</Popup>
+            <Popup offset={[0, -10]}>
+              Central marker position is: {center}
+            </Popup>
           </Marker>
         )}
+        {markers &&
+          markers.length > 0 &&
+          markers.map((marker) => (
+            <Marker key={marker.toString()} position={marker}>
+              <Popup offset={[0, -10]}>Marker position is: {marker}</Popup>
+            </Marker>
+          ))}
       </MapContainer>
     </Box>
   );

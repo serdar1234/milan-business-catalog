@@ -2,15 +2,12 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-// import EuroIcon from '@mui/icons-material/Euro';
 import { HoursSection } from '@/layers/01_widgets/BusinessInformation/ui/BusinessHours';
-// import { BusinessInformationProps } from './BusinessInformation';
 import { MOCK_BUSINESS_DETAILS as mocks } from '@/layers/04_shared/api/mocks/businessDetailsMocks';
 import { Business } from '@/layers/04_shared/types/types';
 import AddressPhoneWebsite from './AddressPhoneWebsite';
 
 export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
-  // const priceRange = '€€';
   return (
     <Box
       sx={{
@@ -38,18 +35,6 @@ export const DesktopView: React.FC<{ data?: Business }> = ({ data }) => {
             Hours
           </Typography>
           <HoursSection hours={mocks.hours} />
-
-          {/* {mocks.amenities.map((a) => (
-            <Box
-              key={a.label}
-              sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
-            >
-              <a.icon sx={{ color: 'brandAccent.main', mr: 2, fontSize: 24 }} />
-              <Typography variant="body1" color="text.primary">
-                {a.label}
-              </Typography>
-            </Box>
-          ))} */}
         </Grid>
       </Grid>
     </Box>

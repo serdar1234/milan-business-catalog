@@ -111,7 +111,7 @@ const Footer: React.FC = () => {
           }}
         >
           <Typography variant="caption" sx={{ color: '' }}>
-            © 2025 MilanoDiscover. All rights reserved.
+            © 2026 MilanoDiscover. All rights reserved.
           </Typography>
 
           <Box sx={{ display: 'flex', gap: 3 }}>

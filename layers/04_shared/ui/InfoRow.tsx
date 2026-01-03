@@ -13,7 +13,6 @@ export const InfoRow: React.FC<{
     else if (title === 'Phone') linkText = 'tel:' + content;
     else if (title === 'Email') linkText = 'mailto:' + content;
   }
-  console.log('linkText', content, linkText);
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
       <Icon sx={{ color: 'brandAccent.main', mr: 2, mt: 0.25, fontSize: 24 }} />

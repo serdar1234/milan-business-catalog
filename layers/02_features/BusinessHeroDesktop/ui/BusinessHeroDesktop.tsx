@@ -1,14 +1,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-// import IconButton from '@mui/material/IconButton';
-
-// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarIcon from '@mui/icons-material/Star';
-// import RestaurantIcon from '@mui/icons-material/Restaurant';
-// import EuroIcon from '@mui/icons-material/Euro';
-// import AccessTimeIcon from '@mui/icons-material/AccessTime';
-// import NearMeIcon from '@mui/icons-material/NearMe';
 import { BusinessActionsBar } from '../../BusinessActionsBar/ui/BusinessActionsBar';
 import Link from 'next/link';
 import { AppBreadcrumbs } from '@/layers/04_shared/ui/AppBreadcrumbs';
@@ -28,8 +21,6 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
     description,
     average_rating,
     approved_reviews_count,
-    // distance,
-    // isOpen,
     coordinates,
     images,
     phone,
@@ -38,11 +29,6 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
     slug,
   } = data!;
   const imageUrl = images[0]?.url ?? '/business.jpg';
-  // const tags = ['Lunch', 'Dinner', 'Dessert'];
-  // const priceRange = '€€';
-  // const statusText = '23:00';
-  const views = 1000;
-  const saves = 100;
 
   const BREADCRUMBS = [
     { label: 'Home', href: '/' },
@@ -94,18 +80,6 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
             zIndex: 3,
           }}
         >
-          {/* <IconButton
-            sx={{
-              color: 'brandAccent.main',
-              bgcolor: 'rgba(255, 255, 255, 0.5)',
-              '&:hover': {
-                bgcolor: 'rgba(255, 255, 255, 0.7)',
-              },
-            }}
-            aria-label="add to favorites"
-          >
-            <FavoriteBorderIcon />
-          </IconButton> */}
           <ShareButtonWithMenu companyName={name} />
         </Box>
 
@@ -164,61 +138,12 @@ export const BusinessHeroDesktop: React.FC<BusinessHeroDesktopProps> = ({
           >
             {description}
           </Typography>
-
-          {/* <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 3,
-              flexWrap: 'wrap',
-              mt: 2,
-            }}
-          >
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <RestaurantIcon
-                sx={{ color: 'brandPin.main', fontSize: 20, mr: 0.5 }}
-              />
-              <Typography variant="body2">{tags[0]}</Typography>
-            </Box>
-
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <EuroIcon
-                sx={{ color: 'brandPin.main', fontSize: 20, mr: 0.5 }}
-              />
-              <Typography variant="body2">{priceRange}</Typography>
-            </Box>
-
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <NearMeIcon
-                sx={{ color: 'brandPin.main', fontSize: 20, mr: 0.5 }}
-              />
-              <Typography variant="body2">{distance} from you</Typography>
-            </Box>
-
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <AccessTimeIcon
-                sx={{
-                  color: isOpen ? 'brandPin.main' : 'statusError.main',
-                  fontSize: 20,
-                  mr: 0.5,
-                }}
-              />
-              <Typography
-                variant="body2"
-                color={isOpen ? 'statusSuccess.main' : 'statusError.main'}
-              >
-                {isOpen ? `Open until ${statusText}` : 'Closed Now'}
-              </Typography>
-            </Box>
-          </Box> */}
         </Box>
       </Box>
       <BusinessActionsBar
         phone={phone}
         website={website}
         address={address}
-        views={views}
-        saves={saves}
         lat={coordinates.lat}
         lon={coordinates.lon}
         slug={slug}

@@ -6,11 +6,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-
-// import StarIcon from '@mui/icons-material/Star';
-// import AccessTimeIcon from '@mui/icons-material/AccessTime';
-// import GridViewIcon from '@mui/icons-material/GridView';
-// import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PlaceIcon from '@mui/icons-material/Place';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
@@ -25,19 +20,8 @@ interface MobileBusinessHeaderProps {
 export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
   data,
 }) => {
-  const {
-    name,
-    category,
-    // average_rating,
-    // isOpen,
-    // city,
-    slug,
-    address,
-    phone,
-    email,
-    website,
-    coordinates,
-  } = data!;
+  const { name, category, slug, address, phone, email, website, coordinates } =
+    data!;
   const contactItems = [
     {
       icon: PlaceIcon,
@@ -85,23 +69,6 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
           alignItems: 'flex-start',
         }}
       >
-        {/* Restaurant icon */}
-        {/* <Grid
-          size={'auto'}
-          sx={{
-            bgcolor: 'rgba(255,255,255,0.1)',
-            p: 1.5,
-            borderRadius: '50%',
-            display: 'flex',
-            width: 'fit-content',
-          }}
-        >
-          <RestaurantIcon sx={{ fontSize: 36, color: 'white' }} />
-        </Grid> */}
-        {/* <Grid
-          // size={6}
-          sx={{ minWidth: 0 }}
-        > */}
         <Typography
           variant="h5"
           component={'h1'}
@@ -114,69 +81,7 @@ export const MobileBusinessHeader: React.FC<MobileBusinessHeaderProps> = ({
         <Typography variant="body2" color="surface" sx={{ mb: 1 }}>
           <Link href={`/category/${category.slug}`}>{category.name}</Link>
         </Typography>
-        {/* </Grid> */}
-        {/* QR code */}
-        {/* <Grid size={'grow'}>
-          <Box
-            sx={{
-              p: 1.5,
-              borderRadius: 2,
-              border: '4px solid white',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              position: 'absolute',
-              bottom: '1.5rem',
-              height: { xs: 92, sm: 'calc(100% - 3rem)' },
-              right: '1.5rem',
-              aspectRatio: '1/1',
-              background: 'linear-gradient(135deg, #F06240 0%, #D83B1B 100%)',
-            }}
-          >
-            <GridViewIcon sx={{ fontSize: 28, color: 'white' }} />
-          </Box>
-        </Grid> */}
-        {/* Rating and district */}
-        {/* <Grid
-          size={6}
-          sx={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            flexDirection: 'column',
-            flexWrap: 'wrap',
-            gap: { xs: 1.5, sm: 2 },
-          }}
-        >
-          <Grid sx={{ display: 'flex', alignItems: 'center' }}>
-            <StarIcon sx={{ color: 'secondary.main', fontSize: 18, mr: 0.5 }} />
-            <Typography variant="body2" fontWeight="bold">
-              {average_rating}
-            </Typography>
-          </Grid>
-          <Grid sx={{ display: 'flex', alignItems: 'center' }}>
-            <PlaceIcon sx={{ color: 'brandPin.main', fontSize: 18, mr: 0.5 }} />
-            <Typography variant="body2" color="grey.300">
-              {city}
-            </Typography>
-          </Grid>
-          <Grid sx={{ display: 'flex', alignItems: 'center' }}>
-            <AccessTimeIcon
-              sx={{
-                color: isOpen ? 'statusSuccess.main' : 'statusError.main',
-                fontSize: 18,
-                mr: 0.5,
-              }}
-            />
-            <Typography
-              variant="body2"
-              color={isOpen ? 'statusSuccess.main' : 'statusError.main'}
-            >
-              Open Now
-            </Typography>
-          </Grid>
-        </Grid> */}
       </Grid>
-      {/* Contact items */}
       <List>
         {contactItems.map((item, index) => {
           const IconComponent = item.icon;

@@ -94,7 +94,7 @@ export const DesktopView = () => {
               color="text.secondary"
               sx={{ p: 2, textAlign: 'center' }}
             >
-              End of list. Showing first {NUMBER_OF_BUSINESSES} of{' '}
+              End of list. Showing first {NUMBER_OF_BUSINESSES} of&nbsp;
               {meta?.pagination.total_count} places.
             </Typography>
           </Box>
