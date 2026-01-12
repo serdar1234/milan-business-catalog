@@ -3,22 +3,11 @@
 import Link from 'next/link';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { useClientSetting } from '@/layers/04_shared/hooks/useClientSetting';
-import { useGetCategoriesQuery } from '@/layers/03_entities/category/categoryApi';
+import { useNavigationLinks } from '@/layers/04_shared/hooks/useNavigationLinks';
 import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
 
 export const DesktopNavigation: React.FC = () => {
-  const [language] = useClientSetting('language', 'en');
-  const { data: options } = useGetCategoriesQuery(language, {
-    refetchOnMountOrArgChange: false,
-  });
-  console.log('options', options);
-  const NAV_LINKS =
-    options?.slice(0, 3).map((option) => ({
-      href: `/category/${option.slug}`,
-      label: option.name,
-    })) ?? [];
-  NAV_LINKS.push({ href: '/map', label: 'Map View' });
+  const navLinks = useNavigationLinks(3);
 
   return (
     <Box
@@ -29,7 +18,7 @@ export const DesktopNavigation: React.FC = () => {
         marginInline: '1rem',
       }}
     >
-      {NAV_LINKS.map((link) => (
+      {navLinks.map((link) => (
         <Button
           key={link.href}
           component={Link}

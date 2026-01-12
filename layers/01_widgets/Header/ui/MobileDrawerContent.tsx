@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import {
   Box,
@@ -8,20 +10,15 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
+import { useNavigationLinks } from '@/layers/04_shared/hooks/useNavigationLinks';
 import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
 import { LanguageCurrencySwitcher } from '@/layers/01_widgets/LanguageCurrencySwitcher';
-
-const NAV_LINKS = [
-  { href: '/', label: 'Discover' },
-  { href: '/category/shopping', label: 'Shopping' },
-  { href: '/category/culture', label: 'Culture' },
-  { href: '/category/food', label: 'Food & Drink' },
-  { href: '/map', label: 'Map View' },
-];
 
 export const MobileDrawerContent: React.FC<{
   handleDrawerClose: () => void;
 }> = ({ handleDrawerClose }) => {
+  const navLinks = useNavigationLinks(5);
+
   return (
     <Box sx={{ width: 250, bgcolor: 'background.default', height: '100%' }}>
       <Toolbar sx={{ backgroundColor: 'primary.main' }}>
@@ -36,9 +33,9 @@ export const MobileDrawerContent: React.FC<{
       <Divider sx={{ mb: 1 }} />
 
       <List>
-        {NAV_LINKS.map((item) => (
+        {navLinks.map((item) => (
           <ListItem
-            key={item.label}
+            key={item.href}
             component={Link}
             href={item.href}
             onClick={handleDrawerClose}
