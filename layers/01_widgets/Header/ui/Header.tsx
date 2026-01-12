@@ -14,11 +14,19 @@ import { MobileDrawerContent } from './MobileDrawerContent';
 import { SharedIcon } from '@/layers/04_shared/ui/Icon';
 import { useScrollLock } from '@/layers/04_shared/hooks/useScrollLock';
 import { openSearchDrawer } from '@/layers/03_entities/search/model/slice';
+import { useClientSetting } from '@/layers/04_shared/hooks/useClientSetting';
+import { useGetCategoriesQuery } from '@/layers/03_entities/category/categoryApi';
+import { Spinner } from '@/layers/04_shared/ui/Spinner';
 
 export const Header: FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   useScrollLock(mobileOpen);
+  const [language] = useClientSetting('language', 'en');
 
+  const { data: options, isError } = useGetCategoriesQuery(language, {
+    refetchOnMountOrArgChange: false,
+  });
+  console.log('options', options);
   const dispatch = useDispatch();
 
   const handleSearchClick = (event: React.MouseEvent) => {
@@ -29,6 +37,8 @@ export const Header: FC = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  if (isError) return null;
 
   return (
     <AppBar position="sticky">
@@ -79,14 +89,6 @@ export const Header: FC = () => {
           >
             <SharedIcon iconName="Search" />
           </IconButton>
-
-          {/* <IconButton
-            component={Link}
-            href="#"
-            sx={{ color: 'primary.contrastText' }}
-          >
-            <SharedIcon iconName="User" />
-          </IconButton> */}
         </Box>
       </Toolbar>
 

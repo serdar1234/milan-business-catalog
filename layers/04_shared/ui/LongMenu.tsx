@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useScrollLock } from '../hooks/useScrollLock';
 import { useGetCategoriesQuery } from '@/layers/03_entities/category/categoryApi';
 import { useClientSetting } from '@/layers/04_shared/hooks/useClientSetting';
+import { Spinner } from './Spinner';
 
 const ITEM_HEIGHT = '50vh';
 
@@ -34,8 +35,8 @@ export default function LongMenu({ title }: { title: string }) {
     setAnchorEl(null);
     setMobileOpen(false);
   };
-  if (error) return <div>error</div>;
-  if (isLoading) return <div>loading</div>;
+  if (error) return null;
+  if (isLoading) return <Spinner />;
 
   return (
     <Box
