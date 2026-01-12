@@ -1,15 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import {
-  Box,
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import { useNavigationLinks } from '@/layers/04_shared/hooks/useNavigationLinks';
 import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
 import { LanguageCurrencySwitcher } from '@/layers/01_widgets/LanguageCurrencySwitcher';

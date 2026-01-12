@@ -1,13 +1,11 @@
-'use client';
-
 import Link from 'next/link';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { useNavigationLinks } from '@/layers/04_shared/hooks/useNavigationLinks';
 import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
+import { fetchCategories } from '@/layers/04_shared/utils/helpers.server';
 
-export const DesktopNavigation: React.FC = () => {
-  const navLinks = useNavigationLinks(3);
+export const DesktopNavigation: React.FC = async () => {
+  const categories = await fetchCategories(4);
 
   return (
     <Box
@@ -18,22 +16,23 @@ export const DesktopNavigation: React.FC = () => {
         marginInline: '1rem',
       }}
     >
-      {navLinks.map((link) => (
-        <Button
-          key={link.href}
-          component={Link}
-          href={link.href}
-          sx={{
-            color: 'var(--color-border-grey)',
-            '&:hover': { color: 'white' },
-            textTransform: 'capitalize',
-            whiteSpace: 'nowrap',
-            padding: '0.5rem',
-          }}
-        >
-          {link.label}
-        </Button>
-      ))}
+      {categories &&
+        categories.map((category) => (
+          <Button
+            key={category.id}
+            component={Link}
+            href={`/category/${category.slug}`}
+            sx={{
+              color: 'var(--color-border-grey)',
+              '&:hover': { color: 'white' },
+              textTransform: 'capitalize',
+              whiteSpace: 'nowrap',
+              padding: '0.5rem',
+            }}
+          >
+            {category.name}
+          </Button>
+        ))}
       <Box>
         <SearchForm />
       </Box>

@@ -1,35 +1,14 @@
-'use client';
-
-import { FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
 import Link from 'next/link';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { DesktopNavigation } from './DesktopNavigation';
-import { MobileDrawerContent } from './MobileDrawerContent';
-import { SharedIcon } from '@/layers/04_shared/ui/Icon';
-import { useScrollLock } from '@/layers/04_shared/hooks/useScrollLock';
-import { openSearchDrawer } from '@/layers/03_entities/search/model/slice';
+import { MobileMenu } from './MobileMenu';
+import { SearchButton } from './SearchButton';
 
 export const Header: FC = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  useScrollLock(mobileOpen);
-
-  const dispatch = useDispatch();
-
-  const handleSearchClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-    dispatch(openSearchDrawer());
-  };
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
   return (
     <AppBar position="sticky">
       <Toolbar
@@ -40,15 +19,7 @@ export const Header: FC = () => {
           justifyContent: 'space-between',
         }}
       >
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ display: { md: 'none' }, mr: 2 }}
-        >
-          <SharedIcon iconName="Menu" />
-        </IconButton>
+        <MobileMenu />
 
         <Typography
           variant="h6"
@@ -70,32 +41,9 @@ export const Header: FC = () => {
         <DesktopNavigation />
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <IconButton
-            onClick={handleSearchClick}
-            sx={{
-              display: { xs: 'block', md: 'none' },
-              color: 'primary.contrastText',
-            }}
-          >
-            <SharedIcon iconName="Search" />
-          </IconButton>
+          <SearchButton />
         </Box>
       </Toolbar>
-
-      <nav>
-        <Drawer
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          anchor="right"
-          ModalProps={{ keepMounted: true, disableScrollLock: true }}
-          sx={{
-            display: 'block',
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },
-          }}
-        >
-          <MobileDrawerContent handleDrawerClose={handleDrawerToggle} />
-        </Drawer>
-      </nav>
     </AppBar>
   );
 };
