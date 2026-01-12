@@ -1,4 +1,3 @@
-// SearchButton.tsx (Client Component)
 'use client';
 
 import { useDispatch } from 'react-redux';

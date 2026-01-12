@@ -6,9 +6,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { DesktopNavigation } from './DesktopNavigation';
 import { MobileMenu } from './MobileMenu';
+import { fetchCategories } from '@/layers/04_shared/utils/helpers.server';
 import { SearchButton } from './SearchButton';
 
-export const Header: FC = () => {
+export const Header: FC = async () => {
+  const categories = await fetchCategories(4);
   return (
     <AppBar position="sticky">
       <Toolbar
@@ -19,7 +21,7 @@ export const Header: FC = () => {
           justifyContent: 'space-between',
         }}
       >
-        <MobileMenu />
+        <MobileMenu categories={categories} />
 
         <Typography
           variant="h6"
@@ -38,7 +40,7 @@ export const Header: FC = () => {
           Milan Catalog
         </Typography>
 
-        <DesktopNavigation />
+        <DesktopNavigation categories={categories} />
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <SearchButton />

@@ -8,14 +8,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useNavigationLinks } from '@/layers/04_shared/hooks/useNavigationLinks';
 import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
 import { LanguageCurrencySwitcher } from '@/layers/01_widgets/LanguageCurrencySwitcher';
+import { Category } from '@/layers/03_entities/category/categoryApi';
 
 export const MobileDrawerContent: React.FC<{
   handleDrawerClose: () => void;
-}> = ({ handleDrawerClose }) => {
-  const navLinks = useNavigationLinks(5);
+  categories: Category[] | null;
+}> = ({ handleDrawerClose, categories }) => {
+  const navLinks = categories ?? [];
 
   return (
     <Box sx={{ width: 250, bgcolor: 'background.default', height: '100%' }}>
@@ -31,17 +32,27 @@ export const MobileDrawerContent: React.FC<{
       <Divider sx={{ mb: 1 }} />
 
       <List>
-        {navLinks.map((item) => (
-          <ListItem
-            key={item.href}
-            component={Link}
-            href={item.href}
-            onClick={handleDrawerClose}
-            sx={{ textDecoration: 'none', color: 'text.primary' }}
-          >
-            <ListItemText primary={item.label} />
-          </ListItem>
-        ))}
+        {navLinks &&
+          navLinks.map((item) => (
+            <ListItem
+              key={item.id}
+              component={Link}
+              href={`/category/${item.slug}`}
+              onClick={handleDrawerClose}
+              sx={{ textDecoration: 'none', color: 'text.primary' }}
+            >
+              <ListItemText primary={item.name} />
+            </ListItem>
+          ))}
+        <ListItem
+          key="map"
+          component={Link}
+          href={'/map'}
+          onClick={handleDrawerClose}
+          sx={{ textDecoration: 'none', color: 'text.primary' }}
+        >
+          <ListItemText primary="Map" />
+        </ListItem>
       </List>
 
       <LanguageCurrencySwitcher />

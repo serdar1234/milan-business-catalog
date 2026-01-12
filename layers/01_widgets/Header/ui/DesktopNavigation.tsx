@@ -2,11 +2,13 @@ import Link from 'next/link';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
-import { fetchCategories } from '@/layers/04_shared/utils/helpers.server';
+import { Category } from '@/layers/03_entities/category/categoryApi';
 
-export const DesktopNavigation: React.FC = async () => {
-  const categories = await fetchCategories(4);
-
+export const DesktopNavigation = ({
+  categories,
+}: {
+  categories: Category[] | null;
+}) => {
   return (
     <Box
       sx={{

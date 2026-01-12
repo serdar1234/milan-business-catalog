@@ -1,4 +1,3 @@
-// MobileMenu.tsx (Client Component)
 'use client';
 
 import { useState } from 'react';
@@ -7,8 +6,13 @@ import Drawer from '@mui/material/Drawer';
 import { SharedIcon } from '@/layers/04_shared/ui/Icon';
 import { useScrollLock } from '@/layers/04_shared/hooks/useScrollLock';
 import { MobileDrawerContent } from './MobileDrawerContent';
+import { Category } from '@/layers/03_entities/category/categoryApi';
 
-export const MobileMenu = () => {
+export const MobileMenu = ({
+  categories,
+}: {
+  categories: Category[] | null;
+}) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   useScrollLock(mobileOpen);
 
@@ -37,7 +41,10 @@ export const MobileMenu = () => {
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 250 },
           }}
         >
-          <MobileDrawerContent handleDrawerClose={handleDrawerToggle} />
+          <MobileDrawerContent
+            categories={categories}
+            handleDrawerClose={handleDrawerToggle}
+          />
         </Drawer>
       </nav>
     </>
