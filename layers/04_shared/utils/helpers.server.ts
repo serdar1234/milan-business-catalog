@@ -1,7 +1,7 @@
 import { Category } from '@/layers/03_entities/category/categoryApi';
 import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
 import { BASE_URL } from '@/layers/03_entities/api/baseApi';
-import { Meta, Business } from '../types/types';
+import { Meta, Business, Review } from '../types/types';
 
 export async function fetchCategory(slug: string) {
   const { lang } = await getSSRPreferences();
@@ -69,6 +69,39 @@ export async function fetchSearchResults({
     return res.json();
   } catch (err) {
     console.error('Failed to fetch search results', err);
+    return null;
+  }
+}
+
+export async function fetchCompanyDetails(slug: string) {
+  const { lang } = await getSSRPreferences();
+  try {
+    const res = await fetch(`${BASE_URL}/companies/${slug}?lang=${lang}`, {
+      next: { revalidate: 300 },
+    });
+
+    if (!res.ok) return null;
+    return res.json() as Promise<{ data: Business }>;
+  } catch (err) {
+    console.error('Failed to fetch company details', err);
+    return null;
+  }
+}
+
+export async function fetchCompanyReviews(slug: string) {
+  const { lang } = await getSSRPreferences();
+  try {
+    const res = await fetch(
+      `${BASE_URL}/companies/${slug}/reviews?lang=${lang}`,
+      {
+        next: { revalidate: 300 },
+      },
+    );
+
+    if (!res.ok) return null;
+    return res.json() as Promise<{ data: Review[] }>;
+  } catch (err) {
+    console.error('Failed to fetch company reviews', err);
     return null;
   }
 }

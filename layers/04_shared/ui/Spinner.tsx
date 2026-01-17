@@ -21,7 +21,7 @@ export function Spinner({ size, color, bgcolor, height }: Props) {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: height ?? '60vh',
+        height: height ?? 'auto',
         backgroundColor: bgcolor ?? 'var(--color-secondary-main)',
       }}
     >

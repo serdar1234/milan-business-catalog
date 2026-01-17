@@ -12,7 +12,9 @@ import { notFound } from 'next/navigation';
 import { CategoryHeader } from '@/layers/01_widgets/CategoryHeader/CategoryHeader';
 import { fetchCategoryBusinesses } from '@/layers/04_shared/utils/helpers.server';
 
-type Props = { params: { slug: string } };
+interface Props {
+  params: { slug: string } | Promise<{ slug: string }>;
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
