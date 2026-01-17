@@ -16,9 +16,8 @@ type Props = { params: { slug: string } };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const { lang } = await getSSRPreferences();
 
-  const json = await fetchCategory(slug, lang);
+  const json = await fetchCategory(slug);
 
   if (!json) return { title: 'Category', description: '' };
 
@@ -33,14 +32,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
   const { lang } = await getSSRPreferences();
-  const json = await fetchCategory(slug, lang);
+  const json = await fetchCategory(slug);
 
   if (!json) notFound();
   const { name, companies_count, id } = json.data;
 
   const initialResult = await fetchCategoryBusinesses({
     category_id: id,
-    lang,
   });
   if (!initialResult) return null;
 

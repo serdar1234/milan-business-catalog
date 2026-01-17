@@ -50,7 +50,6 @@ export default async function SearchPage({
 
   const initialResult = await fetchSearchResults({
     query: decodedQuery,
-    lang,
   });
   if (!initialResult) return null;
 

@@ -5,9 +5,9 @@ import {
 } from '@/layers/04_shared/configs/settings';
 
 export async function getSSRPreferences() {
-  const store = cookies();
+  const store = await cookies();
   return {
-    lang: ((await store).get('lang')?.value as LanguageCode) || 'en',
-    currency: ((await store).get('currency')?.value as CurrencyCode) || 'EUR',
+    lang: (store.get('lang')?.value as LanguageCode) || 'en',
+    currency: (store.get('currency')?.value as CurrencyCode) || 'EUR',
   };
 }

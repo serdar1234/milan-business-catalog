@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import { BASE_URL } from '@/layers/03_entities/api/baseApi';
 import { BusinessCardSmall } from '@/layers/02_features/BusinessCardSmall/BusinessCardSmall';
 import { Business } from '@/layers/04_shared/types/types';
+import { fetchCategoryBusinesses } from '@/layers/04_shared/utils/helpers.server';
 
 export async function SimilarPlaces({
   id,
@@ -14,11 +14,13 @@ export async function SimilarPlaces({
   id: number;
   slug: string;
 }) {
-  const category = await fetch(
-    `${BASE_URL}/companies/?page=1&per_page=3&category_id=${id}&sort=rating`,
-  );
-  const json = await category.json();
-  const businesses: Business[] = json.data;
+  const json = fetchCategoryBusinesses({
+    page: 1,
+    limit: 3,
+    category_id: id,
+    sort: 'rating',
+  });
+  const businesses: Business[] = (await json?.then((res) => res?.data)) || [];
   return (
     <Box
       component="section"

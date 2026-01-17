@@ -11,7 +11,8 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "lint-staged": "lint-staged",
-    "prepare": "husky"
+    "prepare": "husky",
+    "type-check": "tsc --noEmit"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
