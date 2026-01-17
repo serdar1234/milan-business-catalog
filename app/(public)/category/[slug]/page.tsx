@@ -2,18 +2,17 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { CategoryFilters } from '@/layers/01_widgets/CategoryFilters/CategoryFilters';
 import LongMenu from '@/layers/04_shared/ui/LongMenu';
-import CategoryBusinessList from './CategoryBusinessList';
 import style from './CategoryPage.module.css';
+import { CategoryBusinessListServer } from './CategoryBusinessListServer';
 
 import type { Metadata } from 'next';
-import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
 import { fetchCategory } from '@/layers/04_shared/utils/helpers.server';
 import { notFound } from 'next/navigation';
 import { CategoryHeader } from '@/layers/01_widgets/CategoryHeader/CategoryHeader';
-import { fetchCategoryBusinesses } from '@/layers/04_shared/utils/helpers.server';
 
 interface Props {
   params: { slug: string } | Promise<{ slug: string }>;
+  searchParams: { page?: string } | Promise<{ page?: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -31,18 +30,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function CategoryPage({ params }: Props) {
+export default async function CategoryPage({ params, searchParams }: Props) {
   const { slug } = await params;
-  const { lang } = await getSSRPreferences();
+  const { page: pageParam } = await searchParams;
+
   const json = await fetchCategory(slug);
 
   if (!json) notFound();
   const { name, companies_count, id } = json.data;
 
-  const initialResult = await fetchCategoryBusinesses({
-    category_id: id,
-  });
-  if (!initialResult) return null;
+  const currentPage = pageParam ? parseInt(pageParam, 10) : 1;
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
@@ -66,11 +63,7 @@ export default async function CategoryPage({ params }: Props) {
               <CategoryFilters />
             </div>
             <div className={style['grid-item__main']}>
-              <CategoryBusinessList
-                id={id}
-                lang={lang}
-                initialResult={initialResult}
-              />
+              <CategoryBusinessListServer id={id} currentPage={currentPage} />
             </div>
           </div>
         </Container>
