@@ -1,4 +1,4 @@
-import { AutocompleteResult } from '@/layers/03_entities/autocomplete/api';
+import { AutocompleteResult } from '@/layers/04_shared/types/types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 interface SearchOptionItemProps {

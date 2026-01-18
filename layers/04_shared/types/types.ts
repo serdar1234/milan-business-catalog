@@ -111,3 +111,11 @@ export interface ReviewStats {
     percentage: number;
   }[];
 }
+
+export interface AutocompleteResult {
+  name: string;
+  city: string;
+  slug: string;
+  country: string;
+  id: number;
+}

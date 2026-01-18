@@ -15,10 +15,9 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 
 import { addRecentSearch } from '@/layers/03_entities/search/model/slice';
-import {
-  AutocompleteResult,
-  useGetAutocompleteSuggestionsQuery,
-} from '@/layers/03_entities/autocomplete/api';
+import { AutocompleteResult } from '@/layers/04_shared/types/types';
+
+import { useAutocompleteSuggestions } from '@/layers/04_shared/hooks/useAutocompleteSuggestions';
 
 import { useDebounce } from '@/layers/04_shared/hooks/useDebounce';
 import { useCurrentLanguage } from '@/layers/04_shared/hooks/useCurrentLanguage';
@@ -48,24 +47,21 @@ export const SearchForm: React.FC<{
   const currentLang = useCurrentLanguage();
   const debouncedQuery = useDebounce(query, 500);
 
-  const { data: suggestions, isFetching } = useGetAutocompleteSuggestionsQuery(
-    {
-      q: debouncedQuery,
-      limit: 10,
-      lang: currentLang,
-    },
-    { skip: debouncedQuery.trimStart() === '' },
+  const { suggestions, isLoading } = useAutocompleteSuggestions(
+    debouncedQuery.trim() === '' ? '' : debouncedQuery,
+    10,
+    currentLang,
   );
 
   const localOptions = useMemo(
-    () => (query === '' ? [] : (suggestions ?? [])),
+    () => (query === '' ? [] : suggestions),
     [suggestions, query],
   );
 
   const runSearch = useCallback(
     (searchValue: string) => {
       const matchedOption = localOptions.find(
-        (opt) =>
+        (opt: AutocompleteResult) =>
           opt.name.trim().toLowerCase() === searchValue.trim().toLowerCase(),
       );
 
@@ -146,15 +142,21 @@ export const SearchForm: React.FC<{
         onInputChange={(_, value) => setQuery(value)}
         onChange={handleAutocompleteChange}
         onClose={handleClose}
-        loading={isFetching}
+        loading={isLoading}
         loadingText="Searching..."
         getOptionLabel={(opt) => (typeof opt === 'string' ? opt : opt.name)}
-        isOptionEqualToValue={(a, b) => a.id === b.id}
+        isOptionEqualToValue={(a, b) =>
+          typeof a !== 'string' && typeof b !== 'string' && a.id === b.id
+        }
         renderInput={(params) => (
           <SearchInput {...params} isLoading={isPending} />
         )}
         renderOption={(props, option) => (
-          <SearchOptionItem props={props} option={option} key={option.id} />
+          <SearchOptionItem
+            props={props}
+            option={option}
+            key={typeof option === 'string' ? option : option.id}
+          />
         )}
       />
     </Box>

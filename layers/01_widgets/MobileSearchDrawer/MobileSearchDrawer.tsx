@@ -29,10 +29,9 @@ import {
   clearRecentSearches,
 } from '@/layers/03_entities/search/model/slice';
 
-import {
-  AutocompleteResult,
-  useGetAutocompleteSuggestionsQuery,
-} from '@/layers/03_entities/autocomplete/api';
+import { AutocompleteResult } from '@/layers/04_shared/types/types';
+
+import { useAutocompleteSuggestions } from '@/layers/04_shared/hooks/useAutocompleteSuggestions';
 
 import { useDebounce } from '@/layers/04_shared/hooks/useDebounce';
 import { useCurrentLanguage } from '@/layers/04_shared/hooks/useCurrentLanguage';
@@ -53,12 +52,13 @@ const MobileSearchDrawer: React.FC = () => {
   const currentLang = useCurrentLanguage();
   const debouncedQuery = useDebounce(query, 500);
 
-  const { data: suggestions, isFetching } = useGetAutocompleteSuggestionsQuery(
-    { q: debouncedQuery, limit: 10, lang: currentLang },
-    { skip: debouncedQuery.trimStart() === '' },
+  const { suggestions, isLoading } = useAutocompleteSuggestions(
+    debouncedQuery,
+    10,
+    currentLang,
   );
 
-  const localOptions = query === '' ? [] : (suggestions ?? []);
+  const localOptions = query === '' ? [] : suggestions;
 
   const setInputFocus = () => {
     ref.current?.focus();
@@ -128,7 +128,7 @@ const MobileSearchDrawer: React.FC = () => {
             else if (value) runSearch(value.name, value.slug);
           }}
           onClose={handleClearInput}
-          loading={isFetching}
+          loading={isLoading}
           loadingText="Searching..."
           getOptionLabel={(opt) => (typeof opt === 'string' ? opt : opt.name)}
           isOptionEqualToValue={(a, b) => a.id === b.id}
