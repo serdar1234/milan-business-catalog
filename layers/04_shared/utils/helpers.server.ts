@@ -105,3 +105,25 @@ export async function fetchCompanyReviews(slug: string) {
     return null;
   }
 }
+
+export async function fetchBusinesses({
+  sort = 'rating',
+  limit = 10,
+}): Promise<Business[] | null> {
+  const { lang } = await getSSRPreferences();
+  try {
+    const res = await fetch(
+      `${BASE_URL}/companies?sort=${sort}&limit=${limit}&lang=${lang}`,
+      {
+        next: { revalidate: 300 },
+      },
+    );
+
+    if (!res.ok) return null;
+    const response = await res.json();
+    return response.data || [];
+  } catch (err) {
+    console.error('Failed to fetch businesses', err);
+    return null;
+  }
+}
