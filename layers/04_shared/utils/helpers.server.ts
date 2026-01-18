@@ -1,6 +1,6 @@
 import { Category } from '@/layers/04_shared/types/types';
 import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
-import { BASE_URL } from '@/layers/03_entities/api/baseApi';
+import { BASE_URL } from '@/layers/04_shared/configs/api';
 import { Meta, Business, Review } from '../types/types';
 
 export async function fetchCategory(slug: string) {

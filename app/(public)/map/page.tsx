@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import MapSidebar from '@/app/(public)/map/MapSidebar';
 import { MapContainerClient } from '@/layers/02_features/Map';
-import { BASE_URL } from '@/layers/03_entities/api/baseApi';
+import { BASE_URL } from '@/layers/04_shared/configs/api';
 import type { Business } from '@/layers/04_shared/types/types';
 
 type SP = { slug?: string };

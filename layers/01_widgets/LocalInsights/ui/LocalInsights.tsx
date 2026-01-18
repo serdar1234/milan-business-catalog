@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import { BASE_URL } from '@/layers/03_entities/api/baseApi';
+import { BASE_URL } from '@/layers/04_shared/configs/api';
 import { LanguageCode } from '@/layers/04_shared/configs/settings';
 import { InsightCard } from '@/layers/02_features/InsightCard/ui/InsightCard';
 import { Insight } from '@/layers/04_shared/types/types';

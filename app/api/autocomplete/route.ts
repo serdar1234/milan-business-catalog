@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
-import { BASE_URL } from '@/layers/03_entities/api/baseApi';
+import { BASE_URL } from '@/layers/04_shared/configs/api';
 
 interface AutocompleteResult {
   name: string;

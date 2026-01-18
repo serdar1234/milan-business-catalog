@@ -3,7 +3,7 @@ import { BusinessHeader } from '@/layers/01_widgets/BusinessHeader/BusinessHeade
 import { MobileQuickActions } from '@/layers/01_widgets/MobileQuickActions/ui/MobileQuickActions';
 import { notFound } from 'next/navigation';
 import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
-import { BASE_URL } from '@/layers/03_entities/api/baseApi';
+import { BASE_URL } from '@/layers/04_shared/configs/api';
 import { Business } from '@/layers/04_shared/types/types';
 
 interface Props {

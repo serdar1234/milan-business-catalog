@@ -1,13 +1,9 @@
-import { RootState } from '@/layers/03_entities/store';
+import { RootState, RecentSearchState } from '@/layers/03_entities/store/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SearchItem {
   value: string;
   slug: string;
-}
-interface RecentSearchState {
-  searches: SearchItem[];
-  isDrawerOpen: boolean;
 }
 
 const MAX_RECENT_SEARCHES = 10;
