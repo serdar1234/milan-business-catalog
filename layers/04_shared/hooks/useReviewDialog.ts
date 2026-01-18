@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useCurrentLanguage } from './useCurrentLanguage';
-import { useSubmitReviewMutation } from '@/layers/03_entities/business/businessApi';
 import { ReviewFormData } from '../types/types';
 
 export const useReviewDialog = (slug?: string) => {
@@ -8,24 +7,51 @@ export const useReviewDialog = (slug?: string) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const currentLang = useCurrentLanguage();
-  const [submitReview, { isLoading, isError }] = useSubmitReviewMutation();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleOpenDialog = () => setIsDialogOpen(true);
   const handleCloseDialog = () => setIsDialogOpen(false);
 
   const handleSubmitReview = async (formData: ReviewFormData) => {
     if (!slug) return;
-    try {
-      await submitReview({
-        slug,
-        formData,
-        lang: currentLang,
-      }).unwrap();
 
+    setIsLoading(true);
+    setIsError(false);
+
+    try {
+      const response = await fetch(
+        `https://api.milanplaces.com/api/v1/companies/${slug}/reviews`,
+        {
+          method: 'POST',
+          headers: {
+            'Accept-Language': currentLang,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            review: {
+              name: formData.name,
+              email: formData.email,
+              rating: formData.rating,
+              comment_translations: {
+                [currentLang]: formData.comment,
+              },
+            },
+          }),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       setIsDialogOpen(false);
       setSnackbarOpen(true);
-    } catch (e) {
-      console.error('Error submitting review', e);
+    } catch (error) {
+      console.error('Error submitting review', error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
