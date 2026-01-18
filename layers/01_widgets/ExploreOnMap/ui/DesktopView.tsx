@@ -26,7 +26,11 @@ export const DesktopView = () => {
   const meta = data?.meta;
 
   if (isLoading) {
-    return <Spinner bgcolor="transparent" />;
+    return (
+      <Box display={{ xs: 'none', md: 'block' }}>
+        <Spinner bgcolor="transparent" />;
+      </Box>
+    );
   }
 
   if (isError || !businessList) {
