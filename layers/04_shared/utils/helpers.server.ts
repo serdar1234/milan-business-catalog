@@ -73,6 +73,34 @@ export async function fetchSearchResults({
   }
 }
 
+export async function fetchBusinessesWithCategory({
+  sort = 'rating',
+  limit = 10,
+  category_id,
+}: {
+  sort?: string;
+  limit?: number;
+  category_id?: number;
+}): Promise<{ data: Business[]; meta: Meta } | null> {
+  const { lang } = await getSSRPreferences();
+  try {
+    let url = `${BASE_URL}/companies?sort=${sort}&limit=${limit}&lang=${lang}`;
+    if (category_id) {
+      url += `&category_id=${category_id}`;
+    }
+
+    const res = await fetch(url, {
+      next: { revalidate: 300 },
+    });
+
+    if (!res.ok) return null;
+    return res.json();
+  } catch (err) {
+    console.error('Failed to fetch businesses with category', err);
+    return null;
+  }
+}
+
 export async function fetchCompanyDetails(slug: string) {
   const { lang } = await getSSRPreferences();
   try {
