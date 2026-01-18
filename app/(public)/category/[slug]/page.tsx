@@ -1,12 +1,15 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { CategoryFilters } from '@/layers/01_widgets/CategoryFilters/CategoryFilters';
-import LongMenu from '@/layers/04_shared/ui/LongMenu';
+import { LongMenu } from '@/layers/04_shared/ui/LongMenu';
 import style from './CategoryPage.module.css';
-import { CategoryBusinessListServer } from './CategoryBusinessListServer';
+import { CategoryBusinessList } from './CategoryBusinessList';
 
 import type { Metadata } from 'next';
-import { fetchCategory } from '@/layers/04_shared/utils/helpers.server';
+import {
+  fetchCategories,
+  fetchCategory,
+} from '@/layers/04_shared/utils/helpers.server';
 import { notFound } from 'next/navigation';
 import { CategoryHeader } from '@/layers/01_widgets/CategoryHeader/CategoryHeader';
 
@@ -33,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CategoryPage({ params, searchParams }: Props) {
   const { slug } = await params;
   const { page: pageParam } = await searchParams;
-
+  const categories = await fetchCategories();
   const json = await fetchCategory(slug);
 
   if (!json) notFound();
@@ -57,13 +60,13 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         <Container maxWidth="lg">
           <div className={style['grid-container']}>
             <div className={style['grid-item__categories']}>
-              <LongMenu title="Categories" />
+              <LongMenu title="Categories" categories={categories} />
             </div>
             <div className={style['grid-item__filters']}>
               <CategoryFilters />
             </div>
             <div className={style['grid-item__main']}>
-              <CategoryBusinessListServer id={id} currentPage={currentPage} />
+              <CategoryBusinessList id={id} currentPage={currentPage} />
             </div>
           </div>
         </Container>

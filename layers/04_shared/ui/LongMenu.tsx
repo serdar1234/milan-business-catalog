@@ -1,40 +1,37 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuItem from '@mui/material/MenuItem';
 import { useScrollLock } from '../hooks/useScrollLock';
-import { useGetCategoriesQuery } from '@/layers/03_entities/category/categoryApi';
-import { useClientSetting } from '@/layers/04_shared/hooks/useClientSetting';
+import { Category } from '@/layers/04_shared/types/types';
 
 const ITEM_HEIGHT = '50vh';
 
-export default function LongMenu({ title }: { title: string }) {
+interface LongMenuProps {
+  title: string;
+  categories: Category[] | null;
+}
+
+export function LongMenu({ title, categories }: LongMenuProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const [language] = useClientSetting('language', 'en');
 
   const [mobileOpen, setMobileOpen] = useState(false);
   useScrollLock(mobileOpen);
-  const {
-    data: options,
-    error,
-    isLoading,
-  } = useGetCategoriesQuery(language, { refetchOnMountOrArgChange: false });
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
     setMobileOpen(true);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
     setMobileOpen(false);
   };
-  if (error) return null;
 
   return (
     <Box
@@ -80,17 +77,16 @@ export default function LongMenu({ title }: { title: string }) {
           },
         }}
       >
-        {isLoading && <p>Loading...</p>}
-        {error && null}
-        {(options &&
-          options.map((option) => (
-            <Link key={option.id} href={`/category/${option.slug}`}>
-              <MenuItem key={option.id} selected={option.id === 1}>
-                {option.name}
-              </MenuItem>
-            </Link>
-          ))) ||
-          null}
+        {categories?.map((option) => (
+          <MenuItem
+            key={option.id}
+            selected={option.id === 1}
+            component="a"
+            href={`/category/${option.slug}`}
+          >
+            {option.name}
+          </MenuItem>
+        ))}
       </Menu>
     </Box>
   );

@@ -6,7 +6,7 @@ import Drawer from '@mui/material/Drawer';
 import { SharedIcon } from '@/layers/04_shared/ui/Icon';
 import { useScrollLock } from '@/layers/04_shared/hooks/useScrollLock';
 import { MobileDrawerContent } from './MobileDrawerContent';
-import { Category } from '@/layers/03_entities/category/categoryApi';
+import { Category } from '@/layers/04_shared/types/types';
 
 export const MobileMenu = ({
   categories,

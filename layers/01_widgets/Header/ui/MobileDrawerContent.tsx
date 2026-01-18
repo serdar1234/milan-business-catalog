@@ -10,7 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
 import { LanguageCurrencySwitcher } from '@/layers/01_widgets/LanguageCurrencySwitcher';
-import { Category } from '@/layers/03_entities/category/categoryApi';
+import { Category } from '@/layers/04_shared/types/types';
 
 export const MobileDrawerContent: React.FC<{
   handleDrawerClose: () => void;

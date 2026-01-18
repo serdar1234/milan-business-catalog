@@ -1,34 +1,68 @@
-'use client';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import BusinessCardGrid from '@/layers/02_features/BusinessCardGrid';
+import { fetchCategoryBusinesses } from '@/layers/04_shared/utils/helpers.server';
+import { CategoryBusinessPagination } from './CategoryBusinessPagination';
 
-import { BusinessList } from '@/layers/01_widgets/BusinessList/BusinessList';
-import { LanguageCode } from '@/layers/04_shared/configs/settings';
-import { useCategoryBusinesses } from '@/layers/04_shared/hooks/useCategoryBusinesses';
-import { Business, Meta } from '@/layers/04_shared/types/types';
-type Props = {
+interface Props {
   id: number;
-  lang: LanguageCode;
-  initialResult: {
-    data: Business[];
-    meta: Meta;
-  };
-};
+  currentPage: number;
+}
 
-export default function CategoryBusinessList({
-  id,
-  lang,
-  initialResult,
-}: Props) {
-  const { page, setPage, businessList, meta, isLoading, isError } =
-    useCategoryBusinesses(id, lang, initialResult);
+export async function CategoryBusinessList({ id, currentPage }: Props) {
+  const result = await fetchCategoryBusinesses({
+    category_id: id,
+    page: currentPage,
+    limit: 10,
+    sort: 'rating',
+  });
+
+  if (!result) {
+    return (
+      <Typography color="error.main" sx={{ textAlign: 'center', py: 4 }}>
+        Failed to load businesses.
+      </Typography>
+    );
+  }
+
+  const { data: businessList, meta } = result;
+
+  if (businessList && businessList.length === 0) {
+    return (
+      <Typography color="primary.main" sx={{ textAlign: 'center', p: 4 }}>
+        Oops! We couldn&apos;t find any businesses matching your search. Please
+        try again with different keywords.
+      </Typography>
+    );
+  }
 
   return (
-    <BusinessList
-      businessList={businessList}
-      page={page}
-      meta={meta}
-      isError={isError}
-      isLoading={isLoading}
-      setPage={setPage}
-    />
+    <Box
+      component="section"
+      sx={{
+        bgcolor: 'background.paper',
+        p: 2,
+        borderRadius: '1rem',
+        boxShadow: 2,
+      }}
+    >
+      <Grid container spacing={2} width={'100%'}>
+        <BusinessCardGrid data={businessList || []} cols={2} isSmall={false} />
+        <Box
+          sx={{
+            width: '100%',
+            display: 'flex',
+            flexWrap: 'nowrap',
+            justifyContent: 'center',
+          }}
+        >
+          <CategoryBusinessPagination
+            currentPage={currentPage}
+            totalPages={meta?.pagination.total_pages || 0}
+          />
+        </Box>
+      </Grid>
+    </Box>
   );
 }

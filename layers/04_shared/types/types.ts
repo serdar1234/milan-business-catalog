@@ -1,5 +1,4 @@
 import { Photo } from '@/layers/01_widgets/PhotoGallery/ui/PhotoGallery';
-import { Category } from '@/layers/03_entities/category/categoryApi';
 import { Dispatch, SetStateAction } from 'react';
 
 interface Business {
@@ -118,4 +117,11 @@ export interface AutocompleteResult {
   slug: string;
   country: string;
   id: number;
+}
+
+export interface Category {
+  id: number;
+  slug: string;
+  name: string;
+  companies_count: number;
 }

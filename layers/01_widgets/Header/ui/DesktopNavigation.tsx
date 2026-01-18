@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { SearchForm } from '@/layers/02_features/SearchForm/SearchForm';
-import { Category } from '@/layers/03_entities/category/categoryApi';
+import { Category } from '@/layers/04_shared/types/types';
 
 export const DesktopNavigation = ({
   categories,

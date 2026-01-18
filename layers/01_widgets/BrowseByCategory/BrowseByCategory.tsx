@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { CategoryCard } from '@/layers/02_features/CategoryCard/ui/CategoryCard';
 import { WidgetHeader } from '@/layers/04_shared/ui/WidgetHeader';
-import { Category } from '@/layers/03_entities/category/categoryApi';
+import { Category } from '@/layers/04_shared/types/types';
 import { fetchCategories } from '@/layers/04_shared/utils/helpers.server';
 
 export async function BrowseByCategory() {

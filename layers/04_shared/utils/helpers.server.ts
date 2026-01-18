@@ -1,4 +1,4 @@
-import { Category } from '@/layers/03_entities/category/categoryApi';
+import { Category } from '@/layers/04_shared/types/types';
 import { getSSRPreferences } from '@/layers/04_shared/utils/getSSRPreferences';
 import { BASE_URL } from '@/layers/03_entities/api/baseApi';
 import { Meta, Business, Review } from '../types/types';
