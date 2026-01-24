@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Box from '@mui/material/Box';
+import Link from 'next/link';
 import Typography from '@mui/material/Typography';
 import { Business } from '@/layers/04_shared/types/types';
 import { Spinner } from '@/layers/04_shared/ui/Spinner';
@@ -86,7 +87,7 @@ export default function MapSidebar({ business, isSearching }: MapSidebarProps) {
             component="h1"
             sx={{ fontWeight: 'bold', mb: 0.5 }}
           >
-            {name}
+            <Link href={`/business/${business.slug}`}>{name}</Link>
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Rating

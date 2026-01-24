@@ -38,7 +38,7 @@ export const CTAbuttons = ({
         }}
         onClick={handleClick}
       >
-        Show on Map
+        View Map
       </Button>
 
       <RoundIconButton href={`tel:${phone}`} aria-label="Call business">
