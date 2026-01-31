@@ -29,6 +29,9 @@ export const useSearchResults = (
   query: string,
   lang: LanguageCode,
   initialResult: SearchResult,
+  ratingMin?: string,
+  category_id?: string,
+  sort?: string,
 ): UseSearchResults => {
   const [page, setPage] = useState(initialResult?.meta.pagination.page);
   const [data, setData] = useState<SearchResult | null>(null);
@@ -46,15 +49,29 @@ export const useSearchResults = (
           page: page.toString(),
           lang,
           per_page: '10',
-        }).toString();
-
-        const response = await fetch(`${BASE_URL}/companies/search?${params}`, {
-          method: 'GET',
-          headers: {
-            'Accept-Language': lang,
-            Accept: 'application/json',
-          },
         });
+
+        // Add optional filter parameters
+        if (ratingMin) {
+          params.append('rating_min', ratingMin);
+        }
+        if (category_id) {
+          params.append('category_id', category_id);
+        }
+        if (sort) {
+          params.append('sort', sort);
+        }
+
+        const response = await fetch(
+          `${BASE_URL}/companies/search?${params.toString()}`,
+          {
+            method: 'GET',
+            headers: {
+              'Accept-Language': lang,
+              Accept: 'application/json',
+            },
+          },
+        );
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -71,7 +88,7 @@ export const useSearchResults = (
     };
 
     fetchData();
-  }, [query, page, lang]);
+  }, [query, page, lang, ratingMin, category_id, sort]);
 
   const businessList =
     page === initialResult?.meta.pagination.page

@@ -28,6 +28,9 @@ export async function generateMetadata({
 type SearchPageProps = {
   q?: string;
   view?: ViewType;
+  rating?: string;
+  category_id?: string;
+  sort?: string;
 };
 
 export default async function SearchPage({
@@ -50,6 +53,7 @@ export default async function SearchPage({
 
   const initialResult = await fetchSearchResults({
     query: decodedQuery,
+    rating_min: params.rating ? parseFloat(params.rating.replace('+', '')) : 0,
   });
   if (!initialResult) return null;
 

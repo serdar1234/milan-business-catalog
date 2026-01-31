@@ -4,33 +4,19 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Radio from '@mui/material/Radio';
 import Rating from '@mui/material/Rating';
 import Checkbox from '@mui/material/Checkbox';
 import MuiFormControlLabel from '@mui/material/FormControlLabel';
 import { FilterGroup } from '@/layers/02_features/FilterPanel/FilterGroup';
 
-import {
-  DISTANCE_OPTIONS,
-  PRICE_OPTIONS_VERBOSE,
-  RATING_OPTIONS,
-  FEATURES_OPTIONS_VERBOSE,
-  ATMOSPHERE_OPTIONS_COUNT,
-} from '@/layers/04_shared/api/mocks/filterMocks';
+import { RATING_OPTIONS } from '@/layers/04_shared/api/mocks/filterMocks';
 
 export const FilterPanel: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const currentDistance = searchParams.get('distance') || '1km';
-  const currentPrice = searchParams.get('price') || '';
   const currentRating = searchParams.get('rating') || '';
-
-  const currentFeatures = searchParams.get('features')?.split(',') || [];
-  const currentAtmosphere = searchParams.get('atmosphere')?.split(',') || [];
 
   const updateSearchParams = (key: string, value: string | string[]) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -48,12 +34,32 @@ export const FilterPanel: React.FC = () => {
       params.delete(key);
     }
 
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-  };
+    // Convert rating filter to rating_min parameter for API
+    if (key === 'rating') {
+      if (value) {
+        // Extract numeric value from the rating filter (e.g., '4.5+' -> '4.5')
+        let ratingValue = '';
+        if (typeof value === 'string') {
+          ratingValue = value.replace('+', '');
+        } else if (Array.isArray(value) && value.length > 0) {
+          // For arrays, use the lowest rating (assuming the UI allows multiple selections)
+          // Sort by rating value to get the lowest one
+          const sortedRatings = value
+            .map((v) => v.replace('+', ''))
+            .sort((a, b) => parseFloat(a) - parseFloat(b));
+          ratingValue = sortedRatings[0];
+        }
+        if (ratingValue) {
+          params.set('rating_min', ratingValue);
+        } else {
+          params.delete('rating_min');
+        }
+      } else {
+        params.delete('rating_min');
+      }
+    }
 
-  const handleRadioChange = (key: string, value: string) => {
-    const newValue = searchParams.get(key) === value ? '' : value;
-    updateSearchParams(key, newValue);
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   const handleCheckboxChange = (
@@ -111,40 +117,6 @@ export const FilterPanel: React.FC = () => {
         </Button>
       </Box>
 
-      <FilterGroup title="Distance">
-        <RadioGroup
-          value={currentDistance}
-          onChange={(e) => handleRadioChange('distance', e.target.value)}
-        >
-          {DISTANCE_OPTIONS.map((option) => (
-            <FormControlLabel
-              key={option.value}
-              value={option.value}
-              sx={{ width: 'fit-content' }}
-              control={<Radio size="small" />}
-              label={<Typography variant="body2">{option.label}</Typography>}
-            />
-          ))}
-        </RadioGroup>
-      </FilterGroup>
-
-      <FilterGroup title="Price">
-        <RadioGroup
-          value={currentPrice}
-          onChange={(e) => handleRadioChange('price', e.target.value)}
-        >
-          {PRICE_OPTIONS_VERBOSE.map((option) => (
-            <FormControlLabel
-              key={option.value}
-              value={option.value}
-              sx={{ width: 'fit-content' }}
-              control={<Radio size="small" />}
-              label={<Typography variant="body2">{option.label}</Typography>}
-            />
-          ))}
-        </RadioGroup>
-      </FilterGroup>
-
       <FilterGroup title="Rating">
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           {RATING_OPTIONS.map((option) => (
@@ -187,57 +159,6 @@ export const FilterPanel: React.FC = () => {
             />
           ))}
         </Box>
-      </FilterGroup>
-
-      <FilterGroup title="Features">
-        {FEATURES_OPTIONS_VERBOSE.map((feature) => (
-          <div key={'features_' + feature.value} style={{ display: 'block' }}>
-            <MuiFormControlLabel
-              control={
-                <Checkbox
-                  size="small"
-                  checked={currentFeatures.includes(feature.value)}
-                  onChange={(e) =>
-                    handleCheckboxChange(
-                      'features',
-                      feature.value,
-                      e.target.checked,
-                    )
-                  }
-                />
-              }
-              label={<Typography variant="body2">{feature.label}</Typography>}
-            />
-          </div>
-        ))}
-      </FilterGroup>
-
-      <FilterGroup title="Atmosphere">
-        {ATMOSPHERE_OPTIONS_COUNT.map((atmosphere) => (
-          <div
-            key={'atmosphere_' + atmosphere.value}
-            style={{ display: 'block' }}
-          >
-            <MuiFormControlLabel
-              control={
-                <Checkbox
-                  size="small"
-                  checked={currentAtmosphere.includes(atmosphere.value)}
-                  onChange={(e) =>
-                    handleCheckboxChange(
-                      'atmosphere',
-                      atmosphere.value,
-                      e.target.checked,
-                    )
-                  }
-                />
-              }
-              label={
-                <Typography variant="body2">{atmosphere.label}</Typography>
-              }
-            />
-          </div>
-        ))}
       </FilterGroup>
     </Box>
   );

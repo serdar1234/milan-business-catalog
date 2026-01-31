@@ -57,12 +57,13 @@ export async function fetchSearchResults({
   query = '',
   page = 1,
   limit = 10,
-  category_id = 0,
+  category_id = '',
+  rating_min = 0,
   sort = 'rating',
 }): Promise<{ data: Business[]; meta: Meta } | null> {
   const { lang } = await getSSRPreferences();
   try {
-    const url = `${BASE_URL}/companies/search?q=${encodeURIComponent(query)}&page=${page}&per_page=${limit}${category_id ? `&category_id=${category_id}` : ''}&sort=${sort}&lang=${lang}`;
+    const url = `${BASE_URL}/companies/search?q=${encodeURIComponent(query)}&page=${page}&per_page=${limit}${category_id ? `&category_id=${category_id}` : ''}&rating_min=${rating_min}&sort=${sort}&lang=${lang}`;
     const res = await fetch(url, { next: { revalidate: 60 } });
 
     if (!res.ok) return null;

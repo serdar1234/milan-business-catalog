@@ -41,8 +41,22 @@ export default function SearchPageClient({
   const { open, toggleDrawer, setOpen } = useToggleDrawer();
 
   const [currentView, setCurrentView] = useState<ViewType>(initialView);
+
+  // Extract filter parameters from URL
+  const ratingMin =
+    searchParams.get('rating_min') || searchParams.get('rating') || undefined;
+  const categoryId = searchParams.get('category_id') || undefined;
+  const sort = searchParams.get('sort') || undefined;
+
   const { page, setPage, businessList, meta, isLoading, isError } =
-    useSearchResults(searchQuery, lang, initialResult);
+    useSearchResults(
+      searchQuery,
+      lang,
+      initialResult,
+      ratingMin,
+      categoryId,
+      sort,
+    );
   const total_results = meta?.pagination?.total_count || 0;
 
   const handleViewChange = (newView: ViewType) => {
