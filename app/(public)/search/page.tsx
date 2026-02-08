@@ -55,6 +55,7 @@ export default async function SearchPage({
     query: decodedQuery,
     rating_min: params.rating ? parseFloat(params.rating.replace('+', '')) : 0,
   });
+
   if (!initialResult) return null;
 
   return (

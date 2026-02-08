@@ -11,12 +11,30 @@ import { FilterGroup } from '@/layers/02_features/FilterPanel/FilterGroup';
 
 import { RATING_OPTIONS } from '@/layers/04_shared/api/mocks/filterMocks';
 
-export const FilterPanel: React.FC = () => {
+interface FilterPanelProps {
+  meta?: {
+    pagination: {
+      page: number;
+      per_page: number;
+      total_pages: number;
+      total_count: number;
+    };
+    source: string;
+    facets?: {
+      city: { key: string; count: number }[];
+      category_id: { key: string; count: number }[];
+      country: { key: string; count: number }[];
+    };
+  } | null;
+}
+
+export const FilterPanel: React.FC<FilterPanelProps> = ({ meta }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const currentRating = searchParams.get('rating') || '';
+  const currentCategoryId = searchParams.get('category_id') || '';
 
   const updateSearchParams = (key: string, value: string | string[]) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -160,6 +178,49 @@ export const FilterPanel: React.FC = () => {
           ))}
         </Box>
       </FilterGroup>
+
+      {/* Category filter */}
+      {meta?.facets?.category_id && meta.facets.category_id.length > 0 && (
+        <FilterGroup title="Categories">
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            {meta.facets.category_id.map((category) => {
+              const isChecked = currentCategoryId
+                .split(',')
+                .includes(category.key);
+              return (
+                <MuiFormControlLabel
+                  key={'category_' + category.key}
+                  control={
+                    <Checkbox
+                      size="small"
+                      checked={isChecked}
+                      onChange={(e) =>
+                        handleCheckboxChange(
+                          'category_id',
+                          category.key,
+                          e.target.checked,
+                        )
+                      }
+                    />
+                  }
+                  label={
+                    <Box
+                      display="flex"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      width="100%"
+                    >
+                      <Typography variant="body2">
+                        {category.key} ({category.count})
+                      </Typography>
+                    </Box>
+                  }
+                />
+              );
+            })}
+          </Box>
+        </FilterGroup>
+      )}
     </Box>
   );
 };

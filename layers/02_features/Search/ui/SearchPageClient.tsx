@@ -93,7 +93,7 @@ export default function SearchPageClient({
             aria-label="Filters"
             display={{ xs: 'none', md: 'block' }}
           >
-            <FilterPanel />
+            <FilterPanel meta={meta} />
           </Grid>
           <Grid
             size={{ xs: 12, md: 9, lg: 5 }}
@@ -147,7 +147,7 @@ export default function SearchPageClient({
             flexDirection: 'column',
           }}
         >
-          <FilterPanel />
+          <FilterPanel meta={meta} />
           <Button
             variant="contained"
             onClick={toggleDrawer(false)}

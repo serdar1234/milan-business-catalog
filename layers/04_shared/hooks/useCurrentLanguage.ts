@@ -7,8 +7,6 @@ import {
   LanguageCode,
 } from '@/layers/04_shared/configs/settings';
 
-// Предполагаем, что useLocalStorage правильно реализован для SSR (как обсуждалось ранее)
-
 export const useCurrentLanguage = () => {
   const [lang] = useLocalStorage<LanguageCode>(
     LANGUAGE_STORAGE_KEY,

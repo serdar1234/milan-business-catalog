@@ -53,6 +53,18 @@ interface SearchResults {
 interface Meta {
   pagination: Pagination;
   source: string;
+  facets?: Facets;
+}
+
+interface Facets {
+  city: FacetData[];
+  category_id: FacetData[];
+  country: FacetData[];
+}
+
+interface FacetData {
+  key: string;
+  count: number;
 }
 
 interface ReviewFormData {

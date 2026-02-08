@@ -67,7 +67,7 @@ export async function fetchSearchResults({
     const res = await fetch(url, { next: { revalidate: 60 } });
 
     if (!res.ok) return null;
-    return res.json();
+    return await res.json();
   } catch (err) {
     console.error('Failed to fetch search results', err);
     return null;
