@@ -10,6 +10,7 @@ import MuiFormControlLabel from '@mui/material/FormControlLabel';
 import { FilterGroup } from '@/layers/02_features/FilterPanel/FilterGroup';
 
 import { RATING_OPTIONS } from '@/layers/04_shared/api/mocks/filterMocks';
+import { Facets } from '@/layers/04_shared/types/types';
 
 interface FilterPanelProps {
   meta?: {
@@ -20,11 +21,7 @@ interface FilterPanelProps {
       total_count: number;
     };
     source: string;
-    facets?: {
-      city: { key: string; count: number }[];
-      category_id: { key: string; count: number }[];
-      country: { key: string; count: number }[];
-    };
+    facets?: Facets;
   } | null;
 }
 

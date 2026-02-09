@@ -45,7 +45,7 @@ export default function SearchPageClient({
   // Extract filter parameters from URL
   const ratingMin =
     searchParams.get('rating_min') || searchParams.get('rating') || undefined;
-  const categoryId = searchParams.get('category_id') || undefined;
+  const categoryId = searchParams.get('category_id')?.split(',') || [];
   const sort = searchParams.get('sort') || undefined;
 
   const { page, setPage, businessList, meta, isLoading, isError } =
@@ -53,8 +53,8 @@ export default function SearchPageClient({
       searchQuery,
       lang,
       initialResult,
-      ratingMin,
       categoryId,
+      ratingMin,
       sort,
     );
   const total_results = meta?.pagination?.total_count || 0;

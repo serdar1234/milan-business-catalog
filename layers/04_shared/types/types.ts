@@ -56,14 +56,17 @@ interface Meta {
   facets?: Facets;
 }
 
-interface Facets {
-  city: FacetData[];
-  category_id: FacetData[];
-  country: FacetData[];
+export interface Facets {
+  city?: FacetData[];
+  category_id?: FacetData[];
+  country?: FacetData[];
+  average_rating?: FacetData[];
 }
 
 interface FacetData {
   key: string;
+  from?: number;
+  to?: number;
   count: number;
 }
 

@@ -29,8 +29,8 @@ export const useSearchResults = (
   query: string,
   lang: LanguageCode,
   initialResult: SearchResult,
+  category_ids: string[],
   ratingMin?: string,
-  category_id?: string,
   sort?: string,
 ): UseSearchResults => {
   const [page, setPage] = useState(initialResult?.meta.pagination.page);
@@ -55,8 +55,10 @@ export const useSearchResults = (
         if (ratingMin) {
           params.append('rating_min', ratingMin);
         }
-        if (category_id) {
-          params.append('category_id', category_id);
+        if (category_ids.length > 0) {
+          category_ids.forEach((category_id) => {
+            params.append('category_ids[]', category_id);
+          });
         }
         if (sort) {
           params.append('sort', sort);
@@ -88,12 +90,9 @@ export const useSearchResults = (
     };
 
     fetchData();
-  }, [query, page, lang, ratingMin, category_id, sort]);
+  }, [query, page, lang, ratingMin, category_ids, sort]);
 
-  const businessList =
-    page === initialResult?.meta.pagination.page
-      ? initialResult?.data
-      : (data?.data ?? initialResult?.data ?? []);
+  const businessList = data?.data ?? initialResult?.data ?? [];
   const meta = data?.meta ?? initialResult?.meta ?? null;
 
   return {
