@@ -1,8 +1,9 @@
 import { AutocompleteResult } from '@/layers/04_shared/types/types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+
 interface SearchOptionItemProps {
-  props: React.HTMLAttributes<HTMLLIElement> & { key?: string | number };
+  props: React.HTMLAttributes<HTMLLIElement> & { key: React.Key };
   option: AutocompleteResult;
 }
 

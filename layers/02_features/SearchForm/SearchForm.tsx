@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  FormEvent,
+  SubmitEvent,
   useState,
   useCallback,
   useMemo,
@@ -91,7 +91,7 @@ export const SearchForm: React.FC<{
     [router, dispatch, handleDrawerClose, localOptions],
   );
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const finalValue = selectedOption?.name || query.trim();
     if (finalValue) runSearch(finalValue);
@@ -155,7 +155,7 @@ export const SearchForm: React.FC<{
           <SearchOptionItem
             props={props}
             option={option}
-            key={typeof option === 'string' ? option : option.id}
+            key={typeof option === 'string' ? option : String(option.id)}
           />
         )}
       />
