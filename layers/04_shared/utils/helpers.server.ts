@@ -39,11 +39,12 @@ export async function fetchCategoryBusinesses({
   limit = 10,
   category_id = 1,
   sort = 'rating',
+  rating_min = 0,
 }): Promise<{ data: Business[]; meta: Meta } | null> {
   const { lang } = await getSSRPreferences();
   try {
     const res = await fetch(
-      `${BASE_URL}/companies?page=${page}&per_page=${limit}&category_id=${category_id}&sort=${sort}&lang=${lang}`,
+      `${BASE_URL}/companies?page=${page}&per_page=${limit}&category_id=${category_id}&sort=${sort}&rating_min=${rating_min}&lang=${lang}`,
     );
     if (!res.ok) return null;
     return await res.json();
@@ -63,7 +64,9 @@ export async function fetchSearchResults({
 }): Promise<{ data: Business[]; meta: Meta } | null> {
   const { lang } = await getSSRPreferences();
   try {
-    const url = `${BASE_URL}/companies/search?q=${encodeURIComponent(query)}&page=${page}&per_page=${limit}${category_id ? `&category_id=${category_id}` : ''}&rating_min=${rating_min}&sort=${sort}&lang=${lang}`;
+    const url = `${BASE_URL}/companies/search?q=${encodeURIComponent(query)}&page=${page}&per_page=${limit}${
+      category_id ? `&category_id=${category_id}` : ''
+    }&rating_min=${rating_min}&sort=${sort}&lang=${lang}`;
     const res = await fetch(url, { next: { revalidate: 60 } });
 
     if (!res.ok) return null;

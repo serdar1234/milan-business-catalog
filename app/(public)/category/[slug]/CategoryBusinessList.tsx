@@ -8,14 +8,22 @@ import { CategoryBusinessPagination } from './CategoryBusinessPagination';
 interface Props {
   id: number;
   currentPage: number;
+  ratingMin?: string;
+  sort?: string;
 }
 
-export async function CategoryBusinessList({ id, currentPage }: Props) {
+export async function CategoryBusinessList({
+  id,
+  currentPage,
+  ratingMin,
+  sort,
+}: Props) {
   const result = await fetchCategoryBusinesses({
     category_id: id,
     page: currentPage,
     limit: 10,
-    sort: 'rating',
+    sort: sort || 'rating',
+    rating_min: ratingMin ? parseFloat(ratingMin) : 0,
   });
 
   if (!result) {

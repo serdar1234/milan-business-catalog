@@ -19,9 +19,19 @@ interface FilterPanelProps {
     source: string;
     facets?: Facets;
   } | null;
+  /**
+   * optional callback invoked when a filter checkbox changes;
+   * receives the key and array of selected values.  useful for
+   * parents that want to perform their own fetch instead of
+   * solely relying on URL navigation.
+   */
+  onFilterChange?: (key: string, values: string[]) => void;
 }
 
-export const FilterPanel: React.FC<FilterPanelProps> = ({ meta }) => {
+export const FilterPanel: React.FC<FilterPanelProps> = ({
+  meta,
+  onFilterChange,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -90,6 +100,10 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({ meta }) => {
     }
 
     updateSearchParams(key, currentValues);
+
+    if (onFilterChange) {
+      onFilterChange(key, currentValues);
+    }
   };
 
   const handleClearAll = () => {

@@ -15,7 +15,22 @@ import { CategoryHeader } from '@/layers/01_widgets/CategoryHeader/CategoryHeade
 
 interface Props {
   params: { slug: string } | Promise<{ slug: string }>;
-  searchParams: { page?: string } | Promise<{ page?: string }>;
+  // include any potential filter/search params so we can read them server-side
+  searchParams:
+    | {
+        page?: string;
+        rating?: string;
+        rating_min?: string;
+        sort?: string;
+        category_id?: string;
+      }
+    | Promise<{
+        page?: string;
+        rating?: string;
+        rating_min?: string;
+        sort?: string;
+        category_id?: string;
+      }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -35,7 +50,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params, searchParams }: Props) {
   const { slug } = await params;
-  const { page: pageParam } = await searchParams;
+  const {
+    page: pageParam,
+    rating,
+    rating_min,
+    sort: sortParam,
+    category_id: catIdParam,
+  } = await searchParams;
+
   const categories = await fetchCategories();
   const json = await fetchCategory(slug);
 
@@ -43,6 +65,15 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   const { name, companies_count, id } = json.data;
 
   const currentPage = pageParam ? parseInt(pageParam, 10) : 1;
+  const ratingMin = rating_min || rating || undefined;
+  const sort = sortParam || undefined;
+  // if category_id filter is provided, take the first one (API currently only handles single id)
+  const filteredCategoryId =
+    catIdParam && catIdParam.includes(',')
+      ? parseInt(catIdParam.split(',')[0], 10)
+      : catIdParam
+        ? parseInt(catIdParam, 10)
+        : undefined;
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
@@ -66,7 +97,12 @@ export default async function CategoryPage({ params, searchParams }: Props) {
               <CategoryFilters />
             </div>
             <div className={style['grid-item__main']}>
-              <CategoryBusinessList id={id} currentPage={currentPage} />
+              <CategoryBusinessList
+                id={filteredCategoryId || id}
+                currentPage={currentPage}
+                ratingMin={ratingMin}
+                sort={sort}
+              />
             </div>
           </div>
         </Container>
